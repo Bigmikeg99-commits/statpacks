@@ -49,7 +49,7 @@ export async function GET(req: NextRequest) {
       gamePks.map(async (pk) => {
         try {
           const bsRes = await fetch(
-            `https://statsapi.mlb.com/api/v1.1/game/${pk}/boxscore`,
+            `https://statsapi.mlb.com/api/v1/game/${pk}/boxscore`,
             { cache: 'no-store', headers: HEADERS }
           )
           if (!bsRes.ok) { log.push(`game ${pk}: ${bsRes.status}`); return }
