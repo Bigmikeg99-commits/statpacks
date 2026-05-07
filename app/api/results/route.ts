@@ -1,23 +1,32 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-const MLB_API = 'https://statsapi.mlb.com/api/v1'
+const HEADERS = {
+  'User-Agent': 'StatPacks/1.0 (statpacks.vercel.app)',
+  'Accept': 'application/json',
+}
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url)
-  const date   = searchParams.get('date')            // YYYY-MM-DD
+  const date   = searchParams.get('date')   // YYYY-MM-DD
   const idsRaw = searchParams.get('ids') ?? ''
   const ids    = idsRaw.split(',').map(s => s.trim()).filter(Boolean)
+  const debug  = searchParams.get('debug') === '1'
 
   if (!date || ids.length === 0) {
-    return NextResponse.json({})
+    return NextResponse.json({ _error: 'missing date or ids' })
   }
+
+  const log: string[] = []
 
   try {
     // 1. Get schedule for the date → list of gamePks
-    const schedRes = await fetch(`${MLB_API}/schedule?sportId=1&date=${date}`, {
-      cache: 'no-store',
-    })
-    if (!schedRes.ok) return NextResponse.json({}, { status: 502 })
+    const schedUrl = `https://statsapi.mlb.com/api/v1/schedule?sportId=1&date=${date}`
+    log.push(`fetching schedule: ${schedUrl}`)
+    const schedRes = await fetch(schedUrl, { cache: 'no-store', headers: HEADERS })
+    log.push(`schedule status: ${schedRes.status}`)
+    if (!schedRes.ok) {
+      return NextResponse.json({ _error: `schedule ${schedRes.status}`, _log: log })
+    }
     const sched = await schedRes.json()
 
     const gamePks: number[] = []
@@ -26,8 +35,11 @@ export async function GET(req: NextRequest) {
         gamePks.push(g.gamePk)
       }
     }
+    log.push(`gamePks: ${JSON.stringify(gamePks)}`)
 
-    if (gamePks.length === 0) return NextResponse.json({})
+    if (gamePks.length === 0) {
+      return NextResponse.json(debug ? { _log: log } : {})
+    }
 
     // 2. Fetch all boxscores in parallel, extract pitcher Ks by MLBAM ID
     const idSet = new Set(ids)
@@ -38,9 +50,9 @@ export async function GET(req: NextRequest) {
         try {
           const bsRes = await fetch(
             `https://statsapi.mlb.com/api/v1.1/game/${pk}/boxscore`,
-            { cache: 'no-store' }
+            { cache: 'no-store', headers: HEADERS }
           )
-          if (!bsRes.ok) return
+          if (!bsRes.ok) { log.push(`game ${pk}: ${bsRes.status}`); return }
           const bs = await bsRes.json()
 
           const gameState: string =
@@ -58,17 +70,19 @@ export async function GET(req: NextRequest) {
                 actual_k: pitching.strikeOuts ?? null,
                 game_state: gameState,
               }
+              log.push(`found ${pidStr}: k=${pitching.strikeOuts} state=${gameState}`)
             }
           }
-        } catch {
-          // skip failed game silently
+        } catch (e) {
+          log.push(`game ${pk} error: ${e}`)
         }
       })
     )
 
-    return NextResponse.json(results)
+    const out = debug ? { ...results, _log: log } : results
+    return NextResponse.json(out)
   } catch (err) {
     console.error('[/api/results]', err)
-    return NextResponse.json({ error: String(err) }, { status: 500 })
+    return NextResponse.json({ _error: String(err), _log: log }, { status: 500 })
   }
 }
