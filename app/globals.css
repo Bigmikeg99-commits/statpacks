@@ -106,7 +106,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .card-front,.card-back{position:absolute;width:100%;height:100%;-webkit-backface-visibility:hidden;backface-visibility:hidden;border-radius:8px;overflow:hidden}
 
 /* CARD FRONT — SOG vintage gold/navy */
-.card-front{background:#0A1628;display:flex;flex-direction:column;box-shadow:0 12px 40px rgba(0,0,0,0.7),0 0 0 1.5px rgba(212,175,55,0.35)}
+.card-front{background:#0A1628;display:flex;flex-direction:column;box-shadow:0 12px 40px rgba(0,0,0,0.7),0 0 0 1.5px rgba(212,175,55,0.35);-webkit-transform:translateZ(1px);transform:translateZ(1px)}
 .card-front::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,rgba(212,175,55,0.18) 0%,transparent 18%),linear-gradient(315deg,rgba(212,175,55,0.10) 0%,transparent 14%);pointer-events:none;z-index:4;border-radius:8px}
 .card-front::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent 0%,#B8960C 30%,#D4AF37 60%,transparent 100%);z-index:6}
 .card-photo-area{position:relative;flex:1;overflow:hidden;background:linear-gradient(160deg,#0f2245 0%,#0a1628 60%,#060e1a 100%)}
@@ -179,7 +179,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .chrome-style .card-back{background:#080818;border-color:#4EABDE}
 
 /* CARD BACK */
-.card-back{-webkit-transform:rotateY(180deg);transform:rotateY(180deg);background:#071523;border:1.5px solid #B8960C;border-radius:8px;display:flex;flex-direction:column;padding:10px 12px 9px;box-shadow:0 4px 24px rgba(0,0,0,0.6)}
+.card-back{-webkit-transform:rotateY(180deg) translateZ(1px);transform:rotateY(180deg) translateZ(1px);background:#071523;border:1.5px solid #B8960C;border-radius:8px;display:flex;flex-direction:column;padding:10px 12px 9px;box-shadow:0 4px 24px rgba(0,0,0,0.6)}
 .back-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;padding-bottom:6px;border-bottom:1px solid rgba(212,175,55,0.2)}
 .back-name{font-family:'Playfair Display',serif;font-size:10px;font-weight:700;font-style:italic;color:#D4AF37;letter-spacing:0.05em}
 .back-rank{font-family:'Orbitron',sans-serif;font-size:10px;font-weight:900;color:#D4AF37;letter-spacing:0.06em}
@@ -306,7 +306,9 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
   .picks-section,.tracker-section,.method-section{padding:48px 16px}
   .stats-band{padding:24px 16px}
   .cards-grid{justify-content:center}
-  .card-scene{width:200px;height:360px}
+  .card-scene{width:min(300px,calc(100vw - 48px));height:450px}
+  .back-stats-table th{font-size:5.5px;padding:2px 0}
+  .back-stats-table td{font-size:7.5px;padding:3px 0}
   .segs-grid{grid-template-columns:1fr}
   .sl{width:110px}
   .method-grid{grid-template-columns:1fr}
