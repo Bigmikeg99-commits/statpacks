@@ -30,9 +30,11 @@ export async function GET(req: NextRequest) {
     const sched = await schedRes.json()
 
     const gamePks: number[] = []
+    const gameStates: Record<number, string> = {}
     for (const d of sched.dates ?? []) {
       for (const g of d.games ?? []) {
         gamePks.push(g.gamePk)
+        gameStates[g.gamePk] = g.status?.abstractGameState ?? 'Unknown'
       }
     }
     log.push(`gamePks: ${JSON.stringify(gamePks)}`)
@@ -55,8 +57,7 @@ export async function GET(req: NextRequest) {
           if (!bsRes.ok) { log.push(`game ${pk}: ${bsRes.status}`); return }
           const bs = await bsRes.json()
 
-          const gameState: string =
-            bs.gameData?.status?.abstractGameState ?? 'Unknown'
+          const gameState: string = gameStates[pk] ?? 'Unknown'
 
           for (const side of ['home', 'away'] as const) {
             const pitchers: number[] = bs.teams?.[side]?.pitchers ?? []
