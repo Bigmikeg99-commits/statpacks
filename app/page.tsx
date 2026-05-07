@@ -39,6 +39,12 @@ export default function Page() {
     renderSegs(data.overSegs, 'ov-segs')
     renderSegs(data.underSegs, 'un-segs')
     setupObservers()
+
+    // Auto-poll MLB results every hour
+    const dateStr = data.updated.slice(0, 10) // YYYY-MM-DD
+    pollResults(data.picks, dateStr)
+    const interval = setInterval(() => pollResults(data.picks, dateStr), 60 * 60 * 1000)
+    return () => clearInterval(interval)
   }, [data])
 
   useEffect(() => {
@@ -287,6 +293,9 @@ function renderCards(picks: Pick[], podName: string, updated: string) {
   sorted.forEach((p, i) => {
     const scene = document.createElement('div')
     scene.className = 'card-scene'
+    scene.dataset.mlbamid = p.mlbamid || ''
+    scene.dataset.line    = String(p.line)
+    scene.dataset.rec     = p.rec
     if (p.name === podName) scene.classList.add('is-pod')
     if (p.result === 'win') scene.classList.add('result-win')
     if (p.result === 'loss') scene.classList.add('result-loss')
@@ -555,6 +564,58 @@ function renderChart(daily: Day[], btDaily: Day[], canvas: HTMLCanvasElement) {
   // Scroll to show most recent 7 days — wait for animation to finish
   const scroll = document.getElementById('chartScroll')
   if (scroll) setTimeout(() => { scroll.scrollLeft = totalWidth }, 100)
+}
+
+async function pollResults(picks: Pick[], dateStr: string) {
+  const ids = picks.map(p => p.mlbamid).filter(Boolean)
+  if (!ids.length) return
+  try {
+    const res = await fetch(`/api/results?date=${dateStr}&ids=${ids.join(',')}`)
+    if (!res.ok) return
+    const mlbData: Record<string, { actual_k: number | null; game_state: string }> = await res.json()
+
+    for (const [mlbamid, info] of Object.entries(mlbData)) {
+      const scene = document.querySelector(`[data-mlbamid="${mlbamid}"]`) as HTMLElement | null
+      if (!scene) continue
+
+      const line = parseFloat(scene.dataset.line ?? '0')
+      const rec  = scene.dataset.rec ?? ''
+      const k    = info.actual_k
+      const isFinal = info.game_state === 'Final'
+
+      // Only stamp result once game is over
+      if (!isFinal || k === null) continue
+
+      let resultClass = ''
+      if (rec === 'OVER')  resultClass = k > line ? 'win' : k < line ? 'loss' : ''
+      if (rec === 'UNDER') resultClass = k < line ? 'win' : k > line ? 'loss' : ''
+
+      // Skip if already correct
+      const alreadyWin  = scene.classList.contains('result-win')
+      const alreadyLoss = scene.classList.contains('result-loss')
+      if ((resultClass === 'win' && alreadyWin) || (resultClass === 'loss' && alreadyLoss)) continue
+
+      scene.classList.remove('result-win', 'result-loss')
+      if (resultClass === 'win')  scene.classList.add('result-win')
+      if (resultClass === 'loss') scene.classList.add('result-loss')
+
+      // Inject overlay + stamp into photo area
+      const photoArea = scene.querySelector('.card-photo-area') as HTMLElement | null
+      if (!photoArea) continue
+      photoArea.querySelectorAll('.card-result-overlay, .card-result-stamp').forEach(el => el.remove())
+      if (resultClass) {
+        const overlay = document.createElement('div')
+        overlay.className = `card-result-overlay ${resultClass}`
+        const stamp = document.createElement('div')
+        stamp.className = `card-result-stamp ${resultClass}`
+        stamp.textContent = resultClass === 'win' ? 'W' : 'L'
+        photoArea.appendChild(overlay)
+        photoArea.appendChild(stamp)
+      }
+    }
+  } catch (e) {
+    console.warn('[pollResults]', e)
+  }
 }
 
 function setupObservers() {
