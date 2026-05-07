@@ -51,11 +51,16 @@ export async function GET(req: NextRequest) {
           for (const side of ['home', 'away'] as const) {
             const pitchers: number[] = bs.teams?.[side]?.pitchers ?? []
             const players: Record<string, any> = bs.teams?.[side]?.players ?? {}
+            const starterId = pitchers.length > 0 ? String(pitchers[0]) : null
             for (const pid of pitchers) {
               const pidStr = String(pid)
               if (!idSet.has(pidStr)) continue
               const pitching = players[`ID${pid}`]?.stats?.pitching ?? {}
-              results[pidStr] = { actual_k: pitching.strikeOuts ?? null, game_state: gameState }
+              results[pidStr] = {
+                actual_k: pitching.strikeOuts ?? null,
+                game_state: gameState,
+                started: pidStr === starterId,
+              }
             }
           }
         } catch { /* skip failed game */ }

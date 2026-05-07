@@ -572,46 +572,50 @@ async function pollResults(picks: Pick[], dateStr: string) {
   try {
     const res = await fetch(`/api/results?date=${dateStr}&ids=${ids.join(',')}`)
     if (!res.ok) return
-    const mlbData: Record<string, { actual_k: number | null; game_state: string }> = await res.json()
+    const mlbData: Record<string, { actual_k: number | null; game_state: string; started: boolean }> = await res.json()
 
     for (const [mlbamid, info] of Object.entries(mlbData)) {
       const scene = document.querySelector(`[data-mlbamid="${mlbamid}"]`) as HTMLElement | null
       if (!scene) continue
 
-      const line = parseFloat(scene.dataset.line ?? '0')
-      const rec  = scene.dataset.rec ?? ''
-      const k    = info.actual_k
+      const line    = parseFloat(scene.dataset.line ?? '0')
+      const rec     = scene.dataset.rec ?? ''
+      const k       = info.actual_k
       const isFinal = info.game_state === 'Final'
 
-      // Only stamp result once game is over
-      if (!isFinal || k === null) continue
+      if (!isFinal) continue
 
+      // Opener/DNP — pitcher didn't start
       let resultClass = ''
-      if (rec === 'OVER')  resultClass = k > line ? 'win' : k < line ? 'loss' : ''
-      if (rec === 'UNDER') resultClass = k < line ? 'win' : k > line ? 'loss' : ''
+      let stampText   = ''
+      if (!info.started) {
+        resultClass = 'void'
+        stampText   = 'DNP'
+      } else if (k !== null) {
+        if (rec === 'OVER')  resultClass = k > line ? 'win' : k < line ? 'loss' : ''
+        if (rec === 'UNDER') resultClass = k < line ? 'win' : k > line ? 'loss' : ''
+        stampText = resultClass === 'win' ? 'W' : 'L'
+      }
 
-      // Skip if already correct
-      const alreadyWin  = scene.classList.contains('result-win')
-      const alreadyLoss = scene.classList.contains('result-loss')
-      if ((resultClass === 'win' && alreadyWin) || (resultClass === 'loss' && alreadyLoss)) continue
+      if (!resultClass) continue
 
-      scene.classList.remove('result-win', 'result-loss')
-      if (resultClass === 'win')  scene.classList.add('result-win')
-      if (resultClass === 'loss') scene.classList.add('result-loss')
+      // Skip if already correctly stamped
+      if (scene.classList.contains(`result-${resultClass}`)) continue
+
+      scene.classList.remove('result-win', 'result-loss', 'result-void')
+      scene.classList.add(`result-${resultClass}`)
 
       // Inject overlay + stamp into photo area
       const photoArea = scene.querySelector('.card-photo-area') as HTMLElement | null
       if (!photoArea) continue
       photoArea.querySelectorAll('.card-result-overlay, .card-result-stamp').forEach(el => el.remove())
-      if (resultClass) {
-        const overlay = document.createElement('div')
-        overlay.className = `card-result-overlay ${resultClass}`
-        const stamp = document.createElement('div')
-        stamp.className = `card-result-stamp ${resultClass}`
-        stamp.textContent = resultClass === 'win' ? 'W' : 'L'
-        photoArea.appendChild(overlay)
-        photoArea.appendChild(stamp)
-      }
+      const overlay = document.createElement('div')
+      overlay.className = `card-result-overlay ${resultClass}`
+      const stamp = document.createElement('div')
+      stamp.className = `card-result-stamp ${resultClass}`
+      stamp.textContent = stampText
+      photoArea.appendChild(overlay)
+      photoArea.appendChild(stamp)
     }
   } catch (e) {
     console.warn('[pollResults]', e)
