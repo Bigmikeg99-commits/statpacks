@@ -305,6 +305,8 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
   .btn{width:200px;text-align:center}
   .picks-section,.tracker-section,.method-section{padding:48px 16px}
   .stats-band{padding:24px 16px}
+  .stats-band-inner{grid-template-columns:repeat(2,1fr)}
+  .stat-item:last-child{grid-column:1 / -1}
   .cards-grid{justify-content:center}
   .card-scene{width:min(300px,calc(100vw - 48px));height:450px}
   .back-stats-table th{font-size:5.5px;padding:2px 0}

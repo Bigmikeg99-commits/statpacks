@@ -10,23 +10,16 @@ export async function GET(req: NextRequest) {
   const date   = searchParams.get('date')   // YYYY-MM-DD
   const idsRaw = searchParams.get('ids') ?? ''
   const ids    = idsRaw.split(',').map(s => s.trim()).filter(Boolean)
-  const debug  = searchParams.get('debug') === '1'
 
-  if (!date || ids.length === 0) {
-    return NextResponse.json({ _error: 'missing date or ids' })
-  }
-
-  const log: string[] = []
+  if (!date || ids.length === 0) return NextResponse.json({})
 
   try {
-    // 1. Get schedule for the date → list of gamePks
-    const schedUrl = `https://statsapi.mlb.com/api/v1/schedule?sportId=1&date=${date}`
-    log.push(`fetching schedule: ${schedUrl}`)
-    const schedRes = await fetch(schedUrl, { cache: 'no-store', headers: HEADERS })
-    log.push(`schedule status: ${schedRes.status}`)
-    if (!schedRes.ok) {
-      return NextResponse.json({ _error: `schedule ${schedRes.status}`, _log: log })
-    }
+    // 1. Get schedule for the date → gamePks + game states
+    const schedRes = await fetch(
+      `https://statsapi.mlb.com/api/v1/schedule?sportId=1&date=${date}`,
+      { cache: 'no-store', headers: HEADERS }
+    )
+    if (!schedRes.ok) return NextResponse.json({})
     const sched = await schedRes.json()
 
     const gamePks: number[] = []
@@ -37,13 +30,10 @@ export async function GET(req: NextRequest) {
         gameStates[g.gamePk] = g.status?.abstractGameState ?? 'Unknown'
       }
     }
-    log.push(`gamePks: ${JSON.stringify(gamePks)}`)
 
-    if (gamePks.length === 0) {
-      return NextResponse.json(debug ? { _log: log } : {})
-    }
+    if (gamePks.length === 0) return NextResponse.json({})
 
-    // 2. Fetch all boxscores in parallel, extract pitcher Ks by MLBAM ID
+    // 2. Fetch boxscores in parallel, extract pitcher Ks by MLBAM ID
     const idSet = new Set(ids)
     const results: Record<string, { actual_k: number | null; game_state: string }> = {}
 
@@ -54,36 +44,27 @@ export async function GET(req: NextRequest) {
             `https://statsapi.mlb.com/api/v1/game/${pk}/boxscore`,
             { cache: 'no-store', headers: HEADERS }
           )
-          if (!bsRes.ok) { log.push(`game ${pk}: ${bsRes.status}`); return }
+          if (!bsRes.ok) return
           const bs = await bsRes.json()
-
-          const gameState: string = gameStates[pk] ?? 'Unknown'
+          const gameState = gameStates[pk] ?? 'Unknown'
 
           for (const side of ['home', 'away'] as const) {
             const pitchers: number[] = bs.teams?.[side]?.pitchers ?? []
             const players: Record<string, any> = bs.teams?.[side]?.players ?? {}
-
             for (const pid of pitchers) {
               const pidStr = String(pid)
               if (!idSet.has(pidStr)) continue
               const pitching = players[`ID${pid}`]?.stats?.pitching ?? {}
-              results[pidStr] = {
-                actual_k: pitching.strikeOuts ?? null,
-                game_state: gameState,
-              }
-              log.push(`found ${pidStr}: k=${pitching.strikeOuts} state=${gameState}`)
+              results[pidStr] = { actual_k: pitching.strikeOuts ?? null, game_state: gameState }
             }
           }
-        } catch (e) {
-          log.push(`game ${pk} error: ${e}`)
-        }
+        } catch { /* skip failed game */ }
       })
     )
 
-    const out = debug ? { ...results, _log: log } : results
-    return NextResponse.json(out)
+    return NextResponse.json(results)
   } catch (err) {
     console.error('[/api/results]', err)
-    return NextResponse.json({ _error: String(err), _log: log }, { status: 500 })
+    return NextResponse.json({})
   }
 }
