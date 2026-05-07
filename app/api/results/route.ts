@@ -35,7 +35,7 @@ export async function GET(req: NextRequest) {
 
     // 2. Fetch boxscores in parallel, extract pitcher Ks by MLBAM ID
     const idSet = new Set(ids)
-    const results: Record<string, { actual_k: number | null; game_state: string }> = {}
+    const results: Record<string, { actual_k: number | null; game_state: string; started: boolean }> = {}
 
     await Promise.all(
       gamePks.map(async (pk) => {
