@@ -396,6 +396,7 @@ function buildCardHTML(p: Pick, podName: string, _demoIdx = 0): string {
         <div class="pred-cell"><div class="pred-lbl">Pred K</div><div class="pred-val">${fmt(p.pred_k)}</div></div>
         <div class="pred-cell"><div class="pred-lbl">Line</div><div class="pred-val">${p.line}</div></div>
         <div class="pred-cell"><div class="pred-lbl">P(line)</div><div class="pred-val" style="color:${confColor}">${p.conf}</div></div>
+        <div class="pred-cell"><div class="pred-lbl">Actual K</div><div class="pred-val pred-actual-k" style="color:${p.actual_k != null ? (p.result === 'win' ? '#3ab05a' : '#C44536') : 'rgba(245,241,230,0.35)'}">${p.actual_k != null ? p.actual_k : '--'}</div></div>
       </div>
       ${hasShap
         ? `<div class="shap-block"><div class="shap-hdr">pushing over</div>${shapRows(p.pushers_up,'#3ab05a','+')}</div>
@@ -616,6 +617,13 @@ async function pollResults(picks: Pick[], dateStr: string) {
       stamp.textContent = stampText
       photoArea.appendChild(overlay)
       photoArea.appendChild(stamp)
+
+      // Update Actual K on the card back
+      const actualKEl = scene.querySelector('.pred-actual-k') as HTMLElement | null
+      if (actualKEl && k !== null) {
+        actualKEl.textContent = String(k)
+        actualKEl.style.color = resultClass === 'win' ? '#3ab05a' : '#C44536'
+      }
     }
   } catch (e) {
     console.warn('[pollResults]', e)
