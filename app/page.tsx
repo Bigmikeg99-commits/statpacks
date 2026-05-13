@@ -71,7 +71,7 @@ export default function Page() {
         <div className="nav-links">
           <a href="#">Home</a>
           <a href="#picks">Picks</a>
-          <a href="#tracker">Rankings</a>
+          <a href="#tracker">Performance</a>
           <a href="#method">About</a>
         </div>
         <button className={`nav-hamburger${menuOpen?' open':''}`} aria-label="Menu" onClick={() => setMenuOpen(o=>!o)}>
@@ -81,7 +81,7 @@ export default function Page() {
       <div className={`nav-mobile${menuOpen?' open':''}`}>
         <a href="#" onClick={()=>setMenuOpen(false)}>Home</a>
         <a href="#picks" onClick={()=>setMenuOpen(false)}>Picks</a>
-        <a href="#tracker" onClick={()=>setMenuOpen(false)}>Rankings</a>
+        <a href="#tracker" onClick={()=>setMenuOpen(false)}>Performance</a>
         <a href="#method" onClick={()=>setMenuOpen(false)}>About</a>
       </div>
 
