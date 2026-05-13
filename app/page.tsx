@@ -24,6 +24,7 @@ interface PicksData {
 export default function Page() {
   const [data, setData] = useState<PicksData | null>(null)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [filter, setFilter] = useState<{hand:string;dir:string;ha:string}>({ hand:'all', dir:'all', ha:'all' })
   const [chartReady, setChartReady] = useState(false)
   const chartRef = useRef<HTMLCanvasElement>(null)
 
@@ -34,7 +35,6 @@ export default function Page() {
   useEffect(() => {
     if (!data) return
     populateHero(data.season, data.overSegs, data.underSegs)
-    renderCards(data.picks, data.pod.name, data.updated)
     renderCal(data.daily)
     renderSegs(data.overSegs, 'ov-segs')
     renderSegs(data.underSegs, 'un-segs')
@@ -46,6 +46,17 @@ export default function Page() {
     const interval = setInterval(() => pollResults(data.picks, dateStr), 60 * 60 * 1000)
     return () => clearInterval(interval)
   }, [data])
+
+  // Re-render cards whenever data or filters change
+  useEffect(() => {
+    if (!data) return
+    const filtered = data.picks.filter(p =>
+      (filter.hand === 'all' || p.hand === filter.hand) &&
+      (filter.dir  === 'all' || p.rec  === filter.dir)  &&
+      (filter.ha   === 'all' || p.ha.toLowerCase()[0] === filter.ha[0])
+    )
+    renderCards(filtered, data.pod.name, data.updated)
+  }, [data, filter])
 
   useEffect(() => {
     if (!data || !chartReady || !chartRef.current) return
@@ -123,7 +134,36 @@ export default function Page() {
           <div className="sec-title">Today&apos;s Recommendations</div>
           <div className="sec-sub">Picks generated from the V4 model. Tap a card to see model reasoning.</div>
           <div className="updated-tag" id="updated-tag">Updated: --</div>
+          {data && <button className="csv-btn" onClick={() => downloadCSV(data.picks)}>↓ Export CSV</button>}
         </div>
+        {data && (
+          <div className="filter-bar fade-in">
+            <div className="filter-group">
+              {(['all','L','R'] as const).map(h => (
+                <button key={h} className={`filter-btn${filter.hand === h ? ' active' : ''}`}
+                  onClick={() => setFilter(f => ({...f, hand: h}))}>
+                  {h === 'all' ? 'All Hands' : h === 'L' ? 'LHP' : 'RHP'}
+                </button>
+              ))}
+            </div>
+            <div className="filter-group">
+              {(['all','OVER','UNDER'] as const).map(d => (
+                <button key={d} className={`filter-btn${filter.dir === d ? ' active' : ''}`}
+                  onClick={() => setFilter(f => ({...f, dir: d}))}>
+                  {d === 'all' ? 'All Picks' : d}
+                </button>
+              ))}
+            </div>
+            <div className="filter-group">
+              {(['all','h','a'] as const).map(ha => (
+                <button key={ha} className={`filter-btn${filter.ha === ha ? ' active' : ''}`}
+                  onClick={() => setFilter(f => ({...f, ha: ha}))}>
+                  {ha === 'all' ? 'All Venues' : ha === 'h' ? 'Home' : 'Away'}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
         <div className="cards-grid" id="cards-grid"/>
       </div></section>
 
@@ -138,9 +178,10 @@ export default function Page() {
         </div>
         <div className="trend-card fade-in">
           <div className="trend-header">
-            <span className="trend-title">7-Day Rolling Win Rate</span>
+            <span className="trend-title">Rolling Win Rate</span>
             <div className="legend">
-              <div className="leg"><div className="leg-line" style={{background:'#4EABDE'}}/> Live Picks</div>
+              <div className="leg"><div className="leg-line" style={{background:'#4EABDE'}}/> 7-Day</div>
+              <div className="leg"><div className="leg-line" style={{background:'#3ab05a'}}/> 30-Day</div>
               <div className="leg"><div className="leg-line" style={{background:'#D4AF37',opacity:0.8}}/> V2 Backtest</div>
             </div>
           </div>
@@ -474,23 +515,24 @@ function renderChart(daily: Day[], btDaily: Day[], canvas: HTMLCanvasElement) {
       return parse(a) - parse(b)
     })
 
-  // Rolling 7-day helper for a given dataset mapped to allDates
-  const roll = (src: Day[]) => {
+  // Rolling helper for a given dataset mapped to allDates
+  const roll = (src: Day[], windowSize = 7) => {
     const map = new Map(src.map(d => [d.d, d]))
-    return allDates.map((date, i) => {
-      const window = allDates.slice(Math.max(0, i-6), i+1)
-      if (window.length < 7) return null
-      const days = window.map(d => map.get(d)).filter(Boolean) as Day[]
-      if (days.length < 7) return null
+    return allDates.map((_date, i) => {
+      const win = allDates.slice(Math.max(0, i-(windowSize-1)), i+1)
+      if (win.length < windowSize) return null
+      const days = win.map(d => map.get(d)).filter(Boolean) as Day[]
+      if (days.length < windowSize) return null
       const tw = days.reduce((a,x)=>a+x.w,0), tl = days.reduce((a,x)=>a+x.l,0)
       return tw+tl > 0 ? parseFloat(((tw/(tw+tl))*100).toFixed(1)) : null
     })
   }
 
   // V2 backtest line: data only where date is in btDates, null after 4/29
-  const btRoll = roll(btDaily).map((v, i) => btDates.has(allDates[i]) ? v : null)
-  // Live line: data only where date is in liveDates
-  const liveRoll = roll(daily).map((v, i) => liveDates.has(allDates[i]) ? v : null)
+  const btRoll    = roll(btDaily, 7).map((v, i) => btDates.has(allDates[i])   ? v : null)
+  // Live 7-day and 30-day lines
+  const liveRoll  = roll(daily,  7).map((v, i) => liveDates.has(allDates[i]) ? v : null)
+  const liveRoll30 = roll(daily, 30).map((v, i) => liveDates.has(allDates[i]) ? v : null)
 
   // Scrollable: 24px per day, minimum container width
   const PX_PER_DAY = 24
@@ -505,14 +547,26 @@ function renderChart(daily: Day[], btDaily: Day[], canvas: HTMLCanvasElement) {
     data: {
       labels: allDates,
       datasets: [
-        // Live picks (blue)
+        // Live picks 7-day (blue)
         {
-          label: 'Live Picks',
+          label: '7-Day Live',
           data: liveRoll,
           borderColor: '#4EABDE',
           borderWidth: 2.5,
           pointRadius: 2,
           pointBackgroundColor: '#4EABDE',
+          fill: false,
+          tension: 0.35,
+          spanGaps: false,
+        },
+        // Live picks 30-day (green)
+        {
+          label: '30-Day Live',
+          data: liveRoll30,
+          borderColor: '#3ab05a',
+          borderWidth: 2,
+          pointRadius: 1.5,
+          pointBackgroundColor: '#3ab05a',
           fill: false,
           tension: 0.35,
           spanGaps: false,
@@ -628,6 +682,23 @@ async function pollResults(picks: Pick[], dateStr: string) {
   } catch (e) {
     console.warn('[pollResults]', e)
   }
+}
+
+function downloadCSV(picks: Pick[]) {
+  const headers = ['Name','Hand','Opp','H/A','Rec','Line','Conf','Pred K','Result','Actual K']
+  const rows = picks.map(p => [
+    p.name, p.hand + 'HP', p.opp, p.ha, p.rec,
+    String(p.line), p.conf, p.pred_k.toFixed(1),
+    p.result ?? '', p.actual_k != null ? String(p.actual_k) : ''
+  ])
+  const csv = [headers, ...rows].map(r => r.map(v => `"${v}"`).join(',')).join('\n')
+  const blob = new Blob([csv], { type: 'text/csv' })
+  const url  = URL.createObjectURL(blob)
+  const a    = document.createElement('a')
+  a.href     = url
+  a.download = `statpacks-picks-${new Date().toISOString().slice(0, 10)}.csv`
+  a.click()
+  URL.revokeObjectURL(url)
 }
 
 function setupObservers() {
