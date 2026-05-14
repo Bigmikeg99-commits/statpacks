@@ -26,7 +26,10 @@ export default function Page() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [filter, setFilter] = useState<{hand:string;dir:string;ha:string}>({ hand:'all', dir:'all', ha:'all' })
   const [chartReady, setChartReady] = useState(false)
-  const chartRef = useRef<HTMLCanvasElement>(null)
+  const [chartMode, setChartMode] = useState<'cumulative' | 'rolling'>('cumulative')
+  const chartRef     = useRef<HTMLCanvasElement>(null)
+  const chartInstRef = useRef<any>(null)
+  const chartSeenRef = useRef(false)
 
   useEffect(() => {
     fetch('/data/picks.json').then(r => r.json()).then(setData).catch(() => {})
@@ -61,14 +64,24 @@ export default function Page() {
   useEffect(() => {
     if (!data || !chartReady || !chartRef.current) return
     const canvas = chartRef.current
-    const obs = new IntersectionObserver(entries => {
-      if (!entries[0].isIntersecting) return
-      obs.disconnect()
-      renderChart(data.daily, data.backtestDaily || [], canvas)
-    }, { threshold: 0.3 })
-    obs.observe(canvas)
-    return () => obs.disconnect()
-  }, [data, chartReady])
+    const doRender = () => {
+      if (chartInstRef.current) { chartInstRef.current.destroy(); chartInstRef.current = null }
+      chartInstRef.current = renderChart(data.daily, data.backtestDaily || [], canvas, chartMode, data.season)
+    }
+    if (!chartSeenRef.current) {
+      // First render: wait until chart is visible
+      const obs = new IntersectionObserver(entries => {
+        if (!entries[0].isIntersecting) return
+        obs.disconnect()
+        chartSeenRef.current = true
+        doRender()
+      }, { threshold: 0.3 })
+      obs.observe(canvas)
+      return () => obs.disconnect()
+    } else {
+      doRender()
+    }
+  }, [data, chartReady, chartMode])
 
   return (
     <>
@@ -82,7 +95,7 @@ export default function Page() {
         <div className="nav-links">
           <a href="#">Home</a>
           <a href="#picks">Picks</a>
-          <a href="#tracker">Performance</a>
+          <a href="/performance">Performance</a>
           <a href="#method">About</a>
         </div>
         <button className={`nav-hamburger${menuOpen?' open':''}`} aria-label="Menu" onClick={() => setMenuOpen(o=>!o)}>
@@ -92,7 +105,7 @@ export default function Page() {
       <div className={`nav-mobile${menuOpen?' open':''}`}>
         <a href="#" onClick={()=>setMenuOpen(false)}>Home</a>
         <a href="#picks" onClick={()=>setMenuOpen(false)}>Picks</a>
-        <a href="#tracker" onClick={()=>setMenuOpen(false)}>Performance</a>
+        <a href="/performance" onClick={()=>setMenuOpen(false)}>Performance</a>
         <a href="#method" onClick={()=>setMenuOpen(false)}>About</a>
       </div>
 
@@ -138,30 +151,24 @@ export default function Page() {
         </div>
         {data && (
           <div className="filter-bar fade-in">
-            <div className="filter-group">
-              {(['all','L','R'] as const).map(h => (
-                <button key={h} className={`filter-btn${filter.hand === h ? ' active' : ''}`}
-                  onClick={() => setFilter(f => ({...f, hand: h}))}>
-                  {h === 'all' ? 'All Hands' : h === 'L' ? 'LHP' : 'RHP'}
-                </button>
-              ))}
-            </div>
-            <div className="filter-group">
-              {(['all','OVER','UNDER'] as const).map(d => (
-                <button key={d} className={`filter-btn${filter.dir === d ? ' active' : ''}`}
-                  onClick={() => setFilter(f => ({...f, dir: d}))}>
-                  {d === 'all' ? 'All Picks' : d}
-                </button>
-              ))}
-            </div>
-            <div className="filter-group">
-              {(['all','h','a'] as const).map(ha => (
-                <button key={ha} className={`filter-btn${filter.ha === ha ? ' active' : ''}`}
-                  onClick={() => setFilter(f => ({...f, ha: ha}))}>
-                  {ha === 'all' ? 'All Venues' : ha === 'h' ? 'Home' : 'Away'}
-                </button>
-              ))}
-            </div>
+            <select className="filter-select" value={filter.hand}
+              onChange={e => setFilter(f => ({...f, hand: e.target.value}))}>
+              <option value="all">All Hands</option>
+              <option value="L">LHP</option>
+              <option value="R">RHP</option>
+            </select>
+            <select className="filter-select" value={filter.dir}
+              onChange={e => setFilter(f => ({...f, dir: e.target.value}))}>
+              <option value="all">All Picks</option>
+              <option value="OVER">Over</option>
+              <option value="UNDER">Under</option>
+            </select>
+            <select className="filter-select" value={filter.ha}
+              onChange={e => setFilter(f => ({...f, ha: e.target.value}))}>
+              <option value="all">All Venues</option>
+              <option value="h">Home</option>
+              <option value="a">Away</option>
+            </select>
           </div>
         )}
         <div className="cards-grid" id="cards-grid"/>
@@ -178,16 +185,34 @@ export default function Page() {
         </div>
         <div className="trend-card fade-in">
           <div className="trend-header">
-            <span className="trend-title">Rolling Win Rate</span>
-            <div className="legend">
-              <div className="leg"><div className="leg-line" style={{background:'#4EABDE'}}/> 7-Day</div>
-              <div className="leg"><div className="leg-line" style={{background:'#3ab05a'}}/> 30-Day</div>
-              <div className="leg"><div className="leg-line" style={{background:'#D4AF37',opacity:0.8}}/> V2 Backtest</div>
+            <span className="trend-title">{chartMode === 'cumulative' ? 'Cumulative Win Rate' : 'Rolling Win Rate'}</span>
+            <div style={{display:'flex',alignItems:'center',gap:'12px'}}>
+              {chartMode === 'cumulative' ? (
+                <div className="legend">
+                  <div className="leg"><div className="leg-line" style={{background:'#4EABDE'}}/> Live</div>
+                  <div className="leg"><div className="leg-line" style={{background:'#D4AF37',opacity:0.8}}/> V2 Backtest</div>
+                </div>
+              ) : (
+                <div className="legend">
+                  <div className="leg"><div className="leg-line" style={{background:'#4EABDE'}}/> 7-Day</div>
+                  <div className="leg"><div className="leg-line" style={{background:'#3ab05a'}}/> 30-Day</div>
+                  <div className="leg"><div className="leg-line" style={{background:'#D4AF37',opacity:0.8}}/> V2 Backtest</div>
+                </div>
+              )}
+              <select className="filter-select" value={chartMode}
+                onChange={e => setChartMode(e.target.value as 'cumulative' | 'rolling')}
+                style={{fontSize:'9px',padding:'4px 24px 4px 8px',minWidth:'unset'}}>
+                <option value="cumulative">Cumulative</option>
+                <option value="rolling">Rolling (7-Day)</option>
+              </select>
             </div>
           </div>
-          <div id="chartScroll" style={{overflowX:'auto',overflowY:'hidden',WebkitOverflowScrolling:'touch' as any}}>
+          <div id="chartScroll" style={{overflowX: chartMode === 'rolling' ? 'auto' : 'hidden', overflowY:'hidden', WebkitOverflowScrolling:'touch' as any}}>
             <div style={{position:'relative',height:'160px',minWidth:'100%'}}><canvas id="trendChart" ref={chartRef}/></div>
           </div>
+          {chartMode === 'rolling' && (
+            <div style={{textAlign:'right',fontSize:'9px',color:'rgba(212,175,55,0.35)',marginTop:'4px',letterSpacing:'0.05em'}}>← scroll to view earlier dates</div>
+          )}
         </div>
         <div className="fade-in" style={{marginBottom:'6px'}}><div className="sec-eyebrow" style={{marginBottom:'10px'}}>Daily Calendar</div></div>
         <div className="cal-grid fade-in" id="cal"/>
@@ -502,123 +527,137 @@ function renderSegs(segs: Seg[], id: string) {
   })
 }
 
-function renderChart(daily: Day[], btDaily: Day[], canvas: HTMLCanvasElement) {
+function renderChart(
+  daily: Day[], btDaily: Day[], canvas: HTMLCanvasElement,
+  mode: 'cumulative' | 'rolling', season?: any
+): any {
   const Chart = (window as any).Chart
-  if (!Chart) return
+  if (!Chart) return null
 
-  // Build unified date label list (all unique dates in order)
-  const btDates  = new Set(btDaily.map(d => d.d))
+  const btDates   = new Set(btDaily.map(d => d.d))
   const liveDates = new Set(daily.map(d => d.d))
   const allDates  = Array.from(new Set([...btDaily.map(d=>d.d), ...daily.map(d=>d.d)]))
     .sort((a, b) => {
-      const parse = (s:string) => { const [m,d] = s.split('/'); return parseInt(m)*100+parseInt(d) }
+      const parse = (s:string) => { const [m,dd] = s.split('/'); return parseInt(m)*100+parseInt(dd) }
       return parse(a) - parse(b)
     })
+  const n = allDates.length
+  const grid = 'rgba(212,175,55,0.05)'
+  const tick  = 'rgba(212,175,55,0.5)'
 
-  // Rolling helper for a given dataset mapped to allDates
-  const roll = (src: Day[], windowSize = 7) => {
-    const map = new Map(src.map(d => [d.d, d]))
-    return allDates.map((_date, i) => {
-      const win = allDates.slice(Math.max(0, i-(windowSize-1)), i+1)
-      if (win.length < windowSize) return null
-      const days = win.map(d => map.get(d)).filter(Boolean) as Day[]
-      if (days.length < windowSize) return null
-      const tw = days.reduce((a,x)=>a+x.w,0), tl = days.reduce((a,x)=>a+x.l,0)
-      return tw+tl > 0 ? parseFloat(((tw/(tw+tl))*100).toFixed(1)) : null
-    })
-  }
+  if (mode === 'cumulative') {
+    // Cumulative win % — running total from first pick date
+    const cumulate = (src: Day[], filterDates: Set<string>) => {
+      const map = new Map(src.map(d => [d.d, d]))
+      let tw = 0, tl = 0
+      return allDates.map(date => {
+        const day = map.get(date)
+        if (day) { tw += day.w; tl += day.l }
+        if (!filterDates.has(date)) return null
+        return tw + tl > 0 ? parseFloat(((tw / (tw + tl)) * 100).toFixed(1)) : null
+      })
+    }
+    const liveCum = cumulate(daily, liveDates)
+    const btCum   = cumulate(btDaily, btDates)
 
-  // V2 backtest line: data only where date is in btDates, null after 4/29
-  const btRoll    = roll(btDaily, 7).map((v, i) => btDates.has(allDates[i])   ? v : null)
-  // Live 7-day and 30-day lines
-  const liveRoll  = roll(daily,  7).map((v, i) => liveDates.has(allDates[i]) ? v : null)
-  const liveRoll30 = roll(daily, 30).map((v, i) => liveDates.has(allDates[i]) ? v : null)
+    // Reset canvas to responsive
+    canvas.style.width  = ''
+    canvas.style.height = '160px'
+    canvas.removeAttribute('width')
+    canvas.removeAttribute('height')
 
-  // Scrollable: 24px per day, minimum container width
-  const PX_PER_DAY = 24
-  const totalWidth = Math.max(allDates.length * PX_PER_DAY, 400)
-  canvas.style.width  = totalWidth + 'px'
-  canvas.style.height = '160px'
-  canvas.width  = totalWidth * window.devicePixelRatio
-  canvas.height = 160 * window.devicePixelRatio
-
-  new Chart(canvas, {
-    type: 'line',
-    data: {
-      labels: allDates,
-      datasets: [
-        // Live picks 7-day (blue)
-        {
-          label: '7-Day Live',
-          data: liveRoll,
-          borderColor: '#4EABDE',
-          borderWidth: 2.5,
-          pointRadius: 2,
-          pointBackgroundColor: '#4EABDE',
-          fill: false,
-          tension: 0.35,
-          spanGaps: false,
-        },
-        // Live picks 30-day (green)
-        {
-          label: '30-Day Live',
-          data: liveRoll30,
-          borderColor: '#3ab05a',
-          borderWidth: 2,
-          pointRadius: 1.5,
-          pointBackgroundColor: '#3ab05a',
-          fill: false,
-          tension: 0.35,
-          spanGaps: false,
-        },
-        // V2 backtest (gold) — stops at 4/29
-        {
-          label: 'V2 Backtest',
-          data: btRoll,
-          borderColor: '#D4AF37',
-          borderWidth: 2,
-          pointRadius: 1.5,
-          pointBackgroundColor: '#D4AF37',
-          fill: false,
-          tension: 0.35,
-          spanGaps: false,
-          borderDash: [5, 3],
-        },
-        // Reference line at 57.8%
-        {
-          data: Array(allDates.length).fill(57.8),
-          borderColor: 'rgba(212,175,55,0.18)',
-          borderWidth: 1,
-          borderDash: [2, 4],
-          pointRadius: 0,
-          fill: false,
-        },
-      ],
-    },
-    options: {
-      responsive: false,
-      maintainAspectRatio: false,
-      animation: { duration: 1200, easing: 'easeInOutQuart' },
-      plugins: { legend: { display: false }, tooltip: {
-        callbacks: { label: (ctx:any) => ctx.dataset.label + ': ' + ctx.parsed.y + '%' }
-      }},
-      scales: {
-        x: {
-          ticks: { color: 'rgba(212,175,55,0.5)', font: { size: 9 }, maxRotation: 45 },
-          grid:  { color: 'rgba(212,175,55,0.05)' },
-        },
-        y: {
-          min: 25, max: 95,
-          ticks: { color: 'rgba(212,175,55,0.5)', font: { size: 9 }, callback: (v:number) => v + '%' },
-          grid:  { color: 'rgba(212,175,55,0.05)' },
+    return new Chart(canvas, {
+      type: 'line',
+      data: { labels: allDates, datasets: [
+        { label: 'Live cumulative', data: liveCum, borderColor: '#4EABDE', borderWidth: 2.5, pointRadius: 2, pointBackgroundColor: '#4EABDE', fill: false, tension: 0.3, spanGaps: false },
+        { label: 'V2 Backtest cumulative', data: btCum, borderColor: '#D4AF37', borderWidth: 2, borderDash: [5,3], pointRadius: 1.5, pointBackgroundColor: '#D4AF37', fill: false, tension: 0.3, spanGaps: false },
+        { data: Array(n).fill(57.8), borderColor: 'rgba(212,175,55,0.18)', borderWidth: 1, borderDash: [2,4], pointRadius: 0, fill: false },
+      ]},
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        animation: { duration: 1200, easing: 'easeInOutQuart' },
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: (ctx:any) => ctx.dataset.label ? ctx.dataset.label + ': ' + ctx.parsed.y + '%' : '' }}},
+        scales: {
+          x: { ticks: { color: tick, font: { size: 9 }, maxRotation: 45, autoSkip: true, maxTicksLimit: 12 }, grid: { color: grid } },
+          y: { min: 45, max: 82, ticks: { color: tick, font: { size: 9 }, callback: (v:number) => v + '%' }, grid: { color: grid } },
         },
       },
-    },
-  })
+    })
+  } else {
+    // Rolling mode — narrow axis + endpoint annotation
+    const roll = (src: Day[], windowSize = 7) => {
+      const map = new Map(src.map(d => [d.d, d]))
+      return allDates.map((_date, i) => {
+        const win = allDates.slice(Math.max(0, i - (windowSize - 1)), i + 1)
+        const days = win.map(d => map.get(d)).filter(Boolean) as Day[]
+        if (days.length < 1) return null
+        const tw = days.reduce((a,x)=>a+x.w,0), tl = days.reduce((a,x)=>a+x.l,0)
+        return tw+tl > 0 ? parseFloat(((tw/(tw+tl))*100).toFixed(1)) : null
+      })
+    }
+    const btRoll     = roll(btDaily, 7).map((v, i) => btDates.has(allDates[i])   ? v : null)
+    const liveRoll   = roll(daily,   7).map((v, i) => liveDates.has(allDates[i]) ? v : null)
+    const liveRoll30 = roll(daily,  30).map((v, i) => liveDates.has(allDates[i]) ? v : null)
 
-  // Scroll to show most recent 7 days — wait for animation to finish
-  const scroll = document.getElementById('chartScroll')
-  if (scroll) setTimeout(() => { scroll.scrollLeft = totalWidth }, 100)
+    const PX_PER_DAY = 48
+    const totalWidth = Math.max(n * PX_PER_DAY, 400)
+    canvas.style.width  = totalWidth + 'px'
+    canvas.style.height = '160px'
+    canvas.width  = totalWidth * window.devicePixelRatio
+    canvas.height = 160 * window.devicePixelRatio
+
+    // Endpoint annotation plugin
+    const record = season?.record || ''
+    const pct    = season?.overall_pct || ''
+    const endLabelPlugin = {
+      id: 'endLabel',
+      afterDraw(chart: any) {
+        const ds0 = chart.data.datasets[0]
+        let lastI = -1
+        ds0.data.forEach((v: any, i: number) => { if (v != null) lastI = i })
+        if (lastI < 0) return
+        const meta = chart.getDatasetMeta(0)
+        const pt = meta.data[lastI]
+        if (!pt) return
+        const ctx2 = chart.ctx
+        ctx2.save()
+        ctx2.font = '500 10px Inter,sans-serif'
+        const lbl = `${record} · ${pct}%`
+        const tw2 = ctx2.measureText(lbl).width
+        const px = pt.x + 8, py = pt.y - 4
+        ctx2.fillStyle = 'rgba(13,30,53,0.88)'
+        ctx2.fillRect(px - 2, py - 12, tw2 + 10, 16)
+        ctx2.fillStyle = '#4EABDE'
+        ctx2.fillText(lbl, px + 3, py)
+        ctx2.restore()
+      }
+    }
+
+    const inst = new Chart(canvas, {
+      type: 'line',
+      plugins: [endLabelPlugin],
+      data: { labels: allDates, datasets: [
+        { label: '7-Day Live',   data: liveRoll,   borderColor: '#4EABDE', borderWidth: 2.5, pointRadius: 2,   pointBackgroundColor: '#4EABDE', fill: false, tension: 0.35, spanGaps: false },
+        { label: '30-Day Live',  data: liveRoll30, borderColor: '#3ab05a', borderWidth: 2,   pointRadius: 1.5, pointBackgroundColor: '#3ab05a', fill: false, tension: 0.35, spanGaps: false },
+        { label: 'V2 Backtest',  data: btRoll,     borderColor: '#D4AF37', borderWidth: 2,   pointRadius: 1.5, pointBackgroundColor: '#D4AF37', fill: false, tension: 0.35, spanGaps: false, borderDash: [5,3] },
+        { data: Array(n).fill(57.8), borderColor: 'rgba(212,175,55,0.18)', borderWidth: 1, borderDash: [2,4], pointRadius: 0, fill: false },
+      ]},
+      options: {
+        responsive: false, maintainAspectRatio: false,
+        animation: { duration: 1200, easing: 'easeInOutQuart' },
+        layout: { padding: { right: 115 } },
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: (ctx:any) => ctx.dataset.label + ': ' + ctx.parsed.y + '%' }}},
+        scales: {
+          x: { ticks: { color: tick, font: { size: 9 }, maxRotation: 45 }, grid: { color: grid } },
+          y: { min: 45, max: 82, ticks: { color: tick, font: { size: 9 }, callback: (v:number) => v + '%' }, grid: { color: grid } },
+        },
+      },
+    })
+
+    const scroll = document.getElementById('chartScroll')
+    if (scroll) setTimeout(() => { scroll.scrollLeft = totalWidth }, 100)
+    return inst
+  }
 }
 
 async function pollResults(picks: Pick[], dateStr: string) {
