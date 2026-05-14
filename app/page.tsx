@@ -16,6 +16,7 @@ interface Day { d:string;w:number;l:number;ow:number;ol:number;uw:number;ul:numb
 interface Seg { l:string;w:number;lo:number;pct:number;e:number }
 interface PicksData {
   updated: string
+  picks_date?: string
   season: { record:string;overs:string;unders:string;picks:number;date_range:string;overall_pct:string;over_pct:string;under_pct:string }
   pod: { name:string }
   daily: Day[]; backtestDaily: Day[]; overSegs: Seg[]; underSegs: Seg[]; picks: Pick[]
@@ -27,6 +28,7 @@ export default function Page() {
   const [filter, setFilter] = useState<{hand:string;dir:string;ha:string}>({ hand:'all', dir:'all', ha:'all' })
   const [chartReady, setChartReady] = useState(false)
   const [chartMode, setChartMode] = useState<'cumulative' | 'rolling'>('cumulative')
+  const [calMonth, setCalMonth] = useState<string>(() => String(new Date().getMonth() + 1))
   const chartRef     = useRef<HTMLCanvasElement>(null)
   const chartInstRef = useRef<any>(null)
   const chartSeenRef = useRef(false)
@@ -38,17 +40,25 @@ export default function Page() {
   useEffect(() => {
     if (!data) return
     populateHero(data.season, data.overSegs, data.underSegs)
-    renderCal(data.daily)
     renderSegs(data.overSegs, 'ov-segs')
     renderSegs(data.underSegs, 'un-segs')
     setupObservers()
 
-    // Auto-poll MLB results every hour
-    const dateStr = data.updated.slice(0, 10) // YYYY-MM-DD
+    // Auto-poll MLB results every hour — use picks_date (actual game date) not generation timestamp
+    const dateStr = data.picks_date || data.updated.slice(0, 10)
     pollResults(data.picks, dateStr)
     const interval = setInterval(() => pollResults(data.picks, dateStr), 60 * 60 * 1000)
     return () => clearInterval(interval)
   }, [data])
+
+  // Re-render calendar whenever data or month filter changes
+  useEffect(() => {
+    if (!data) return
+    const filtered = calMonth === 'all'
+      ? data.daily
+      : data.daily.filter(d => d.d.split('/')[0] === calMonth)
+    renderCal(filtered)
+  }, [data, calMonth])
 
   // Re-render cards whenever data or filters change
   useEffect(() => {
@@ -214,7 +224,21 @@ export default function Page() {
             <div style={{textAlign:'right',fontSize:'9px',color:'rgba(212,175,55,0.35)',marginTop:'4px',letterSpacing:'0.05em'}}>← scroll to view earlier dates</div>
           )}
         </div>
-        <div className="fade-in" style={{marginBottom:'6px'}}><div className="sec-eyebrow" style={{marginBottom:'10px'}}>Daily Calendar</div></div>
+        <div className="fade-in" style={{marginBottom:'6px',display:'flex',alignItems:'center',justifyContent:'space-between'}}>
+          <div className="sec-eyebrow">Daily Calendar</div>
+          {data && (() => {
+            const monthNames: Record<string,string> = {'3':'March','4':'April','5':'May','6':'June','7':'July','8':'August','9':'September','10':'October'}
+            const months = Array.from(new Set(data.daily.map(d => d.d.split('/')[0]))).sort((a,b) => +a - +b)
+            return (
+              <select className="filter-select" value={calMonth}
+                onChange={e => setCalMonth(e.target.value)}
+                style={{fontSize:'9px',padding:'4px 24px 4px 8px',minWidth:'unset'}}>
+                <option value="all">Full Season</option>
+                {months.map(m => <option key={m} value={m}>{monthNames[m] || m}</option>)}
+              </select>
+            )
+          })()}
+        </div>
         <div className="cal-grid fade-in" id="cal"/>
         <div className="segs-grid fade-in" style={{marginTop:'32px'}}>
           <div><div className="seg-col-h">Over Segments</div><div id="ov-segs"/></div>
@@ -377,6 +401,10 @@ function renderCards(picks: Pick[], podName: string, updated: string) {
 function buildCardHTML(p: Pick, podName: string, _demoIdx = 0): string {
   const recClass = p.rec === 'OVER' ? 'over' : 'under'
   const confColor = p.rec === 'OVER' ? '#4EABDE' : '#e06050'
+  // For UNDER picks, display confidence in the under direction (100 - P(Line))
+  const displayConf = p.rec === 'UNDER'
+    ? (100 - parseFloat(p.conf)).toFixed(1) + '%'
+    : p.conf
   const badgeColor = p.rec === 'OVER' ? '#c8a84b' : '#a04545'
   const badgeBg    = p.rec === 'OVER' ? 'rgba(200,168,75,0.12)' : 'rgba(158,64,64,0.14)'
   const badgeBorder = p.rec === 'OVER' ? 'rgba(200,168,75,0.45)' : 'rgba(158,64,64,0.5)'
@@ -429,7 +457,7 @@ function buildCardHTML(p: Pick, podName: string, _demoIdx = 0): string {
       </div>
       <div class="card-pick-row">
         <div class="card-rec-badge" style="background:${badgeBg};border:1px solid ${badgeBorder};color:${badgeColor}">${p.rec} ${p.line}K</div>
-        <div class="card-pick-val" style="color:${badgeColor}">${p.conf}</div>
+        <div class="card-pick-val" style="color:${badgeColor}">${displayConf}</div>
       </div>
       <div class="card-tap-hint">tap to flip</div>
       <div class="card-footer-strip">
@@ -461,7 +489,7 @@ function buildCardHTML(p: Pick, podName: string, _demoIdx = 0): string {
       <div class="pred-row">
         <div class="pred-cell"><div class="pred-lbl">Pred K</div><div class="pred-val">${fmt(p.pred_k)}</div></div>
         <div class="pred-cell"><div class="pred-lbl">Line</div><div class="pred-val">${p.line}</div></div>
-        <div class="pred-cell"><div class="pred-lbl">P(line)</div><div class="pred-val" style="color:${confColor}">${p.conf}</div></div>
+        <div class="pred-cell"><div class="pred-lbl">${p.rec === 'UNDER' ? 'P(under)' : 'P(line)'}</div><div class="pred-val" style="color:${confColor}">${displayConf}</div></div>
         <div class="pred-cell"><div class="pred-lbl">Actual K</div><div class="pred-val pred-actual-k" style="color:${p.actual_k != null ? (p.result === 'win' ? '#3ab05a' : '#C44536') : 'rgba(245,241,230,0.35)'}">${p.actual_k != null ? p.actual_k : '--'}</div></div>
       </div>
       ${hasShap
