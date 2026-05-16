@@ -4,6 +4,30 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "StatPacks — MLB K Model",
   description: "Daily MLB strikeout picks powered by LightGBM + Beta-Binomial modeling.",
+  openGraph: {
+    title: "StatPacks — MLB K Model",
+    description: "Daily MLB strikeout picks powered by LightGBM + Beta-Binomial modeling.",
+    url: "https://statpacks.vercel.app",
+    siteName: "StatPacks",
+    images: [
+      {
+        url: "https://statpacks.vercel.app/og-image.png",
+        width: 1200,
+        height: 1200,
+        alt: "StatPacks",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "StatPacks — MLB K Model",
+    description: "Daily MLB strikeout picks powered by LightGBM + Beta-Binomial modeling.",
+    images: ["https://statpacks.vercel.app/og-image.png"],
+  },
+  icons: {
+    icon: "/og-image.png",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
