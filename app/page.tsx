@@ -598,6 +598,10 @@ function renderChart(
     const liveCum = cumulate(daily, liveDates)
     const btCum   = cumulate(btDaily, btDates)
 
+    const cumVals = [...liveCum, ...btCum].filter(v => v !== null) as number[]
+    const cumMax  = cumVals.length > 0 ? Math.ceil((Math.max(...cumVals) + 4) / 5) * 5 : 82
+    const cumMin  = cumVals.length > 0 ? Math.floor((Math.min(...cumVals) - 4) / 5) * 5 : 45
+
     // Reset canvas to responsive
     canvas.style.width  = ''
     canvas.style.height = '160px'
@@ -617,7 +621,7 @@ function renderChart(
         plugins: { legend: { display: false }, tooltip: { callbacks: { label: (ctx:any) => ctx.dataset.label ? ctx.dataset.label + ': ' + ctx.parsed.y + '%' : '' }}},
         scales: {
           x: { ticks: { color: tick, font: { size: 9 }, maxRotation: 45, autoSkip: true, maxTicksLimit: 12 }, grid: { color: grid } },
-          y: { min: 45, max: 82, ticks: { color: tick, font: { size: 9 }, callback: (v:number) => v + '%' }, grid: { color: grid } },
+          y: { min: cumMin, max: cumMax, ticks: { color: tick, font: { size: 9 }, callback: (v:number) => v + '%' }, grid: { color: grid } },
         },
       },
     })
@@ -636,6 +640,10 @@ function renderChart(
     const btRoll     = roll(btDaily, 7).map((v, i) => btDates.has(allDates[i])   ? v : null)
     const liveRoll   = roll(daily,   7).map((v, i) => liveDates.has(allDates[i]) ? v : null)
     const liveRoll30 = roll(daily,  30).map((v, i) => liveDates.has(allDates[i]) ? v : null)
+
+    const rollVals = [...btRoll, ...liveRoll, ...liveRoll30].filter(v => v !== null) as number[]
+    const rollMax  = rollVals.length > 0 ? Math.ceil((Math.max(...rollVals) + 4) / 5) * 5 : 90
+    const rollMin  = rollVals.length > 0 ? Math.floor((Math.min(...rollVals) - 4) / 5) * 5 : 30
 
     const PX_PER_DAY = 48
     const totalWidth = Math.max(n * PX_PER_DAY, 400)
@@ -687,7 +695,7 @@ function renderChart(
         plugins: { legend: { display: false }, tooltip: { callbacks: { label: (ctx:any) => ctx.dataset.label + ': ' + ctx.parsed.y + '%' }}},
         scales: {
           x: { ticks: { color: tick, font: { size: 9 }, maxRotation: 45 }, grid: { color: grid } },
-          y: { min: 45, max: 82, ticks: { color: tick, font: { size: 9 }, callback: (v:number) => v + '%' }, grid: { color: grid } },
+          y: { min: rollMin, max: rollMax, ticks: { color: tick, font: { size: 9 }, callback: (v:number) => v + '%' }, grid: { color: grid } },
         },
       },
     })
