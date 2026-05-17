@@ -333,6 +333,16 @@ function populateHero(s: PicksData['season'], overSegs: Seg[], underSegs: Seg[])
     countUp('hr-ovpct',  parseFloat(s.over_pct),     1200, 1, '%')
     countUp('hr-upct',   parseFloat(s.under_pct),    1200, 1, '%')
 
+    // Dynamic color for pct labels based on actual values
+    const colorClass = (pct: number) => pct >= 57.8 ? 'g' : pct >= 50 ? 'o' : 'r'
+    const setPctColor = (id: string, pct: number) => {
+      const el = document.getElementById(id)
+      if (el) { el.className = `hr-pct ${colorClass(pct)}` }
+    }
+    setPctColor('hr-opct',  parseFloat(s.overall_pct))
+    setPctColor('hr-ovpct', parseFloat(s.over_pct))
+    setPctColor('hr-upct',  parseFloat(s.under_pct))
+
     // Best segment
     const allSegs = [...(overSegs || []), ...(underSegs || [])]
     if (allSegs.length > 0) {
