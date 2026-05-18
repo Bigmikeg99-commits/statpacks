@@ -3,10 +3,10 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "StatPacks — MLB K Model",
-  description: "Daily MLB strikeout picks powered by LightGBM + Beta-Binomial modeling.",
+  description: "Daily MLB Strikeout Model",
   openGraph: {
     title: "StatPacks — MLB K Model",
-    description: "Daily MLB strikeout picks powered by LightGBM + Beta-Binomial modeling.",
+    description: "Daily MLB Strikeout Model",
     url: "https://statpacks.vercel.app",
     siteName: "StatPacks",
     images: [
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary",
     title: "StatPacks — MLB K Model",
-    description: "Daily MLB strikeout picks powered by LightGBM + Beta-Binomial modeling.",
+    description: "Daily MLB Strikeout Model",
     images: ["https://statpacks.vercel.app/og-image.png"],
   },
   icons: {
