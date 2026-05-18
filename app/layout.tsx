@@ -8,11 +8,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: "StatPacks — MLB K Model",
     description: "Daily MLB Strikeout Model",
-    url: "https://statpacks.vercel.app",
+    url: "https://statpacks.app",
     siteName: "StatPacks",
     images: [
       {
-        url: "https://statpacks.vercel.app/og-image.png",
+        url: "https://statpacks.app/og-image.png",
         width: 1200,
         height: 1200,
         alt: "StatPacks",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     card: "summary",
     title: "StatPacks — MLB K Model",
     description: "Daily MLB Strikeout Model",
-    images: ["https://statpacks.vercel.app/og-image.png"],
+    images: ["https://statpacks.app/og-image.png"],
   },
   icons: {
     icon: "/og-image.png",
