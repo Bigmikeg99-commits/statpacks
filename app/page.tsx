@@ -400,7 +400,7 @@ function renderCards(picks: Pick[], podName: string, updated: string) {
     if (p.result === 'win') scene.classList.add('result-win')
     if (p.result === 'loss') scene.classList.add('result-loss')
     scene.addEventListener('click', () => scene.classList.toggle('flipped'))
-    scene.innerHTML = buildCardHTML(p, podName, i)
+    scene.innerHTML = buildCardHTML(p, podName, i + 1)
     grid.appendChild(scene)
     scene.style.opacity = '0'
     setTimeout(() => { scene.style.opacity = ''; scene.classList.add('cascade-in') }, 120 + i * 80)
@@ -408,7 +408,7 @@ function renderCards(picks: Pick[], podName: string, updated: string) {
 }
 
 
-function buildCardHTML(p: Pick, podName: string, _demoIdx = 0): string {
+function buildCardHTML(p: Pick, podName: string, rank = 1): string {
   const recClass = p.rec === 'OVER' ? 'over' : 'under'
   const confColor = p.rec === 'OVER' ? '#4EABDE' : '#e06050'
   // For UNDER picks, display confidence in the under direction (100 - P(Line))
@@ -445,6 +445,7 @@ function buildCardHTML(p: Pick, podName: string, _demoIdx = 0): string {
     }).join('')
   const hasShap = (p.pushers_up?.length||0)+(p.pushers_down?.length||0) > 0
   const podTag = isPod ? `<div class="card-pod-tag">★ Pick of the Day</div>` : ''
+  const rankBadge = isPod ? '' : `<div class="card-rank-badge${rank <= 5 ? ' top' : ''}">#${rank}</div>`
   const resultOverlay = resultClass ? `<div class="card-result-overlay ${resultClass}"></div>` : ''
   const resultStamp = resultClass ? `<div class="card-result-stamp ${resultClass}">${resultClass==='win'?'W':'L'}</div>` : ''
   const imgTag = imgUrl ? `<img src="${imgUrl}" alt="${p.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">` : ''
@@ -453,6 +454,7 @@ function buildCardHTML(p: Pick, podName: string, _demoIdx = 0): string {
   return `<div class="card-inner">
     <div class="card-front">
       ${podTag}
+      ${rankBadge}
       <div class="card-photo-area">
         ${imgTag}
         <div class="card-photo-fallback" style="${fbStyle}">${initials}</div>

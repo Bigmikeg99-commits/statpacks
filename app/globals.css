@@ -154,6 +154,9 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 
 /* POD card badge on grid cards */
 .card-pod-tag{position:absolute;top:0;left:50%;transform:translateX(-50%);z-index:9;font-family:'Inter',sans-serif;font-size:7px;font-weight:800;letter-spacing:0.22em;color:var(--gold);background:rgba(4,8,18,0.95);border:1px solid rgba(212,175,55,0.55);border-top:none;border-radius:0 0 4px 4px;padding:3px 10px;white-space:nowrap;text-transform:uppercase}
+/* Rank badge for non-POD cards */
+.card-rank-badge{position:absolute;top:6px;left:6px;z-index:6;font-family:'Inter',sans-serif;font-size:8px;font-weight:800;letter-spacing:0.08em;color:rgba(245,241,230,0.45);background:rgba(4,8,18,0.72);border:1px solid rgba(212,175,55,0.18);border-radius:3px;padding:2px 5px}
+.card-rank-badge.top{color:rgba(212,175,55,0.75);border-color:rgba(212,175,55,0.35)}
 @keyframes pod-pulse{
   0%,100%{box-shadow:0 0 0 2px rgba(212,175,55,0.7),0 0 28px rgba(212,175,55,0.12),0 12px 40px rgba(0,0,0,0.7)}
   50%{box-shadow:0 0 0 2.5px rgba(212,175,55,1),0 0 42px rgba(212,175,55,0.28),0 12px 40px rgba(0,0,0,0.7)}
