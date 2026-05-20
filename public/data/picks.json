@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-19 09:55",
+  "updated": "2026-05-19 10:55",
   "picks_date": "2026-05-19",
   "season": {
     "record": "329-263",
@@ -1140,6 +1140,7 @@
     {
       "name": "Bailey Falter",
       "mlbamid": "663559",
+      "team": "Kansas City Royals",
       "opp": "vs Boston Red Sox",
       "hand": "L",
       "ha": "Home",
@@ -1236,6 +1237,7 @@
     {
       "name": "Bryce Miller",
       "mlbamid": "682243",
+      "team": "Seattle Mariners",
       "opp": "vs Chicago White Sox",
       "hand": "R",
       "ha": "Home",
@@ -1332,6 +1334,7 @@
     {
       "name": "Griffin Jax",
       "mlbamid": "643377",
+      "team": "Tampa Bay Rays",
       "opp": "vs Baltimore Orioles",
       "hand": "R",
       "ha": "Home",
@@ -1428,6 +1431,7 @@
     {
       "name": "Jacob Lopez",
       "mlbamid": "682052",
+      "team": "Athletics",
       "opp": "vs Los Angeles Angels",
       "hand": "L",
       "ha": "Away",
@@ -1524,6 +1528,7 @@
     {
       "name": "Landen Roupp",
       "mlbamid": "694738",
+      "team": "San Francisco Giants",
       "opp": "vs Arizona Diamondbacks",
       "hand": "R",
       "ha": "Away",
@@ -1620,6 +1625,7 @@
     {
       "name": "Ryne Nelson",
       "mlbamid": "669194",
+      "team": "Arizona Diamondbacks",
       "opp": "vs San Francisco Giants",
       "hand": "R",
       "ha": "Home",
@@ -1716,6 +1722,7 @@
     {
       "name": "Will Warren",
       "mlbamid": "701542",
+      "team": "New York Yankees",
       "opp": "vs Toronto Blue Jays",
       "hand": "R",
       "ha": "Home",
@@ -1812,6 +1819,7 @@
     {
       "name": "Nolan McLean",
       "mlbamid": "690997",
+      "team": "New York Mets",
       "opp": "vs Washington Nationals",
       "hand": "R",
       "ha": "Away",
@@ -1908,6 +1916,7 @@
     {
       "name": "Zebby Matthews",
       "mlbamid": "805673",
+      "team": "Minnesota Twins",
       "opp": "vs Houston Astros",
       "hand": "R",
       "ha": "Home",
@@ -2004,6 +2013,7 @@
     {
       "name": "Keider Montero",
       "mlbamid": "672456",
+      "team": "Detroit Tigers",
       "opp": "vs Cleveland Guardians",
       "hand": "R",
       "ha": "Home",
