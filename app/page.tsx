@@ -5,12 +5,30 @@ import Script from 'next/script'
 /* ---- types ---- */
 interface Shap { label: string; feat: string; val: number; pp: number }
 interface Pick {
-  name: string; mlbamid: string; opp: string; hand: string; ha: string
+  name: string; mlbamid: string; team?: string; opp: string; hand: string; ha: string
   rec: string; line: number; conf: string; pred_k: number
   pushers_up: Shap[]; pushers_down: Shap[]
   result: string | null; actual_k: number | null; pick_status?: string
   avg_ip?: number; k_pct?: number; barrel_pct?: number; stuff_plus?: number
   location_plus?: number; pitching_plus?: number; k_pct_l5?: number
+}
+
+const TEAM_IDS: Record<string, number> = {
+  'Arizona Diamondbacks':109,'Atlanta Braves':144,'Baltimore Orioles':110,
+  'Boston Red Sox':111,'Chicago Cubs':112,'Chicago White Sox':145,
+  'Cincinnati Reds':113,'Cleveland Guardians':114,'Colorado Rockies':115,
+  'Detroit Tigers':116,'Houston Astros':117,'Kansas City Royals':118,
+  'Los Angeles Angels':108,'Los Angeles Dodgers':119,'Miami Marlins':146,
+  'Milwaukee Brewers':158,'Minnesota Twins':142,'New York Mets':121,
+  'New York Yankees':147,'Oakland Athletics':133,'Philadelphia Phillies':143,
+  'Pittsburgh Pirates':134,'San Diego Padres':135,'San Francisco Giants':137,
+  'Seattle Mariners':136,'St. Louis Cardinals':138,'Tampa Bay Rays':139,
+  'Texas Rangers':140,'Toronto Blue Jays':141,'Washington Nationals':120,
+}
+function teamLogoUrl(team?: string): string {
+  if (!team) return ''
+  const id = TEAM_IDS[team]
+  return id ? `https://www.mlbstatic.com/team-logos/${id}.svg` : ''
 }
 interface Day { d:string;w:number;l:number;ow:number;ol:number;uw:number;ul:number;p:number }
 interface Seg { l:string;w:number;lo:number;pct:number;e:number }
@@ -419,6 +437,7 @@ function buildCardHTML(p: Pick, podName: string, rank = 1): string {
   const badgeBg    = p.rec === 'OVER' ? 'rgba(200,168,75,0.12)' : 'rgba(158,64,64,0.14)'
   const badgeBorder = p.rec === 'OVER' ? 'rgba(200,168,75,0.45)' : 'rgba(158,64,64,0.5)'
   const isPod = p.name === podName
+  const logoUrl = teamLogoUrl(p.team)
   const resultClass = p.result === 'win' ? 'win' : p.result === 'loss' ? 'loss' : ''
   const imgUrl = p.mlbamid ? `https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_426,q_auto:best/v1/people/${p.mlbamid}/headshot/67/current` : ''
   const initials = p.name.split(' ').map((n:string) => n[0]).join('')
@@ -465,7 +484,7 @@ function buildCardHTML(p: Pick, podName: string, rank = 1): string {
         <div class="card-player-name">${p.name}</div>
         <div class="card-player-sub">${opp} · ${p.hand}HP · ${p.ha}</div>
         <div class="card-slash-mark">/ /</div>
-        <div class="card-pos-icon"><span>P</span></div>
+        <div class="card-pos-icon">${logoUrl ? `<img src="${logoUrl}" alt="" style="width:22px;height:22px;object-fit:contain;filter:drop-shadow(0 0 2px white) drop-shadow(0 0 2px white) drop-shadow(0 0 1px white);">` : '<span>P</span>'}</div>
       </div>
       <div class="card-pick-row">
         <div class="card-rec-badge" style="background:${badgeBg};border:1px solid ${badgeBorder};color:${badgeColor}">${p.rec} ${p.line}K</div>
