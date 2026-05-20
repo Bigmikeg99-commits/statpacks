@@ -105,7 +105,7 @@ function renderBuckChart(cal: CalPoint[], canvas: HTMLCanvasElement) {
           data: sorted.map(d => d.actual_pct),
           backgroundColor: sorted.map(d =>
             d.actual_pct >= 65 ? 'rgba(58,176,90,0.72)'
-            : d.actual_pct >= 57.8 ? 'rgba(212,175,55,0.6)'
+            : d.actual_pct >= 52.4 ? 'rgba(212,175,55,0.6)'
             : 'rgba(196,69,54,0.65)'
           ),
           borderRadius: 3,
@@ -143,14 +143,14 @@ function renderBuckChart(cal: CalPoint[], canvas: HTMLCanvasElement) {
 /* ---- helpers ---- */
 function gradeColor(pct: number): string {
   if (pct >= 65) return '#3ab05a'
-  if (pct >= 57.8) return '#D4AF37'
+  if (pct >= 52.4) return '#D4AF37'
   return '#C44536'
 }
 function grade(pct: number, n: number): { label: string; cls: string } {
   if (n < 5)  return { label: 'Low n', cls: 'perf-badge-y' }
   if (pct >= 65) return { label: 'Elite',   cls: 'perf-badge-g' }
   if (pct >= 60) return { label: 'Strong',  cls: 'perf-badge-g' }
-  if (pct >= 57.8) return { label: 'Neutral', cls: 'perf-badge-y' }
+  if (pct >= 52.4) return { label: 'Neutral', cls: 'perf-badge-y' }
   return { label: 'Avoid', cls: 'perf-badge-r' }
 }
 
@@ -190,8 +190,8 @@ export default function PerformancePage() {
   const overPct  = parseFloat(s?.over_pct  || '0')
   const underPct = parseFloat(s?.under_pct || '0')
   const totalPct = parseFloat(s?.overall_pct || '0')
-  const edge     = (totalPct - 57.8).toFixed(1)
-  const edgePos  = totalPct >= 57.8
+  const edge     = (totalPct - 52.4).toFixed(1)
+  const edgePos  = totalPct >= 52.4
 
   return (
     <>
@@ -288,8 +288,8 @@ export default function PerformancePage() {
                 <div>Unders</div>
               </div>
               {data.thresholdStats.map((row) => {
-                const edgePp = (row.total.pct - 57.8).toFixed(1)
-                const edgeC  = row.total.pct >= 57.8 ? '#3ab05a' : '#C44536'
+                const edgePp = (row.total.pct - 52.4).toFixed(1)
+                const edgeC  = row.total.pct >= 52.4 ? '#3ab05a' : '#C44536'
                 return (
                   <div className="perf-thresh-row" key={row.label}>
                     <div className="perf-thresh-label">{row.label}</div>
@@ -310,7 +310,7 @@ export default function PerformancePage() {
                     </div>
                     <div className="perf-thresh-cell">
                       <span className="perf-thresh-big" style={{ color: edgeC }}>
-                        {row.total.pct >= 57.8 ? '+' : ''}{edgePp}pp
+                        {row.total.pct >= 52.4 ? '+' : ''}{edgePp}pp
                       </span>
                     </div>
                     <div className="perf-thresh-cell">
@@ -374,7 +374,7 @@ export default function PerformancePage() {
 
         {/* FOOTER NOTE */}
         <div className="perf-footer-note fade-in">
-          <span>V2 Backtest data (3/26–4/29) · V1 &amp; V2 live picks (3/29–present) · −110 breakeven = 57.8%</span>
+          <span>V2 Backtest data (3/26–4/29) · V1 &amp; V2 live picks (3/29–present) · −110 breakeven = 52.4%</span>
           <Link href="/" className="perf-back-link">← Back to today&apos;s picks</Link>
         </div>
 

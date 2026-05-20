@@ -145,7 +145,7 @@ export default function Page() {
       <div className="stats-band"><div className="stats-band-inner">
         <div className="stat-item fade-in"><div className="stat-lbl">Model</div><div className="stat-num" style={{fontSize:'20px',fontFamily:"'Playfair Display',serif"}}>LightGBM</div><div className="stat-detail">Binary Classification</div></div>
         <div className="stat-item fade-in"><div className="stat-lbl">Thresholds</div><div className="stat-num" style={{color:'var(--blue)'}}>6</div><div className="stat-detail">3.5K through 8.5K</div></div>
-        <div className="stat-item fade-in"><div className="stat-lbl">Breakeven</div><div className="stat-num" style={{color:'rgba(245,241,230,0.5)'}}>57.8<span style={{fontSize:'18px'}}>%</span></div><div className="stat-detail">At -110 juice</div></div>
+        <div className="stat-item fade-in"><div className="stat-lbl">Breakeven</div><div className="stat-num" style={{color:'rgba(245,241,230,0.5)'}}>52.4<span style={{fontSize:'18px'}}>%</span></div><div className="stat-detail">At -110 juice</div></div>
         <div className="stat-item fade-in"><div className="stat-lbl">Edge</div><div className="stat-num"><span id="stat-edge">—</span><span style={{fontSize:'18px'}}>pp</span></div><div className="stat-detail" id="stat-edge-label">—</div></div>
         <div className="stat-item fade-in"><div className="stat-lbl">Best Segment</div><div className="stat-num" style={{fontSize:'20px',color:'#3ab05a'}} id="stat-best-seg-pct">—</div><div className="stat-detail" id="stat-best-seg-name">Loading…</div></div>
       </div></div>
@@ -334,7 +334,7 @@ function populateHero(s: PicksData['season'], overSegs: Seg[], underSegs: Seg[])
     countUp('hr-upct',   parseFloat(s.under_pct),    1200, 1, '%')
 
     // Dynamic color for pct labels based on actual values
-    const colorClass = (pct: number) => pct >= 57.8 ? 'g' : pct >= 50 ? 'o' : 'r'
+    const colorClass = (pct: number) => pct >= 52.4 ? 'g' : pct >= 50 ? 'o' : 'r'
     const setPctColor = (id: string, pct: number) => {
       const el = document.getElementById(id)
       if (el) { el.className = `hr-pct ${colorClass(pct)}` }
@@ -354,7 +354,7 @@ function populateHero(s: PicksData['season'], overSegs: Seg[], underSegs: Seg[])
     // Edge — color + label driven by sign
     const livePct = parseFloat(s.overall_pct)
     if (!isNaN(livePct)) {
-      const edgeVal = livePct - 57.8
+      const edgeVal = livePct - 52.4
       const positive = edgeVal >= 0
       const sign = positive ? '+' : ''
       const color = positive ? '#3ab05a' : '#C44536'
@@ -555,14 +555,14 @@ function renderSegs(segs: Seg[], id: string) {
   if (!c) return
   c.innerHTML = ''
   segs.forEach(s => {
-    const good = s.pct >= 57.8
-    const hue = good ? Math.min(140, 78+(s.pct-57.8)*3.2) : 0
-    const lt = good ? 38 : 32+(57.8-s.pct)*0.5
+    const good = s.pct >= 52.4
+    const hue = good ? Math.min(140, 78+(s.pct-52.4)*3.2) : 0
+    const lt = good ? 38 : 32+(52.4-s.pct)*0.5
     const fc = good ? `hsl(${hue},58%,${lt}%)` : 'hsl(0,60%,38%)'
     const eStr = (s.e>=0?'+':'')+s.e.toFixed(1)+'pp'
     const row = document.createElement('div')
     row.className = 'sr fade-in'
-    row.innerHTML = `<div class="sl">${s.l}</div><div class="st"><div class="sf" style="width:0;background:${fc}" data-w="${s.pct.toFixed(1)}"></div><div class="sbe" style="left:57.8%"></div></div><div class="ss"><span class="${good?'g':'r'}">${eStr}</span></div>`
+    row.innerHTML = `<div class="sl">${s.l}</div><div class="st"><div class="sf" style="width:0;background:${fc}" data-w="${s.pct.toFixed(1)}"></div><div class="sbe" style="left:52.4%"></div></div><div class="ss"><span class="${good?'g':'r'}">${eStr}</span></div>`
     c.appendChild(row)
   })
 }
@@ -615,7 +615,7 @@ function renderChart(
       data: { labels: allDates, datasets: [
         { label: 'Live cumulative', data: liveCum, borderColor: '#4EABDE', borderWidth: 2.5, pointRadius: 2, pointBackgroundColor: '#4EABDE', fill: false, tension: 0.3, spanGaps: false },
         { label: 'V2 Backtest cumulative', data: btCum, borderColor: '#D4AF37', borderWidth: 2, borderDash: [5,3], pointRadius: 1.5, pointBackgroundColor: '#D4AF37', fill: false, tension: 0.3, spanGaps: false },
-        { data: Array(n).fill(57.8), borderColor: 'rgba(212,175,55,0.18)', borderWidth: 1, borderDash: [2,4], pointRadius: 0, fill: false },
+        { data: Array(n).fill(52.4), borderColor: 'rgba(212,175,55,0.18)', borderWidth: 1, borderDash: [2,4], pointRadius: 0, fill: false },
       ]},
       options: {
         responsive: true, maintainAspectRatio: false,
@@ -688,7 +688,7 @@ function renderChart(
         { label: '7-Day Live',   data: liveRoll,   borderColor: '#4EABDE', borderWidth: 2.5, pointRadius: 2,   pointBackgroundColor: '#4EABDE', fill: false, tension: 0.35, spanGaps: false },
         { label: '30-Day Live',  data: liveRoll30, borderColor: '#3ab05a', borderWidth: 2,   pointRadius: 1.5, pointBackgroundColor: '#3ab05a', fill: false, tension: 0.35, spanGaps: false },
         { label: 'V2 Backtest',  data: btRoll,     borderColor: '#D4AF37', borderWidth: 2,   pointRadius: 1.5, pointBackgroundColor: '#D4AF37', fill: false, tension: 0.35, spanGaps: false, borderDash: [5,3] },
-        { data: Array(n).fill(57.8), borderColor: 'rgba(212,175,55,0.18)', borderWidth: 1, borderDash: [2,4], pointRadius: 0, fill: false },
+        { data: Array(n).fill(52.4), borderColor: 'rgba(212,175,55,0.18)', borderWidth: 1, borderDash: [2,4], pointRadius: 0, fill: false },
       ]},
       options: {
         responsive: false, maintainAspectRatio: false,
@@ -808,4 +808,3 @@ function setupObservers() {
     }
   })
 }
-

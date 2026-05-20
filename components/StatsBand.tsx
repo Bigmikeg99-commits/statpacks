@@ -14,7 +14,7 @@ export default function StatsBand() {
         </div>
         <div className="stat-item">
           <div className="stat-lbl">Breakeven</div>
-          <div className="stat-num" style={{ color: "rgba(245,241,230,0.5)" }}>57.8<span style={{ fontSize: "18px" }}>%</span></div>
+          <div className="stat-num" style={{ color: "rgba(245,241,230,0.5)" }}>52.4<span style={{ fontSize: "18px" }}>%</span></div>
           <div className="stat-detail">At standard -110 juice</div>
         </div>
         <div className="stat-item">
