@@ -484,7 +484,7 @@ function buildCardHTML(p: Pick, podName: string, rank = 1): string {
         <div class="card-player-name">${p.name}</div>
         <div class="card-player-sub">${opp} · ${p.hand}HP · ${p.ha}</div>
         <div class="card-slash-mark">/ /</div>
-        <div class="card-pos-icon">${logoUrl ? `<img src="${logoUrl}" alt="" style="width:22px;height:22px;object-fit:contain;filter:drop-shadow(0 0 2px white) drop-shadow(0 0 2px white) drop-shadow(0 0 1px white);">` : '<span>P</span>'}</div>
+        <div class="card-pos-icon">${logoUrl ? `<img src="${logoUrl}" alt="" style="width:24px;height:24px;object-fit:contain;filter:drop-shadow(0 0 2px white) drop-shadow(0 0 2px white) drop-shadow(0 0 1px white);">` : '<span>P</span>'}</div>
       </div>
       <div class="card-pick-row">
         <div class="card-rec-badge" style="background:${badgeBg};border:1px solid ${badgeBorder};color:${badgeColor}">${p.rec} ${p.line}K</div>
