@@ -20,7 +20,7 @@ const TEAM_IDS: Record<string, number> = {
   'Detroit Tigers':116,'Houston Astros':117,'Kansas City Royals':118,
   'Los Angeles Angels':108,'Los Angeles Dodgers':119,'Miami Marlins':146,
   'Milwaukee Brewers':158,'Minnesota Twins':142,'New York Mets':121,
-  'New York Yankees':147,'Oakland Athletics':133,'Philadelphia Phillies':143,
+  'New York Yankees':147,'Oakland Athletics':133,'Athletics':133,'Philadelphia Phillies':143,
   'Pittsburgh Pirates':134,'San Diego Padres':135,'San Francisco Giants':137,
   'Seattle Mariners':136,'St. Louis Cardinals':138,'Tampa Bay Rays':139,
   'Texas Rangers':140,'Toronto Blue Jays':141,'Washington Nationals':120,
