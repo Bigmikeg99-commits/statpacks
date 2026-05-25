@@ -9,12 +9,23 @@ export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url)
   const date   = searchParams.get('date')   // YYYY-MM-DD
   const idsRaw = searchParams.get('ids') ?? ''
-  const ids    = idsRaw.split(',').map(s => s.trim()).filter(Boolean)
+
+  // ids format: "mlbamid:teamId,mlbamid:teamId,..." — teamId is optional for back-compat
+  const idEntries = idsRaw.split(',').map(s => s.trim()).filter(Boolean)
+  const ids: string[] = []
+  const mlbamToTeam: Record<string, number> = {}
+  for (const entry of idEntries) {
+    const [mlbamid, teamIdStr] = entry.split(':')
+    if (mlbamid) {
+      ids.push(mlbamid)
+      if (teamIdStr) mlbamToTeam[mlbamid] = parseInt(teamIdStr)
+    }
+  }
 
   if (!date || ids.length === 0) return NextResponse.json({})
 
   try {
-    // 1. Get schedule for the date → gamePks + game states
+    // 1. Get schedule for the date → gamePks + game states + team IDs
     const schedRes = await fetch(
       `https://statsapi.mlb.com/api/v1/schedule?sportId=1&date=${date}`,
       { cache: 'no-store', headers: HEADERS }
@@ -24,10 +35,19 @@ export async function GET(req: NextRequest) {
 
     const gamePks: number[] = []
     const gameStates: Record<number, string> = {}
+    const postponedTeamIds = new Set<number>()
+
     for (const d of sched.dates ?? []) {
       for (const g of d.games ?? []) {
         gamePks.push(g.gamePk)
         gameStates[g.gamePk] = g.status?.abstractGameState ?? 'Unknown'
+        const detailed: string = g.status?.detailedState ?? ''
+        if (detailed.toLowerCase().includes('postponed')) {
+          const homeId: number = g.teams?.home?.team?.id
+          const awayId: number = g.teams?.away?.team?.id
+          if (homeId) postponedTeamIds.add(homeId)
+          if (awayId) postponedTeamIds.add(awayId)
+        }
       }
     }
 
@@ -66,6 +86,15 @@ export async function GET(req: NextRequest) {
         } catch { /* skip failed game */ }
       })
     )
+
+    // 3. For any pitcher not found in boxscores, check if their team's game was postponed
+    for (const mlbamid of ids) {
+      if (results[mlbamid]) continue
+      const teamId = mlbamToTeam[mlbamid]
+      if (teamId && postponedTeamIds.has(teamId)) {
+        results[mlbamid] = { actual_k: null, game_state: 'Postponed', started: false }
+      }
+    }
 
     return NextResponse.json(results)
   } catch (err) {

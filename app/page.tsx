@@ -729,7 +729,10 @@ function renderChart(
 }
 
 async function pollResults(picks: Pick[], dateStr: string) {
-  const ids = picks.map(p => p.mlbamid).filter(Boolean)
+  const ids = picks.map(p => {
+    const teamId = TEAM_IDS[p.team || '']
+    return teamId ? `${p.mlbamid}:${teamId}` : p.mlbamid
+  }).filter(Boolean)
   if (!ids.length) return
   try {
     const res = await fetch(`/api/results?date=${dateStr}&ids=${ids.join(',')}`)
@@ -743,7 +746,24 @@ async function pollResults(picks: Pick[], dateStr: string) {
       const line    = parseFloat(scene.dataset.line ?? '0')
       const rec     = scene.dataset.rec ?? ''
       const k       = info.actual_k
-      const isFinal = info.game_state === 'Final'
+      const isFinal     = info.game_state === 'Final'
+      const isPostponed = info.game_state === 'Postponed'
+
+      if (isPostponed) {
+        if (scene.classList.contains('result-ppd')) continue
+        scene.classList.remove('result-win', 'result-loss', 'result-void', 'result-ppd')
+        scene.classList.add('result-ppd')
+        const photoArea = scene.querySelector('.card-photo-area') as HTMLElement | null
+        if (photoArea) {
+          photoArea.querySelectorAll('.card-result-overlay, .card-result-stamp').forEach(el => el.remove())
+          const overlay = document.createElement('div'); overlay.className = 'card-result-overlay ppd'
+          const stamp   = document.createElement('div'); stamp.className   = 'card-result-stamp ppd'; stamp.textContent = 'PPD'
+          photoArea.appendChild(overlay); photoArea.appendChild(stamp)
+        }
+        const actualKEl = scene.querySelector('.pred-actual-k') as HTMLElement | null
+        if (actualKEl) { actualKEl.textContent = 'PPD'; actualKEl.style.color = '#4EABDE' }
+        continue
+      }
 
       if (!isFinal) continue
 
