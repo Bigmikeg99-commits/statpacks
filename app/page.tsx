@@ -144,7 +144,7 @@ export default function Page() {
         <div className="hero-content">
           <div className="hero-eyebrow">Sports Analytics · Predictive Models</div>
           <div className="hero-title">Stat<span>Packs</span></div>
-          <div className="hero-sub">Built on data. Tracked honestly.</div>
+          <div className="hero-sub">Built on Data. Tracked Transparently.</div>
           <div className="hero-record">
             <div className="hr-block"><div className="hr-lbl">Season Record</div><div className="hr-val" id="hr-record">--</div><div className="hr-pct o" id="hr-opct">--%</div></div>
             <div className="hr-block"><div className="hr-lbl">Unders</div><div className="hr-val" id="hr-unders">--</div><div className="hr-pct g" id="hr-upct">--%</div></div>
