@@ -417,6 +417,7 @@ function renderCards(picks: Pick[], podName: string, updated: string) {
     if (p.name === podName) scene.classList.add('is-pod')
     if (p.result === 'win') scene.classList.add('result-win')
     if (p.result === 'loss') scene.classList.add('result-loss')
+    if (p.pick_status === 'PPD') scene.classList.add('result-ppd')
     scene.addEventListener('click', () => scene.classList.toggle('flipped'))
     scene.innerHTML = buildCardHTML(p, podName, i + 1)
     grid.appendChild(scene)
@@ -438,7 +439,7 @@ function buildCardHTML(p: Pick, podName: string, rank = 1): string {
   const badgeBorder = p.rec === 'OVER' ? 'rgba(200,168,75,0.45)' : 'rgba(158,64,64,0.5)'
   const isPod = p.name === podName
   const logoUrl = teamLogoUrl(p.team)
-  const resultClass = p.result === 'win' ? 'win' : p.result === 'loss' ? 'loss' : ''
+  const resultClass = p.result === 'win' ? 'win' : p.result === 'loss' ? 'loss' : p.pick_status === 'PPD' ? 'ppd' : ''
   const imgUrl = p.mlbamid ? `https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_426,q_auto:best/v1/people/${p.mlbamid}/headshot/67/current` : ''
   const initials = p.name.split(' ').map((n:string) => n[0]).join('')
   const lastName = p.name.split(' ').slice(1).join(' ') || p.name
@@ -466,7 +467,7 @@ function buildCardHTML(p: Pick, podName: string, rank = 1): string {
   const podTag = isPod ? `<div class="card-pod-tag">★ Pick of the Day</div>` : ''
   const rankBadge = isPod ? '' : `<div class="card-rank-badge${rank <= 5 ? ' top' : ''}">#${rank}</div>`
   const resultOverlay = resultClass ? `<div class="card-result-overlay ${resultClass}"></div>` : ''
-  const resultStamp = resultClass ? `<div class="card-result-stamp ${resultClass}">${resultClass==='win'?'W':'L'}</div>` : ''
+  const resultStamp = resultClass ? `<div class="card-result-stamp ${resultClass}">${resultClass==='win'?'W':resultClass==='loss'?'L':'PPD'}</div>` : ''
   const imgTag = imgUrl ? `<img src="${imgUrl}" alt="${p.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">` : ''
   const fbStyle = imgUrl ? '' : 'display:flex;'
 
@@ -521,7 +522,7 @@ function buildCardHTML(p: Pick, podName: string, rank = 1): string {
         <div class="pred-cell"><div class="pred-lbl">Pred K</div><div class="pred-val">${fmt(p.pred_k)}</div></div>
         <div class="pred-cell"><div class="pred-lbl">Line</div><div class="pred-val">${p.line}</div></div>
         <div class="pred-cell"><div class="pred-lbl">${p.rec === 'UNDER' ? 'P(under)' : 'P(line)'}</div><div class="pred-val" style="color:${confColor}">${displayConf}</div></div>
-        <div class="pred-cell"><div class="pred-lbl">Actual K</div><div class="pred-val pred-actual-k" style="color:${p.actual_k != null ? (p.result === 'win' ? '#3ab05a' : '#C44536') : 'rgba(245,241,230,0.35)'}">${p.actual_k != null ? p.actual_k : '--'}</div></div>
+        <div class="pred-cell"><div class="pred-lbl">Actual K</div><div class="pred-val pred-actual-k" style="color:${p.actual_k != null ? (p.result === 'win' ? '#3ab05a' : '#C44536') : p.pick_status === 'PPD' ? '#4EABDE' : 'rgba(245,241,230,0.35)'}">${p.actual_k != null ? p.actual_k : p.pick_status === 'PPD' ? 'PPD' : '--'}</div></div>
       </div>
       ${hasShap
         ? `<div class="shap-block"><div class="shap-hdr">pushing over</div>${shapRows(p.pushers_up,'#3ab05a','+')}</div>

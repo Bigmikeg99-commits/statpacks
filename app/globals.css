@@ -123,9 +123,12 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .card-result-stamp.win{background:#28b450;color:#fff;border:1.5px solid rgba(255,255,255,0.3);border-radius:50%;width:24px;font-family:'Playfair Display',serif;font-size:11px;font-weight:900}
 .card-result-stamp.loss{background:#C44536;color:#fff;border:1.5px solid rgba(255,255,255,0.3);border-radius:50%;width:24px;font-family:'Playfair Display',serif;font-size:11px;font-weight:900}
 .card-result-stamp.void{background:#555;color:rgba(255,255,255,0.8);border:1.5px solid rgba(255,255,255,0.15)}
+.card-result-overlay.ppd{background:linear-gradient(180deg,rgba(78,171,222,0.0) 0%,rgba(78,171,222,0.22) 100%)}
+.card-result-stamp.ppd{background:#4EABDE;color:#fff;border:1.5px solid rgba(255,255,255,0.3);border-radius:4px;font-size:8px;width:32px}
 .card-scene.result-win .card-front{box-shadow:0 0 0 2px #28b450,0 12px 40px rgba(0,0,0,0.7)}
 .card-scene.result-loss .card-front{box-shadow:0 0 0 2px #C44536,0 12px 40px rgba(0,0,0,0.7)}
 .card-scene.result-void .card-front{box-shadow:0 0 0 2px #666,0 12px 40px rgba(0,0,0,0.7)}
+.card-scene.result-ppd .card-front{box-shadow:0 0 0 2px #4EABDE,0 12px 40px rgba(0,0,0,0.7)}
 .card-nameplate{flex-shrink:0;position:relative;background:linear-gradient(100deg,#0A1628 0%,#0d1e35 55%,#0A1628 100%);padding:10px 46px 7px 10px;border-top:2px solid #B8960C;overflow:hidden;min-height:58px;display:flex;flex-direction:column;justify-content:center}
 .card-nameplate::before{content:'';position:absolute;top:-8px;right:52px;width:2px;height:130%;background:linear-gradient(180deg,transparent,#D4AF37,transparent);transform:rotate(-18deg);opacity:0.5}
 .card-nameplate::after{content:'';position:absolute;bottom:0;left:0;right:0;top:0;background:linear-gradient(100deg,rgba(212,175,55,0.06) 0%,transparent 60%);pointer-events:none}
