@@ -151,8 +151,7 @@ export default function Page() {
             <div className="hr-block"><div className="hr-lbl">Overs</div><div className="hr-val" id="hr-overs">--</div><div className="hr-pct r" id="hr-ovpct">--%</div></div>
             <div className="hr-block"><div className="hr-lbl">Picks</div><div className="hr-val" id="hr-picks">--</div><div className="hr-pct" style={{color:'rgba(245,241,230,0.35)'}} id="hr-range">--</div></div>
           </div>
-          <div className="hero-cta">
-            <a href="#picks" className="btn btn-primary">Browse Packs</a>
+          <div className="hero-cta" style={{justifyContent:'center'}}>
             <a href="#picks" className="btn btn-secondary">Today&apos;s Top Picks</a>
           </div>
         </div>
