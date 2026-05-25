@@ -45,7 +45,7 @@ export default function Page() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [filter, setFilter] = useState<{hand:string;dir:string;ha:string}>({ hand:'all', dir:'all', ha:'all' })
   const [chartReady, setChartReady] = useState(false)
-  const [chartMode, setChartMode] = useState<'cumulative' | 'rolling'>('cumulative')
+  const [chartMode] = useState<'cumulative' | 'rolling'>('rolling')
   const [calMonth, setCalMonth] = useState<string>(() => String(new Date().getMonth() + 1))
   const chartRef     = useRef<HTMLCanvasElement>(null)
   const chartInstRef = useRef<any>(null)
@@ -213,26 +213,11 @@ export default function Page() {
         </div>
         <div className="trend-card fade-in">
           <div className="trend-header">
-            <span className="trend-title">{chartMode === 'cumulative' ? 'Cumulative Win Rate' : 'Rolling Win Rate'}</span>
-            <div style={{display:'flex',alignItems:'center',gap:'12px'}}>
-              {chartMode === 'cumulative' ? (
-                <div className="legend">
-                  <div className="leg"><div className="leg-line" style={{background:'#4EABDE'}}/> Live</div>
-                  <div className="leg"><div className="leg-line" style={{background:'#D4AF37',opacity:0.8}}/> V2 Backtest</div>
-                </div>
-              ) : (
-                <div className="legend">
-                  <div className="leg"><div className="leg-line" style={{background:'#4EABDE'}}/> 7-Day</div>
-                  <div className="leg"><div className="leg-line" style={{background:'#3ab05a'}}/> 30-Day</div>
-                  <div className="leg"><div className="leg-line" style={{background:'#D4AF37',opacity:0.8}}/> V2 Backtest</div>
-                </div>
-              )}
-              <select className="filter-select" value={chartMode}
-                onChange={e => setChartMode(e.target.value as 'cumulative' | 'rolling')}
-                style={{fontSize:'9px',padding:'4px 24px 4px 8px',minWidth:'unset'}}>
-                <option value="cumulative">Cumulative</option>
-                <option value="rolling">Rolling (7-Day)</option>
-              </select>
+            <span className="trend-title">Rolling Win Rate</span>
+            <div className="legend">
+              <div className="leg"><div className="leg-line" style={{background:'#4EABDE'}}/> 7-Day</div>
+              <div className="leg"><div className="leg-line" style={{background:'#3ab05a'}}/> 30-Day</div>
+              <div className="leg"><div className="leg-line" style={{background:'#D4AF37',opacity:0.8}}/> V2 Backtest</div>
             </div>
           </div>
           <div id="chartScroll" style={{overflowX: chartMode === 'rolling' ? 'auto' : 'hidden', overflowY:'hidden', WebkitOverflowScrolling:'touch' as any}}>
