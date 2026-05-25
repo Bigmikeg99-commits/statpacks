@@ -124,7 +124,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .card-result-stamp.loss{background:#C44536;color:#fff;border:1.5px solid rgba(255,255,255,0.3);border-radius:50%;width:24px;font-family:'Playfair Display',serif;font-size:11px;font-weight:900}
 .card-result-stamp.void{background:#555;color:rgba(255,255,255,0.8);border:1.5px solid rgba(255,255,255,0.15)}
 .card-result-overlay.ppd{background:linear-gradient(180deg,rgba(78,171,222,0.0) 0%,rgba(78,171,222,0.38) 100%)}
-.card-result-stamp.ppd{background:#4EABDE;color:#fff;border:1.5px solid rgba(255,255,255,0.3);border-radius:50%;width:24px;font-family:'Playfair Display',serif;font-size:8px;font-weight:900}
+.card-result-stamp.ppd{background:#4EABDE;color:#fff;border:1.5px solid rgba(255,255,255,0.3);border-radius:4px;width:32px;font-family:'Inter',sans-serif;font-size:8px;font-weight:800;letter-spacing:0.04em}
 .card-scene.result-win .card-front{box-shadow:0 0 0 2px #28b450,0 12px 40px rgba(0,0,0,0.7)}
 .card-scene.result-loss .card-front{box-shadow:0 0 0 2px #C44536,0 12px 40px rgba(0,0,0,0.7)}
 .card-scene.result-void .card-front{box-shadow:0 0 0 2px #666,0 12px 40px rgba(0,0,0,0.7)}
