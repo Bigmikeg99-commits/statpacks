@@ -226,18 +226,35 @@ export default function Page() {
             <div style={{textAlign:'right',fontSize:'9px',color:'rgba(212,175,55,0.35)',marginTop:'4px',letterSpacing:'0.05em'}}>← scroll to view earlier dates</div>
           )}
         </div>
-        <div className="fade-in" style={{marginBottom:'6px',display:'flex',alignItems:'center',justifyContent:'space-between'}}>
-          <div className="sec-eyebrow">Daily Calendar</div>
+        <div className="fade-in" style={{marginBottom:'6px',display:'flex',alignItems:'flex-end',justifyContent:'space-between'}}>
+          <div>
+            <div className="sec-eyebrow">Daily Calendar</div>
+            {data && (() => {
+              const monthNames: Record<string,string> = {'3':'March','4':'April','5':'May','6':'June','7':'July','8':'August','9':'September','10':'October'}
+              const months = Array.from(new Set(data.daily.map(d => d.d.split('/')[0]))).sort((a,b) => +a - +b)
+              return (
+                <select className="filter-select" value={calMonth}
+                  onChange={e => setCalMonth(e.target.value)}
+                  style={{fontSize:'9px',padding:'4px 24px 4px 8px',minWidth:'unset',marginTop:'6px'}}>
+                  <option value="all">Full Season</option>
+                  {months.map(m => <option key={m} value={m}>{monthNames[m] || m}</option>)}
+                </select>
+              )
+            })()}
+          </div>
           {data && (() => {
             const monthNames: Record<string,string> = {'3':'March','4':'April','5':'May','6':'June','7':'July','8':'August','9':'September','10':'October'}
-            const months = Array.from(new Set(data.daily.map(d => d.d.split('/')[0]))).sort((a,b) => +a - +b)
+            const filtered = calMonth === 'all' ? data.daily : data.daily.filter(d => d.d.split('/')[0] === calMonth)
+            const tw = filtered.reduce((a,d) => a + d.w, 0)
+            const tl = filtered.reduce((a,d) => a + d.l, 0)
+            const pct = tw + tl > 0 ? ((tw / (tw + tl)) * 100).toFixed(1) : '0.0'
+            const label = calMonth === 'all' ? 'Full Season' : (monthNames[calMonth] || calMonth)
+            const good = parseFloat(pct) >= 52.4
             return (
-              <select className="filter-select" value={calMonth}
-                onChange={e => setCalMonth(e.target.value)}
-                style={{fontSize:'9px',padding:'4px 24px 4px 8px',minWidth:'unset'}}>
-                <option value="all">Full Season</option>
-                {months.map(m => <option key={m} value={m}>{monthNames[m] || m}</option>)}
-              </select>
+              <div style={{textAlign:'right'}}>
+                <div style={{fontSize:'10px',fontWeight:500,color: good ? '#3ab05a' : '#C44536',marginBottom:'2px'}}>{pct}%</div>
+                <div style={{fontSize:'14px',fontWeight:600,color:'#fff',lineHeight:1.1}}>{tw}-{tl}</div>
+              </div>
             )
           })()}
         </div>
