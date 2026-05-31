@@ -23,9 +23,9 @@ export default function StatsBand() {
           <div className="stat-detail">Above breakeven</div>
         </div>
         <div className="stat-item">
-          <div className="stat-lbl">Best Segment</div>
-          <div className="stat-num" style={{ color: "#3ab05a", fontSize: "20px" }}>77.4%</div>
-          <div className="stat-detail">RHP Home ≤4.5</div>
+          <div className="stat-lbl">Best Segment (Last Month)</div>
+          <div className="stat-num" style={{ color: "#3ab05a", fontSize: "20px" }}>22-7</div>
+          <div className="stat-detail">OVER 77%+  (75.9%)</div>
         </div>
       </div>
     </div>
