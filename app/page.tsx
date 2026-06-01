@@ -166,7 +166,7 @@ export default function Page() {
         <div className="stat-item fade-in"><div className="stat-lbl">Thresholds</div><div className="stat-num" style={{color:'var(--blue)'}}>6</div><div className="stat-detail">3.5K through 8.5K</div></div>
         <div className="stat-item fade-in"><div className="stat-lbl">Breakeven</div><div className="stat-num" style={{color:'rgba(245,241,230,0.5)'}}>52.4<span style={{fontSize:'18px'}}>%</span></div><div className="stat-detail">At -110 juice</div></div>
         <div className="stat-item fade-in"><div className="stat-lbl">Edge</div><div className="stat-num"><span id="stat-edge">—</span><span style={{fontSize:'18px'}}>pp</span></div><div className="stat-detail" id="stat-edge-label">—</div></div>
-        <div className="stat-item fade-in"><div className="stat-lbl" id="stat-best-seg-lbl">Best Segment</div><div className="stat-num" style={{fontSize:'16px',color:'#3ab05a',fontFamily:"'Playfair Display',serif"}} id="stat-best-seg-name">Loading…</div><div className="stat-detail" id="stat-best-seg-record" style={{color:'rgba(245,241,230,0.5)'}}>—</div></div>
+        <div className="stat-item fade-in"><div className="stat-lbl" id="stat-best-seg-lbl">Best Segment</div><div className="stat-num" style={{fontSize:'24px',color:'#3ab05a'}} id="stat-best-seg-name">Loading…</div><div className="stat-detail" id="stat-best-seg-record" style={{color:'rgba(245,241,230,0.45)'}}>—</div></div>
       </div></div>
 
       {/* PICKS */}
@@ -368,7 +368,7 @@ function populateHero(s: PicksData['season'], overSegs: Seg[], underSegs: Seg[],
     if (bestMonthSeg) {
       setText('stat-best-seg-lbl', `Best Segment (${bestMonthSeg.month})`)
       setText('stat-best-seg-name', bestMonthSeg.label)
-      setText('stat-best-seg-record', `${bestMonthSeg.w}-${bestMonthSeg.l} · ${bestMonthSeg.pct.toFixed(1)}%`)
+      setText('stat-best-seg-record', `${bestMonthSeg.w}-${bestMonthSeg.l} · ${bestMonthSeg.pct.toFixed(1)}% win rate`)
     } else {
       const allSegs = [...(overSegs || []), ...(underSegs || [])]
       if (allSegs.length > 0) {
