@@ -166,7 +166,7 @@ export default function Page() {
         <div className="stat-item fade-in"><div className="stat-lbl">Thresholds</div><div className="stat-num" style={{color:'var(--blue)'}}>6</div><div className="stat-detail">3.5K through 8.5K</div></div>
         <div className="stat-item fade-in"><div className="stat-lbl">Breakeven</div><div className="stat-num" style={{color:'rgba(245,241,230,0.5)'}}>52.4<span style={{fontSize:'18px'}}>%</span></div><div className="stat-detail">At -110 juice</div></div>
         <div className="stat-item fade-in"><div className="stat-lbl">Edge</div><div className="stat-num"><span id="stat-edge">—</span><span style={{fontSize:'18px'}}>pp</span></div><div className="stat-detail" id="stat-edge-label">—</div></div>
-        <div className="stat-item fade-in"><div className="stat-lbl" id="stat-best-seg-lbl">Best Segment</div><div className="stat-num" style={{fontSize:'20px',color:'#3ab05a'}} id="stat-best-seg-pct">—</div><div className="stat-detail" id="stat-best-seg-record" style={{color:'rgba(245,241,230,0.5)'}}>—</div><div className="stat-detail" id="stat-best-seg-name">Loading…</div></div>
+        <div className="stat-item fade-in"><div className="stat-lbl" id="stat-best-seg-lbl">Best Segment</div><div className="stat-num" style={{fontSize:'18px',color:'#3ab05a'}} id="stat-best-seg-name">Loading…</div><div className="stat-detail" id="stat-best-seg-record" style={{color:'rgba(245,241,230,0.5)'}}>—</div></div>
       </div></div>
 
       {/* PICKS */}
@@ -367,9 +367,8 @@ function populateHero(s: PicksData['season'], overSegs: Seg[], underSegs: Seg[],
     // Best segment
     if (bestMonthSeg) {
       setText('stat-best-seg-lbl', `Best Segment (${bestMonthSeg.month})`)
-      countUp('stat-best-seg-pct', bestMonthSeg.pct, 1300, 1, '%')
-      setText('stat-best-seg-record', `${bestMonthSeg.w}-${bestMonthSeg.l}`)
       setText('stat-best-seg-name', bestMonthSeg.label)
+      setText('stat-best-seg-record', `${bestMonthSeg.w}-${bestMonthSeg.l} · ${bestMonthSeg.pct.toFixed(1)}%`)
     } else {
       const allSegs = [...(overSegs || []), ...(underSegs || [])]
       if (allSegs.length > 0) {
