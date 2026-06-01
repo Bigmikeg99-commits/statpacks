@@ -32,12 +32,14 @@ function teamLogoUrl(team?: string): string {
 }
 interface Day { d:string;w:number;l:number;ow:number;ol:number;uw:number;ul:number;p:number }
 interface Seg { l:string;w:number;lo:number;pct:number;e:number }
+interface BestMonthSeg { label:string; pct:number; w:number; l:number; month:string }
 interface PicksData {
   updated: string
   picks_date?: string
   season: { record:string;overs:string;unders:string;picks:number;date_range:string;overall_pct:string;over_pct:string;under_pct:string }
   pod: { name:string }
   daily: Day[]; backtestDaily: Day[]; overSegs: Seg[]; underSegs: Seg[]; picks: Pick[]
+  bestMonthSeg?: BestMonthSeg | null
 }
 
 export default function Page() {
@@ -57,7 +59,7 @@ export default function Page() {
 
   useEffect(() => {
     if (!data) return
-    populateHero(data.season, data.overSegs, data.underSegs)
+    populateHero(data.season, data.overSegs, data.underSegs, data.bestMonthSeg)
     renderSegs(data.overSegs, 'ov-segs')
     renderSegs(data.underSegs, 'un-segs')
     setupObservers()
@@ -164,7 +166,7 @@ export default function Page() {
         <div className="stat-item fade-in"><div className="stat-lbl">Thresholds</div><div className="stat-num" style={{color:'var(--blue)'}}>6</div><div className="stat-detail">3.5K through 8.5K</div></div>
         <div className="stat-item fade-in"><div className="stat-lbl">Breakeven</div><div className="stat-num" style={{color:'rgba(245,241,230,0.5)'}}>52.4<span style={{fontSize:'18px'}}>%</span></div><div className="stat-detail">At -110 juice</div></div>
         <div className="stat-item fade-in"><div className="stat-lbl">Edge</div><div className="stat-num"><span id="stat-edge">—</span><span style={{fontSize:'18px'}}>pp</span></div><div className="stat-detail" id="stat-edge-label">—</div></div>
-        <div className="stat-item fade-in"><div className="stat-lbl">Best Segment</div><div className="stat-num" style={{fontSize:'20px',color:'#3ab05a'}} id="stat-best-seg-pct">—</div><div className="stat-detail" id="stat-best-seg-name">Loading…</div></div>
+        <div className="stat-item fade-in"><div className="stat-lbl" id="stat-best-seg-lbl">Best Segment</div><div className="stat-num" style={{fontSize:'20px',color:'#3ab05a'}} id="stat-best-seg-pct">—</div><div className="stat-detail" id="stat-best-seg-record" style={{color:'rgba(245,241,230,0.5)'}}>—</div><div className="stat-detail" id="stat-best-seg-name">Loading…</div></div>
       </div></div>
 
       {/* PICKS */}
@@ -338,7 +340,7 @@ function countUpRecord(id: string, record: string, duration = 1200) {
   requestAnimationFrame(tick)
 }
 
-function populateHero(s: PicksData['season'], overSegs: Seg[], underSegs: Seg[]) {
+function populateHero(s: PicksData['season'], overSegs: Seg[], underSegs: Seg[], bestMonthSeg?: BestMonthSeg | null) {
   setTimeout(() => {
     // date range doesn't animate
     setText('hr-range', s.date_range)
@@ -363,11 +365,18 @@ function populateHero(s: PicksData['season'], overSegs: Seg[], underSegs: Seg[])
     setPctColor('hr-upct',  parseFloat(s.under_pct))
 
     // Best segment
-    const allSegs = [...(overSegs || []), ...(underSegs || [])]
-    if (allSegs.length > 0) {
-      const best = allSegs.reduce((a, b) => a.pct > b.pct ? a : b)
-      countUp('stat-best-seg-pct', best.pct, 1300, 1, '%')
-      setText('stat-best-seg-name', best.l)
+    if (bestMonthSeg) {
+      setText('stat-best-seg-lbl', `Best Segment (${bestMonthSeg.month})`)
+      countUp('stat-best-seg-pct', bestMonthSeg.pct, 1300, 1, '%')
+      setText('stat-best-seg-record', `${bestMonthSeg.w}-${bestMonthSeg.l}`)
+      setText('stat-best-seg-name', bestMonthSeg.label)
+    } else {
+      const allSegs = [...(overSegs || []), ...(underSegs || [])]
+      if (allSegs.length > 0) {
+        const best = allSegs.reduce((a, b) => a.pct > b.pct ? a : b)
+        countUp('stat-best-seg-pct', best.pct, 1300, 1, '%')
+        setText('stat-best-seg-name', best.l)
+      }
     }
 
     // Edge — color + label driven by sign
