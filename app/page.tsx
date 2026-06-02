@@ -274,14 +274,14 @@ export default function Page() {
         <div className="sec-header fade-in">
           <div className="sec-eyebrow">Methodology</div>
           <div className="sec-title">How the Model Works</div>
-          <div className="sec-sub">A quantitative approach to MLB strikeout prediction.</div>
+          <div className="sec-sub">A clear, data-driven system for predicting MLB pitcher strikeouts.</div>
         </div>
         <div className="method-grid">
           {[
-            {n:'01',title:'Feature Engineering',desc:'30+ features per start: pitcher K rate, pitch mix, velocity, movement, Savant opponent whiff rates by pitch type, opponent batting splits vs. handedness, and contextual factors.',tag:'30+ features'},
-            {n:'02',title:'Binary Classifier',desc:'Six independent LightGBM classifiers — one per K threshold from 3.5 to 8.5. Each outputs a direct probability of exceeding that threshold.',tag:'LightGBM · 6 thresholds'},
-            {n:'03',title:'Beta-Binomial Layer',desc:'A separate LightGBM regressor predicts raw strikeout count. A Beta-Binomial distribution converts that prediction into a calibrated probability, accounting for natural variance.',tag:'Probabilistic · overdispersion'},
-            {n:'04',title:'Agreement Filter',desc:'A pick is only surfaced when both models agree on direction. Disagreements are dropped entirely.',tag:'Dual-model consensus'},
+            {n:'01',title:'Feature Engineering',desc:'We analyze over 30 key details for every start: the pitcher\'s strikeout history, pitch quality, speed and movement, and how opposing batters typically perform against those pitches.',tag:'30+ features'},
+            {n:'02',title:'Binary Classifier',desc:'Six separate AI models each answer one straightforward question: "Will the pitcher exceed a specific strikeout total?" (covering common lines from 3.5 to 8.5 Ks).',tag:'LightGBM · 6 thresholds'},
+            {n:'03',title:'Beta-Binomial Layer',desc:'We convert the raw predictions into reliable percentage probabilities that account for the natural variation in baseball.',tag:'Probabilistic · overdispersion'},
+            {n:'04',title:'Agreement Filter',desc:'We only display a pick when all the models agree on the same direction (Over or Under). Disagreements are excluded entirely.',tag:'Dual-model consensus'},
           ].map(m => (
             <div key={m.n} className="method-card fade-in">
               <div className="method-num">{m.n}</div>
