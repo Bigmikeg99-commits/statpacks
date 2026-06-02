@@ -279,7 +279,7 @@ export default function Page() {
         <div className="method-grid">
           {[
             {n:'01',title:'Feature Engineering',desc:'We analyze over 30 key details for every start: the pitcher\'s strikeout history, pitch quality, speed and movement, and how opposing batters typically perform against those pitches.',tag:'30+ features'},
-            {n:'02',title:'Binary Classifier',desc:'Six separate AI models each answer one straightforward question: "Will the pitcher exceed a specific strikeout total?" (covering common lines from 3.5 to 8.5 Ks).',tag:'LightGBM · 6 thresholds'},
+            {n:'02',title:'Six separate models (Binary Classifiers)',desc:'Each answers one straightforward question: "Will the pitcher exceed a specific strikeout total?" (covering common lines from 3.5 to 8.5 Ks).',tag:'LightGBM · 6 thresholds'},
             {n:'03',title:'Beta-Binomial Layer',desc:'We convert the raw predictions into reliable percentage probabilities that account for the natural variation in baseball.',tag:'Probabilistic · overdispersion'},
             {n:'04',title:'Agreement Filter',desc:'We only display a pick when all the models agree on the same direction (Over or Under). Disagreements are excluded entirely.',tag:'Dual-model consensus'},
           ].map(m => (
