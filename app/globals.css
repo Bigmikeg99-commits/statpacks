@@ -208,7 +208,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .shap-block{margin-bottom:4px;flex:1}
 .shap-hdr{font-size:7.5px;color:rgba(212,175,55,0.7);letter-spacing:0.16em;font-family:'Inter',sans-serif;text-transform:uppercase;margin-bottom:3px}
 .shap-row{display:flex;align-items:center;gap:5px;margin-bottom:3px}
-.shap-lbl{font-size:8px;color:rgba(240,230,200,0.9);font-family:'Inter',sans-serif;width:76px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.shap-lbl{font-size:8px;color:rgba(240,230,200,0.9);font-family:'Inter',sans-serif;width:115px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .shap-track{flex:1;height:4px;background:rgba(0,0,0,0.3);border-radius:2px;overflow:hidden}
 .shap-fill{height:100%;border-radius:2px}
 .shap-num{font-size:7px;font-family:'Inter',sans-serif;width:24px;text-align:right;flex-shrink:0}
