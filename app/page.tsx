@@ -465,12 +465,46 @@ function buildCardHTML(p: Pick, podName: string, rank = 1): string {
   const pctStr = (v: number|null|undefined) => v != null ? (v*100).toFixed(1)+'%' : '--'
 
   // SHAP bars
+  const labelMap: Record<string,string> = {
+    'Avg BF (rolling 5 starts)': 'Recent batters faced',
+    'Expected batters faced (raw)': 'Expected batters',
+    'Expected batters faced': 'Expected batters',
+    'Avg innings per start': 'Avg innings',
+    'Season K rate': 'Season strikeout rate',
+    'Recent K rate (L5)': 'Recent strikeout rate',
+    'Fastball usage %': 'Fastball usage',
+    'Zone swing-miss rate': 'Zone swing and miss',
+    'Opp Z-Contact% (pitcher)': 'Opponent zone contact',
+    'Opp Z-Contact%': 'Opponent zone contact',
+    'Opp K% vs fastball': 'Opponent K% vs fastball',
+    'Stuff+ rating': 'Pitch quality',
+    'Opp SwStr%': 'Opponent whiff rate',
+    'Opp O-Swing% (pitcher)': 'Opponent chase rate',
+    'Opp O-Contact%': 'Opponent contact rate',
+    'Opp Z-Swing%': 'Opponent zone swing rate',
+    'Opp whiff rate vs fastball': 'Opponent whiff vs fastball',
+    'Opp whiff rate vs breaking': 'Opponent whiff vs breaking',
+    'Opp K% vs breaking ball': 'Opponent K% vs breaking',
+    'Opp K% vs same hand (L10)': 'Opponent K% same hand',
+    'Opponent K rate': 'Opponent strikeout rate',
+    'Opponent Barrel%': 'Opponent hard hit rate',
+    'Opponent wOBA vs handedness': 'Opponent wOBA vs hand',
+    'Opponent wRC+ vs handedness': 'Opponent wRC+ vs hand',
+    'Opponent BB/K vs handedness': 'Opponent BB/K vs hand',
+    'Opponent PAs vs handedness': 'Opponent PAs vs hand',
+    'Fastball velocity': 'Fastball velocity',
+    'Fastball horizontal movement': 'Fastball movement',
+    'Changeup usage %': 'Changeup usage',
+    'Days since last start': 'Days since last start',
+    'Home/Away': 'Home / Away',
+  }
+  const friendlyLabel = (lbl: string) => labelMap[lbl] || lbl
   const allPP = [...(p.pushers_up||[]),...(p.pushers_down||[])].map(x=>x.pp)
   const maxPP = allPP.length ? Math.max(...allPP) : 1
   const shapRows = (arr: Shap[], color: string, sign: string) =>
     (arr||[]).slice(0,4).map(f => {
       const w = Math.round((f.pp/maxPP)*100)
-      return `<div class="shap-row"><div class="shap-lbl">${f.label}</div><div class="shap-track"><div class="shap-fill" style="width:${w}%;background:${color}"></div></div><div class="shap-num" style="color:${color}">${sign}${f.pp.toFixed(0)}</div></div>`
+      return `<div class="shap-row"><div class="shap-lbl">${friendlyLabel(f.label)}</div><div class="shap-track"><div class="shap-fill" style="width:${w}%;background:${color}"></div></div><div class="shap-num" style="color:${color}">${sign}${f.pp.toFixed(0)}</div></div>`
     }).join('')
   const hasShap = (p.pushers_up?.length||0)+(p.pushers_down?.length||0) > 0
   const podTag = isPod ? `<div class="card-pod-tag">★ Pick of the Day</div>` : ''
@@ -515,7 +549,7 @@ function buildCardHTML(p: Pick, podName: string, rank = 1): string {
       </div>
       <div class="back-stats-hdr">2026 Season Stats</div>
       <table class="back-stats-table">
-        <tr><th>Avg IP</th><th>K%</th><th>Barrel%</th><th>Stuff+</th><th>Loc+</th><th>Pitch+</th><th>K% L5</th></tr>
+        <tr><th>Avg Inn</th><th>K%</th><th>Barrel%</th><th>Stuff+</th><th>Loc+</th><th>Pitch+</th><th>Last 5 K%</th></tr>
         <tr>
           <td>${fmt(bAvgIP as number)}</td>
           <td>${pctStr(bKPct as number)}</td>
@@ -528,14 +562,14 @@ function buildCardHTML(p: Pick, podName: string, rank = 1): string {
       </table>
       <div class="back-divider"></div>
       <div class="pred-row">
-        <div class="pred-cell"><div class="pred-lbl">Pred K</div><div class="pred-val">${fmt(p.pred_k)}</div></div>
+        <div class="pred-cell"><div class="pred-lbl">Projected Ks</div><div class="pred-val">${fmt(p.pred_k)}</div></div>
         <div class="pred-cell"><div class="pred-lbl">Line</div><div class="pred-val">${p.line}</div></div>
-        <div class="pred-cell"><div class="pred-lbl">${p.rec === 'UNDER' ? 'P(under)' : 'P(line)'}</div><div class="pred-val" style="color:${confColor}">${displayConf}</div></div>
-        <div class="pred-cell"><div class="pred-lbl">Actual K</div><div class="pred-val pred-actual-k" style="color:${p.actual_k != null ? (p.result === 'win' ? '#3ab05a' : '#C44536') : p.pick_status === 'PPD' ? '#4EABDE' : 'rgba(245,241,230,0.35)'}">${p.actual_k != null ? p.actual_k : p.pick_status === 'PPD' ? 'PPD' : '--'}</div></div>
+        <div class="pred-cell"><div class="pred-lbl">Model Confidence</div><div class="pred-val" style="color:${confColor}">${displayConf}</div></div>
+        <div class="pred-cell"><div class="pred-lbl">Actual Ks</div><div class="pred-val pred-actual-k" style="color:${p.actual_k != null ? (p.result === 'win' ? '#3ab05a' : '#C44536') : p.pick_status === 'PPD' ? '#4EABDE' : 'rgba(245,241,230,0.35)'}">${p.actual_k != null ? p.actual_k : p.pick_status === 'PPD' ? 'PPD' : '--'}</div></div>
       </div>
       ${hasShap
-        ? `<div class="shap-block"><div class="shap-hdr">pushing over</div>${shapRows(p.pushers_up,'#3ab05a','+')}</div>
-           <div class="shap-block"><div class="shap-hdr">pushing under</div>${shapRows(p.pushers_down,'#C44536','-')}</div>`
+        ? `<div class="shap-block"><div class="shap-hdr">More Strikeouts</div>${shapRows(p.pushers_up,'#3ab05a','+')}</div>
+           <div class="shap-block"><div class="shap-hdr">Fewer Strikeouts</div>${shapRows(p.pushers_down,'#C44536','-')}</div>`
         : '<div class="no-shap">no model data</div>'
       }
       <div class="back-footer">
