@@ -232,12 +232,12 @@ export default function PSIPage() {
           <div style={{position:'relative',zIndex:1,maxWidth:'900px',margin:'0 auto'}}>
             <div className="hero-eyebrow">Pitcher Strikeout Index · 2026</div>
             <h1 style={{fontFamily:"'Playfair Display',serif",fontSize:'clamp(60px,10vw,110px)',fontWeight:900,color:'var(--cream)',lineHeight:.9,marginBottom:'20px',letterSpacing:'-0.01em'}}>
-              PSI<span style={{color:'var(--gold)',fontStyle:'italic'}}>+</span>
+              PSI<span style={{color:'var(--gold)',fontSize:'0.45em',verticalAlign:'super',fontWeight:700,letterSpacing:0}}>+</span>
             </h1>
-            <p style={{fontSize:'16px',color:'rgba(245,241,230,0.65)',maxWidth:'620px',margin:'0 auto 12px',lineHeight:1.7,fontFamily:"'Inter',sans-serif",fontWeight:500}}>
+            <p style={{fontSize:'16px',color:'rgba(245,241,230,0.9)',maxWidth:'620px',margin:'0 auto 12px',lineHeight:1.7,fontFamily:"'Inter',sans-serif",fontWeight:500}}>
               A new framework for evaluating strikeout ability in modern baseball.
             </p>
-            <p style={{fontSize:'13px',color:'rgba(245,241,230,0.38)',maxWidth:'560px',margin:'0 auto 36px',lineHeight:1.8,fontFamily:"'Inter',sans-serif",fontStyle:'italic'}}>
+            <p style={{fontSize:'13px',color:'rgba(245,241,230,0.6)',maxWidth:'560px',margin:'0 auto 36px',lineHeight:1.8,fontFamily:"'Inter',sans-serif",fontStyle:'italic'}}>
               Tells you which pitchers are built to strikeout hitters, not just which ones have recently.
             </p>
             <div style={{display:'flex',gap:'12px',justifyContent:'center',flexWrap:'wrap',marginBottom:'40px'}}>
