@@ -124,9 +124,9 @@ export default function Page() {
         </div>
         <div className="nav-links">
           <a href="#">Home</a>
+          <a href="/psi" style={{color:'var(--gold)'}}>PSI+</a>
           <a href="#picks">Picks</a>
           <a href="/performance">Performance</a>
-          <a href="/psi" style={{color:'var(--gold)'}}>PSI+</a>
           <a href="#method">About</a>
         </div>
         <button className={`nav-hamburger${menuOpen?' open':''}`} aria-label="Menu" onClick={() => setMenuOpen(o=>!o)}>
@@ -135,9 +135,9 @@ export default function Page() {
       </nav>
       <div className={`nav-mobile${menuOpen?' open':''}`}>
         <a href="#" onClick={()=>setMenuOpen(false)}>Home</a>
+        <a href="/psi" onClick={()=>setMenuOpen(false)} style={{color:'var(--gold)'}}>PSI+</a>
         <a href="#picks" onClick={()=>setMenuOpen(false)}>Picks</a>
         <a href="/performance" onClick={()=>setMenuOpen(false)}>Performance</a>
-        <a href="/psi" onClick={()=>setMenuOpen(false)} style={{color:'var(--gold)'}}>PSI+</a>
         <a href="#method" onClick={()=>setMenuOpen(false)}>About</a>
       </div>
 
@@ -647,8 +647,8 @@ function renderChart(
       return parse(a) - parse(b)
     })
   const n = allDates.length
-  const grid = 'rgba(212,175,55,0.05)'
-  const tick  = 'rgba(212,175,55,0.5)'
+  const grid = 'rgba(212,175,55,0.08)'
+  const tick  = 'rgba(245,241,230,0.6)'
 
   if (mode === 'cumulative') {
     // Cumulative win % — running total from first pick date
@@ -687,8 +687,8 @@ function renderChart(
         animation: { duration: 1200, easing: 'easeInOutQuart' },
         plugins: { legend: { display: false }, tooltip: { callbacks: { label: (ctx:any) => ctx.dataset.label ? ctx.dataset.label + ': ' + ctx.parsed.y + '%' : '' }}},
         scales: {
-          x: { ticks: { color: tick, font: { size: 9 }, maxRotation: 45, autoSkip: true, maxTicksLimit: 12 }, grid: { color: grid } },
-          y: { min: cumMin, max: cumMax, ticks: { color: tick, font: { size: 9 }, callback: (v:number) => v + '%' }, grid: { color: grid } },
+          x: { ticks: { color: tick, font: { size: 11 }, maxRotation: 45, autoSkip: true, maxTicksLimit: 12 }, grid: { color: grid } },
+          y: { min: cumMin, max: cumMax, ticks: { color: tick, font: { size: 11 }, callback: (v:number) => v + '%' }, grid: { color: grid } },
         },
       },
     })
@@ -761,8 +761,8 @@ function renderChart(
         layout: { padding: { right: 115 } },
         plugins: { legend: { display: false }, tooltip: { callbacks: { label: (ctx:any) => ctx.dataset.label + ': ' + ctx.parsed.y + '%' }}},
         scales: {
-          x: { ticks: { color: tick, font: { size: 9 }, maxRotation: 45 }, grid: { color: grid } },
-          y: { min: rollMin, max: rollMax, ticks: { color: tick, font: { size: 9 }, callback: (v:number) => v + '%' }, grid: { color: grid } },
+          x: { ticks: { color: tick, font: { size: 11 }, maxRotation: 45 }, grid: { color: grid } },
+          y: { min: rollMin, max: rollMax, ticks: { color: tick, font: { size: 11 }, callback: (v:number) => v + '%' }, grid: { color: grid } },
         },
       },
     })

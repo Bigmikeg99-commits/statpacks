@@ -35,7 +35,7 @@ function renderCalChart(cal: CalPoint[], canvas: HTMLCanvasElement) {
   const actuals = sorted.map(d => d.actual_pct)
   const perfect = sorted.map(d => d.model_conf)
   const grid = 'rgba(212,175,55,0.08)'
-  const tick  = 'rgba(245,241,230,0.4)'
+  const tick  = 'rgba(245,241,230,0.6)'
   calChartInst = new Chart(canvas, {
     type: 'line',
     data: {
@@ -79,11 +79,11 @@ function renderCalChart(cal: CalPoint[], canvas: HTMLCanvasElement) {
         },
       },
       scales: {
-        x: { grid: { color: grid }, ticks: { color: tick, font: { size: 10 } } },
+        x: { grid: { color: grid }, ticks: { color: tick, font: { size: 11 } } },
         y: {
           grid: { color: grid }, min: 30, max: 100,
-          ticks: { color: tick, font: { size: 10 }, callback: (v: any) => v + '%' },
-          title: { display: true, text: 'Actual win rate', color: tick, font: { size: 10 } },
+          ticks: { color: tick, font: { size: 11 }, callback: (v: any) => v + '%' },
+          title: { display: true, text: 'Actual win rate', color: tick, font: { size: 11 } },
         },
       },
     },
@@ -94,7 +94,7 @@ function renderBuckChart(cal: CalPoint[], canvas: HTMLCanvasElement) {
   if (buckChartInst) { buckChartInst.destroy(); buckChartInst = null }
   const sorted = [...cal].sort((a, b) => a.model_conf - b.model_conf)
   const grid = 'rgba(212,175,55,0.08)'
-  const tick  = 'rgba(245,241,230,0.4)'
+  const tick  = 'rgba(245,241,230,0.6)'
   buckChartInst = new Chart(canvas, {
     type: 'bar',
     data: {
@@ -129,11 +129,11 @@ function renderBuckChart(cal: CalPoint[], canvas: HTMLCanvasElement) {
         annotation: {},
       },
       scales: {
-        x: { grid: { color: grid }, ticks: { color: tick, font: { size: 10 } } },
+        x: { grid: { color: grid }, ticks: { color: tick, font: { size: 11 } } },
         y: {
           grid: { color: grid }, min: 30, max: 100,
-          ticks: { color: tick, font: { size: 10 }, callback: (v: any) => v + '%' },
-          title: { display: true, text: 'Win rate %', color: tick, font: { size: 10 } },
+          ticks: { color: tick, font: { size: 11 }, callback: (v: any) => v + '%' },
+          title: { display: true, text: 'Win rate %', color: tick, font: { size: 11 } },
         },
       },
     },
@@ -207,8 +207,9 @@ export default function PerformancePage() {
         </div>
         <div className="nav-links">
           <Link href="/">Home</Link>
+          <Link href="/psi" style={{ color: '#D4AF37' }}>PSI+</Link>
           <Link href="/#picks">Picks</Link>
-          <Link href="/performance" style={{ color: '#D4AF37' }}>Performance</Link>
+          <Link href="/performance">Performance</Link>
           <Link href="/#method">About</Link>
         </div>
         <button className={`nav-hamburger${menuOpen ? ' open' : ''}`} aria-label="Menu"
@@ -218,6 +219,7 @@ export default function PerformancePage() {
       </nav>
       <div className={`nav-mobile${menuOpen ? ' open' : ''}`}>
         <Link href="/"            onClick={() => setMenuOpen(false)}>Home</Link>
+        <Link href="/psi"         onClick={() => setMenuOpen(false)} style={{ color: '#D4AF37' }}>PSI+</Link>
         <Link href="/#picks"      onClick={() => setMenuOpen(false)}>Picks</Link>
         <Link href="/performance" onClick={() => setMenuOpen(false)}>Performance</Link>
         <Link href="/#method"     onClick={() => setMenuOpen(false)}>About</Link>

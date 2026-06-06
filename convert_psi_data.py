@@ -49,7 +49,7 @@ def t_lb(r):
         'name': flip_name(r.get('player_name', '')),
         'psi':  num(r.get('METRIC'), 1),
         'role': r.get('role', ''),
-        'k_pct':num(r.get('K_pct'), 1),
+        'k_pct':num(r.get('K_pct'), 4),
         'clw':  num(r.get('CLW'), 4),
         'velo': num(r.get('fb_velo_p95'), 1),
         'vaa':  num(r.get('fb_vaa_mean'), 2),
