@@ -558,7 +558,7 @@ export default function PSIPage() {
                 <XAxis dataKey="q" tick={{fill:'rgba(245,241,230,0.6)',fontSize:11,fontFamily:'Inter'}} axisLine={{stroke:'rgba(245,241,230,0.1)'}} tickLine={false}/>
                 <YAxis domain={[14,30]} tickFormatter={v=>`${v}%`} tick={{fill:'rgba(245,241,230,0.6)',fontSize:11,fontFamily:'Inter'}} axisLine={{stroke:'rgba(245,241,230,0.1)'}} tickLine={false}/>
                 <Tooltip content={(p:any)=><ChartTip {...p} fmt={(v:any)=>`${v}%`} />}/>
-                <Bar dataKey="k" radius={[3,3,0,0]} label={{position:'top',fill:'rgba(245,241,230,0.65)',fontSize:11,fontFamily:'Orbitron',fontWeight:700,formatter:(v:any)=>`${v}%`}}>
+                <Bar dataKey="k" radius={[3,3,0,0]} activeBar={false} label={{position:'top',fill:'rgba(245,241,230,0.65)',fontSize:11,fontFamily:'Orbitron',fontWeight:700,formatter:(v:any)=>`${v}%`}}>
                   {(qTab==='starters'?QUARTILE_S:QUARTILE_R).map((_,i)=>(
                     <Cell key={i} fill={i===3?'#3ab05a':i===2?'rgba(212,175,55,0.65)':i===1?'rgba(212,175,55,0.38)':'rgba(196,69,54,0.55)'}/>
                   ))}
