@@ -549,7 +549,13 @@ export default function PSIPage() {
                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(212,175,55,0.08)" vertical={false}/>
                 <XAxis dataKey="q" tick={{fill:'rgba(245,241,230,0.6)',fontSize:11,fontFamily:'Inter'}} axisLine={{stroke:'rgba(245,241,230,0.1)'}} tickLine={false}/>
                 <YAxis domain={[14,30]} tickFormatter={v=>`${v}%`} tick={{fill:'rgba(245,241,230,0.6)',fontSize:11,fontFamily:'Inter'}} axisLine={{stroke:'rgba(245,241,230,0.1)'}} tickLine={false}/>
-                <Tooltip contentStyle={{background:'#0d1e35',border:'1px solid rgba(212,175,55,0.2)',borderRadius:'4px',fontFamily:'Inter',fontSize:'11px',color:'#F5F1E6'}} formatter={(v:any)=>[`${v}%`,'Avg K%']}/>
+                <Tooltip
+                  wrapperStyle={{outline:'none'}}
+                  contentStyle={{background:'#0d1e35',border:'1px solid rgba(212,175,55,0.22)',borderRadius:'4px',fontFamily:'Inter',fontSize:'11px',color:'#F5F1E6'}}
+                  labelStyle={{color:'#D4AF37',fontWeight:600,marginBottom:'4px'}}
+                  itemStyle={{color:'#F5F1E6'}}
+                  formatter={(v:any)=>[`${v}%`,'Avg K%']}
+                />
                 <Bar dataKey="k" radius={[3,3,0,0]} label={{position:'top',fill:'rgba(245,241,230,0.65)',fontSize:11,fontFamily:'Orbitron',fontWeight:700,formatter:(v:any)=>`${v}%`}}>
                   {(qTab==='starters'?QUARTILE_S:QUARTILE_R).map((_,i)=>(
                     <Cell key={i} fill={i===3?'#3ab05a':i===2?'rgba(212,175,55,0.65)':i===1?'rgba(212,175,55,0.38)':'rgba(196,69,54,0.55)'}/>
@@ -567,9 +573,9 @@ export default function PSIPage() {
               {label:'Accuracy flagging overrated pitchers',          val:'82.3%', sub:'PSI+ low, K% fell the next year',       color:'#3ab05a'},
             ].map(s=>(
               <div key={s.label} style={{background:'rgba(13,30,53,0.8)',border:'1px solid rgba(212,175,55,0.1)',borderRadius:'4px',padding:'16px 18px'}}>
-                <div style={{fontSize:'8px',letterSpacing:'0.18em',color:'rgba(245,241,230,0.3)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase',marginBottom:'8px'}}>{s.label}</div>
+                <div style={{fontSize:'9px',letterSpacing:'0.15em',color:'rgba(245,241,230,0.55)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase',marginBottom:'8px',lineHeight:1.5}}>{s.label}</div>
                 <div style={{fontFamily:"'Orbitron',sans-serif",fontSize:'24px',fontWeight:700,color:s.color,lineHeight:1}}>{s.val}</div>
-                <div style={{fontSize:'10px',color:'rgba(245,241,230,0.32)',fontFamily:"'Inter',sans-serif",marginTop:'6px'}}>{s.sub}</div>
+                <div style={{fontSize:'11px',color:'rgba(245,241,230,0.55)',fontFamily:"'Inter',sans-serif",marginTop:'6px'}}>{s.sub}</div>
               </div>
             ))}
           </div>
