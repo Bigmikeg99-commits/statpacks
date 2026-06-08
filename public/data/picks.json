@@ -1,18 +1,18 @@
 {
-  "updated": "2026-06-07 11:41",
-  "picks_date": "2026-06-07",
+  "updated": "2026-06-08 15:50",
+  "picks_date": "2026-06-08",
   "season": {
-    "record": "416-347",
-    "overs": "185-185",
-    "unders": "231-162",
-    "picks": 763,
+    "record": "421-351",
+    "overs": "187-187",
+    "unders": "234-164",
+    "picks": 772,
     "overall_pct": "54.5",
     "over_pct": "50.0",
     "under_pct": "58.8",
-    "date_range": "3/26-6/6"
+    "date_range": "3/26-6/7"
   },
   "pod": {
-    "name": "Shane Drohan"
+    "name": "Gavin Williams"
   },
   "daily": [
     {
@@ -744,6 +744,16 @@
       "uw": 1,
       "ul": 1,
       "p": 42.9
+    },
+    {
+      "d": "6/7",
+      "w": 5,
+      "l": 4,
+      "ow": 2,
+      "ol": 2,
+      "uw": 3,
+      "ul": 2,
+      "p": 55.6
     }
   ],
   "backtestDaily": [
@@ -1128,25 +1138,18 @@
       "e": 10.2
     },
     {
-      "l": "Line 5.0-5.5",
-      "w": 51,
-      "lo": 31,
-      "pct": 62.2,
-      "e": 4.4
+      "l": "RHP Home ≤4.5",
+      "w": 36,
+      "lo": 22,
+      "pct": 62.1,
+      "e": 4.3
     },
     {
       "l": "RHP Home ≤5.5",
-      "w": 54,
-      "lo": 34,
-      "pct": 61.4,
-      "e": 3.6
-    },
-    {
-      "l": "RHP Away",
-      "w": 52,
-      "lo": 33,
-      "pct": 61.2,
-      "e": 3.4
+      "w": 56,
+      "lo": 35,
+      "pct": 61.5,
+      "e": 3.7
     },
     {
       "l": "P(Line) 65-70%",
@@ -1156,32 +1159,39 @@
       "e": 3.1
     },
     {
-      "l": "RHP Home ≤4.5",
-      "w": 34,
-      "lo": 22,
+      "l": "RHP Home (all)",
+      "w": 68,
+      "lo": 44,
       "pct": 60.7,
       "e": 2.9
     },
     {
-      "l": "RHP Home (all)",
-      "w": 66,
-      "lo": 43,
-      "pct": 60.6,
-      "e": 2.8
+      "l": "Line 5.0-5.5",
+      "w": 51,
+      "lo": 33,
+      "pct": 60.7,
+      "e": 2.9
+    },
+    {
+      "l": "RHP Away",
+      "w": 52,
+      "lo": 34,
+      "pct": 60.5,
+      "e": 2.7
     },
     {
       "l": "Line 4.5",
-      "w": 56,
+      "w": 57,
       "lo": 38,
-      "pct": 59.6,
-      "e": 1.8
+      "pct": 60.0,
+      "e": 2.2
     },
     {
       "l": "Line ≤4.0",
-      "w": 32,
+      "w": 33,
       "lo": 23,
-      "pct": 58.2,
-      "e": 0.4
+      "pct": 58.9,
+      "e": 1.1
     },
     {
       "l": "RHP Home >5.5",
@@ -1237,9 +1247,9 @@
     {
       "l": "LHP (all)",
       "w": 83,
-      "lo": 30,
-      "pct": 73.5,
-      "e": 15.7
+      "lo": 31,
+      "pct": 72.8,
+      "e": 15.0
     },
     {
       "l": "Line 6.0-6.5",
@@ -1249,13 +1259,6 @@
       "e": 13.9
     },
     {
-      "l": "LHP Away",
-      "w": 51,
-      "lo": 21,
-      "pct": 70.8,
-      "e": 13.0
-    },
-    {
       "l": "P(Line) 15-20%",
       "w": 57,
       "lo": 24,
@@ -1263,25 +1266,32 @@
       "e": 12.6
     },
     {
+      "l": "LHP Away",
+      "w": 51,
+      "lo": 22,
+      "pct": 69.9,
+      "e": 12.1
+    },
+    {
       "l": "Away (all)",
-      "w": 155,
-      "lo": 68,
+      "w": 157,
+      "lo": 69,
       "pct": 69.5,
       "e": 11.7
     },
     {
       "l": "RHP Away",
-      "w": 104,
+      "w": 106,
       "lo": 47,
-      "pct": 68.9,
-      "e": 11.1
+      "pct": 69.3,
+      "e": 11.5
     },
     {
       "l": "Home (all)",
-      "w": 109,
-      "lo": 50,
-      "pct": 68.6,
-      "e": 10.8
+      "w": 110,
+      "lo": 51,
+      "pct": 68.3,
+      "e": 10.5
     },
     {
       "l": "Line ≤3.5",
@@ -1292,24 +1302,24 @@
     },
     {
       "l": "RHP Home",
-      "w": 77,
-      "lo": 41,
-      "pct": 65.3,
-      "e": 7.5
-    },
-    {
-      "l": "Line 4.0-4.5",
-      "w": 104,
-      "lo": 56,
+      "w": 78,
+      "lo": 42,
       "pct": 65.0,
       "e": 7.2
     },
     {
+      "l": "Line 4.0-4.5",
+      "w": 105,
+      "lo": 57,
+      "pct": 64.8,
+      "e": 7.0
+    },
+    {
       "l": "Line 5.0-5.5",
-      "w": 69,
-      "lo": 40,
-      "pct": 63.3,
-      "e": 5.5
+      "w": 71,
+      "lo": 41,
+      "pct": 63.4,
+      "e": 5.6
     },
     {
       "l": "P(Line) 20-25%",
@@ -1328,974 +1338,142 @@
   ],
   "picks": [
     {
-      "name": "Shane Drohan",
-      "mlbamid": "675660",
-      "team": "Milwaukee Brewers",
-      "opp": "vs Colorado Rockies",
-      "hand": "L",
-      "ha": "Away",
-      "rec": "UNDER",
-      "line": 4.0,
-      "conf": "10.8%",
-      "pred_k": 3.0,
-      "avg_ip": 2.69,
-      "k_pct": 0.1333,
-      "k_pct_l5": 0.1316,
-      "barrel_pct": 0.1579,
-      "stuff_plus": 98.4,
-      "location_plus": 102.4,
-      "pitching_plus": 103.0,
-      "result": null,
-      "actual_k": null,
-      "pushers_up": [
-        {
-          "label": "Days since last start",
-          "feat": "days_since_last_start",
-          "val": 6.0,
-          "pp": 3.8
-        },
-        {
-          "label": "Opp Z-Contact% (pitcher)",
-          "feat": "Z-Contact%",
-          "val": 0.7436,
-          "pp": 2.8
-        },
-        {
-          "label": "Opp K% vs same hand (L10)",
-          "feat": "Opponents_K%_vs_hand_L10",
-          "val": 0.2868,
-          "pp": 1.4
-        },
-        {
-          "label": "Changeup usage %",
-          "feat": "changeup_usage",
-          "val": 0.0382,
-          "pp": 1.2
-        },
-        {
-          "label": "Borg overall rating",
-          "feat": "botOvr",
-          "val": 55.7229,
-          "pp": 0.9
-        },
-        {
-          "label": "Opp SwStr%",
-          "feat": "opp_swstr_pct",
-          "val": 0.123,
-          "pp": 0.9
-        }
-      ],
-      "pushers_down": [
-        {
-          "label": "Season K rate",
-          "feat": "K%",
-          "val": 0.1333,
-          "pp": 107.7
-        },
-        {
-          "label": "Expected batters faced",
-          "feat": "expected_batters",
-          "val": 11.5622,
-          "pp": 57.0
-        },
-        {
-          "label": "Expected batters faced (raw)",
-          "feat": "expected_batters_raw",
-          "val": 8.8733,
-          "pp": 34.6
-        },
-        {
-          "label": "Avg BF (rolling 5 starts)",
-          "feat": "BF_rolling_avg",
-          "val": 15.0,
-          "pp": 32.3
-        },
-        {
-          "label": "Avg innings per start",
-          "feat": "avg_IP_per_start",
-          "val": 2.6889,
-          "pp": 17.2
-        },
-        {
-          "label": "Recent K rate (L5)",
-          "feat": "K%_recent",
-          "val": 0.1316,
-          "pp": 13.1
-        }
-      ]
-    },
-    {
-      "name": "Cam Schlittler",
-      "mlbamid": "693645",
-      "team": "New York Yankees",
-      "opp": "vs Boston Red Sox",
+      "name": "Gavin Williams",
+      "mlbamid": "668909",
+      "team": "Cleveland Guardians",
+      "opp": "vs New York Yankees",
       "hand": "R",
       "ha": "Home",
       "rec": "OVER",
-      "line": 5.5,
-      "conf": "84.3%",
-      "pred_k": 7.1,
-      "avg_ip": 6.01,
-      "k_pct": 0.2847,
-      "k_pct_l5": 0.2909,
-      "barrel_pct": 0.066,
-      "stuff_plus": 111.2,
-      "location_plus": 107.0,
-      "pitching_plus": 115.1,
+      "line": 6.5,
+      "conf": "64.8%",
+      "pred_k": null,
+      "avg_ip": 6.31,
+      "k_pct": 0.2901,
+      "k_pct_l5": 0.2958,
+      "barrel_pct": 0.1232,
+      "stuff_plus": 104.9,
+      "location_plus": 104.8,
+      "pitching_plus": 106.4,
       "result": null,
       "actual_k": null,
-      "pushers_up": [
-        {
-          "label": "Season K rate",
-          "feat": "K%",
-          "val": 0.2847,
-          "pp": 152.5
-        },
-        {
-          "label": "Expected batters faced (raw)",
-          "feat": "expected_batters_raw",
-          "val": 19.833,
-          "pp": 17.3
-        },
-        {
-          "label": "Home/Away",
-          "feat": "home_away",
-          "val": 1.0,
-          "pp": 15.0
-        },
-        {
-          "label": "Recent K rate (L5)",
-          "feat": "K%_recent",
-          "val": 0.2909,
-          "pp": 13.1
-        },
-        {
-          "label": "Expected batters faced",
-          "feat": "expected_batters",
-          "val": 25.843,
-          "pp": 12.8
-        },
-        {
-          "label": "Fastball velocity",
-          "feat": "fastball_avg_mph",
-          "val": 97.6943,
-          "pp": 9.5
-        }
-      ],
-      "pushers_down": [
-        {
-          "label": "Opp whiff rate vs changeup",
-          "feat": "opp_whiff_rate_vs_changeup",
-          "val": 0.381,
-          "pp": 7.6
-        },
-        {
-          "label": "Fastball usage %",
-          "feat": "fastball_usage",
-          "val": 0.6369,
-          "pp": 6.6
-        },
-        {
-          "label": "Opp whiff rate vs fastball",
-          "feat": "opp_whiff_rate_vs_fastball",
-          "val": 0.187,
-          "pp": 2.4
-        },
-        {
-          "label": "Opponent K rate",
-          "feat": "opponent_K%",
-          "val": 0.2245,
-          "pp": 2.2
-        },
-        {
-          "label": "Opp Z-Contact%",
-          "feat": "opp_z_contact_pct",
-          "val": 0.8693,
-          "pp": 1.8
-        },
-        {
-          "label": "Opp K% vs fastball",
-          "feat": "opp_k_pct_vs_fastball",
-          "val": 0.171,
-          "pp": 1.3
-        }
-      ]
+      "pushers_up": [],
+      "pushers_down": []
     },
     {
-      "name": "Sandy Alcantara",
-      "mlbamid": "645261",
-      "team": "Miami Marlins",
-      "opp": "vs Tampa Bay Rays",
+      "name": "Kyle Harrison",
+      "mlbamid": "690986",
+      "team": "Milwaukee Brewers",
+      "opp": "vs Athletics",
+      "hand": "L",
+      "ha": "Away",
+      "rec": "OVER",
+      "line": 6.5,
+      "conf": "59.6%",
+      "pred_k": null,
+      "avg_ip": 4.91,
+      "k_pct": 0.3188,
+      "k_pct_l5": 0.3049,
+      "barrel_pct": 0.0511,
+      "stuff_plus": 106.0,
+      "location_plus": 116.0,
+      "pitching_plus": 117.5,
+      "result": null,
+      "actual_k": null,
+      "pushers_up": [],
+      "pushers_down": []
+    },
+    {
+      "name": "Chris Bassitt",
+      "mlbamid": "605135",
+      "team": "Baltimore Orioles",
+      "opp": "vs Seattle Mariners",
       "hand": "R",
       "ha": "Home",
       "rec": "UNDER",
       "line": 4.5,
-      "conf": "23.6%",
-      "pred_k": 3.6,
-      "avg_ip": 5.81,
-      "k_pct": 0.1633,
-      "k_pct_l5": 0.16,
-      "barrel_pct": 0.0677,
-      "stuff_plus": 101.5,
-      "location_plus": 104.0,
-      "pitching_plus": 104.0,
+      "conf": "15.4%",
+      "pred_k": null,
+      "avg_ip": 4.72,
+      "k_pct": 0.1418,
+      "k_pct_l5": 0.1321,
+      "barrel_pct": 0.0412,
+      "stuff_plus": 95.6,
+      "location_plus": 100.1,
+      "pitching_plus": 95.5,
       "result": null,
       "actual_k": null,
-      "pushers_up": [
-        {
-          "label": "Expected batters faced (raw)",
-          "feat": "expected_batters_raw",
-          "val": 19.184,
-          "pp": 12.6
-        },
-        {
-          "label": "Fastball horizontal movement",
-          "feat": "fastball_x_movement",
-          "val": -8.5316,
-          "pp": 10.8
-        },
-        {
-          "label": "Avg BF (rolling 5 starts)",
-          "feat": "BF_rolling_avg",
-          "val": 24.6667,
-          "pp": 9.9
-        },
-        {
-          "label": "Opp Z-Swing%",
-          "feat": "opp_z_swing_pct",
-          "val": 0.6524,
-          "pp": 6.8
-        },
-        {
-          "label": "Fastball velocity",
-          "feat": "fastball_avg_mph",
-          "val": 97.3725,
-          "pp": 4.6
-        },
-        {
-          "label": "Days since last start",
-          "feat": "days_since_last_start",
-          "val": 6.0,
-          "pp": 4.5
-        }
-      ],
-      "pushers_down": [
-        {
-          "label": "Season K rate",
-          "feat": "K%",
-          "val": 0.1633,
-          "pp": 100.7
-        },
-        {
-          "label": "Opp Z-Contact%",
-          "feat": "opp_z_contact_pct",
-          "val": 0.8947,
-          "pp": 17.0
-        },
-        {
-          "label": "Opponent K rate",
-          "feat": "opponent_K%",
-          "val": 0.1919,
-          "pp": 16.1
-        },
-        {
-          "label": "Fastball usage %",
-          "feat": "fastball_usage",
-          "val": 0.428,
-          "pp": 12.1
-        },
-        {
-          "label": "Opp O-Contact%",
-          "feat": "opp_o_contact_pct",
-          "val": 0.7281,
-          "pp": 10.6
-        },
-        {
-          "label": "Opp SwStr%",
-          "feat": "opp_swstr_pct",
-          "val": 0.0791,
-          "pp": 8.4
-        }
-      ]
+      "pushers_up": [],
+      "pushers_down": []
     },
     {
-      "name": "Shane Baz",
-      "mlbamid": "669358",
-      "team": "Baltimore Orioles",
-      "opp": "vs Toronto Blue Jays",
-      "hand": "R",
-      "ha": "Away",
-      "rec": "UNDER",
-      "line": 5.5,
-      "conf": "28.5%",
-      "pred_k": 4.4,
-      "avg_ip": 5.63,
-      "k_pct": 0.2066,
-      "k_pct_l5": 0.2059,
-      "barrel_pct": 0.0853,
-      "stuff_plus": 99.1,
-      "location_plus": 100.6,
-      "pitching_plus": 102.4,
-      "result": null,
-      "actual_k": null,
-      "pushers_up": [
-        {
-          "label": "Avg BF (rolling 5 starts)",
-          "feat": "BF_rolling_avg",
-          "val": 25.3333,
-          "pp": 16.5
-        },
-        {
-          "label": "Expected batters faced (raw)",
-          "feat": "expected_batters_raw",
-          "val": 18.568,
-          "pp": 12.3
-        },
-        {
-          "label": "Days since last start",
-          "feat": "days_since_last_start",
-          "val": 5.0,
-          "pp": 7.0
-        },
-        {
-          "label": "Fastball velocity",
-          "feat": "fastball_avg_mph",
-          "val": 96.2301,
-          "pp": 5.9
-        },
-        {
-          "label": "Changeup drop",
-          "feat": "changeup_vertical_drop",
-          "val": 5.571,
-          "pp": 5.4
-        },
-        {
-          "label": "Avg innings per start",
-          "feat": "avg_IP_per_start",
-          "val": 5.6267,
-          "pp": 5.3
-        }
-      ],
-      "pushers_down": [
-        {
-          "label": "Opponent K rate",
-          "feat": "opponent_K%",
-          "val": 0.1939,
-          "pp": 14.9
-        },
-        {
-          "label": "Home/Away",
-          "feat": "home_away",
-          "val": 0.0,
-          "pp": 9.9
-        },
-        {
-          "label": "Opp O-Contact%",
-          "feat": "opp_o_contact_pct",
-          "val": 0.6888,
-          "pp": 6.3
-        },
-        {
-          "label": "Opp K% vs breaking ball",
-          "feat": "opp_k_pct_vs_breaking",
-          "val": 0.264,
-          "pp": 6.0
-        },
-        {
-          "label": "Opp O-Swing%",
-          "feat": "opp_o_swing_pct",
-          "val": 0.3672,
-          "pp": 4.5
-        },
-        {
-          "label": "Opp whiff rate vs fastball",
-          "feat": "opp_whiff_rate_vs_fastball",
-          "val": 0.181,
-          "pp": 3.8
-        }
-      ]
-    },
-    {
-      "name": "Griffin Jax",
-      "mlbamid": "643377",
-      "team": "Tampa Bay Rays",
-      "opp": "vs Miami Marlins",
-      "hand": "R",
+      "name": "Andrew Abbott",
+      "mlbamid": "671096",
+      "team": "Cincinnati Reds",
+      "opp": "vs San Diego Padres",
+      "hand": "L",
       "ha": "Away",
       "rec": "UNDER",
       "line": 4.5,
-      "conf": "30.3%",
-      "pred_k": 3.8,
-      "avg_ip": 3.72,
-      "k_pct": 0.2136,
-      "k_pct_l5": 0.2029,
-      "barrel_pct": 0.0972,
-      "stuff_plus": 106.5,
-      "location_plus": 105.4,
-      "pitching_plus": 113.6,
+      "conf": "24.8%",
+      "pred_k": null,
+      "avg_ip": 4.92,
+      "k_pct": 0.1577,
+      "k_pct_l5": 0.1558,
+      "barrel_pct": 0.0727,
+      "stuff_plus": 94.7,
+      "location_plus": 101.2,
+      "pitching_plus": 95.8,
       "result": null,
       "actual_k": null,
-      "pushers_up": [
-        {
-          "label": "Season K rate",
-          "feat": "K%",
-          "val": 0.2136,
-          "pp": 20.8
-        },
-        {
-          "label": "Opp Z-Swing%",
-          "feat": "opp_z_swing_pct",
-          "val": 0.6586,
-          "pp": 7.3
-        },
-        {
-          "label": "Days since last start",
-          "feat": "days_since_last_start",
-          "val": 6.0,
-          "pp": 3.5
-        },
-        {
-          "label": "Stuff+ rating",
-          "feat": "Stuff+",
-          "val": 106.5102,
-          "pp": 2.6
-        },
-        {
-          "label": "Opp Z-Contact% (pitcher)",
-          "feat": "Z-Contact%",
-          "val": 0.844,
-          "pp": 2.5
-        },
-        {
-          "label": "Borg stuff rating",
-          "feat": "botStf",
-          "val": 62.3257,
-          "pp": 1.7
-        }
-      ],
-      "pushers_down": [
-        {
-          "label": "Avg BF (rolling 5 starts)",
-          "feat": "BF_rolling_avg",
-          "val": 16.25,
-          "pp": 34.0
-        },
-        {
-          "label": "Expected batters faced",
-          "feat": "expected_batters",
-          "val": 15.9817,
-          "pp": 14.7
-        },
-        {
-          "label": "Expected batters faced (raw)",
-          "feat": "expected_batters_raw",
-          "val": 12.265,
-          "pp": 13.8
-        },
-        {
-          "label": "Home/Away",
-          "feat": "home_away",
-          "val": 0.0,
-          "pp": 11.9
-        },
-        {
-          "label": "Fastball usage %",
-          "feat": "fastball_usage",
-          "val": 0.4263,
-          "pp": 11.8
-        },
-        {
-          "label": "Opponent K rate",
-          "feat": "opponent_K%",
-          "val": 0.2094,
-          "pp": 8.0
-        }
-      ]
+      "pushers_up": [],
+      "pushers_down": []
     },
     {
-      "name": "Michael Soroka",
-      "mlbamid": "647336",
-      "team": "Arizona Diamondbacks",
+      "name": "Patrick Corbin",
+      "mlbamid": "571578",
+      "team": "Toronto Blue Jays",
+      "opp": "vs Philadelphia Phillies",
+      "hand": "L",
+      "ha": "Home",
+      "rec": "UNDER",
+      "line": 4.0,
+      "conf": "33.7%",
+      "pred_k": null,
+      "avg_ip": 4.72,
+      "k_pct": 0.1581,
+      "k_pct_l5": 0.169,
+      "barrel_pct": 0.0791,
+      "stuff_plus": 93.3,
+      "location_plus": 104.0,
+      "pitching_plus": 97.3,
+      "result": null,
+      "actual_k": null,
+      "pushers_up": [],
+      "pushers_down": []
+    },
+    {
+      "name": "Logan Webb",
+      "mlbamid": "657277",
+      "team": "San Francisco Giants",
       "opp": "vs Washington Nationals",
       "hand": "R",
       "ha": "Home",
-      "rec": "OVER",
-      "line": 4.5,
-      "conf": "69.2%",
-      "pred_k": 5.9,
-      "avg_ip": 5.42,
-      "k_pct": 0.2357,
-      "k_pct_l5": 0.2391,
-      "barrel_pct": 0.0821,
-      "stuff_plus": 93.5,
-      "location_plus": 106.8,
-      "pitching_plus": 97.9,
-      "result": null,
-      "actual_k": null,
-      "pushers_up": [
-        {
-          "label": "Season K rate",
-          "feat": "K%",
-          "val": 0.2357,
-          "pp": 53.7
-        },
-        {
-          "label": "Avg BF (rolling 5 starts)",
-          "feat": "BF_rolling_avg",
-          "val": 24.6667,
-          "pp": 16.6
-        },
-        {
-          "label": "Expected batters faced (raw)",
-          "feat": "expected_batters_raw",
-          "val": 17.886,
-          "pp": 14.9
-        },
-        {
-          "label": "Home/Away",
-          "feat": "home_away",
-          "val": 1.0,
-          "pp": 11.9
-        },
-        {
-          "label": "Recent K rate (L5)",
-          "feat": "K%_recent",
-          "val": 0.2391,
-          "pp": 6.1
-        },
-        {
-          "label": "Days since last start",
-          "feat": "days_since_last_start",
-          "val": 5.0,
-          "pp": 3.6
-        }
-      ],
-      "pushers_down": [
-        {
-          "label": "Fastball usage %",
-          "feat": "fastball_usage",
-          "val": 0.432,
-          "pp": 9.2
-        },
-        {
-          "label": "Opponent wOBA vs handedness",
-          "feat": "opponent_wOBA_vs_hand",
-          "val": 0.339,
-          "pp": 5.5
-        },
-        {
-          "label": "Opponent BB/K vs handedness",
-          "feat": "opponent_BB_per_K_vs_hand",
-          "val": 0.4586,
-          "pp": 5.1
-        },
-        {
-          "label": "Opp K% vs fastball",
-          "feat": "opp_k_pct_vs_fastball",
-          "val": 0.167,
-          "pp": 4.2
-        },
-        {
-          "label": "Opp Z-Contact% (pitcher)",
-          "feat": "Z-Contact%",
-          "val": 0.9082,
-          "pp": 3.9
-        },
-        {
-          "label": "Opp whiff rate vs fastball",
-          "feat": "opp_whiff_rate_vs_fastball",
-          "val": 0.189,
-          "pp": 2.6
-        }
-      ]
-    },
-    {
-      "name": "Joey Cantillo",
-      "mlbamid": "676282",
-      "team": "Cleveland Guardians",
-      "opp": "vs Texas Rangers",
-      "hand": "L",
-      "ha": "Away",
       "rec": "UNDER",
       "line": 5.5,
-      "conf": "31.4%",
-      "pred_k": 4.6,
-      "avg_ip": 4.72,
-      "k_pct": 0.2105,
-      "k_pct_l5": 0.2115,
-      "barrel_pct": 0.08,
-      "stuff_plus": 98.8,
-      "location_plus": 91.2,
-      "pitching_plus": 89.9,
+      "conf": "39.6%",
+      "pred_k": null,
+      "avg_ip": 5.81,
+      "k_pct": 0.2032,
+      "k_pct_l5": 0.2031,
+      "barrel_pct": 0.0565,
+      "stuff_plus": 101.5,
+      "location_plus": 104.3,
+      "pitching_plus": 106.9,
       "result": null,
       "actual_k": null,
-      "pushers_up": [
-        {
-          "label": "Season K rate",
-          "feat": "K%",
-          "val": 0.2105,
-          "pp": 14.7
-        },
-        {
-          "label": "Days since last start",
-          "feat": "days_since_last_start",
-          "val": 5.0,
-          "pp": 8.4
-        },
-        {
-          "label": "Opp O-Contact%",
-          "feat": "opp_o_contact_pct",
-          "val": 0.5937,
-          "pp": 7.4
-        },
-        {
-          "label": "Opp Z-Contact% (pitcher)",
-          "feat": "Z-Contact%",
-          "val": 0.8253,
-          "pp": 6.8
-        },
-        {
-          "label": "Changeup usage %",
-          "feat": "changeup_usage",
-          "val": 0.2896,
-          "pp": 5.5
-        },
-        {
-          "label": "Opp whiff rate vs fastball",
-          "feat": "opp_whiff_rate_vs_fastball",
-          "val": 0.209,
-          "pp": 3.3
-        }
-      ],
-      "pushers_down": [
-        {
-          "label": "Home/Away",
-          "feat": "home_away",
-          "val": 0.0,
-          "pp": 10.3
-        },
-        {
-          "label": "Opponent K rate",
-          "feat": "opponent_K%",
-          "val": 0.2195,
-          "pp": 9.1
-        },
-        {
-          "label": "Opp K% vs breaking ball",
-          "feat": "opp_k_pct_vs_breaking",
-          "val": 0.265,
-          "pp": 5.4
-        },
-        {
-          "label": "Changeup drop",
-          "feat": "changeup_vertical_drop",
-          "val": 7.9606,
-          "pp": 3.4
-        },
-        {
-          "label": "Recent K rate (L5)",
-          "feat": "K%_recent",
-          "val": 0.2115,
-          "pp": 3.4
-        },
-        {
-          "label": "Zone swing-miss rate",
-          "feat": "in_zone_swing_miss",
-          "val": 0.1183,
-          "pp": 3.1
-        }
-      ]
-    },
-    {
-      "name": "Mike Burrows",
-      "mlbamid": "681347",
-      "team": "Houston Astros",
-      "opp": "vs Athletics",
-      "hand": "R",
-      "ha": "Home",
-      "rec": "UNDER",
-      "line": 5.5,
-      "conf": "32.0%",
-      "pred_k": 4.5,
-      "avg_ip": 5.62,
-      "k_pct": 0.19,
-      "k_pct_l5": 0.1897,
-      "barrel_pct": 0.0935,
-      "stuff_plus": 93.0,
-      "location_plus": 97.1,
-      "pitching_plus": 91.4,
-      "result": null,
-      "actual_k": null,
-      "pushers_up": [
-        {
-          "label": "Avg BF (rolling 5 starts)",
-          "feat": "BF_rolling_avg",
-          "val": 24.0,
-          "pp": 16.9
-        },
-        {
-          "label": "Expected batters faced (raw)",
-          "feat": "expected_batters_raw",
-          "val": 18.535,
-          "pp": 12.2
-        },
-        {
-          "label": "Changeup usage %",
-          "feat": "changeup_usage",
-          "val": 0.2652,
-          "pp": 9.6
-        },
-        {
-          "label": "Home/Away",
-          "feat": "home_away",
-          "val": 1.0,
-          "pp": 7.5
-        },
-        {
-          "label": "Days since last start",
-          "feat": "days_since_last_start",
-          "val": 5.0,
-          "pp": 7.2
-        },
-        {
-          "label": "Opp O-Contact%",
-          "feat": "opp_o_contact_pct",
-          "val": 0.6103,
-          "pp": 7.0
-        }
-      ],
-      "pushers_down": [
-        {
-          "label": "Season K rate",
-          "feat": "K%",
-          "val": 0.19,
-          "pp": 28.0
-        },
-        {
-          "label": "Opponent K rate",
-          "feat": "opponent_K%",
-          "val": 0.2096,
-          "pp": 15.6
-        },
-        {
-          "label": "Opp K% vs breaking ball",
-          "feat": "opp_k_pct_vs_breaking",
-          "val": 0.276,
-          "pp": 4.6
-        },
-        {
-          "label": "Opp K% vs changeup",
-          "feat": "opp_k_pct_vs_changeup",
-          "val": 0.155,
-          "pp": 4.0
-        },
-        {
-          "label": "Pitching+ rating",
-          "feat": "Pitching+",
-          "val": 91.4358,
-          "pp": 3.0
-        },
-        {
-          "label": "Opp Z-Swing%",
-          "feat": "opp_z_swing_pct",
-          "val": 0.7112,
-          "pp": 2.9
-        }
-      ]
-    },
-    {
-      "name": "Michael McGreevy",
-      "mlbamid": "700241",
-      "team": "St. Louis Cardinals",
-      "opp": "vs Cincinnati Reds",
-      "hand": "R",
-      "ha": "Home",
-      "rec": "OVER",
-      "line": 3.5,
-      "conf": "67.8%",
-      "pred_k": 4.1,
-      "avg_ip": 5.31,
-      "k_pct": 0.1679,
-      "k_pct_l5": 0.1778,
-      "barrel_pct": 0.0995,
-      "stuff_plus": 81.2,
-      "location_plus": 109.9,
-      "pitching_plus": 93.1,
-      "result": null,
-      "actual_k": null,
-      "pushers_up": [
-        {
-          "label": "Opponent K rate",
-          "feat": "opponent_K%",
-          "val": 0.2553,
-          "pp": 15.8
-        },
-        {
-          "label": "Expected batters faced (raw)",
-          "feat": "expected_batters_raw",
-          "val": 17.534,
-          "pp": 5.6
-        },
-        {
-          "label": "Opp K% vs breaking ball",
-          "feat": "opp_k_pct_vs_breaking",
-          "val": 0.366,
-          "pp": 5.2
-        },
-        {
-          "label": "Opponent PAs vs handedness",
-          "feat": "opponent_PA_vs_hand",
-          "val": 564.0,
-          "pp": 4.7
-        },
-        {
-          "label": "Opp K% vs same hand (L10)",
-          "feat": "Opponents_K%_vs_hand_L10",
-          "val": 0.1364,
-          "pp": 4.7
-        },
-        {
-          "label": "Home/Away",
-          "feat": "home_away",
-          "val": 1.0,
-          "pp": 3.7
-        }
-      ],
-      "pushers_down": [
-        {
-          "label": "Season K rate",
-          "feat": "K%",
-          "val": 0.1679,
-          "pp": 62.8
-        },
-        {
-          "label": "Recent K rate (L5)",
-          "feat": "K%_recent",
-          "val": 0.1778,
-          "pp": 4.0
-        },
-        {
-          "label": "Opponent BB/K vs handedness",
-          "feat": "opponent_BB_per_K_vs_hand",
-          "val": 0.4375,
-          "pp": 2.8
-        },
-        {
-          "label": "Opp Z-Contact% (pitcher)",
-          "feat": "Z-Contact%",
-          "val": 0.9214,
-          "pp": 2.2
-        },
-        {
-          "label": "Opp whiff rate vs fastball",
-          "feat": "opp_whiff_rate_vs_fastball",
-          "val": 0.182,
-          "pp": 2.2
-        },
-        {
-          "label": "Stuff+ rating",
-          "feat": "Stuff+",
-          "val": 81.224,
-          "pp": 2.2
-        }
-      ]
-    },
-    {
-      "name": "Jose Soriano",
-      "mlbamid": "667755",
-      "team": "Los Angeles Angels",
-      "opp": "vs Los Angeles Dodgers",
-      "hand": "R",
-      "ha": "Away",
-      "rec": "OVER",
-      "line": 5.0,
-      "conf": "66.5%",
-      "pred_k": 5.9,
-      "avg_ip": 5.92,
-      "k_pct": 0.2707,
-      "k_pct_l5": 0.2727,
-      "barrel_pct": 0.0904,
-      "stuff_plus": 101.2,
-      "location_plus": 103.7,
-      "pitching_plus": 107.4,
-      "result": null,
-      "actual_k": null,
-      "pushers_up": [
-        {
-          "label": "Season K rate",
-          "feat": "K%",
-          "val": 0.2707,
-          "pp": 102.3
-        },
-        {
-          "label": "Expected batters faced (raw)",
-          "feat": "expected_batters_raw",
-          "val": 19.547,
-          "pp": 16.7
-        },
-        {
-          "label": "Avg BF (rolling 5 starts)",
-          "feat": "BF_rolling_avg",
-          "val": 25.3333,
-          "pp": 15.0
-        },
-        {
-          "label": "Recent K rate (L5)",
-          "feat": "K%_recent",
-          "val": 0.2727,
-          "pp": 8.0
-        },
-        {
-          "label": "Expected batters faced",
-          "feat": "expected_batters",
-          "val": 25.4703,
-          "pp": 6.7
-        },
-        {
-          "label": "Fastball velocity",
-          "feat": "fastball_avg_mph",
-          "val": 97.6346,
-          "pp": 4.7
-        }
-      ],
-      "pushers_down": [
-        {
-          "label": "Opponent K rate",
-          "feat": "opponent_K%",
-          "val": 0.1954,
-          "pp": 15.1
-        },
-        {
-          "label": "Home/Away",
-          "feat": "home_away",
-          "val": 0.0,
-          "pp": 13.6
-        },
-        {
-          "label": "Fastball usage %",
-          "feat": "fastball_usage",
-          "val": 0.5067,
-          "pp": 8.9
-        },
-        {
-          "label": "Opp O-Contact%",
-          "feat": "opp_o_contact_pct",
-          "val": 0.6541,
-          "pp": 7.3
-        },
-        {
-          "label": "Zone swing-miss rate",
-          "feat": "in_zone_swing_miss",
-          "val": 0.1394,
-          "pp": 6.6
-        },
-        {
-          "label": "Opp K% vs fastball",
-          "feat": "opp_k_pct_vs_fastball",
-          "val": 0.154,
-          "pp": 4.8
-        }
-      ]
+      "pushers_up": [],
+      "pushers_down": []
     }
   ],
   "thresholdStats": [
