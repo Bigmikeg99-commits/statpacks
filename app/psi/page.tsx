@@ -257,17 +257,14 @@ export default function PSIPage() {
               <a href="#leaderboard" className="btn btn-primary">2026 Leaderboard</a>
               <a href="#validation"  className="btn btn-secondary">Validation Results</a>
             </div>
-            <div style={{display:'flex',gap:'8px',justifyContent:'center',flexWrap:'wrap'}}>
+            <div style={{display:'flex',gap:'10px',justifyContent:'center',flexWrap:'wrap'}}>
               {[
-                {label:'Data',       val:'3.6M pitches'},
-                {label:'Training',   val:'2020–2024'},
-                {label:'Holdout',    val:'2025 season'},
-                {label:'Components', val:'CLW · Velo · VAA'},
-                {label:'100',        val:'= league avg within role'},
+                'Built on 2020–2024 data',
+                'Blind-tested on 2025 season',
+                'Count leverage · Velocity · Pitch angle',
               ].map(k=>(
-                <div key={k.label} style={{background:'rgba(13,30,53,0.85)',border:'1px solid rgba(212,175,55,0.18)',borderRadius:'4px',padding:'10px 16px',textAlign:'center'}}>
-                  <div style={{fontSize:'7px',letterSpacing:'0.2em',color:'rgba(212,175,55,0.45)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase',marginBottom:'4px'}}>{k.label}</div>
-                  <div style={{fontSize:'11px',fontWeight:600,color:'var(--cream)',fontFamily:"'Inter',sans-serif"}}>{k.val}</div>
+                <div key={k} style={{background:'rgba(13,30,53,0.85)',border:'1px solid rgba(212,175,55,0.18)',borderRadius:'4px',padding:'10px 20px',textAlign:'center'}}>
+                  <div style={{fontSize:'12px',fontWeight:600,color:'var(--cream)',fontFamily:"'Inter',sans-serif"}}>{k}</div>
                 </div>
               ))}
             </div>
@@ -499,44 +496,91 @@ export default function PSIPage() {
           </div>
 
           <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(300px,1fr))',gap:'16px'}}>
-            {[
-              {
-                num:'01', abbr:'CLW', name:'Count-Leveraged Whiff Rate', weight:'60%', yoy:'0.5818',
-                benchmark:'vs. CSW% standalone r = 0.4892', color:'#3ab05a',
-                desc:'Whiff rate that gives extra credit for missing bats when it counts most. Two-strike swings-and-misses are worth 2×. First-pitch misses count half. Not all whiffs are equal.',
-                insight:'"Not just whether you miss bats. When you miss them."',
-              },
-              {
-                num:'02', abbr:'VELO P95', name:'Fastball Velocity Ceiling', weight:'30%', yoy:'0.4815',
-                benchmark:'vs. mean FB velocity r = 0.4705', color:'#4EABDE',
-                desc:'Top-end fastball velocity, not average velocity. Elite pitchers reach back for extra in big moments. The 95th percentile captures that ceiling. The average misses it.',
-                insight:'"The 95th percentile captures the extra gear, not the average."',
-              },
-              {
-                num:'03', abbr:'VAA', name:'Fastball Vertical Approach Angle', weight:'10%', yoy:'0.4159',
-                benchmark:'', color:'var(--gold)',
-                desc:'The angle at which a fastball arrives at home plate. A flatter angle is harder for hitters to square up. More negative = flatter = better. Cristopher Sánchez sits at −6.92°, 98th percentile.',
-                insight:'"A flatter approach angle meets the bat path at the worst possible spot for the hitter."',
-              },
-            ].map(c=>(
-              <div key={c.num} className="method-card">
-                <div className="method-num">{c.num}</div>
-                <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'10px'}}>
-                  <div style={{fontFamily:"'Orbitron',sans-serif",fontSize:'11px',fontWeight:700,color:c.color,letterSpacing:'0.08em'}}>{c.abbr}</div>
-                  <div style={{fontSize:'8px',letterSpacing:'0.1em',color:'rgba(245,241,230,0.3)',fontFamily:"'Inter',sans-serif",background:'rgba(255,255,255,0.04)',border:'1px solid rgba(255,255,255,0.06)',borderRadius:'2px',padding:'3px 7px',textTransform:'uppercase'}}>Weight: {c.weight}</div>
-                </div>
-                <div className="method-title">{c.name}</div>
-                <p className="method-desc" style={{marginBottom:'14px'}}>{c.desc}</p>
-                <div style={{background:'rgba(255,255,255,0.03)',border:'1px solid rgba(255,255,255,0.06)',borderRadius:'3px',padding:'10px 12px',marginBottom:'12px'}}>
-                  <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:c.benchmark?'5px':'0'}}>
-                    <span style={{fontSize:'8px',letterSpacing:'0.15em',color:'rgba(245,241,230,0.3)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase'}}>YoY r</span>
-                    <span style={{fontFamily:"'Orbitron',sans-serif",fontSize:'15px',fontWeight:700,color:c.color}}>{c.yoy}</span>
+
+            {/* 01 — CLW */}
+            <div className="flip-card" style={{height:'340px'}}>
+              <div className="flip-card-inner">
+                <div className="flip-card-front" style={{background:'var(--surf)',border:'1px solid rgba(58,176,90,0.25)',padding:'26px',position:'relative'}}>
+                  <div style={{position:'absolute',top:0,left:0,bottom:0,width:'2px',background:'linear-gradient(180deg,transparent,#3ab05a,transparent)'}}/>
+                  <div className="method-num">01</div>
+                  <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'10px'}}>
+                    <div style={{fontFamily:"'Orbitron',sans-serif",fontSize:'11px',fontWeight:700,color:'#3ab05a',letterSpacing:'0.08em'}}>CLW</div>
+                    <div style={{fontSize:'8px',letterSpacing:'0.1em',color:'rgba(245,241,230,0.3)',fontFamily:"'Inter',sans-serif",background:'rgba(255,255,255,0.04)',border:'1px solid rgba(255,255,255,0.06)',borderRadius:'2px',padding:'3px 7px',textTransform:'uppercase'}}>Weight: 60%</div>
                   </div>
-                  {c.benchmark&&<div style={{fontSize:'9px',color:'rgba(245,241,230,0.28)',fontFamily:"'Inter',sans-serif"}}>{c.benchmark}</div>}
+                  <div className="method-title">Count-Leveraged Whiff Rate</div>
+                  <p className="method-desc">This measures how often a pitcher misses bats when it matters most. Two-strike whiffs count double. First-pitch misses count half.</p>
+                  <div style={{position:'absolute',bottom:'18px',left:0,right:0,textAlign:'center',fontSize:'9px',letterSpacing:'0.15em',color:'rgba(58,176,90,0.4)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase'}}>Hover to see the formula ↺</div>
                 </div>
-                <div style={{fontSize:'11px',fontStyle:'italic',color:'rgba(245,241,230,0.5)',fontFamily:"'Playfair Display',serif",lineHeight:1.65}}>{c.insight}</div>
+                <div className="flip-card-back" style={{background:'#0c1b30',border:'1px solid rgba(58,176,90,0.25)',borderLeft:'3px solid #3ab05a',padding:'26px',display:'flex',flexDirection:'column',gap:'14px'}}>
+                  <div style={{fontFamily:"'Playfair Display',serif",fontSize:'16px',fontWeight:700,color:'var(--cream)',lineHeight:1.4}}>Count-Leveraged Whiff Rate (CLW)</div>
+                  <p style={{fontSize:'12px',color:'rgba(245,241,230,0.6)',fontFamily:"'Inter',sans-serif",lineHeight:1.7,margin:0}}>Pitches are weighted by count leverage.</p>
+                  <div>
+                    <div style={{fontSize:'8px',letterSpacing:'0.18em',color:'rgba(212,175,55,0.45)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase',marginBottom:'8px'}}>Weights</div>
+                    {[['Two-strike','2.0×'],['First-pitch','0.5×'],['All others','1.0×']].map(([lbl,val])=>(
+                      <div key={lbl} style={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'8px 0',borderBottom:'1px solid rgba(212,175,55,0.08)'}}>
+                        <span style={{fontSize:'12px',color:'rgba(245,241,230,0.6)',fontFamily:"'Inter',sans-serif"}}>{lbl}</span>
+                        <span style={{fontFamily:"'Orbitron',sans-serif",fontSize:'13px',fontWeight:700,color:'#3ab05a'}}>{val}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div style={{background:'rgba(255,255,255,0.03)',border:'1px solid rgba(255,255,255,0.06)',borderRadius:'3px',padding:'10px 14px',display:'flex',justifyContent:'space-between',alignItems:'center',marginTop:'auto'}}>
+                    <span style={{fontSize:'9px',letterSpacing:'0.15em',color:'rgba(245,241,230,0.3)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase'}}>YoY correlation</span>
+                    <span style={{fontFamily:"'Orbitron',sans-serif",fontSize:'16px',fontWeight:700,color:'#3ab05a'}}>r = 0.5818</span>
+                  </div>
+                </div>
               </div>
-            ))}
+            </div>
+
+            {/* 02 — VELO P95 */}
+            <div className="flip-card" style={{height:'340px'}}>
+              <div className="flip-card-inner">
+                <div className="flip-card-front" style={{background:'var(--surf)',border:'1px solid rgba(78,171,222,0.25)',padding:'26px',position:'relative'}}>
+                  <div style={{position:'absolute',top:0,left:0,bottom:0,width:'2px',background:'linear-gradient(180deg,transparent,#4EABDE,transparent)'}}/>
+                  <div className="method-num">02</div>
+                  <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'10px'}}>
+                    <div style={{fontFamily:"'Orbitron',sans-serif",fontSize:'11px',fontWeight:700,color:'#4EABDE',letterSpacing:'0.08em'}}>VELO P95</div>
+                    <div style={{fontSize:'8px',letterSpacing:'0.1em',color:'rgba(245,241,230,0.3)',fontFamily:"'Inter',sans-serif",background:'rgba(255,255,255,0.04)',border:'1px solid rgba(255,255,255,0.06)',borderRadius:'2px',padding:'3px 7px',textTransform:'uppercase'}}>Weight: 30%</div>
+                  </div>
+                  <div className="method-title">Fastball Velocity Ceiling</div>
+                  <p className="method-desc">This captures the top-end speed a pitcher can reach when the moment demands it. Not average velocity. The high gear they can access in big counts.</p>
+                  <div style={{position:'absolute',bottom:'18px',left:0,right:0,textAlign:'center',fontSize:'9px',letterSpacing:'0.15em',color:'rgba(78,171,222,0.4)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase'}}>Hover to see the formula ↺</div>
+                </div>
+                <div className="flip-card-back" style={{background:'#0c1b30',border:'1px solid rgba(78,171,222,0.25)',borderLeft:'3px solid #4EABDE',padding:'26px',display:'flex',flexDirection:'column',gap:'14px'}}>
+                  <div style={{fontFamily:"'Playfair Display',serif",fontSize:'16px',fontWeight:700,color:'var(--cream)',lineHeight:1.4}}>Fastball Velocity Ceiling (Velo P95)</div>
+                  <p style={{fontSize:'12px',color:'rgba(245,241,230,0.6)',fontFamily:"'Inter',sans-serif",lineHeight:1.7,margin:0}}>95th percentile of release speed across four-seam fastballs, sinkers, and cutters.</p>
+                  <div style={{background:'rgba(255,255,255,0.03)',border:'1px solid rgba(255,255,255,0.06)',borderRadius:'3px',padding:'10px 14px',display:'flex',justifyContent:'space-between',alignItems:'center',marginTop:'auto'}}>
+                    <span style={{fontSize:'9px',letterSpacing:'0.15em',color:'rgba(245,241,230,0.3)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase'}}>YoY correlation</span>
+                    <span style={{fontFamily:"'Orbitron',sans-serif",fontSize:'16px',fontWeight:700,color:'#4EABDE'}}>r = 0.4815</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* 03 — VAA */}
+            <div className="flip-card" style={{height:'340px'}}>
+              <div className="flip-card-inner">
+                <div className="flip-card-front" style={{background:'var(--surf)',border:'1px solid rgba(212,175,55,0.25)',padding:'26px',position:'relative'}}>
+                  <div style={{position:'absolute',top:0,left:0,bottom:0,width:'2px',background:'linear-gradient(180deg,transparent,var(--gold),transparent)'}}/>
+                  <div className="method-num">03</div>
+                  <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'10px'}}>
+                    <div style={{fontFamily:"'Orbitron',sans-serif",fontSize:'11px',fontWeight:700,color:'var(--gold)',letterSpacing:'0.08em'}}>VAA</div>
+                    <div style={{fontSize:'8px',letterSpacing:'0.1em',color:'rgba(245,241,230,0.3)',fontFamily:"'Inter',sans-serif",background:'rgba(255,255,255,0.04)',border:'1px solid rgba(255,255,255,0.06)',borderRadius:'2px',padding:'3px 7px',textTransform:'uppercase'}}>Weight: 10%</div>
+                  </div>
+                  <div className="method-title">Fastball Vertical Approach Angle</div>
+                  <p className="method-desc">This measures how flat or steep a fastball enters the strike zone. Flatter angles are harder for hitters to square up cleanly.</p>
+                  <div style={{position:'absolute',bottom:'18px',left:0,right:0,textAlign:'center',fontSize:'9px',letterSpacing:'0.15em',color:'rgba(212,175,55,0.4)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase'}}>Hover to see the formula ↺</div>
+                </div>
+                <div className="flip-card-back" style={{background:'#0c1b30',border:'1px solid rgba(212,175,55,0.25)',borderLeft:'3px solid var(--gold)',padding:'26px',display:'flex',flexDirection:'column',gap:'14px'}}>
+                  <div style={{fontFamily:"'Playfair Display',serif",fontSize:'16px',fontWeight:700,color:'var(--cream)',lineHeight:1.4}}>Fastball Vertical Approach Angle (VAA)</div>
+                  <p style={{fontSize:'12px',color:'rgba(245,241,230,0.6)',fontFamily:"'Inter',sans-serif",lineHeight:1.7,margin:0}}>Mean vertical approach angle of fastballs at the front of home plate. More negative values are flatter.</p>
+                  <div style={{background:'rgba(255,255,255,0.03)',border:'1px solid rgba(255,255,255,0.06)',borderRadius:'3px',padding:'10px 14px',display:'flex',justifyContent:'space-between',alignItems:'center',marginTop:'auto'}}>
+                    <span style={{fontSize:'9px',letterSpacing:'0.15em',color:'rgba(245,241,230,0.3)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase'}}>YoY correlation</span>
+                    <span style={{fontFamily:"'Orbitron',sans-serif",fontSize:'16px',fontWeight:700,color:'var(--gold)'}}>r = 0.4159</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
 
           {/* Notable 2026 findings */}
