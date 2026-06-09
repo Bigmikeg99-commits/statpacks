@@ -675,7 +675,7 @@ export default function PSIPage() {
             <div style={card}>
               <div style={cardTop}/>
               <div style={{fontSize:'9px',letterSpacing:'0.22em',color:'rgba(212,175,55,0.5)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase',marginBottom:'5px'}}>Year-over-Year Consistency</div>
-              <div style={{fontFamily:"'Playfair Display',serif",fontSize:'18px',fontWeight:700,color:'var(--cream)',marginBottom:'4px'}}>Stability Comparison</div>
+              <div style={{fontFamily:"'Playfair Display',serif",fontSize:'18px',fontWeight:700,color:'var(--cream)',marginBottom:'4px'}}>Is PSI+ Consistent Year to Year?</div>
               <div style={{fontSize:'11px',color:'rgba(245,241,230,0.35)',fontFamily:"'Inter',sans-serif",marginBottom:'20px'}}>Starters · Higher = more consistent from year to year</div>
               <ResponsiveContainer width="100%" height={148}>
                 <BarChart data={STABILITY} layout="vertical" margin={{left:36,right:56,top:4,bottom:4}}>
@@ -694,7 +694,8 @@ export default function PSIPage() {
               <div style={cardTop}/>
               <div style={{fontSize:'9px',letterSpacing:'0.22em',color:'rgba(212,175,55,0.5)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase',marginBottom:'5px'}}>2024 Metric Predicting 2025 K%</div>
               <div style={{fontFamily:"'Playfair Display',serif",fontSize:'18px',fontWeight:700,color:'var(--cream)',marginBottom:'4px'}}>Predictive Accuracy</div>
-              <div style={{fontSize:'11px',color:'rgba(245,241,230,0.35)',fontFamily:"'Inter',sans-serif",marginBottom:'18px'}}>306 pitchers with back-to-back seasons</div>
+              <div style={{fontSize:'11px',color:'rgba(245,241,230,0.35)',fontFamily:"'Inter',sans-serif",marginBottom:'6px'}}>306 pitchers with back-to-back seasons</div>
+              <div style={{fontSize:'11px',color:'rgba(245,241,230,0.4)',fontFamily:"'Inter',sans-serif",fontStyle:'italic',marginBottom:'16px'}}>r measures predictive accuracy — closer to 1.0 means better.</div>
               <table style={{width:'100%',borderCollapse:'collapse',fontFamily:"'Inter',sans-serif"}}>
                 <thead>
                   <tr style={{borderBottom:'1px solid rgba(212,175,55,0.15)'}}>
@@ -773,7 +774,7 @@ export default function PSIPage() {
         {/* ══ SIGNAL DISCOVERY ══ */}
         <section style={sec}>
           <div className="sec-header">
-            <div className="sec-eyebrow">Research · 51 Stats Tested</div>
+            <div className="sec-eyebrow">What We Tested · How We Chose the Components</div>
             <h2 className="sec-title">How We Found the Signal</h2>
             <p className="sec-sub">We tested 51 different pitcher stats to find which ones best predict future strikeout rate. Most well-known stats fell short. The ones that made it into PSI+ are the ones that actually held up.</p>
           </div>
