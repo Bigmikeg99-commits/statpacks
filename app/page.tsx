@@ -869,7 +869,7 @@ function downloadCSV(picks: Pick[]) {
   const headers = ['Name','Hand','Opp','H/A','Rec','Line','Conf','Pred K','Result','Actual K']
   const rows = picks.map(p => [
     p.name, p.hand + 'HP', p.opp, p.ha, p.rec,
-    String(p.line), p.conf, p.pred_k.toFixed(1),
+    String(p.line), p.conf, p.pred_k != null ? p.pred_k.toFixed(1) : '--',
     p.result ?? '', p.actual_k != null ? String(p.actual_k) : ''
   ])
   const csv = [headers, ...rows].map(r => r.map(v => `"${v}"`).join(',')).join('\n')
