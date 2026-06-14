@@ -1,6 +1,6 @@
 {
-  "updated": "2026-06-13 09:17",
-  "picks_date": "2026-06-13",
+  "updated": "2026-06-14 10:14",
+  "picks_date": "2026-06-14",
   "season": {
     "record": "429-360",
     "overs": "194-191",
@@ -12,7 +12,7 @@
     "date_range": "3/26-6/10"
   },
   "pod": {
-    "name": "Ranger Suarez"
+    "name": "Casey Mize"
   },
   "daily": [
     {
@@ -1368,136 +1368,210 @@
   ],
   "picks": [
     {
-      "name": "Ranger Suarez",
-      "mlbamid": "624133",
-      "team": "Boston Red Sox",
-      "opp": "vs Texas Rangers",
-      "hand": "L",
-      "ha": "Home",
-      "rec": "UNDER",
-      "line": 5.5,
-      "conf": "16.2%",
-      "pred_k": null,
-      "avg_ip": 5.12,
-      "k_pct": 0.2395,
-      "barrel_pct": 0.0625,
-      "stuff_plus": 94.4,
-      "location_plus": 103.7,
-      "pitching_plus": 100.2,
-      "result": null,
-      "actual_k": null,
-      "pushers_up": [],
-      "pushers_down": []
-    },
-    {
-      "name": "Joey Cantillo",
-      "mlbamid": "676282",
-      "team": "Cleveland Guardians",
-      "opp": "vs Detroit Tigers",
-      "hand": "L",
-      "ha": "Home",
-      "rec": "UNDER",
-      "line": 5.0,
-      "conf": "24.6%",
-      "pred_k": null,
-      "avg_ip": 5.02,
-      "k_pct": 0.2122,
-      "barrel_pct": 0.0683,
-      "stuff_plus": 98.7,
-      "location_plus": 90.6,
-      "pitching_plus": 89.2,
-      "result": null,
-      "actual_k": null,
-      "pushers_up": [],
-      "pushers_down": []
-    },
-    {
-      "name": "Griffin Jax",
-      "mlbamid": "643377",
-      "team": "Tampa Bay Rays",
-      "opp": "vs Los Angeles Angels",
+      "name": "Casey Mize",
+      "mlbamid": "663554",
+      "team": "Detroit Tigers",
+      "opp": "vs Cleveland Guardians",
       "hand": "R",
       "ha": "Away",
       "rec": "OVER",
-      "line": 5.0,
-      "conf": "74.2%",
+      "line": 3.5,
+      "conf": "85.1%",
       "pred_k": null,
-      "avg_ip": 3.72,
-      "k_pct": 0.2136,
-      "barrel_pct": 0.0972,
-      "stuff_plus": 106.5,
-      "location_plus": 105.4,
-      "pitching_plus": 113.6,
+      "avg_ip": 5.24,
+      "k_pct": 0.2649,
+      "barrel_pct": 0.0732,
+      "stuff_plus": 89.0,
+      "location_plus": 105.8,
+      "pitching_plus": 96.4,
       "result": null,
       "actual_k": null,
       "pushers_up": [],
       "pushers_down": []
     },
     {
-      "name": "Kyle Freeland",
-      "mlbamid": "607536",
-      "team": "Colorado Rockies",
-      "opp": "vs Athletics",
-      "hand": "L",
-      "ha": "Away",
-      "rec": "UNDER",
+      "name": "Grayson Rodriguez",
+      "mlbamid": "680570",
+      "team": "Los Angeles Angels",
+      "opp": "vs Tampa Bay Rays",
+      "hand": "R",
+      "ha": "Home",
+      "rec": "OVER",
       "line": 4.5,
-      "conf": "30.9%",
+      "conf": "72.5%",
+      "pred_k": null,
+      "avg_ip": 5.42,
+      "k_pct": 0.1977,
+      "barrel_pct": 0.1034,
+      "stuff_plus": 104.8,
+      "location_plus": 97.3,
+      "pitching_plus": 101.7,
+      "result": null,
+      "actual_k": null,
+      "pushers_up": [],
+      "pushers_down": []
+    },
+    {
+      "name": "Patrick Corbin",
+      "mlbamid": "571578",
+      "team": "Toronto Blue Jays",
+      "opp": "vs New York Yankees",
+      "hand": "L",
+      "ha": "Home",
+      "rec": "OVER",
+      "line": 3.5,
+      "conf": "69.7%",
       "pred_k": null,
       "avg_ip": 4.62,
-      "k_pct": 0.187,
-      "barrel_pct": 0.0958,
-      "stuff_plus": 91.8,
-      "location_plus": 99.3,
-      "pitching_plus": 90.3,
+      "k_pct": 0.1706,
+      "barrel_pct": 0.0828,
+      "stuff_plus": 93.5,
+      "location_plus": 103.9,
+      "pitching_plus": 97.5,
       "result": null,
       "actual_k": null,
       "pushers_up": [],
       "pushers_down": []
     },
     {
-      "name": "Aaron Nola",
-      "mlbamid": "605400",
-      "team": "Philadelphia Phillies",
-      "opp": "vs Milwaukee Brewers",
+      "name": "Logan Webb",
+      "mlbamid": "657277",
+      "team": "San Francisco Giants",
+      "opp": "vs Chicago Cubs",
       "hand": "R",
-      "ha": "Away",
+      "ha": "Home",
       "rec": "UNDER",
       "line": 5.5,
-      "conf": "36.0%",
+      "conf": "31.7%",
       "pred_k": null,
-      "avg_ip": 5.03,
-      "k_pct": 0.2286,
-      "barrel_pct": 0.0819,
-      "stuff_plus": 105.9,
-      "location_plus": 101.0,
-      "pitching_plus": 106.4,
+      "avg_ip": 6.1,
+      "k_pct": 0.2061,
+      "barrel_pct": 0.0629,
+      "stuff_plus": 102.0,
+      "location_plus": 103.7,
+      "pitching_plus": 106.7,
       "result": null,
       "actual_k": null,
       "pushers_up": [],
       "pushers_down": []
     },
     {
-      "name": "Mike Burrows",
-      "mlbamid": "681347",
+      "name": "Spencer Arrighetti",
+      "mlbamid": "681293",
       "team": "Houston Astros",
       "opp": "vs Kansas City Royals",
       "hand": "R",
       "ha": "Away",
       "rec": "OVER",
-      "line": 4.0,
-      "conf": "63.0%",
+      "line": 4.5,
+      "conf": "66.5%",
       "pred_k": null,
-      "avg_ip": 5.32,
-      "k_pct": 0.19,
-      "barrel_pct": 0.0935,
-      "stuff_plus": 93.0,
-      "location_plus": 97.1,
-      "pitching_plus": 91.4,
+      "avg_ip": 5.64,
+      "k_pct": 0.2172,
+      "barrel_pct": 0.0579,
+      "stuff_plus": 98.2,
+      "location_plus": 91.1,
+      "pitching_plus": 92.7,
       "result": null,
       "actual_k": null,
       "pushers_up": [],
       "pushers_down": []
+    },
+    {
+      "name": "Tomoyuki Sugano",
+      "mlbamid": "608372",
+      "team": "Colorado Rockies",
+      "opp": "vs Athletics",
+      "hand": "R",
+      "ha": "Away",
+      "rec": "UNDER",
+      "line": 3.0,
+      "conf": "35.3%",
+      "pred_k": 3.0,
+      "avg_ip": 5.03,
+      "k_pct": 0.1358,
+      "barrel_pct": 0.1627,
+      "stuff_plus": 81.1,
+      "location_plus": 103.3,
+      "pitching_plus": 88.7,
+      "result": null,
+      "actual_k": null,
+      "pushers_up": [
+        {
+          "label": "PSI: whiff rate (CLW)",
+          "feat": "PSI_CLW",
+          "val": 0.0786,
+          "pp": 8.8
+        },
+        {
+          "label": "Home/Away",
+          "feat": "home_away",
+          "val": 1.0,
+          "pp": 7.3
+        },
+        {
+          "label": "Days since last start",
+          "feat": "days_since_last_start",
+          "val": 7.0,
+          "pp": 4.4
+        },
+        {
+          "label": "PSI+ (composite strikeout index)",
+          "feat": "PSI_plus",
+          "val": 84.7,
+          "pp": 2.8
+        },
+        {
+          "label": "PSI: vertical approach angle",
+          "feat": "PSI_vaa",
+          "val": -5.872,
+          "pp": 2.5
+        },
+        {
+          "label": "day_of_season",
+          "feat": "day_of_season",
+          "val": 74.0,
+          "pp": 2.4
+        }
+      ],
+      "pushers_down": [
+        {
+          "label": "K%_vs_league",
+          "feat": "K%_vs_league",
+          "val": -0.0836,
+          "pp": 150.3
+        },
+        {
+          "label": "K%_recent_vs_league",
+          "feat": "K%_recent_vs_league",
+          "val": -0.0869,
+          "pp": 13.5
+        },
+        {
+          "label": "Recent K rate (L3)",
+          "feat": "K%_recent",
+          "val": 0.1325,
+          "pp": 11.1
+        },
+        {
+          "label": "Opponent K rate",
+          "feat": "opponent_K%",
+          "val": 0.2065,
+          "pp": 5.2
+        },
+        {
+          "label": "Opponent BB/K vs handedness",
+          "feat": "opponent_BB_per_K_vs_hand",
+          "val": 0.5584,
+          "pp": 4.8
+        },
+        {
+          "label": "Fastball usage %",
+          "feat": "fastball_usage",
+          "val": 0.3971,
+          "pp": 4.2
+        }
+      ]
     },
     {
       "name": "Jeffrey Springs",
@@ -1508,7 +1582,7 @@
       "ha": "Home",
       "rec": "UNDER",
       "line": 5.0,
-      "conf": "37.3%",
+      "conf": "37.1%",
       "pred_k": null,
       "avg_ip": 5.51,
       "k_pct": 0.2058,
@@ -1522,88 +1596,376 @@
       "pushers_down": []
     },
     {
-      "name": "Noah Cameron",
-      "mlbamid": "702070",
-      "team": "Kansas City Royals",
-      "opp": "vs Houston Astros",
-      "hand": "L",
-      "ha": "Home",
+      "name": "Michael McGreevy",
+      "mlbamid": "700241",
+      "team": "St. Louis Cardinals",
+      "opp": "vs Minnesota Twins",
+      "hand": "R",
+      "ha": "Away",
       "rec": "UNDER",
-      "line": 4.5,
-      "conf": "37.4%",
+      "line": 3.5,
+      "conf": "38.2%",
       "pred_k": null,
-      "avg_ip": 5.02,
-      "k_pct": 0.2222,
-      "barrel_pct": 0.1006,
-      "stuff_plus": 94.8,
-      "location_plus": 106.4,
-      "pitching_plus": 103.2,
+      "avg_ip": 5.31,
+      "k_pct": 0.1679,
+      "barrel_pct": 0.0995,
+      "stuff_plus": 81.2,
+      "location_plus": 109.9,
+      "pitching_plus": 93.1,
       "result": null,
       "actual_k": null,
       "pushers_up": [],
       "pushers_down": []
     },
     {
-      "name": "Kevin Gausman",
-      "mlbamid": "592332",
-      "team": "Toronto Blue Jays",
-      "opp": "vs New York Yankees",
+      "name": "Emerson Hancock",
+      "mlbamid": "676106",
+      "team": "Seattle Mariners",
+      "opp": "vs Washington Nationals",
       "hand": "R",
-      "ha": "Home",
+      "ha": "Away",
       "rec": "OVER",
-      "line": 5.5,
+      "line": 4.0,
       "conf": "60.6%",
       "pred_k": null,
-      "avg_ip": 5.53,
-      "k_pct": 0.2426,
-      "barrel_pct": 0.0741,
-      "stuff_plus": 99.0,
-      "location_plus": 108.2,
-      "pitching_plus": 105.6,
+      "avg_ip": 5.81,
+      "k_pct": 0.2583,
+      "barrel_pct": 0.1038,
+      "stuff_plus": 101.5,
+      "location_plus": 106.6,
+      "pitching_plus": 102.5,
       "result": null,
       "actual_k": null,
       "pushers_up": [],
       "pushers_down": []
     },
     {
-      "name": "Randy Vásquez",
-      "mlbamid": "681190",
-      "team": "San Diego Padres",
-      "opp": "vs Baltimore Orioles",
+      "name": "Bryce Elder",
+      "mlbamid": "693821",
+      "team": "Atlanta Braves",
+      "opp": "vs New York Mets",
+      "hand": "R",
+      "ha": "Away",
+      "rec": "UNDER",
+      "line": 4.5,
+      "conf": "41.0%",
+      "pred_k": null,
+      "avg_ip": 6.03,
+      "k_pct": 0.2094,
+      "barrel_pct": 0.0351,
+      "stuff_plus": 85.5,
+      "location_plus": 104.6,
+      "pitching_plus": 93.3,
+      "result": null,
+      "actual_k": null,
+      "pushers_up": [],
+      "pushers_down": []
+    },
+    {
+      "name": "Max Meyer",
+      "mlbamid": "676974",
+      "team": "Miami Marlins",
+      "opp": "vs Pittsburgh Pirates",
+      "hand": "R",
+      "ha": "Away",
+      "rec": "OVER",
+      "line": 5.5,
+      "conf": "57.4%",
+      "pred_k": 5.8,
+      "avg_ip": 5.42,
+      "k_pct": 0.2671,
+      "barrel_pct": 0.092,
+      "stuff_plus": 97.3,
+      "location_plus": 107.6,
+      "pitching_plus": 106.1,
+      "result": null,
+      "actual_k": null,
+      "pushers_up": [
+        {
+          "label": "K%_vs_league",
+          "feat": "K%_vs_league",
+          "val": 0.0497,
+          "pp": 93.5
+        },
+        {
+          "label": "Home/Away",
+          "feat": "home_away",
+          "val": 1.0,
+          "pp": 11.2
+        },
+        {
+          "label": "K%_recent_vs_league",
+          "feat": "K%_recent_vs_league",
+          "val": 0.0533,
+          "pp": 10.1
+        },
+        {
+          "label": "Recent K rate (L3)",
+          "feat": "K%_recent",
+          "val": 0.2727,
+          "pp": 8.5
+        },
+        {
+          "label": "Avg innings per start",
+          "feat": "avg_IP_per_start",
+          "val": 5.61,
+          "pp": 6.5
+        },
+        {
+          "label": "Opp K% vs same hand (L10)",
+          "feat": "Opponents_K%_vs_hand_L10",
+          "val": 0.2667,
+          "pp": 5.4
+        }
+      ],
+      "pushers_down": [
+        {
+          "label": "Opponent K rate",
+          "feat": "opponent_K%",
+          "val": 0.2141,
+          "pp": 13.3
+        },
+        {
+          "label": "Opp Z-Contact%",
+          "feat": "opp_z_contact_pct",
+          "val": 0.8834,
+          "pp": 7.2
+        },
+        {
+          "label": "Fastball usage %",
+          "feat": "fastball_usage",
+          "val": 0.3479,
+          "pp": 6.5
+        },
+        {
+          "label": "PSI: whiff rate (CLW)",
+          "feat": "PSI_CLW",
+          "val": 0.1452,
+          "pp": 4.7
+        },
+        {
+          "label": "Opp O-Contact%",
+          "feat": "opp_o_contact_pct",
+          "val": 0.6665,
+          "pp": 4.6
+        },
+        {
+          "label": "Opp K% vs breaking ball",
+          "feat": "opp_k_pct_vs_breaking",
+          "val": 0.287,
+          "pp": 4.3
+        }
+      ]
+    },
+    {
+      "name": "Trevor Rogers",
+      "mlbamid": "669432",
+      "team": "Baltimore Orioles",
+      "opp": "vs San Diego Padres",
+      "hand": "L",
+      "ha": "Home",
+      "rec": "OVER",
+      "line": 4.5,
+      "conf": "55.5%",
+      "pred_k": 4.0,
+      "avg_ip": 4.62,
+      "k_pct": 0.1727,
+      "barrel_pct": 0.0798,
+      "stuff_plus": 100.3,
+      "location_plus": 100.6,
+      "pitching_plus": 99.2,
+      "result": null,
+      "actual_k": null,
+      "pushers_up": [
+        {
+          "label": "Days since last start",
+          "feat": "days_since_last_start",
+          "val": 5.0,
+          "pp": 3.9
+        },
+        {
+          "label": "Home/Away",
+          "feat": "home_away",
+          "val": 1.0,
+          "pp": 3.8
+        },
+        {
+          "label": "Opp K% vs breaking ball",
+          "feat": "opp_k_pct_vs_breaking",
+          "val": 0.333,
+          "pp": 3.7
+        },
+        {
+          "label": "PSI: whiff rate (CLW)",
+          "feat": "PSI_CLW",
+          "val": 0.0997,
+          "pp": 2.9
+        },
+        {
+          "label": "Opp Z-Contact% (pitcher card)",
+          "feat": "Z-Contact%",
+          "val": 0.8737,
+          "pp": 1.8
+        },
+        {
+          "label": "Pitching+ rating",
+          "feat": "Pitching+",
+          "val": 98.5109,
+          "pp": 1.5
+        }
+      ],
+      "pushers_down": [
+        {
+          "label": "K%_vs_league",
+          "feat": "K%_vs_league",
+          "val": -0.05,
+          "pp": 73.6
+        },
+        {
+          "label": "Fastball usage %",
+          "feat": "fastball_usage",
+          "val": 0.5611,
+          "pp": 8.8
+        },
+        {
+          "label": "Recent K rate (L3)",
+          "feat": "K%_recent",
+          "val": 0.1739,
+          "pp": 4.0
+        },
+        {
+          "label": "K%_recent_vs_league",
+          "feat": "K%_recent_vs_league",
+          "val": -0.0455,
+          "pp": 2.8
+        },
+        {
+          "label": "Opp K% vs fastball",
+          "feat": "opp_k_pct_vs_fastball",
+          "val": 0.184,
+          "pp": 2.5
+        },
+        {
+          "label": "Opponent BB/K vs handedness",
+          "feat": "opponent_BB_per_K_vs_hand",
+          "val": 0.4209,
+          "pp": 2.3
+        }
+      ]
+    },
+    {
+      "name": "Colin Rea",
+      "mlbamid": "607067",
+      "team": "Chicago Cubs",
+      "opp": "vs San Francisco Giants",
       "hand": "R",
       "ha": "Away",
       "rec": "OVER",
       "line": 3.5,
-      "conf": "59.3%",
-      "pred_k": null,
-      "avg_ip": 5.51,
-      "k_pct": 0.1888,
-      "barrel_pct": 0.1099,
-      "stuff_plus": 99.4,
-      "location_plus": 102.1,
-      "pitching_plus": 97.7,
+      "conf": "54.2%",
+      "pred_k": 3.8,
+      "avg_ip": 4.83,
+      "k_pct": 0.1731,
+      "barrel_pct": 0.1267,
+      "stuff_plus": 93.9,
+      "location_plus": 98.0,
+      "pitching_plus": 91.7,
       "result": null,
       "actual_k": null,
-      "pushers_up": [],
-      "pushers_down": []
+      "pushers_up": [
+        {
+          "label": "Opp O-Swing% (pitcher card)",
+          "feat": "O-Swing%",
+          "val": 0.3452,
+          "pp": 2.3
+        },
+        {
+          "label": "O-Swing%_vs_league",
+          "feat": "O-Swing%_vs_league",
+          "val": 0.0261,
+          "pp": 2.1
+        },
+        {
+          "label": "Days since last start",
+          "feat": "days_since_last_start",
+          "val": 6.0,
+          "pp": 2.0
+        },
+        {
+          "label": "day_of_season",
+          "feat": "day_of_season",
+          "val": 74.0,
+          "pp": 1.6
+        },
+        {
+          "label": "Opp O-Contact%",
+          "feat": "opp_o_contact_pct",
+          "val": 0.6185,
+          "pp": 1.4
+        },
+        {
+          "label": "PSI: vertical approach angle",
+          "feat": "PSI_vaa",
+          "val": -5.003,
+          "pp": 1.4
+        }
+      ],
+      "pushers_down": [
+        {
+          "label": "K%_vs_league",
+          "feat": "K%_vs_league",
+          "val": -0.0324,
+          "pp": 45.8
+        },
+        {
+          "label": "Home/Away",
+          "feat": "home_away",
+          "val": 0.0,
+          "pp": 9.2
+        },
+        {
+          "label": "K%_recent_vs_league",
+          "feat": "K%_recent_vs_league",
+          "val": -0.0455,
+          "pp": 6.4
+        },
+        {
+          "label": "Fastball vertical drop",
+          "feat": "fastball_vertical_drop",
+          "val": 8.076,
+          "pp": 4.3
+        },
+        {
+          "label": "Changeup usage %",
+          "feat": "changeup_usage",
+          "val": 0.0032,
+          "pp": 4.1
+        },
+        {
+          "label": "Recent K rate (L3)",
+          "feat": "K%_recent",
+          "val": 0.1739,
+          "pp": 2.9
+        }
+      ]
     },
     {
-      "name": "Martín Pérez",
-      "mlbamid": "527048",
-      "team": "Atlanta Braves",
-      "opp": "vs New York Mets",
-      "hand": "L",
+      "name": "Emmet Sheehan",
+      "mlbamid": "686218",
+      "team": "Los Angeles Dodgers",
+      "opp": "vs Chicago White Sox",
+      "hand": "R",
       "ha": "Away",
-      "rec": "UNDER",
-      "line": 4.0,
-      "conf": "41.0%",
+      "rec": "OVER",
+      "line": 5.5,
+      "conf": "52.9%",
       "pred_k": null,
-      "avg_ip": 5.13,
-      "k_pct": 0.1792,
-      "barrel_pct": 0.0738,
-      "stuff_plus": 87.1,
-      "location_plus": 99.3,
-      "pitching_plus": 89.9,
+      "avg_ip": 5.03,
+      "k_pct": 0.2594,
+      "barrel_pct": 0.1,
+      "stuff_plus": 97.6,
+      "location_plus": 110.1,
+      "pitching_plus": 107.9,
       "result": null,
       "actual_k": null,
       "pushers_up": [],
