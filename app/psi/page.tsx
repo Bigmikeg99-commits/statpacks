@@ -493,7 +493,7 @@ export default function PSIPage() {
             <h2 className="sec-title">What Goes Into PSI+</h2>
           </div>
 
-          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:'16px'}}>
+          <div style={{display:'grid',gridTemplateColumns:'repeat(2,1fr)',gap:'16px'}}>
 
             {/* 01 — CLW */}
             <div className="flip-card" style={{height:'340px'}}>
