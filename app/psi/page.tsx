@@ -500,7 +500,7 @@ export default function PSIPage() {
               <div className="flip-card-inner">
                 <div className="flip-card-front" style={{background:'var(--surf)',border:'1px solid rgba(58,176,90,0.25)',padding:'26px'}}>
                   <div style={{position:'absolute',top:0,left:0,bottom:0,width:'2px',background:'linear-gradient(180deg,transparent,#3ab05a,transparent)'}}/>
-                  <div className="method-num">01</div>
+
                   <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'10px'}}>
                     <div style={{fontFamily:"'Orbitron',sans-serif",fontSize:'11px',fontWeight:700,color:'#3ab05a',letterSpacing:'0.08em'}}>CLW</div>
                     <div style={{fontSize:'8px',letterSpacing:'0.1em',color:'rgba(245,241,230,0.3)',fontFamily:"'Inter',sans-serif",background:'rgba(255,255,255,0.04)',border:'1px solid rgba(255,255,255,0.06)',borderRadius:'2px',padding:'3px 7px',textTransform:'uppercase'}}>Weight: 55%</div>
@@ -534,7 +534,7 @@ export default function PSIPage() {
               <div className="flip-card-inner">
                 <div className="flip-card-front" style={{background:'var(--surf)',border:'1px solid rgba(78,171,222,0.25)',padding:'26px'}}>
                   <div style={{position:'absolute',top:0,left:0,bottom:0,width:'2px',background:'linear-gradient(180deg,transparent,#4EABDE,transparent)'}}/>
-                  <div className="method-num">02</div>
+
                   <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'10px'}}>
                     <div style={{fontFamily:"'Orbitron',sans-serif",fontSize:'11px',fontWeight:700,color:'#4EABDE',letterSpacing:'0.08em'}}>VELO P95</div>
                     <div style={{fontSize:'8px',letterSpacing:'0.1em',color:'rgba(245,241,230,0.3)',fontFamily:"'Inter',sans-serif",background:'rgba(255,255,255,0.04)',border:'1px solid rgba(255,255,255,0.06)',borderRadius:'2px',padding:'3px 7px',textTransform:'uppercase'}}>Weight: 35%</div>
@@ -559,7 +559,7 @@ export default function PSIPage() {
               <div className="flip-card-inner">
                 <div className="flip-card-front" style={{background:'var(--surf)',border:'1px solid rgba(212,175,55,0.25)',padding:'26px'}}>
                   <div style={{position:'absolute',top:0,left:0,bottom:0,width:'2px',background:'linear-gradient(180deg,transparent,var(--gold),transparent)'}}/>
-                  <div className="method-num">03</div>
+
                   <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'10px'}}>
                     <div style={{fontFamily:"'Orbitron',sans-serif",fontSize:'11px',fontWeight:700,color:'var(--gold)',letterSpacing:'0.08em'}}>VAA</div>
                     <div style={{fontSize:'8px',letterSpacing:'0.1em',color:'rgba(245,241,230,0.3)',fontFamily:"'Inter',sans-serif",background:'rgba(255,255,255,0.04)',border:'1px solid rgba(255,255,255,0.06)',borderRadius:'2px',padding:'3px 7px',textTransform:'uppercase'}}>Weight: 5%</div>
@@ -584,7 +584,7 @@ export default function PSIPage() {
               <div className="flip-card-inner">
                 <div className="flip-card-front" style={{background:'var(--surf)',border:'1px solid rgba(224,123,84,0.25)',padding:'26px'}}>
                   <div style={{position:'absolute',top:0,left:0,bottom:0,width:'2px',background:'linear-gradient(180deg,transparent,#E07B54,transparent)'}}/>
-                  <div className="method-num">04</div>
+
                   <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'10px'}}>
                     <div style={{fontFamily:"'Orbitron',sans-serif",fontSize:'11px',fontWeight:700,color:'#E07B54',letterSpacing:'0.08em'}}>SLWR</div>
                     <div style={{fontSize:'8px',letterSpacing:'0.1em',color:'rgba(245,241,230,0.3)',fontFamily:"'Inter',sans-serif",background:'rgba(255,255,255,0.04)',border:'1px solid rgba(255,255,255,0.06)',borderRadius:'2px',padding:'3px 7px',textTransform:'uppercase'}}>Weight: 5%</div>
