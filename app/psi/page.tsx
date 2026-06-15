@@ -240,20 +240,20 @@ export default function PSIPage() {
       <main style={{minHeight:'100vh',paddingBottom:'80px'}}>
 
         {/* ══ HERO ══ */}
-        <section style={{background:'var(--navy)',padding:'80px 40px 60px',textAlign:'center',borderBottom:'2px solid rgba(212,175,55,0.15)',position:'relative',overflow:'hidden'}}>
+        <section style={{background:'var(--navy)',padding:'52px 40px 40px',textAlign:'center',borderBottom:'2px solid rgba(212,175,55,0.15)',position:'relative',overflow:'hidden'}}>
           <div style={{position:'absolute',inset:0,background:'repeating-linear-gradient(0deg,rgba(78,171,222,0.03) 0,rgba(78,171,222,0.03) 1px,transparent 1px,transparent 70px),repeating-linear-gradient(90deg,rgba(78,171,222,0.03) 0,rgba(78,171,222,0.03) 1px,transparent 1px,transparent 70px)',pointerEvents:'none'}}/>
           <div style={{position:'relative',zIndex:1,maxWidth:'900px',margin:'0 auto'}}>
             <div className="hero-eyebrow">Pitcher Strikeout Index · 2026</div>
-            <h1 style={{fontFamily:"'Playfair Display',serif",fontSize:'clamp(60px,10vw,110px)',fontWeight:900,color:'var(--cream)',lineHeight:.9,marginBottom:'20px',letterSpacing:'-0.01em'}}>
+            <h1 style={{fontFamily:"'Playfair Display',serif",fontSize:'clamp(60px,10vw,110px)',fontWeight:900,color:'var(--cream)',lineHeight:.9,marginBottom:'14px',letterSpacing:'-0.01em'}}>
               PSI<span style={{color:'var(--gold)',fontSize:'0.45em',verticalAlign:'super',fontWeight:700,letterSpacing:0}}>+</span>
             </h1>
-            <p style={{fontSize:'16px',color:'rgba(245,241,230,0.9)',maxWidth:'620px',margin:'0 auto 12px',lineHeight:1.7,fontFamily:"'Inter',sans-serif",fontWeight:500}}>
+            <p style={{fontSize:'16px',color:'rgba(245,241,230,0.9)',maxWidth:'620px',margin:'0 auto 8px',lineHeight:1.7,fontFamily:"'Inter',sans-serif",fontWeight:500}}>
               A new framework for evaluating strikeout ability in modern baseball.
             </p>
-            <p style={{fontSize:'13px',color:'rgba(245,241,230,0.6)',maxWidth:'560px',margin:'0 auto 36px',lineHeight:1.8,fontFamily:"'Inter',sans-serif",fontStyle:'italic'}}>
+            <p style={{fontSize:'13px',color:'rgba(245,241,230,0.6)',maxWidth:'560px',margin:'0 auto 24px',lineHeight:1.8,fontFamily:"'Inter',sans-serif",fontStyle:'italic'}}>
               Tells you which pitchers are built to strikeout hitters, not just which ones have recently.
             </p>
-            <div style={{display:'flex',gap:'12px',justifyContent:'center',flexWrap:'wrap',marginBottom:'40px'}}>
+            <div style={{display:'flex',gap:'12px',justifyContent:'center',flexWrap:'wrap',marginBottom:'28px'}}>
               <a href="#leaderboard" className="btn btn-primary">2026 Leaderboard</a>
               <a href="#validation"  className="btn btn-secondary">Validation Results</a>
             </div>
@@ -268,7 +268,7 @@ export default function PSIPage() {
                 </div>
               ))}
             </div>
-            <div style={{marginTop:'20px',fontSize:'9px',letterSpacing:'0.15em',color:'rgba(245,241,230,0.22)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase'}}>
+            <div style={{marginTop:'14px',fontSize:'9px',letterSpacing:'0.15em',color:'rgba(245,241,230,0.22)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase'}}>
               Last updated: June 15, 2026
             </div>
           </div>
