@@ -271,9 +271,9 @@ export default function PSIPage() {
             <div style={{marginTop:'14px',fontSize:'9px',letterSpacing:'0.15em',color:'rgba(245,241,230,0.22)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase'}}>
               Last updated: June 15, 2026
             </div>
-            <div style={{marginTop:'28px',paddingTop:'24px',borderTop:'1px solid rgba(212,175,55,0.12)'}}>
-              <p style={{fontFamily:"'Playfair Display',serif",fontSize:'clamp(13px,1.4vw,15.5px)',color:'rgba(245,241,230,0.55)',lineHeight:1.85,margin:'0 auto',maxWidth:'820px',textAlign:'center'}}>
-                PSI+ takes its name from the unit of pressure measurement. The connection is intentional. Every pitch in an at-bat carries a different level of consequence. It ranges from getting ahead on the first pitch to putting hitters away when they are vulnerable to avoiding the counts where leverage flips back to the hitter. A pitcher does not only face pressure in two-strike counts.{' '}
+            <div style={{marginTop:'32px',paddingTop:'28px',borderTop:'1px solid rgba(212,175,55,0.12)'}}>
+              <p style={{fontFamily:"'Playfair Display',serif",fontSize:'clamp(13px,1.4vw,15.5px)',color:'rgba(245,241,230,0.55)',lineHeight:2.1,margin:'0 auto',maxWidth:'780px',textAlign:'center'}}>
+                PSI+ takes its name from the unit of pressure measurement. Every pitch carries a different level of consequence. It ranges from getting ahead on the first pitch to putting hitters away when they are vulnerable to avoiding the counts where leverage flips back to the hitter.{' '}
                 <span style={{color:'rgba(245,241,230,0.82)',fontWeight:600}}>PSI+ weights every pitch by the pressure of the moment it was thrown in.</span>{' '}
                 That is where the name comes from.
               </p>
