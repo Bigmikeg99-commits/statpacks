@@ -272,7 +272,7 @@ export default function PSIPage() {
               Last updated: June 15, 2026
             </div>
             <div style={{marginTop:'28px',paddingTop:'24px',borderTop:'1px solid rgba(212,175,55,0.12)'}}>
-              <p style={{fontFamily:"'Playfair Display',serif",fontSize:'clamp(12px,1.2vw,14px)',color:'rgba(245,241,230,0.55)',lineHeight:1.8,margin:'0 auto',maxWidth:'820px',textAlign:'center'}}>
+              <p style={{fontFamily:"'Playfair Display',serif",fontSize:'clamp(13px,1.4vw,15.5px)',color:'rgba(245,241,230,0.55)',lineHeight:1.85,margin:'0 auto',maxWidth:'820px',textAlign:'center'}}>
                 PSI+ takes its name from the unit of pressure measurement. The connection is intentional. Every pitch in an at-bat carries a different level of consequence. It ranges from getting ahead on the first pitch to putting hitters away when they are vulnerable to avoiding the counts where leverage flips back to the hitter. A pitcher does not only face pressure in two-strike counts.{' '}
                 <span style={{color:'rgba(245,241,230,0.82)',fontWeight:600}}>PSI+ weights every pitch by the pressure of the moment it was thrown in.</span>{' '}
                 That is where the name comes from.
