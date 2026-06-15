@@ -498,7 +498,7 @@ export default function PSIPage() {
             {/* 01 — CLW */}
             <div className="flip-card" style={{height:'340px'}}>
               <div className="flip-card-inner">
-                <div className="flip-card-front" style={{background:'var(--surf)',border:'1px solid rgba(58,176,90,0.25)',padding:'26px',position:'relative'}}>
+                <div className="flip-card-front" style={{background:'var(--surf)',border:'1px solid rgba(58,176,90,0.25)',padding:'26px'}}>
                   <div style={{position:'absolute',top:0,left:0,bottom:0,width:'2px',background:'linear-gradient(180deg,transparent,#3ab05a,transparent)'}}/>
                   <div className="method-num">01</div>
                   <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'10px'}}>
@@ -532,7 +532,7 @@ export default function PSIPage() {
             {/* 02 — VELO P95 */}
             <div className="flip-card" style={{height:'340px'}}>
               <div className="flip-card-inner">
-                <div className="flip-card-front" style={{background:'var(--surf)',border:'1px solid rgba(78,171,222,0.25)',padding:'26px',position:'relative'}}>
+                <div className="flip-card-front" style={{background:'var(--surf)',border:'1px solid rgba(78,171,222,0.25)',padding:'26px'}}>
                   <div style={{position:'absolute',top:0,left:0,bottom:0,width:'2px',background:'linear-gradient(180deg,transparent,#4EABDE,transparent)'}}/>
                   <div className="method-num">02</div>
                   <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'10px'}}>
@@ -557,7 +557,7 @@ export default function PSIPage() {
             {/* 03 — VAA */}
             <div className="flip-card" style={{height:'340px'}}>
               <div className="flip-card-inner">
-                <div className="flip-card-front" style={{background:'var(--surf)',border:'1px solid rgba(212,175,55,0.25)',padding:'26px',position:'relative'}}>
+                <div className="flip-card-front" style={{background:'var(--surf)',border:'1px solid rgba(212,175,55,0.25)',padding:'26px'}}>
                   <div style={{position:'absolute',top:0,left:0,bottom:0,width:'2px',background:'linear-gradient(180deg,transparent,var(--gold),transparent)'}}/>
                   <div className="method-num">03</div>
                   <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'10px'}}>
@@ -582,7 +582,7 @@ export default function PSIPage() {
             {/* 04 — SLWR */}
             <div className="flip-card" style={{height:'340px'}}>
               <div className="flip-card-inner">
-                <div className="flip-card-front" style={{background:'var(--surf)',border:'1px solid rgba(224,123,84,0.25)',padding:'26px',position:'relative'}}>
+                <div className="flip-card-front" style={{background:'var(--surf)',border:'1px solid rgba(224,123,84,0.25)',padding:'26px'}}>
                   <div style={{position:'absolute',top:0,left:0,bottom:0,width:'2px',background:'linear-gradient(180deg,transparent,#E07B54,transparent)'}}/>
                   <div className="method-num">04</div>
                   <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'10px'}}>
