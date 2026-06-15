@@ -269,7 +269,7 @@ export default function PSIPage() {
               ))}
             </div>
             <div style={{marginTop:'20px',fontSize:'9px',letterSpacing:'0.15em',color:'rgba(245,241,230,0.22)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase'}}>
-              Last updated: June 1, 2026
+              Last updated: June 15, 2026
             </div>
           </div>
         </section>
@@ -286,7 +286,7 @@ export default function PSIPage() {
         {/* ══ LEADERBOARD ══ */}
         <section id="leaderboard" style={sec}>
           <div className="sec-header">
-            <div className="sec-eyebrow">2026 Season · Through June 1</div>
+            <div className="sec-eyebrow">2026 Season · Through June 15</div>
             <h2 className="sec-title">Leaderboard</h2>
             <p className="sec-sub">Minimum {minP} pitches. Scored within role. 100 = league average.</p>
           </div>
