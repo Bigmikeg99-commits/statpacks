@@ -240,7 +240,7 @@ export default function PSIPage() {
       <main style={{minHeight:'100vh',paddingBottom:'80px'}}>
 
         {/* ══ HERO ══ */}
-        <section style={{background:'var(--navy)',padding:'38px 40px 40px',textAlign:'center',borderBottom:'2px solid rgba(212,175,55,0.15)',position:'relative',overflow:'hidden'}}>
+        <section style={{background:'var(--navy)',padding:'45px 40px 40px',textAlign:'center',borderBottom:'2px solid rgba(212,175,55,0.15)',position:'relative',overflow:'hidden'}}>
           <div style={{position:'absolute',inset:0,background:'repeating-linear-gradient(0deg,rgba(78,171,222,0.03) 0,rgba(78,171,222,0.03) 1px,transparent 1px,transparent 70px),repeating-linear-gradient(90deg,rgba(78,171,222,0.03) 0,rgba(78,171,222,0.03) 1px,transparent 1px,transparent 70px)',pointerEvents:'none'}}/>
           <div style={{position:'relative',zIndex:1,maxWidth:'900px',margin:'0 auto'}}>
             <div className="hero-eyebrow">Pitcher Strikeout Index · 2026</div>
