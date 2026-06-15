@@ -506,12 +506,12 @@ export default function PSIPage() {
                     <div style={{fontSize:'8px',letterSpacing:'0.1em',color:'rgba(245,241,230,0.3)',fontFamily:"'Inter',sans-serif",background:'rgba(255,255,255,0.04)',border:'1px solid rgba(255,255,255,0.06)',borderRadius:'2px',padding:'3px 7px',textTransform:'uppercase'}}>Weight: 55%</div>
                   </div>
                   <div className="method-title">Count-Leveraged Whiff Rate</div>
-                  <p className="method-desc">Measures how often a pitcher misses bats when it matters most. Two-strike whiffs count double. First-pitch misses count half. The heaviest component in PSI+.</p>
+                  <p className="method-desc" style={{color:'rgba(245,241,230,0.72)',lineHeight:1.85}}>Measures how often a pitcher misses bats when it matters most. Two-strike whiffs count double. First-pitch misses count half. The heaviest component in PSI+.</p>
                   <div style={{position:'absolute',bottom:'18px',left:0,right:0,textAlign:'center',fontSize:'9px',letterSpacing:'0.15em',color:'rgba(58,176,90,0.4)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase'}}>Hover to see the formula ↺</div>
                 </div>
                 <div className="flip-card-back" style={{background:'#0c1b30',border:'1px solid rgba(58,176,90,0.25)',borderLeft:'3px solid #3ab05a',padding:'26px',display:'flex',flexDirection:'column',gap:'14px'}}>
                   <div style={{fontFamily:"'Playfair Display',serif",fontSize:'16px',fontWeight:700,color:'var(--cream)',lineHeight:1.4}}>Count-Leveraged Whiff Rate (CLW)</div>
-                  <p style={{fontSize:'12px',color:'rgba(245,241,230,0.6)',fontFamily:"'Inter',sans-serif",lineHeight:1.7,margin:0}}>Pitches are weighted by count leverage before calculating whiff rate.</p>
+                  <p style={{fontSize:'13px',color:'rgba(245,241,230,0.72)',fontFamily:"'Inter',sans-serif",lineHeight:1.85,margin:0}}>Pitches are weighted by count leverage before calculating whiff rate.</p>
                   <div>
                     <div style={{fontSize:'8px',letterSpacing:'0.18em',color:'rgba(212,175,55,0.45)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase',marginBottom:'8px'}}>Count Weights</div>
                     {[['Two-strike','2.0×'],['First-pitch','0.5×'],['All others','1.0×']].map(([lbl,val])=>(
@@ -540,12 +540,12 @@ export default function PSIPage() {
                     <div style={{fontSize:'8px',letterSpacing:'0.1em',color:'rgba(245,241,230,0.3)',fontFamily:"'Inter',sans-serif",background:'rgba(255,255,255,0.04)',border:'1px solid rgba(255,255,255,0.06)',borderRadius:'2px',padding:'3px 7px',textTransform:'uppercase'}}>Weight: 35%</div>
                   </div>
                   <div className="method-title">Fastball Velocity Ceiling</div>
-                  <p className="method-desc">Captures the top-end speed a pitcher can reach when the moment demands it. Not average velocity — the high gear they can access in big counts.</p>
+                  <p className="method-desc" style={{color:'rgba(245,241,230,0.72)',lineHeight:1.85}}>Captures the top-end speed a pitcher can reach when the moment demands it. Not average velocity — the high gear they can access in big counts.</p>
                   <div style={{position:'absolute',bottom:'18px',left:0,right:0,textAlign:'center',fontSize:'9px',letterSpacing:'0.15em',color:'rgba(78,171,222,0.4)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase'}}>Hover to see the formula ↺</div>
                 </div>
                 <div className="flip-card-back" style={{background:'#0c1b30',border:'1px solid rgba(78,171,222,0.25)',borderLeft:'3px solid #4EABDE',padding:'26px',display:'flex',flexDirection:'column',gap:'14px'}}>
                   <div style={{fontFamily:"'Playfair Display',serif",fontSize:'16px',fontWeight:700,color:'var(--cream)',lineHeight:1.4}}>Fastball Velocity Ceiling (Velo P95)</div>
-                  <p style={{fontSize:'12px',color:'rgba(245,241,230,0.6)',fontFamily:"'Inter',sans-serif",lineHeight:1.7,margin:0}}>95th percentile of release speed across four-seam fastballs, sinkers, and cutters. Rewards the ability to reach back for more.</p>
+                  <p style={{fontSize:'13px',color:'rgba(245,241,230,0.72)',fontFamily:"'Inter',sans-serif",lineHeight:1.85,margin:0}}>95th percentile of release speed across four-seam fastballs, sinkers, and cutters — measuring the top-end speed a pitcher can reach, not their average.</p>
                   <div style={{background:'rgba(255,255,255,0.03)',border:'1px solid rgba(255,255,255,0.06)',borderRadius:'3px',padding:'10px 14px',display:'flex',justifyContent:'space-between',alignItems:'center',marginTop:'auto'}}>
                     <span style={{fontSize:'9px',letterSpacing:'0.15em',color:'rgba(245,241,230,0.3)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase'}}>YoY correlation</span>
                     <span style={{fontFamily:"'Orbitron',sans-serif",fontSize:'16px',fontWeight:700,color:'#4EABDE'}}>r = 0.4815</span>
@@ -565,12 +565,12 @@ export default function PSIPage() {
                     <div style={{fontSize:'8px',letterSpacing:'0.1em',color:'rgba(245,241,230,0.3)',fontFamily:"'Inter',sans-serif",background:'rgba(255,255,255,0.04)',border:'1px solid rgba(255,255,255,0.06)',borderRadius:'2px',padding:'3px 7px',textTransform:'uppercase'}}>Weight: 5%</div>
                   </div>
                   <div className="method-title">Fastball Vertical Approach Angle</div>
-                  <p className="method-desc">Measures how flat or steep a fastball enters the strike zone. Flatter angles are harder for hitters to square up. A smaller component, but stable year over year.</p>
+                  <p className="method-desc" style={{color:'rgba(245,241,230,0.72)',lineHeight:1.85}}>Measures how flat or steep a fastball enters the strike zone. Flatter angles are harder for hitters to square up. A smaller component, but stable year over year.</p>
                   <div style={{position:'absolute',bottom:'18px',left:0,right:0,textAlign:'center',fontSize:'9px',letterSpacing:'0.15em',color:'rgba(212,175,55,0.4)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase'}}>Hover to see the formula ↺</div>
                 </div>
                 <div className="flip-card-back" style={{background:'#0c1b30',border:'1px solid rgba(212,175,55,0.25)',borderLeft:'3px solid var(--gold)',padding:'26px',display:'flex',flexDirection:'column',gap:'14px'}}>
                   <div style={{fontFamily:"'Playfair Display',serif",fontSize:'16px',fontWeight:700,color:'var(--cream)',lineHeight:1.4}}>Fastball Vertical Approach Angle (VAA)</div>
-                  <p style={{fontSize:'12px',color:'rgba(245,241,230,0.6)',fontFamily:"'Inter',sans-serif",lineHeight:1.7,margin:0}}>Mean vertical approach angle of fastballs at the front of home plate. More negative values indicate a flatter plane into the zone.</p>
+                  <p style={{fontSize:'13px',color:'rgba(245,241,230,0.72)',fontFamily:"'Inter',sans-serif",lineHeight:1.85,margin:0}}>Mean vertical approach angle of fastballs at the front of home plate. More negative values indicate a flatter plane into the zone.</p>
                   <div style={{background:'rgba(255,255,255,0.03)',border:'1px solid rgba(255,255,255,0.06)',borderRadius:'3px',padding:'10px 14px',display:'flex',justifyContent:'space-between',alignItems:'center',marginTop:'auto'}}>
                     <span style={{fontSize:'9px',letterSpacing:'0.15em',color:'rgba(245,241,230,0.3)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase'}}>YoY correlation</span>
                     <span style={{fontFamily:"'Orbitron',sans-serif",fontSize:'16px',fontWeight:700,color:'var(--gold)'}}>r = 0.4159</span>
@@ -590,12 +590,12 @@ export default function PSIPage() {
                     <div style={{fontSize:'8px',letterSpacing:'0.1em',color:'rgba(245,241,230,0.3)',fontFamily:"'Inter',sans-serif",background:'rgba(255,255,255,0.04)',border:'1px solid rgba(255,255,255,0.06)',borderRadius:'2px',padding:'3px 7px',textTransform:'uppercase'}}>Weight: 5%</div>
                   </div>
                   <div className="method-title">Secondary Leverage Whiff Rate</div>
-                  <p className="method-desc">The same count-leverage logic as CLW, applied only to secondary pitches — breaking balls, changeups, and off-speed offerings. Only included when a pitcher has thrown at least 50 secondary pitches.</p>
+                  <p className="method-desc" style={{color:'rgba(245,241,230,0.72)',lineHeight:1.85}}>The same count-leverage logic as CLW. Applied only to secondary pitches — breaking balls, changeups, and off-speed offerings. Only included when a pitcher has thrown at least 50 secondary pitches.</p>
                   <div style={{position:'absolute',bottom:'18px',left:0,right:0,textAlign:'center',fontSize:'9px',letterSpacing:'0.15em',color:'rgba(224,123,84,0.4)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase'}}>Hover to see the formula ↺</div>
                 </div>
                 <div className="flip-card-back" style={{background:'#0c1b30',border:'1px solid rgba(224,123,84,0.25)',borderLeft:'3px solid #E07B54',padding:'26px',display:'flex',flexDirection:'column',gap:'14px'}}>
                   <div style={{fontFamily:"'Playfair Display',serif",fontSize:'16px',fontWeight:700,color:'var(--cream)',lineHeight:1.4}}>Secondary Leverage Whiff Rate (SLWR)</div>
-                  <p style={{fontSize:'12px',color:'rgba(245,241,230,0.6)',fontFamily:"'Inter',sans-serif",lineHeight:1.7,margin:0}}>Applies count-leverage multipliers to whiffs on breaking balls, changeups, and off-speed pitches. New in PSI+ v2.</p>
+                  <p style={{fontSize:'13px',color:'rgba(245,241,230,0.72)',fontFamily:"'Inter',sans-serif",lineHeight:1.85,margin:0}}>Applies count-leverage multipliers to whiffs on breaking balls, changeups, and off-speed pitches. New in PSI+ v2.</p>
                   <div>
                     <div style={{fontSize:'8px',letterSpacing:'0.18em',color:'rgba(212,175,55,0.45)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase',marginBottom:'8px'}}>Fallback weights · {"<"}50 secondary pitches</div>
                     {[['CLW','57.89%'],['Velo','36.84%'],['VAA','5.26%']].map(([lbl,val])=>(
@@ -606,7 +606,7 @@ export default function PSIPage() {
                     ))}
                   </div>
                   <div style={{background:'rgba(255,255,255,0.03)',border:'1px solid rgba(255,255,255,0.06)',borderRadius:'3px',padding:'8px 14px',marginTop:'auto',fontSize:'10px',color:'rgba(245,241,230,0.35)',fontFamily:"'Inter',sans-serif",lineHeight:1.6}}>
-                    When SLWR is excluded, the remaining three weights are rescaled proportionally.
+                    When SLWR is excluded the remaining three weights are rescaled proportionally.
                   </div>
                 </div>
               </div>
