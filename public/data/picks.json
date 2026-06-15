@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-15 15:43",
+  "updated": "2026-06-15 15:55",
   "picks_date": "2026-06-15",
   "season": {
     "record": "447-369",
@@ -12,7 +12,7 @@
     "date_range": "3/26-6/14"
   },
   "pod": {
-    "name": "Mitch Spence"
+    "name": "Shota Imanaga"
   },
   "daily": [
     {
@@ -1407,102 +1407,6 @@
     }
   ],
   "picks": [
-    {
-      "name": "Mitch Spence",
-      "mlbamid": "687765",
-      "team": "Kansas City Royals",
-      "opp": "vs Washington Nationals",
-      "hand": "R",
-      "ha": "Away",
-      "rec": "UNDER",
-      "line": 3.0,
-      "conf": "21.3%",
-      "pred_k": 3.0,
-      "avg_ip": 4.51,
-      "k_pct": 0.1406,
-      "barrel_pct": 0.0556,
-      "stuff_plus": 91.1,
-      "location_plus": 89.3,
-      "pitching_plus": 85.9,
-      "result": null,
-      "actual_k": null,
-      "pushers_up": [
-        {
-          "label": "Opp O-Contact%",
-          "feat": "opp_o_contact_pct",
-          "val": 0.6139,
-          "pp": 4.9
-        },
-        {
-          "label": "Pitch hand (L/R)",
-          "feat": "pitch_hand",
-          "val": 1.0,
-          "pp": 3.5
-        },
-        {
-          "label": "Opp O-Swing%",
-          "feat": "opp_o_swing_pct",
-          "val": 0.3214,
-          "pp": 3.0
-        },
-        {
-          "label": "Opp SwStr%",
-          "feat": "opp_swstr_pct",
-          "val": 0.1092,
-          "pp": 2.0
-        },
-        {
-          "label": "Opp K% vs breaking ball",
-          "feat": "opp_k_pct_vs_breaking",
-          "val": 0.311,
-          "pp": 1.6
-        },
-        {
-          "label": "Opp Z-Swing%",
-          "feat": "opp_z_swing_pct",
-          "val": 0.6767,
-          "pp": 0.6
-        }
-      ],
-      "pushers_down": [
-        {
-          "label": "Zone swing-miss rate",
-          "feat": "in_zone_swing_miss",
-          "val": 0.0011,
-          "pp": 52.9
-        },
-        {
-          "label": "Days since last start",
-          "feat": "days_since_last_start",
-          "val": 260.0,
-          "pp": 42.0
-        },
-        {
-          "label": "Stuff+ rating",
-          "feat": "Stuff+",
-          "val": 91.1484,
-          "pp": 30.8
-        },
-        {
-          "label": "Changeup drop",
-          "feat": "changeup_vertical_drop",
-          "val": -35.2,
-          "pp": 20.9
-        },
-        {
-          "label": "Pitching+ rating",
-          "feat": "Pitching+",
-          "val": 85.8787,
-          "pp": 17.8
-        },
-        {
-          "label": "Fastball extension",
-          "feat": "ext_FB",
-          "val": 6.219,
-          "pp": 16.2
-        }
-      ]
-    },
     {
       "name": "Shota Imanaga",
       "mlbamid": "684007",
