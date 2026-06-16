@@ -685,10 +685,12 @@ export default function PSIPage() {
 
           <div style={{background:'rgba(58,176,90,0.07)',border:'1px solid rgba(58,176,90,0.2)',borderRadius:'4px',padding:'18px 22px'}}>
             <p style={{fontSize:'13px',color:'rgba(245,241,230,0.75)',fontFamily:"'Inter',sans-serif",lineHeight:1.7,margin:0}}>
-              When PSI+ disagreed sharply with a pitcher's raw K% rate, it was right <strong style={{color:'#3ab05a'}}>58.8% of the time</strong> across 260 cases.
-              The overrated signal is especially reliable: when PSI+ flagged a pitcher as due for regression, it was correct <strong style={{color:'#3ab05a'}}>82.3% of the time</strong>.
+              PSI+ flagged underrated pitchers correctly <strong style={{color:'#3ab05a'}}>58.8% of the time</strong> when the K% rose the next year.
+              The overrated signal was correct <strong style={{color:'#3ab05a'}}>79.1% of the time</strong>.
+              At larger divergences greater than 1.0 standard deviation, overall accuracy rose to <strong style={{color:'#3ab05a'}}>74.5% across 94 cases</strong>.
             </p>
           </div>
+          <div className="updated-tag" style={{marginTop:'12px'}}>Includes partial 2026 season data through June 1</div>
         </section>
 
         <div className="divider"/>
@@ -821,9 +823,9 @@ export default function PSIPage() {
           {/* Accuracy tiles */}
           <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(220px,1fr))',gap:'12px',marginTop:'16px'}}>
             {[
-              {label:'Overall accuracy when PSI+ disagreed with K%', val:'58.8%', sub:'153 of 260 cases',                     color:'var(--gold)'},
-              {label:'Accuracy flagging underrated pitchers',         val:'51.5%', sub:'PSI+ high, K% rose the next year',      color:'#4EABDE'},
-              {label:'Accuracy flagging overrated pitchers',          val:'82.3%', sub:'PSI+ low, K% fell the next year',       color:'#3ab05a'},
+              {label:'Overall accuracy when PSI+ disagreed with K%', val:'58.8%', sub:'236 of 342 cases',                     color:'var(--gold)'},
+              {label:'Accuracy flagging underrated pitchers',         val:'58.8%', sub:'PSI+ high, K% rose the next year',      color:'#4EABDE'},
+              {label:'Accuracy flagging overrated pitchers',          val:'79.1%', sub:'PSI+ low, K% fell the next year',       color:'#3ab05a'},
             ].map(s=>(
               <div key={s.label} style={{background:'rgba(13,30,53,0.8)',border:'1px solid rgba(212,175,55,0.1)',borderRadius:'4px',padding:'16px 18px'}}>
                 <div style={{fontSize:'9px',letterSpacing:'0.15em',color:'rgba(245,241,230,0.55)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase',marginBottom:'8px',lineHeight:1.5}}>{s.label}</div>
