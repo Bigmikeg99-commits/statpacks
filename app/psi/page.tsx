@@ -52,7 +52,7 @@ const CASE_STUDIES = [
   {
     type: 'OVERRATED', name: 'Adam Wainwright', year: 2022,
     kpct: '17.8%', psi: '80.0', next_kpct: '11.4%', change: '−6.4pp',
-    quote: '"PSI+ had been saying it was coming for a while."',
+    quote: '"Velocity had dropped. Two-strike whiff rate had weakened for two seasons in a row. The 17.8% K rate in 2022 masked the decline until the numbers aligned in 2023."',
   },
   {
     type: 'UNDERRATED', name: 'Zack Wheeler', year: 2020,
