@@ -753,6 +753,39 @@ export default function PSIPage() {
             </div>
           </div>
 
+          {/* v2 vs v1 comparison */}
+          <div style={{...card,marginBottom:'24px'}}>
+            <div style={cardTop}/>
+            <div style={{fontSize:'9px',letterSpacing:'0.22em',color:'rgba(212,175,55,0.5)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase',marginBottom:'5px'}}>PSI+ v2 · Blind Holdout · 2025 Season</div>
+            <div style={{fontFamily:"'Playfair Display',serif",fontSize:'18px',fontWeight:700,color:'var(--cream)',marginBottom:'4px'}}>v2 vs. v1</div>
+            <p style={{fontSize:'12px',color:'rgba(245,241,230,0.45)',fontFamily:"'Inter',sans-serif",lineHeight:1.7,margin:'0 0 16px'}}>All results from the same blind holdout. No 2025 data was used in building either version.</p>
+            <table style={{width:'100%',borderCollapse:'collapse',fontFamily:"'Inter',sans-serif",marginBottom:'16px'}}>
+              <thead>
+                <tr style={{borderBottom:'1px solid rgba(212,175,55,0.15)'}}>
+                  {['','v1','v2'].map(h=>(
+                    <th key={h} style={{textAlign:h===''?'left':'center',padding:'6px 8px',fontSize:'8px',letterSpacing:'0.14em',color:'rgba(212,175,55,0.5)',textTransform:'uppercase',fontWeight:700}}>{h}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  {label:'Predictive accuracy · starters', v1:'0.6799', v2:'0.6906'},
+                  {label:'Predictive accuracy · overall',  v1:'0.5815', v2:'0.5910'},
+                  {label:'YoY stability · starters',       v1:'0.6542', v2:'0.6669'},
+                ].map((row,i)=>(
+                  <tr key={i} style={{borderBottom:'1px solid rgba(212,175,55,0.05)',background:i%2?'transparent':'rgba(255,255,255,0.01)'}}>
+                    <td style={{padding:'10px 8px',fontSize:'13px',color:'rgba(245,241,230,0.65)',fontFamily:"'Inter',sans-serif"}}>{row.label}</td>
+                    <td style={{padding:'10px 8px',textAlign:'center',fontFamily:"'Orbitron',sans-serif",fontSize:'11px',color:'rgba(245,241,230,0.4)'}}>{row.v1}</td>
+                    <td style={{padding:'10px 8px',textAlign:'center',fontFamily:"'Orbitron',sans-serif",fontSize:'12px',fontWeight:700,color:'#3ab05a'}}>{row.v2} ↑</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <p style={{fontSize:'12px',color:'rgba(245,241,230,0.4)',fontFamily:"'Inter',sans-serif",lineHeight:1.7,margin:0}}>
+              Low-velocity pitchers show the largest accuracy gains in v2. SLWR captures secondary pitch quality that the original three components missed.
+            </p>
+          </div>
+
           {/* Quartile K% chart */}
           <div style={card}>
             <div style={cardTop}/>
@@ -878,7 +911,7 @@ export default function PSIPage() {
           <div className="sec-header">
             <div className="sec-eyebrow">Weight Testing · 36 Combinations</div>
             <h2 className="sec-title">How the Weights Were Chosen</h2>
-            <p className="sec-sub">We tested every possible combination of CLW, velocity, and VAA weights against the 2025 data. The mix that best predicted strikeout rate: CLW 60%, Velo 30%, VAA 10%.</p>
+            <p className="sec-sub">We tested every combination of CLW, velocity, and VAA weights against the 2025 holdout data. That optimization informed v1. PSI+ v2 adds a fourth component and adjusts the weights accordingly.</p>
           </div>
 
           {!weights || weights.length === 0 ? (
@@ -931,9 +964,59 @@ export default function PSIPage() {
 
           <div style={{background:'rgba(78,171,222,0.06)',border:'1px solid rgba(78,171,222,0.18)',borderRadius:'4px',padding:'18px 22px',marginTop:'20px'}}>
             <p style={{fontSize:'13px',color:'rgba(245,241,230,0.75)',fontFamily:"'Inter',sans-serif",lineHeight:1.7,margin:0}}>
-              <strong style={{color:'#4EABDE'}}>Winner: CLW = 60%, Velocity = 30%, VAA = 10%.</strong>{' '}
+              <strong style={{color:'#4EABDE'}}>v1 winner: CLW = 60%, Velocity = 30%, VAA = 10%.</strong>{' '}
               Every combination that gave VAA more than 10% weight underperformed. VAA and velocity are correlated, so over-weighting VAA was essentially counting the velocity signal twice.
             </p>
+          </div>
+
+          {/* v2 methodology */}
+          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(300px,1fr))',gap:'16px',marginTop:'20px'}}>
+
+            <div style={{background:'rgba(13,30,53,0.8)',border:'1px solid rgba(212,175,55,0.12)',borderRadius:'4px',padding:'22px 24px'}}>
+              <div style={{fontSize:'9px',letterSpacing:'0.2em',color:'rgba(212,175,55,0.5)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase',marginBottom:'10px'}}>PSI+ v2 · Core Weights</div>
+              <div style={{fontFamily:"'Playfair Display',serif",fontSize:'16px',fontWeight:700,color:'var(--cream)',marginBottom:'14px'}}>What Changed</div>
+              <p style={{fontSize:'13px',color:'rgba(245,241,230,0.6)',fontFamily:"'Inter',sans-serif",lineHeight:1.75,margin:'0 0 14px'}}>
+                v2 adds SLWR as a fourth component. Secondary pitch quality was missing from v1. The original three weights were adjusted to make room.
+              </p>
+              {[
+                {label:'CLW',  val:'55%', note:'down from 60%'},
+                {label:'Velo', val:'35%', note:'up from 30%'},
+                {label:'VAA',  val:'5%',  note:'down from 10%'},
+                {label:'SLWR', val:'5%',  note:'new in v2'},
+              ].map(row=>(
+                <div key={row.label} style={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'7px 0',borderBottom:'1px solid rgba(212,175,55,0.07)'}}>
+                  <span style={{fontFamily:"'Orbitron',sans-serif",fontSize:'11px',fontWeight:700,color:'rgba(245,241,230,0.8)'}}>{row.label}</span>
+                  <div style={{display:'flex',alignItems:'center',gap:'10px'}}>
+                    <span style={{fontSize:'11px',color:'rgba(245,241,230,0.3)',fontFamily:"'Inter',sans-serif",fontStyle:'italic'}}>{row.note}</span>
+                    <span style={{fontFamily:"'Orbitron',sans-serif",fontSize:'13px',fontWeight:700,color:'var(--gold)'}}>{row.val}</span>
+                  </div>
+                </div>
+              ))}
+              <p style={{fontSize:'11px',color:'rgba(245,241,230,0.3)',fontFamily:"'Inter',sans-serif",lineHeight:1.6,margin:'14px 0 0'}}>
+                When a pitcher has fewer than 50 secondary pitches, SLWR is excluded and the remaining three weights are rescaled proportionally.
+              </p>
+            </div>
+
+            <div style={{background:'rgba(13,30,53,0.8)',border:'1px solid rgba(212,175,55,0.12)',borderRadius:'4px',padding:'22px 24px'}}>
+              <div style={{fontSize:'9px',letterSpacing:'0.2em',color:'rgba(212,175,55,0.5)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase',marginBottom:'10px'}}>Dual-Weighting Framework</div>
+              <div style={{fontFamily:"'Playfair Display',serif",fontSize:'16px',fontWeight:700,color:'var(--cream)',marginBottom:'14px'}}>Two Sets of Weights</div>
+              <p style={{fontSize:'13px',color:'rgba(245,241,230,0.6)',fontFamily:"'Inter',sans-serif",lineHeight:1.75,margin:'0 0 14px'}}>
+                PSI+ runs on two separate weighting schemes depending on the use case.
+              </p>
+              <div style={{borderLeft:'2px solid rgba(212,175,55,0.2)',paddingLeft:'14px',marginBottom:'14px'}}>
+                <div style={{fontSize:'11px',fontWeight:700,color:'rgba(245,241,230,0.8)',fontFamily:"'Inter',sans-serif",marginBottom:'4px'}}>Published PSI+</div>
+                <p style={{fontSize:'12px',color:'rgba(245,241,230,0.45)',fontFamily:"'Inter',sans-serif",lineHeight:1.65,margin:0}}>
+                  Uses the core weights above. Optimized for predicting strikeout rate year over year. This is what appears on the leaderboard.
+                </p>
+              </div>
+              <div style={{borderLeft:'2px solid rgba(78,171,222,0.25)',paddingLeft:'14px'}}>
+                <div style={{fontSize:'11px',fontWeight:700,color:'rgba(245,241,230,0.8)',fontFamily:"'Inter',sans-serif",marginBottom:'4px'}}>Betting Model</div>
+                <p style={{fontSize:'12px',color:'rgba(245,241,230,0.45)',fontFamily:"'Inter',sans-serif",lineHeight:1.65,margin:0}}>
+                  Uses a separate set of weights not published here. Optimized for a different objective. The two versions will diverge on some pitchers.
+                </p>
+              </div>
+            </div>
+
           </div>
         </section>
 
