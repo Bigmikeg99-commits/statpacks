@@ -823,7 +823,7 @@ export default function PSIPage() {
           {/* Accuracy tiles */}
           <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(220px,1fr))',gap:'12px',marginTop:'16px'}}>
             {[
-              {label:'Overall accuracy when PSI+ disagreed with K%', val:'58.8%', sub:'236 of 342 cases',                     color:'var(--gold)'},
+              {label:'Overall accuracy when PSI+ disagreed with K%', val:'69.0%', sub:'236 of 342 cases',                     color:'var(--gold)'},
               {label:'Accuracy flagging underrated pitchers',         val:'58.8%', sub:'PSI+ high, K% rose the next year',      color:'#4EABDE'},
               {label:'Accuracy flagging overrated pitchers',          val:'79.1%', sub:'PSI+ low, K% fell the next year',       color:'#3ab05a'},
             ].map(s=>(
