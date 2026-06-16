@@ -361,7 +361,7 @@ export default function PSIPage() {
                       <td style={{padding:'12px 12px',textAlign:'center',fontFamily:"'Orbitron',sans-serif",fontSize:'12px',color:'rgba(245,241,230,0.9)'}}>{r.clw?.toFixed(3)}</td>
                       <td style={{padding:'12px 12px',textAlign:'center',fontFamily:"'Orbitron',sans-serif",fontSize:'12px',color:'rgba(245,241,230,0.9)'}}>{r.velo}</td>
                       <td style={{padding:'12px 12px',textAlign:'center',fontFamily:"'Orbitron',sans-serif",fontSize:'12px',color:'rgba(245,241,230,0.9)'}}>{r.vaa?.toFixed(2)}°</td>
-                      <td style={{padding:'12px 12px',textAlign:'center',fontFamily:"'Orbitron',sans-serif",fontSize:'12px',color: r.slwr != null ? '#E07B54' : 'rgba(245,241,230,0.25)'}}>{r.slwr != null ? r.slwr.toFixed(3) : '—'}</td>
+                      <td style={{padding:'12px 12px',textAlign:'center',fontFamily:"'Orbitron',sans-serif",fontSize:'12px',color: r.slwr != null ? 'rgba(245,241,230,0.9)' : 'rgba(245,241,230,0.25)'}}>{r.slwr != null ? r.slwr.toFixed(3) : '—'}</td>
                     </tr>
                   ))}
                   {filtered.length === 0 && (
