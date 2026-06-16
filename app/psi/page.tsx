@@ -782,7 +782,7 @@ export default function PSIPage() {
               </tbody>
             </table>
             <p style={{fontSize:'12px',color:'rgba(245,241,230,0.4)',fontFamily:"'Inter',sans-serif",lineHeight:1.7,margin:0}}>
-              Low-velocity pitchers show the largest accuracy gains in v2. SLWR captures secondary pitch quality that the original three components missed.
+              Low-velocity pitchers show better prediction accuracy in v2.
             </p>
           </div>
 
