@@ -44,16 +44,20 @@ print(f"Output: {DST}\n")
 
 # ── 1. 2026 Leaderboard ──────────────────────────────────────────
 def t_lb(r):
+    slwr_raw = (r.get('SLWR') or r.get('slwr') or '').strip()
+    ext_raw  = (r.get('ext_fb') or r.get('extension') or r.get('fb_extension') or '').strip()
     return {
-        'id':   r.get('pitcher', ''),
-        'name': flip_name(r.get('player_name', '')),
-        'psi':  num(r.get('METRIC'), 1),
-        'role': r.get('role', ''),
-        'k_pct':num(r.get('K_pct'), 4),
-        'clw':  num(r.get('CLW'), 4),
-        'velo': num(r.get('fb_velo_p95'), 1),
-        'vaa':  num(r.get('fb_vaa_mean'), 2),
-        'n':    int(float(r.get('n_pitches', 0) or 0)),
+        'id':     r.get('pitcher', ''),
+        'name':   flip_name(r.get('player_name', '')),
+        'psi':    num(r.get('METRIC'), 1),
+        'role':   r.get('role', ''),
+        'k_pct':  num(r.get('K_pct'), 4),
+        'clw':    num(r.get('CLW'), 4),
+        'velo':   num(r.get('fb_velo_p95'), 1),
+        'vaa':    num(r.get('fb_vaa_mean'), 2),
+        'n':      int(float(r.get('n_pitches', 0) or 0)),
+        'slwr':   num(slwr_raw, 3) if slwr_raw not in ('', 'nan', 'None', 'NA') else None,
+        'ext_fb': num(ext_raw,  1) if ext_raw  not in ('', 'nan', 'None', 'NA') else None,
     }
 convert('metric_v2_2026_live.csv', 'psi_leaderboard_2026.json', t_lb, 'pitchers')
 
