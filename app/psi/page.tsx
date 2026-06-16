@@ -10,7 +10,7 @@ import {
 interface LBRow {
   id: string; name: string; psi: number; role: string
   k_pct: number; clw: number; velo: number; vaa: number; n: number
-  slwr?: number | null; ext_fb?: number | null
+  slwr?: number | null
 }
 interface SignalRow { signal: string; yoy_r: number; same_r: number; cat: string }
 interface WeightRow { w_clw: number; w_velo: number; w_vaa: number; hold_starter: number; hold_all: number }
@@ -335,7 +335,6 @@ export default function PSIPage() {
                       {col:'velo',     label:'Velo p95',   align:'center'},
                       {col:'vaa',      label:'VAA',        align:'center'},
                       {col:'slwr',     label:'SLWR',       align:'center'},
-                      {col:'ext_fb',   label:'Extension',  align:'center'},
                     ] as const).map(({col,label,align})=>{
                       const isSort = sort.col === (col as LBKey)
                       const clickable = col !== '_rank'
@@ -363,11 +362,10 @@ export default function PSIPage() {
                       <td style={{padding:'12px 12px',textAlign:'center',fontFamily:"'Orbitron',sans-serif",fontSize:'12px',color:'rgba(245,241,230,0.9)'}}>{r.velo}</td>
                       <td style={{padding:'12px 12px',textAlign:'center',fontFamily:"'Orbitron',sans-serif",fontSize:'12px',color:'rgba(245,241,230,0.9)'}}>{r.vaa?.toFixed(2)}°</td>
                       <td style={{padding:'12px 12px',textAlign:'center',fontFamily:"'Orbitron',sans-serif",fontSize:'12px',color: r.slwr != null ? '#E07B54' : 'rgba(245,241,230,0.25)'}}>{r.slwr != null ? r.slwr.toFixed(3) : '—'}</td>
-                      <td style={{padding:'12px 12px',textAlign:'center',fontFamily:"'Orbitron',sans-serif",fontSize:'12px',color: r.ext_fb != null ? '#4EABDE' : 'rgba(245,241,230,0.25)'}}>{r.ext_fb != null ? r.ext_fb.toFixed(1) : '—'}</td>
                     </tr>
                   ))}
                   {filtered.length === 0 && (
-                    <tr><td colSpan={9} style={{textAlign:'center',padding:'32px',color:'rgba(245,241,230,0.3)',fontSize:'12px',fontFamily:"'Inter',sans-serif"}}>No pitchers match the current filters.</td></tr>
+                    <tr><td colSpan={8} style={{textAlign:'center',padding:'32px',color:'rgba(245,241,230,0.3)',fontSize:'12px',fontFamily:"'Inter',sans-serif"}}>No pitchers match the current filters.</td></tr>
                   )}
                 </tbody>
               </table>
