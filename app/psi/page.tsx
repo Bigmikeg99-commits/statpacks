@@ -470,7 +470,7 @@ export default function PSIPage() {
                       axisLine={{stroke:'rgba(245,241,230,0.1)'}} tickLine={false}
                       tickFormatter={(v:number)=>String(v)}
                       width={32}/>
-                    <Tooltip content={(p:any)=><ChartTip {...p} fmt={(v:any)=>Number(v).toFixed(1)} />}/>
+                    <Tooltip cursor={false} content={(p:any)=><ChartTip {...p} fmt={(v:any)=>Number(v).toFixed(1)} />}/>
                     <ReferenceLine y={100} stroke="rgba(245,241,230,0.2)" strokeDasharray="5 4"
                       label={{value:'Avg (100)',fill:'rgba(245,241,230,0.35)',fontSize:10,fontFamily:'Inter',position:'insideTopRight'}}/>
                     <Line type="monotone" dataKey="psi" stroke="#D4AF37" strokeWidth={2.5} dot={false} activeDot={{r:5,fill:'#D4AF37',stroke:'var(--navy)',strokeWidth:2}}/>
@@ -713,7 +713,7 @@ export default function PSIPage() {
                 <BarChart data={STABILITY} layout="vertical" margin={{left:36,right:56,top:4,bottom:4}}>
                   <XAxis type="number" domain={[0,0.9]} hide/>
                   <YAxis type="category" dataKey="name" tick={{fill:'rgba(245,241,230,0.65)',fontSize:12,fontFamily:'Inter'}} axisLine={false} tickLine={false} width={34}/>
-                  <Tooltip content={(p:any)=><ChartTip {...p} fmt={(v:any)=>Number(v).toFixed(3)} />}/>
+                  <Tooltip cursor={false} content={(p:any)=><ChartTip {...p} fmt={(v:any)=>Number(v).toFixed(3)} />}/>
                   <Bar dataKey="r" radius={[0,3,3,0]} label={{position:'right',fill:'rgba(245,241,230,0.55)',fontSize:11,fontFamily:'Orbitron',fontWeight:700,formatter:(v:any)=>Number(v).toFixed(3)}}>
                     {STABILITY.map((s,i)=><Cell key={i} fill={s.color}/>)}
                   </Bar>
@@ -808,7 +808,7 @@ export default function PSIPage() {
                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(212,175,55,0.08)" vertical={false}/>
                 <XAxis dataKey="q" tick={{fill:'rgba(245,241,230,0.6)',fontSize:11,fontFamily:'Inter'}} axisLine={{stroke:'rgba(245,241,230,0.1)'}} tickLine={false}/>
                 <YAxis domain={[14,30]} tickFormatter={v=>`${v}%`} tick={{fill:'rgba(245,241,230,0.6)',fontSize:11,fontFamily:'Inter'}} axisLine={{stroke:'rgba(245,241,230,0.1)'}} tickLine={false}/>
-                <Tooltip content={(p:any)=><ChartTip {...p} fmt={(v:any)=>`${v}%`} />}/>
+                <Tooltip cursor={false} content={(p:any)=><ChartTip {...p} fmt={(v:any)=>`${v}%`} />}/>
                 <Bar dataKey="k" radius={[3,3,0,0]} activeBar={false} label={{position:'top',fill:'rgba(245,241,230,0.65)',fontSize:11,fontFamily:'Orbitron',fontWeight:700,formatter:(v:any)=>`${v}%`}}>
                   {(qTab==='starters'?QUARTILE_S:QUARTILE_R).map((_,i)=>(
                     <Cell key={i} fill={i===3?'#3ab05a':i===2?'rgba(212,175,55,0.65)':i===1?'rgba(212,175,55,0.38)':'rgba(196,69,54,0.55)'}/>
@@ -879,7 +879,7 @@ export default function PSIPage() {
                     <CartesianGrid strokeDasharray="3 3" stroke="rgba(212,175,55,0.08)" horizontal={false}/>
                     <XAxis type="number" domain={[0,0.68]} tickFormatter={v=>v.toFixed(2)} tick={{fill:'rgba(245,241,230,0.6)',fontSize:11,fontFamily:'Inter'}} axisLine={{stroke:'rgba(245,241,230,0.1)'}} tickLine={false}/>
                     <YAxis type="category" dataKey="name" tick={{fill:'rgba(245,241,230,0.7)',fontSize:11,fontFamily:'Inter'}} axisLine={false} tickLine={false} width={168}/>
-                    <Tooltip content={(p:any)=><ChartTip {...p} fmt={(v:any)=>Number(v).toFixed(4)} />}/>
+                    <Tooltip cursor={false} content={(p:any)=><ChartTip {...p} fmt={(v:any)=>Number(v).toFixed(4)} />}/>
                     <Bar dataKey="r" radius={[0,3,3,0]} label={{position:'right',fill:'rgba(245,241,230,0.45)',fontSize:9,fontFamily:'Inter',formatter:(v:any)=>Number(v).toFixed(4)}}>
                       {sigChart.map((s,i)=>(
                         <Cell key={i} fill={s.cat==='NOVEL'?'#3ab05a':s.cat==='BENCHMARK'?'rgba(212,175,55,0.55)':'rgba(78,171,222,0.55)'}/>
