@@ -9,7 +9,7 @@ Run this script from Terminal after moving your CSVs into ~/Desktop/StatPacks/Ne
 Writes JSON files to ~/Desktop/StatPacks/statpacks/public/data/
 which the /psi page fetches on load.
 """
-import csv, json, os, sys
+import csv, json, os, sys, glob
 
 SRC = os.path.expanduser("~/Desktop/StatPacks/New Stat/")
 DST = os.path.expanduser("~/Desktop/StatPacks/statpacks/public/data/")
@@ -57,7 +57,10 @@ def t_lb(r):
         'n':     int(float(r.get('n_pitches', 0) or 0)),
         'slwr':  num(slwr_raw, 3) if slwr_raw not in ('', 'nan', 'None', 'NA') else None,
     }
-convert('metric_v3_2026_live.csv', 'psi_leaderboard_2026.json', t_lb, 'pitchers')
+_lb_matches = sorted(glob.glob(os.path.join(SRC, 'metric_*2026_live.csv')), key=os.path.getmtime, reverse=True)
+_lb_file = os.path.basename(_lb_matches[0]) if _lb_matches else 'metric_2026_live.csv'
+print(f"  Using  {_lb_file}")
+convert(_lb_file, 'psi_leaderboard_2026.json', t_lb, 'pitchers')
 
 # ── 2. Signal rankings ───────────────────────────────────────────
 def t_sig(r):
