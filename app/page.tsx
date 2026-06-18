@@ -577,7 +577,7 @@ function buildCardHTML(p: Pick, podName: string, rank = 1): string {
         <div class="pred-cell"><div class="pred-lbl">Projected Ks</div><div class="pred-val">${fmt(p.pred_k)}</div></div>
         <div class="pred-cell"><div class="pred-lbl">Line</div><div class="pred-val">${p.line}</div></div>
         <div class="pred-cell"><div class="pred-lbl">Model Confidence</div><div class="pred-val" style="color:${confColor}">${displayConf}</div></div>
-        <div class="pred-cell"><div class="pred-lbl">Actual Ks</div><div class="pred-val pred-actual-k" style="color:${p.actual_k != null ? (p.result === 'win' ? '#3ab05a' : p.result === 'push' ? '#D4AF37' : '#C44536') : p.pick_status === 'PPD' ? '#4EABDE' : 'rgba(245,241,230,0.35)'}">${p.actual_k != null ? p.actual_k : p.pick_status === 'PPD' ? 'PPD' : '--'}</div></div>
+        <div class="pred-cell"><div class="pred-lbl">Actual Ks</div><div class="pred-val pred-actual-k" style="color:${p.actual_k != null ? (p.result === 'win' ? '#3ab05a' : p.result === 'push' ? '#999' : '#C44536') : p.pick_status === 'PPD' ? '#4EABDE' : 'rgba(245,241,230,0.35)'}">${p.actual_k != null ? p.actual_k : p.pick_status === 'PPD' ? 'PPD' : '--'}</div></div>
       </div>
       ${hasShap
         ? `<div class="shap-block"><div class="shap-hdr">More Strikeouts</div>${shapRows(p.pushers_up,'#3ab05a','+')}</div>
@@ -863,7 +863,7 @@ async function pollResults(picks: Pick[], dateStr: string) {
       const actualKEl = scene.querySelector('.pred-actual-k') as HTMLElement | null
       if (actualKEl && k !== null) {
         actualKEl.textContent = String(k)
-        actualKEl.style.color = resultClass === 'win' ? '#3ab05a' : resultClass === 'push' ? '#D4AF37' : '#C44536'
+        actualKEl.style.color = resultClass === 'win' ? '#3ab05a' : resultClass === 'push' ? '#999' : '#C44536'
       }
     }
   } catch (e) {
