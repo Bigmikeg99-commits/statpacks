@@ -561,7 +561,7 @@ function buildCardHTML(p: Pick, podName: string, rank = 1): string {
       </div>
       <div class="back-stats-hdr">2026 Season Stats</div>
       <table class="back-stats-table">
-        <tr><th>Avg Inn</th><th>K%</th><th>Barrel%</th><th>Stuff+</th><th>Loc+</th><th>Pitch+</th><th>Last 5 K%</th></tr>
+        <tr><th>Avg IP</th><th>K%</th><th>Barrel%</th><th>Stuff+</th><th>Loc+</th><th>Pitch+</th><th>Last 5 K%</th></tr>
         <tr>
           <td>${fmt(bAvgIP as number)}</td>
           <td>${pctStr(bKPct as number)}</td>
