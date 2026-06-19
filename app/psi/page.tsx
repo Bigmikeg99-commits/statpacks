@@ -272,20 +272,17 @@ export default function PSIPage() {
             <p style={{fontSize:'13px',color:'rgba(245,241,230,0.6)',maxWidth:'560px',margin:'0 auto 24px',lineHeight:1.8,fontFamily:"'Inter',sans-serif",fontStyle:'italic'}}>
               Tells you which pitchers are built to strikeout hitters, not just which ones have recently.
             </p>
-            <div style={{display:'flex',gap:'12px',justifyContent:'center',flexWrap:'wrap',marginBottom:'28px'}}>
-              <a href="#leaderboard" className="btn btn-primary">2026 Leaderboard</a>
-              <a href="#validation"  className="btn btn-secondary">Validation Results</a>
+            <div style={{display:'flex',justifyContent:'center',marginBottom:'14px'}}>
+              <a href="#leaderboard" className="btn btn-primary btn-hero">
+                2026 Leaderboard
+                <span aria-hidden="true" style={{marginLeft:'10px'}}>→</span>
+              </a>
             </div>
-            <div style={{display:'flex',gap:'10px',justifyContent:'center',flexWrap:'wrap'}}>
-              {[
-                'Built on 2020–2024 data',
-                'Blind-tested on 2025 season',
-                'Count leverage · Velocity · Pitch angle · SLWR',
-              ].map(k=>(
-                <div key={k} style={{background:'rgba(13,30,53,0.85)',border:'1px solid rgba(212,175,55,0.18)',borderRadius:'4px',padding:'10px 20px',textAlign:'center'}}>
-                  <div style={{fontSize:'12px',fontWeight:600,color:'var(--cream)',fontFamily:"'Inter',sans-serif"}}>{k}</div>
-                </div>
-              ))}
+            <div style={{textAlign:'center',marginBottom:'20px'}}>
+              <a href="#validation" className="link-quiet">Validation Results</a>
+            </div>
+            <div style={{fontSize:'10.5px',color:'rgba(245,241,230,0.32)',fontFamily:"'Inter',sans-serif",letterSpacing:'0.03em',textAlign:'center'}}>
+              Built on 2020–2024 data &nbsp;·&nbsp; Blind-tested on 2025 season &nbsp;·&nbsp; Count leverage · Velocity · Pitch angle · SLWR
             </div>
             <div style={{marginTop:'14px',fontSize:'9px',letterSpacing:'0.15em',color:'rgba(245,241,230,0.22)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase'}}>
               {fmtAsOfFull(asOf) ? `Last updated: ${fmtAsOfFull(asOf)}` : 'Last updated: —'}
