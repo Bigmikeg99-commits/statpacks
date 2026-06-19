@@ -793,7 +793,7 @@ function renderChart(
       data: { labels: allDates, datasets: [
         { label: '7-Day Live',   data: liveRoll,   borderColor: LIVE_COLOR, borderWidth: 2.5, pointRadius: 2,
           pointBackgroundColor: (ctx:any) => splitIdx >= 0 && ctx.dataIndex >= splitIdx ? PSI_COLOR : LIVE_COLOR,
-          segment: { borderColor: (ctx:any) => splitIdx >= 0 && ctx.p1DataIndex >= splitIdx ? PSI_COLOR : LIVE_COLOR },
+          segment: { borderColor: (ctx:any) => splitIdx >= 0 && ctx.p0DataIndex >= splitIdx ? PSI_COLOR : LIVE_COLOR },
           fill: false, tension: 0.35, spanGaps: false },
         { label: '30-Day Live',  data: liveRoll30, borderColor: '#3ab05a', borderWidth: 2,   pointRadius: 1.5, pointBackgroundColor: '#3ab05a', fill: false, tension: 0.35, spanGaps: false },
         { data: Array(n).fill(52.4), borderColor: 'rgba(212,175,55,0.18)', borderWidth: 1, borderDash: [2,4], pointRadius: 0, fill: false },
