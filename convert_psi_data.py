@@ -86,25 +86,35 @@ else:
 
 # ── 3. Weight optimization ───────────────────────────────────────
 def t_wt(r):
+    w_slwr = r.get('w_slwr')
     return {
         'w_clw':        round(float(r.get('w_clw', 0)) * 100),
         'w_velo':       round(float(r.get('w_velo', 0)) * 100),
         'w_vaa':        round(float(r.get('w_vaa', 0)) * 100),
+        'w_slwr':       round(float(w_slwr) * 100) if w_slwr else None,
         'hold_starter': num(r.get('hold_starter'), 4),
         'hold_all':     num(r.get('hold_all'), 4),
     }
-convert('weight_optimization_results.csv', 'psi_weights.json', t_wt, 'combinations')
+convert('weight_optimization_v2_results.csv', 'psi_weights.json', t_wt, 'combinations')
 
 # ── 4. Rolling features (large file — loads on-demand) ──────────
 def t_roll(r):
+    def safe_num(key, d=4):
+        v = (r.get(key) or '').strip()
+        return num(v, d) if v not in ('', 'nan', 'None', 'NA') else None
     return {
-        'id':   r.get('pitcher', ''),
-        'date': r.get('game_date', '')[:10],
-        'psi':  num(r.get('PSI_plus'), 1),
-        'clw':  num(r.get('PSI_CLW'), 4),
-        'velo': num(r.get('PSI_velo_p95'), 1),
-        'vaa':  num(r.get('PSI_vaa'), 2),
-        'n':    int(float(r.get('PSI_n_pitches', 0) or 0)),
+        'id':      r.get('pitcher', ''),
+        'date':    r.get('game_date', '')[:10],
+        'psi':     safe_num('PSI_plus', 1),
+        'clw':     safe_num('PSI_CLW', 4),
+        'velo':    safe_num('PSI_velo_p95', 1),
+        'vaa':     safe_num('PSI_vaa', 2),
+        'n':       int(float(r.get('PSI_n_pitches', 0) or 0)),
+        'slwr':    safe_num('SLWR', 4),
+        'spin_ff': safe_num('spin_FF', 1),
+        'spin_si': safe_num('spin_SI', 1),
+        'spin_fc': safe_num('spin_FC', 1),
+        'ext_fb':  safe_num('ext_FB', 3),
     }
 convert('psi_rolling_features.csv', 'psi_rolling.json', t_roll, 'rows')
 
