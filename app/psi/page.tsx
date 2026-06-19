@@ -111,6 +111,14 @@ function fmtSignal(s: string) {
   return s.replace(/_/g, ' ').replace(/\bpct\b/gi, '%').replace(/\b\w/g, c => c.toUpperCase()).slice(0, 30)
 }
 
+function fmtAsOf(d: string | null) {
+  if (!d) return null
+  const [y, m, day] = d.split('-').map(Number)
+  if (!y || !m || !day) return null
+  const dt = new Date(y, m - 1, day)
+  return dt.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })
+}
+
 type LBKey = keyof LBRow
 type SortDir = 'asc' | 'desc'
 
@@ -131,8 +139,10 @@ export default function PSIPage() {
   const [showDrop,      setShowDrop]      = useState(false)
   const [qTab,          setQTab]          = useState<'starters'|'relievers'>('starters')
   const [showAll,       setShowAll]       = useState(false)
+  const [asOf,          setAsOf]          = useState<string|null>(null)
 
   useEffect(() => {
+    fetch('/data/psi_meta.json').then(r=>r.json()).then(d=>setAsOf(d?.asOf ?? null)).catch(()=>setAsOf(null))
     fetch('/data/psi_leaderboard_2026.json').then(r=>r.json()).then(data=>{
       setLbData(data)
       // Default trajectory to Dylan Cease
@@ -439,7 +449,7 @@ export default function PSIPage() {
         {/* ══ LEADERBOARD ══ */}
         <section id="leaderboard" style={sec}>
           <div className="sec-header">
-            <div className="sec-eyebrow">2026 Season · Through June 15</div>
+            <div className="sec-eyebrow">2026 Season{fmtAsOf(asOf) ? ` · Through ${fmtAsOf(asOf)}` : ''}</div>
             <h2 className="sec-title">Leaderboard</h2>
             <p className="sec-sub">Minimum {minP} pitches. Scored within role. 100 = league average.</p>
           </div>

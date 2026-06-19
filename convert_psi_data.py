@@ -98,13 +98,17 @@ def t_wt(r):
 convert('weight_optimization_v2_results.csv', 'psi_weights.json', t_wt, 'combinations')
 
 # ── 4. Rolling features (large file — loads on-demand) ──────────
+_max_date = ['']
 def t_roll(r):
     def safe_num(key, d=4):
         v = (r.get(key) or '').strip()
         return num(v, d) if v not in ('', 'nan', 'None', 'NA') else None
+    d = r.get('game_date', '')[:10]
+    if d and d > _max_date[0]:
+        _max_date[0] = d
     return {
         'id':      r.get('pitcher', ''),
-        'date':    r.get('game_date', '')[:10],
+        'date':    d,
         'psi':     safe_num('PSI_plus', 1),
         'clw':     safe_num('PSI_CLW', 4),
         'velo':    safe_num('PSI_velo_p95', 1),
@@ -117,5 +121,16 @@ def t_roll(r):
         'ext_fb':  safe_num('ext_FB', 3),
     }
 convert('psi_rolling_features.csv', 'psi_rolling.json', t_roll, 'rows')
+
+# ── 5. Metadata — "as of" date for the leaderboard, derived from the
+#      latest game_date actually present in the rolling features file.
+#      This keeps the "Through [date]" tag on /psi in sync automatically
+#      — no manual editing needed after each data refresh.
+if _max_date[0]:
+    with open(os.path.join(DST, 'psi_meta.json'), 'w') as f:
+        json.dump({'asOf': _max_date[0]}, f)
+    print(f"  OK    psi_meta.json  (asOf {_max_date[0]})")
+else:
+    print(f"  SKIP  psi_meta.json — no game_date found in rolling features")
 
 print("\nDone — refresh statpacks.app/psi to see your data.\n")
