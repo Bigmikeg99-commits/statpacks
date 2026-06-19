@@ -274,7 +274,7 @@ export default function PSIPage() {
             </p>
             <div style={{display:'flex',justifyContent:'center',marginBottom:'14px'}}>
               <a href="#leaderboard" className="btn btn-primary btn-hero">
-                2026 Leaderboard
+                See Who's Leading PSI+
                 <span aria-hidden="true" style={{marginLeft:'10px'}}>→</span>
               </a>
             </div>
