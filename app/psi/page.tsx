@@ -272,7 +272,7 @@ export default function PSIPage() {
               {[
                 'Built on 2020–2024 data',
                 'Blind-tested on 2025 season',
-                'Count leverage · Velocity · Pitch angle',
+                'Count leverage · Velocity · Pitch angle · SLWR',
               ].map(k=>(
                 <div key={k} style={{background:'rgba(13,30,53,0.85)',border:'1px solid rgba(212,175,55,0.18)',borderRadius:'4px',padding:'10px 20px',textAlign:'center'}}>
                   <div style={{fontSize:'12px',fontWeight:600,color:'var(--cream)',fontFamily:"'Inter',sans-serif"}}>{k}</div>
