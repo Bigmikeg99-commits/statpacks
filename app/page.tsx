@@ -220,7 +220,7 @@ export default function Page() {
             <div className="legend">
               <div className="leg"><div className="leg-line" style={{background:'#4EABDE'}}/> 7-Day</div>
               <div className="leg"><div className="leg-line" style={{background:'#3ab05a'}}/> 30-Day</div>
-              <div className="leg"><div className="leg-line" style={{background:'#D4AF37',opacity:0.8}}/> V2 Backtest</div>
+              <div className="leg"><div className="leg-line" style={{background:'#D4AF37',opacity:0.8}}/> PSI+ Added</div>
             </div>
           </div>
           <div id="chartScroll" style={{overflowX: chartMode === 'rolling' ? 'auto' : 'hidden', overflowY:'hidden', WebkitOverflowScrolling:'touch' as any}}>
@@ -714,11 +714,14 @@ function renderChart(
         return tw+tl > 0 ? parseFloat(((tw/(tw+tl))*100).toFixed(1)) : null
       })
     }
-    const btRoll     = roll(btDaily, 7).map((v, i) => btDates.has(allDates[i])   ? v : null)
     const liveRoll   = roll(daily,   7).map((v, i) => liveDates.has(allDates[i]) ? v : null)
     const liveRoll30 = roll(daily,  30).map((v, i) => liveDates.has(allDates[i]) ? v : null)
 
-    const rollVals = [...btRoll, ...liveRoll, ...liveRoll30].filter(v => v !== null) as number[]
+    const splitIdx = allDates.indexOf('6/11')
+    const PSI_COLOR = '#D4AF37'
+    const LIVE_COLOR = '#4EABDE'
+
+    const rollVals = [...liveRoll, ...liveRoll30].filter(v => v !== null) as number[]
     const rollMax  = rollVals.length > 0 ? Math.ceil((Math.max(...rollVals) + 4) / 5) * 5 : 90
     const rollMin  = rollVals.length > 0 ? Math.floor((Math.min(...rollVals) - 4) / 5) * 5 : 30
 
@@ -756,19 +759,49 @@ function renderChart(
       }
     }
 
+    // Marks the date PSI+ components were added, with a dashed vertical line + label
+    const psiMarkerPlugin = {
+      id: 'psiMarker',
+      afterDraw(chart: any) {
+        if (splitIdx < 0) return
+        const meta = chart.getDatasetMeta(0)
+        const pt = meta.data[splitIdx]
+        if (!pt) return
+        const ctx2 = chart.ctx
+        const top = chart.scales.y.top, bottom = chart.scales.y.bottom
+        ctx2.save()
+        ctx2.strokeStyle = 'rgba(212,175,55,0.45)'
+        ctx2.setLineDash([4,3])
+        ctx2.lineWidth = 1
+        ctx2.beginPath()
+        ctx2.moveTo(pt.x, top)
+        ctx2.lineTo(pt.x, bottom)
+        ctx2.stroke()
+        ctx2.setLineDash([])
+        ctx2.font = '600 9px Inter,sans-serif'
+        const lbl = 'PSI+ Added'
+        const tw2 = ctx2.measureText(lbl).width
+        ctx2.fillStyle = 'rgba(212,175,55,0.9)'
+        ctx2.fillText(lbl, pt.x - tw2 / 2, top - 4)
+        ctx2.restore()
+      }
+    }
+
     const inst = new Chart(canvas, {
       type: 'line',
-      plugins: [endLabelPlugin],
+      plugins: [endLabelPlugin, psiMarkerPlugin],
       data: { labels: allDates, datasets: [
-        { label: '7-Day Live',   data: liveRoll,   borderColor: '#4EABDE', borderWidth: 2.5, pointRadius: 2,   pointBackgroundColor: '#4EABDE', fill: false, tension: 0.35, spanGaps: false },
+        { label: '7-Day Live',   data: liveRoll,   borderColor: LIVE_COLOR, borderWidth: 2.5, pointRadius: 2,
+          pointBackgroundColor: (ctx:any) => splitIdx >= 0 && ctx.dataIndex >= splitIdx ? PSI_COLOR : LIVE_COLOR,
+          segment: { borderColor: (ctx:any) => splitIdx >= 0 && ctx.p1DataIndex >= splitIdx ? PSI_COLOR : LIVE_COLOR },
+          fill: false, tension: 0.35, spanGaps: false },
         { label: '30-Day Live',  data: liveRoll30, borderColor: '#3ab05a', borderWidth: 2,   pointRadius: 1.5, pointBackgroundColor: '#3ab05a', fill: false, tension: 0.35, spanGaps: false },
-        { label: 'V2 Backtest',  data: btRoll,     borderColor: '#D4AF37', borderWidth: 2,   pointRadius: 1.5, pointBackgroundColor: '#D4AF37', fill: false, tension: 0.35, spanGaps: false, borderDash: [5,3] },
         { data: Array(n).fill(52.4), borderColor: 'rgba(212,175,55,0.18)', borderWidth: 1, borderDash: [2,4], pointRadius: 0, fill: false },
       ]},
       options: {
         responsive: false, maintainAspectRatio: false,
         animation: { duration: 1200, easing: 'easeInOutQuart' },
-        layout: { padding: { right: 115 } },
+        layout: { padding: { right: 115, top: 14 } },
         plugins: { legend: { display: false }, tooltip: { callbacks: { label: (ctx:any) => ctx.dataset.label + ': ' + ctx.parsed.y + '%' }}},
         scales: {
           x: { ticks: { color: tick, font: { size: 11 }, maxRotation: 45 }, grid: { color: grid } },
