@@ -119,6 +119,14 @@ function fmtAsOf(d: string | null) {
   return dt.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })
 }
 
+function fmtAsOfFull(d: string | null) {
+  if (!d) return null
+  const [y, m, day] = d.split('-').map(Number)
+  if (!y || !m || !day) return null
+  const dt = new Date(y, m - 1, day)
+  return dt.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+}
+
 type LBKey = keyof LBRow
 type SortDir = 'asc' | 'desc'
 
@@ -280,7 +288,7 @@ export default function PSIPage() {
               ))}
             </div>
             <div style={{marginTop:'14px',fontSize:'9px',letterSpacing:'0.15em',color:'rgba(245,241,230,0.22)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase'}}>
-              Last updated: June 15, 2026
+              {fmtAsOfFull(asOf) ? `Last updated: ${fmtAsOfFull(asOf)}` : 'Last updated: —'}
             </div>
             <div style={{marginTop:'32px',paddingTop:'28px',borderTop:'1px solid rgba(212,175,55,0.12)'}}>
               <p style={{fontFamily:"'Playfair Display',serif",fontSize:'clamp(13px,1.4vw,15.5px)',color:'rgba(245,241,230,0.55)',lineHeight:2.1,margin:'0 auto',maxWidth:'780px',textAlign:'center'}}>
