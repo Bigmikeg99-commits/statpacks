@@ -230,7 +230,7 @@ export default function PerformancePage() {
 
         {/* HEADER */}
         <div className="perf-header fade-in">
-          <div className="sec-eyebrow">Model Transparency — PSIV2</div>
+          <div className="sec-eyebrow">Model Transparency — PSI+ V2</div>
           <h1 className="perf-title">Backtesting Dashboard</h1>
           <p className="perf-subtitle">
             Full season performance · {s?.date_range || '—'} · All posted picks
