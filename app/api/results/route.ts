@@ -36,6 +36,7 @@ export async function GET(req: NextRequest) {
     const gamePks: number[] = []
     const gameStates: Record<number, string> = {}
     const postponedTeamIds = new Set<number>()
+    const teamGameState: Record<number, string> = {}
 
     for (const d of sched.dates ?? []) {
       for (const g of d.games ?? []) {
@@ -48,6 +49,11 @@ export async function GET(req: NextRequest) {
           if (homeId) postponedTeamIds.add(homeId)
           if (awayId) postponedTeamIds.add(awayId)
         }
+        const homeId: number = g.teams?.home?.team?.id
+        const awayId: number = g.teams?.away?.team?.id
+        const state = g.status?.abstractGameState ?? 'Unknown'
+        if (homeId) teamGameState[homeId] = state
+        if (awayId) teamGameState[awayId] = state
       }
     }
 
@@ -87,12 +93,18 @@ export async function GET(req: NextRequest) {
       })
     )
 
-    // 3. For any pitcher not found in boxscores, check if their team's game was postponed
+    // 3. For any pitcher not found in boxscores, check if their team's game was
+    //    postponed, or if their team's game finished and they simply never
+    //    appeared (scratched, bumped from the rotation, swapped to bullpen, etc.)
+    //    — both cases should resolve to a DNP stamp rather than staying pending.
     for (const mlbamid of ids) {
       if (results[mlbamid]) continue
       const teamId = mlbamToTeam[mlbamid]
-      if (teamId && postponedTeamIds.has(teamId)) {
+      if (!teamId) continue
+      if (postponedTeamIds.has(teamId)) {
         results[mlbamid] = { actual_k: null, game_state: 'Postponed', started: false }
+      } else if (teamGameState[teamId] === 'Final') {
+        results[mlbamid] = { actual_k: null, game_state: 'Final', started: false }
       }
     }
 
