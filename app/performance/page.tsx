@@ -17,6 +17,7 @@ interface Season {
 }
 interface PerfData {
   season: Season
+  performanceSeason: Season
   thresholdStats: ThresholdBucket[]
   calibrationData: CalPoint[]
   updated: string
@@ -186,7 +187,7 @@ export default function PerformancePage() {
     }
   }, [data, chartReady])
 
-  const s = data?.season
+  const s = data?.performanceSeason
   const overPct  = parseFloat(s?.over_pct  || '0')
   const underPct = parseFloat(s?.under_pct || '0')
   const totalPct = parseFloat(s?.overall_pct || '0')
@@ -233,7 +234,7 @@ export default function PerformancePage() {
           <div className="sec-eyebrow">Model Transparency — PSI+ V2</div>
           <h1 className="perf-title">Backtesting Dashboard</h1>
           <p className="perf-subtitle">
-            Full season performance · {s?.date_range || '—'} · All posted picks
+            PSI+ V2 model performance · {s?.date_range || '—'} · Backtest + live V2 picks
           </p>
           {data && (
             <p className="updated-tag">Updated: {data.updated}</p>
