@@ -230,7 +230,7 @@ export default function PerformancePage() {
 
         {/* HEADER */}
         <div className="perf-header fade-in">
-          <div className="sec-eyebrow">Model Transparency — V4</div>
+          <div className="sec-eyebrow">Model Transparency — PSIV2</div>
           <h1 className="perf-title">Backtesting Dashboard</h1>
           <p className="perf-subtitle">
             Full season performance · {s?.date_range || '—'} · All posted picks
@@ -359,7 +359,7 @@ export default function PerformancePage() {
                 <canvas ref={calRef}/>
               </div>
               <div className="perf-chart-note">
-                Blue = V4 model · Dashed = perfect calibration
+                Blue = PSIV2 model · Dashed = perfect calibration
               </div>
             </div>
             <div className="perf-chart-card">
@@ -376,7 +376,7 @@ export default function PerformancePage() {
 
         {/* FOOTER NOTE */}
         <div className="perf-footer-note fade-in">
-          <span>V2 Backtest data (3/26–4/29) · V1 &amp; V2 live picks (3/29–present) · −110 breakeven = 52.4%</span>
+          <span>V2 Backtest (5/08–6/10) · Live V2 picks (6/11–present) · −110 breakeven = 52.4%</span>
           <Link href="/" className="perf-back-link">← Back to today&apos;s picks</Link>
         </div>
 
