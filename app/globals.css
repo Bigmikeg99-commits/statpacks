@@ -204,7 +204,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .back-pill.under{background:rgba(196,69,54,0.12);color:#e06050;border:1px solid rgba(196,69,54,0.3)}
 .back-stats-hdr{font-family:'Inter',sans-serif;font-size:8px;font-weight:700;letter-spacing:0.18em;color:rgba(212,175,55,0.7);text-transform:uppercase;margin-bottom:4px}
 .back-stats-table{width:100%;border-collapse:collapse;margin-bottom:3px}
-.back-stats-table th{font-family:'Inter',sans-serif;font-size:7px;letter-spacing:0.1em;color:rgba(212,175,55,0.65);text-transform:uppercase;text-align:center;padding:2px 1px;border-bottom:1px solid rgba(212,175,55,0.2)}
+.back-stats-table th{font-family:'Inter',sans-serif;font-size:7px;line-height:1.15;letter-spacing:0.1em;color:rgba(212,175,55,0.65);text-transform:uppercase;text-align:center;vertical-align:bottom;padding:2px 1px 3px;border-bottom:1px solid rgba(212,175,55,0.2)}
 .back-stats-table td{font-family:'Orbitron',sans-serif;font-size:9px;font-weight:700;color:#F5F1E6;text-align:center;padding:4px 1px 2px}
 .back-divider{height:1px;background:rgba(212,175,55,0.12);margin:6px 0}
 .pred-row{display:flex;justify-content:space-between;margin-bottom:8px;padding-bottom:7px;border-bottom:1px solid rgba(212,175,55,0.1)}
