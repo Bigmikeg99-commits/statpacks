@@ -176,7 +176,7 @@ export default function Page() {
         <div className="sec-header fade-in">
           <div className="sec-eyebrow">Daily Picks</div>
           <div className="sec-title">Today&apos;s Recommendations</div>
-          <div className="sec-sub">Picks generated from the V4 model. Tap a card to see model reasoning.</div>
+          <div className="sec-sub">Picks generated from the PSI+ V2 model. Tap a card to see model reasoning.</div>
           <div className="updated-tag" id="updated-tag">Updated: --</div>
           {data && <button className="csv-btn" onClick={() => downloadCSV(data.picks)}>↓ Export CSV</button>}
         </div>
@@ -574,7 +574,7 @@ function buildCardHTML(p: Pick, podName: string, rank = 1): string {
       </table>
       <div class="back-divider"></div>
       <div class="pred-row">
-        <div class="pred-cell"><div class="pred-lbl">Projected Ks</div><div class="pred-val">${fmt(p.pred_k)}</div></div>
+        <div class="pred-cell"><div class="pred-lbl">Median K</div><div class="pred-val">${fmt(p.pred_k)}</div></div>
         <div class="pred-cell"><div class="pred-lbl">Line</div><div class="pred-val">${p.line}</div></div>
         <div class="pred-cell"><div class="pred-lbl">Model Confidence</div><div class="pred-val" style="color:${confColor}">${displayConf}</div></div>
         <div class="pred-cell"><div class="pred-lbl">Actual Ks</div><div class="pred-val pred-actual-k" style="color:${p.actual_k != null ? (p.result === 'win' ? '#3ab05a' : p.result === 'push' ? '#999' : '#C44536') : p.pick_status === 'PPD' ? '#4EABDE' : 'rgba(245,241,230,0.35)'}">${p.actual_k != null ? p.actual_k : p.pick_status === 'PPD' ? 'PPD' : '--'}</div></div>
