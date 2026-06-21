@@ -282,7 +282,10 @@ export default function PSIPage() {
               <a href="#validation" className="link-quiet">Validation Results</a>
             </div>
             <div style={{fontSize:'12.5px',color:'rgba(245,241,230,0.52)',fontFamily:"'Inter',sans-serif",letterSpacing:'0.01em',lineHeight:1.7,maxWidth:'620px',margin:'0 auto',textAlign:'center'}}>
-              Built on 2020–2024 data &nbsp;·&nbsp; Blind-tested on 2025 season &nbsp;·&nbsp; Count leverage · Velocity · Pitch angle · SLWR
+              Built on 2020–2024 data &nbsp;·&nbsp; Blind-tested on 2025 season
+            </div>
+            <div style={{marginTop:'8px',fontSize:'9.5px',letterSpacing:'0.12em',color:'rgba(245,241,230,0.32)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase',textAlign:'center'}}>
+              Count Leverage &nbsp;·&nbsp; Velocity &nbsp;·&nbsp; Pitch Angle &nbsp;·&nbsp; SLWR
             </div>
             <div style={{marginTop:'14px',fontSize:'9px',letterSpacing:'0.15em',color:'rgba(245,241,230,0.22)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase'}}>
               {fmtAsOfFull(asOf) ? `Last updated: ${fmtAsOfFull(asOf)}` : 'Last updated: —'}
