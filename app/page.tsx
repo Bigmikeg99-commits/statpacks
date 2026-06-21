@@ -300,7 +300,7 @@ export default function Page() {
       <footer className="footer">
         <div className="footer-brand"><span style={{display:'inline-block',border:'2px solid var(--red)',borderRadius:'5px',padding:'5px 14px',fontFamily:"'Inter',sans-serif",fontSize:'14px',fontWeight:800,letterSpacing:'0.16em',color:'#fff'}}>StatPacks</span></div>
         <div className="footer-tagline">Collect the edge.</div>
-        <div className="footer-sub">MLB K Model &nbsp;·&nbsp; 2026 Season &nbsp;·&nbsp; V4</div>
+        <div className="footer-sub">MLB K Model &nbsp;·&nbsp; 2026 Season &nbsp;·&nbsp; PSI+ V2</div>
         <div className="footer-line"/>
         <div className="footer-copy">For entertainment purposes. Always gamble responsibly.</div>
       </footer>
@@ -548,7 +548,7 @@ function buildCardHTML(p: Pick, podName: string, rank = 1): string {
       </div>
       <div class="card-tap-hint">tap to flip</div>
       <div class="card-footer-strip">
-        <span>StatPacks · V4</span><span>${p.hand}HP · ${p.ha}</span>
+        <span>StatPacks · PSI+ V2</span><span>${p.hand}HP · ${p.ha}</span>
       </div>
     </div>
     <div class="card-back">
@@ -585,7 +585,7 @@ function buildCardHTML(p: Pick, podName: string, rank = 1): string {
         : '<div class="no-shap">no model data</div>'
       }
       <div class="back-footer">
-        <div class="back-footer-txt">StatPacks · V4</div>
+        <div class="back-footer-txt">StatPacks · PSI+ V2</div>
         <div class="back-footer-txt">${p.hand}HP · ${p.ha}</div>
       </div>
     </div>

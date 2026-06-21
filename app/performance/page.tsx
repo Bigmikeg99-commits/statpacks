@@ -53,7 +53,7 @@ function renderCalChart(cal: CalPoint[], canvas: HTMLCanvasElement) {
           tension: 0,
         },
         {
-          label: 'V4 Model',
+          label: 'PSI+ V2 Model',
           data: actuals,
           borderColor: '#4EABDE',
           borderWidth: 2.5,
