@@ -52,6 +52,8 @@ export default function Page() {
   const chartRef     = useRef<HTMLCanvasElement>(null)
   const chartInstRef = useRef<any>(null)
   const chartSeenRef = useRef(false)
+  const axisRef      = useRef<HTMLCanvasElement>(null)
+  const axisInstRef  = useRef<any>(null)
 
   useEffect(() => {
     fetch('/data/picks.json').then(r => r.json()).then(setData).catch(() => {})
@@ -96,7 +98,10 @@ export default function Page() {
     const canvas = chartRef.current
     const doRender = () => {
       if (chartInstRef.current) { chartInstRef.current.destroy(); chartInstRef.current = null }
-      chartInstRef.current = renderChart(data.daily, data.backtestDaily || [], canvas, chartMode, data.season)
+      if (axisInstRef.current)  { axisInstRef.current.destroy();  axisInstRef.current  = null }
+      const result = renderChart(data.daily, data.backtestDaily || [], canvas, chartMode, data.season, axisRef.current)
+      chartInstRef.current = result?.chart || null
+      axisInstRef.current  = result?.axis  || null
     }
     if (!chartSeenRef.current) {
       // First render: wait until chart is visible
@@ -223,8 +228,13 @@ export default function Page() {
               <div className="leg"><div className="leg-line" style={{background:'#D4AF37',opacity:0.8}}/> PSI+ Added</div>
             </div>
           </div>
-          <div id="chartScroll" style={{overflowX: chartMode === 'rolling' ? 'auto' : 'hidden', overflowY:'hidden', WebkitOverflowScrolling:'touch' as any}}>
-            <div style={{position:'relative',height:'160px',minWidth:'100%'}}><canvas id="trendChart" ref={chartRef}/></div>
+          <div id="chartScroll" style={{overflowX: chartMode === 'rolling' ? 'auto' : 'hidden', overflowY:'hidden', WebkitOverflowScrolling:'touch' as any, display:'flex'}}>
+            {chartMode === 'rolling' && (
+              <div style={{position:'sticky',left:0,zIndex:2,background:'var(--surf)',flex:'0 0 auto',height:'160px'}}>
+                <canvas id="axisChart" ref={axisRef}/>
+              </div>
+            )}
+            <div style={{position:'relative',height:'160px',minWidth:'100%',flex:'1 0 auto'}}><canvas id="trendChart" ref={chartRef}/></div>
           </div>
           {chartMode === 'rolling' && (
             <div style={{textAlign:'right',fontSize:'9px',color:'rgba(212,175,55,0.35)',marginTop:'4px',letterSpacing:'0.05em'}}>← scroll to view earlier dates</div>
@@ -644,7 +654,7 @@ function renderSegs(segs: Seg[], id: string) {
 
 function renderChart(
   daily: Day[], btDaily: Day[], canvas: HTMLCanvasElement,
-  mode: 'cumulative' | 'rolling', season?: any
+  mode: 'cumulative' | 'rolling', season?: any, axisCanvas?: HTMLCanvasElement | null
 ): any {
   const Chart = (window as any).Chart
   if (!Chart) return null
@@ -685,7 +695,7 @@ function renderChart(
     canvas.removeAttribute('width')
     canvas.removeAttribute('height')
 
-    return new Chart(canvas, {
+    const chart = new Chart(canvas, {
       type: 'line',
       data: { labels: allDates, datasets: [
         { label: 'Live cumulative', data: liveCum, borderColor: '#4EABDE', borderWidth: 2.5, pointRadius: 2, pointBackgroundColor: '#4EABDE', fill: false, tension: 0.3, spanGaps: false },
@@ -702,6 +712,7 @@ function renderChart(
         },
       },
     })
+    return { chart, axis: null }
   } else {
     // Rolling mode — narrow axis + endpoint annotation
     const roll = (src: Day[], windowSize = 7) => {
@@ -805,14 +816,41 @@ function renderChart(
         plugins: { legend: { display: false }, tooltip: { callbacks: { label: (ctx:any) => ctx.dataset.label + ': ' + ctx.parsed.y + '%' }}},
         scales: {
           x: { ticks: { color: tick, font: { size: 11 }, maxRotation: 45 }, grid: { color: grid } },
-          y: { min: rollMin, max: rollMax, ticks: { color: tick, font: { size: 11 }, callback: (v:number) => v + '%' }, grid: { color: grid } },
+          y: { min: rollMin, max: rollMax, ticks: { display: false }, grid: { color: grid }, border: { display: false } },
         },
       },
     })
 
     const scroll = document.getElementById('chartScroll')
     if (scroll) setTimeout(() => { scroll.scrollLeft = totalWidth }, 100)
-    return inst
+
+    // Sticky axis-only chart so the % scale stays visible while the main chart scrolls
+    let axisInst: any = null
+    if (axisCanvas) {
+      const AXIS_W = 34
+      axisCanvas.style.width  = AXIS_W + 'px'
+      axisCanvas.style.height = '160px'
+      axisCanvas.width  = AXIS_W * window.devicePixelRatio
+      axisCanvas.height = 160 * window.devicePixelRatio
+      axisInst = new Chart(axisCanvas, {
+        type: 'line',
+        data: { labels: allDates, datasets: [
+          { data: Array(n).fill(null), pointRadius: 0, borderWidth: 0 },
+        ]},
+        options: {
+          responsive: false, maintainAspectRatio: false,
+          animation: false,
+          layout: { padding: { top: 14 } },
+          plugins: { legend: { display: false }, tooltip: { enabled: false } },
+          scales: {
+            x: { ticks: { color: 'rgba(0,0,0,0)', font: { size: 11 }, maxRotation: 45 }, grid: { display: false }, border: { display: false } },
+            y: { min: rollMin, max: rollMax, ticks: { color: tick, font: { size: 11 }, callback: (v:number) => v + '%' }, grid: { display: false }, border: { display: false } },
+          },
+        },
+      })
+    }
+
+    return { chart: inst, axis: axisInst }
   }
 }
 
