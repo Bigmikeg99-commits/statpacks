@@ -148,6 +148,7 @@ export default function PSIPage() {
   const [qTab,          setQTab]          = useState<'starters'|'relievers'>('starters')
   const [showAll,       setShowAll]       = useState(false)
   const [asOf,          setAsOf]          = useState<string|null>(null)
+  const [showWhyName,   setShowWhyName]   = useState(false)
 
   useEffect(() => {
     fetch('/data/psi_meta.json').then(r=>r.json()).then(d=>setAsOf(d?.asOf ?? null)).catch(()=>setAsOf(null))
@@ -259,7 +260,7 @@ export default function PSIPage() {
       <main style={{minHeight:'100vh',paddingBottom:'80px'}}>
 
         {/* ══ HERO ══ */}
-        <section style={{background:'var(--navy)',padding:'45px 40px 40px',textAlign:'center',borderBottom:'2px solid rgba(212,175,55,0.15)',position:'relative',overflow:'hidden'}}>
+        <section style={{background:'var(--navy)',padding:'40px',textAlign:'center',borderBottom:'2px solid rgba(212,175,55,0.15)',position:'relative',overflow:'hidden',minHeight:'calc(100vh - 64px)',display:'flex',flexDirection:'column',justifyContent:'center'}}>
           <div style={{position:'absolute',inset:0,background:'repeating-linear-gradient(0deg,rgba(78,171,222,0.03) 0,rgba(78,171,222,0.03) 1px,transparent 1px,transparent 70px),repeating-linear-gradient(90deg,rgba(78,171,222,0.03) 0,rgba(78,171,222,0.03) 1px,transparent 1px,transparent 70px)',pointerEvents:'none'}}/>
           <div style={{position:'relative',zIndex:1,maxWidth:'900px',margin:'0 auto'}}>
             <div className="hero-eyebrow">Pitcher Strikeout Index · 2026</div>
@@ -289,13 +290,6 @@ export default function PSIPage() {
             </div>
             <div style={{marginTop:'14px',fontSize:'9px',letterSpacing:'0.15em',color:'rgba(245,241,230,0.22)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase'}}>
               {fmtAsOfFull(asOf) ? `Last updated: ${fmtAsOfFull(asOf)}` : 'Last updated: —'}
-            </div>
-            <div style={{marginTop:'32px',paddingTop:'28px',borderTop:'1px solid rgba(212,175,55,0.12)'}}>
-              <p style={{fontFamily:"'Playfair Display',serif",fontSize:'clamp(13px,1.4vw,15.5px)',color:'rgba(245,241,230,0.55)',lineHeight:2.1,margin:'0 auto',maxWidth:'780px',textAlign:'center'}}>
-                PSI+ takes its name from the unit of pressure measurement. Every pitch carries a different level of consequence. It ranges from getting ahead on the first pitch to putting hitters away when they are vulnerable to avoiding the counts where leverage flips back to the hitter.{' '}
-                <span style={{color:'rgba(245,241,230,0.82)',fontWeight:600}}>PSI+ weights every pitch by the pressure of the moment it was thrown in.</span>{' '}
-                That is where the name comes from.
-              </p>
             </div>
           </div>
         </section>
@@ -449,6 +443,26 @@ export default function PSIPage() {
                 </div>
               ))}
             </div>
+          </div>
+
+          {/* Why the Name? toggle */}
+          <div style={{marginTop:'36px',textAlign:'center'}}>
+            <button
+              onClick={() => setShowWhyName(v => !v)}
+              style={{
+                background:'none',border:'none',cursor:'pointer',padding:0,
+                fontFamily:"'Inter',sans-serif",fontSize:'10.5px',letterSpacing:'0.18em',
+                textTransform:'uppercase',color:'rgba(212,175,55,0.7)',
+              }}
+            >
+              Why the Name? <span style={{display:'inline-block',marginLeft:'6px',transition:'transform 0.2s',transform: showWhyName ? 'rotate(180deg)' : 'rotate(0deg)'}}>▾</span>
+            </button>
+            {showWhyName && (
+              <p style={{fontFamily:"'Playfair Display',serif",fontSize:'clamp(13px,1.4vw,15.5px)',color:'rgba(245,241,230,0.55)',lineHeight:2.1,margin:'20px auto 0',maxWidth:'780px',textAlign:'center'}}>
+                PSI+ takes its name from the unit of pressure measurement. Every pitch carries a different level of consequence. It ranges from getting ahead on the first pitch to putting hitters away when they are vulnerable to avoiding the counts where leverage flips back to the hitter.{' '}
+                <span style={{color:'rgba(245,241,230,0.82)',fontWeight:600}}>PSI+ weights every pitch by the pressure of the moment it was thrown in.</span>
+              </p>
+            )}
           </div>
         </section>
 
