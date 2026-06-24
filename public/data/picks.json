@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-24 11:00",
+  "updated": "2026-06-24 11:15",
   "picks_date": "2026-06-24",
   "season": {
     "record": "492-396",
@@ -12,7 +12,7 @@
     "date_range": "3/26-6/23"
   },
   "pod": {
-    "name": "JP Sears"
+    "name": "Griffin Jax"
   },
   "daily": [
     {
@@ -1782,97 +1782,6 @@
   ],
   "picks": [
     {
-      "name": "JP Sears",
-      "mlbamid": "676664",
-      "team": "San Diego Padres",
-      "opp": "vs Atlanta Braves",
-      "hand": "L",
-      "ha": "Home",
-      "rec": "UNDER",
-      "line": 4.0,
-      "conf": "21.4%",
-      "pred_k": 3.0,
-      "avg_ip": 4.74,
-      "k_pct": 0.1538,
-      "k_pct_l5": 0.1942,
-      "barrel_pct": 0.0526,
-      "stuff_plus": 84.7,
-      "location_plus": 95.3,
-      "pitching_plus": 81.8,
-      "result": null,
-      "actual_k": null,
-      "pushers_up": [
-        {
-          "label": "Sinker spin rate",
-          "feat": "spin_SI",
-          "val": 1911.4,
-          "pp": 20.6
-        },
-        {
-          "label": "Opp O-Swing%",
-          "feat": "opp_o_swing_pct",
-          "val": 0.363,
-          "pp": 7.1
-        },
-        {
-          "label": "Changeup drop",
-          "feat": "changeup_vertical_drop",
-          "val": 32.79,
-          "pp": 5.0
-        },
-        {
-          "label": "Fastball horizontal movement",
-          "feat": "fastball_x_movement",
-          "val": 5.663,
-          "pp": 4.2
-        },
-        {
-          "label": "Opp K% vs changeup",
-          "feat": "opp_k_pct_vs_changeup",
-          "val": 0.233,
-          "pp": 4.2
-        }
-      ],
-      "pushers_down": [
-        {
-          "label": "Days since last start",
-          "feat": "days_since_last_start",
-          "val": 269.0,
-          "pp": 53.4
-        },
-        {
-          "label": "Stuff+ rating",
-          "feat": "Stuff+",
-          "val": 84.6536,
-          "pp": 52.0
-        },
-        {
-          "label": "Pitching+ rating",
-          "feat": "Pitching+",
-          "val": 81.7696,
-          "pp": 24.5
-        },
-        {
-          "label": "Opp O-Contact%",
-          "feat": "opp_o_contact_pct",
-          "val": 0.6562,
-          "pp": 18.6
-        },
-        {
-          "label": "Opp K% vs breaking ball",
-          "feat": "opp_k_pct_vs_breaking",
-          "val": 0.239,
-          "pp": 12.5
-        },
-        {
-          "label": "PSI+ (composite strikeout index)",
-          "feat": "PSI_plus",
-          "val": 90.8,
-          "pp": 11.8
-        }
-      ]
-    },
-    {
       "name": "Griffin Jax",
       "mlbamid": "643377",
       "team": "Tampa Bay Rays",
@@ -2164,6 +2073,103 @@
       ]
     },
     {
+      "name": "Mike Burrows",
+      "mlbamid": "681347",
+      "team": "Houston Astros",
+      "opp": "vs Toronto Blue Jays",
+      "hand": "R",
+      "ha": "Away",
+      "rec": "OVER",
+      "line": 3.5,
+      "conf": "76.4%",
+      "pred_k": 4.3,
+      "avg_ip": 5.61,
+      "k_pct": 0.1857,
+      "k_pct_l5": 0.1881,
+      "barrel_pct": 0.0913,
+      "stuff_plus": 93.3,
+      "location_plus": 98.4,
+      "pitching_plus": 92.8,
+      "result": null,
+      "actual_k": null,
+      "pushers_up": [
+        {
+          "label": "Changeup usage %",
+          "feat": "changeup_usage",
+          "val": 0.2705,
+          "pp": 52.5
+        },
+        {
+          "label": "Zone swing-miss rate",
+          "feat": "in_zone_swing_miss",
+          "val": 0.1088,
+          "pp": 24.6
+        },
+        {
+          "label": "PSI+ (composite strikeout index)",
+          "feat": "PSI_plus",
+          "val": 98.1,
+          "pp": 11.1
+        },
+        {
+          "label": "Opp Z-Swing%",
+          "feat": "opp_z_swing_pct",
+          "val": 0.6938,
+          "pp": 7.4
+        },
+        {
+          "label": "Swinging-strike + whiff rate (SLWR)",
+          "feat": "SLWR",
+          "val": 0.1626,
+          "pp": 7.0
+        },
+        {
+          "label": "Pitch hand (L/R)",
+          "feat": "pitch_hand",
+          "val": 1.0,
+          "pp": 2.7
+        }
+      ],
+      "pushers_down": [
+        {
+          "label": "Stuff+ rating",
+          "feat": "Stuff+",
+          "val": 93.31,
+          "pp": 14.9
+        },
+        {
+          "label": "Days since last start",
+          "feat": "days_since_last_start",
+          "val": 11.0,
+          "pp": 13.7
+        },
+        {
+          "label": "Opp O-Contact%",
+          "feat": "opp_o_contact_pct",
+          "val": 0.686,
+          "pp": 13.2
+        },
+        {
+          "label": "Opp K% vs fastball",
+          "feat": "opp_k_pct_vs_fastball",
+          "val": 0.165,
+          "pp": 9.0
+        },
+        {
+          "label": "Opp whiff rate vs fastball",
+          "feat": "opp_whiff_rate_vs_fastball",
+          "val": 0.196,
+          "pp": 8.0
+        },
+        {
+          "label": "Opp whiff rate vs changeup",
+          "feat": "opp_whiff_rate_vs_changeup",
+          "val": 0.234,
+          "pp": 4.9
+        }
+      ]
+    },
+    {
       "name": "Tyler Mahle",
       "mlbamid": "641816",
       "team": "San Francisco Giants",
@@ -2261,99 +2267,93 @@
       ]
     },
     {
-      "name": "Mike Burrows",
-      "mlbamid": "681347",
-      "team": "Houston Astros",
-      "opp": "vs Toronto Blue Jays",
-      "hand": "R",
-      "ha": "Away",
-      "rec": "OVER",
-      "line": 3.5,
-      "conf": "76.4%",
-      "pred_k": 4.3,
-      "avg_ip": 5.61,
-      "k_pct": 0.1857,
-      "k_pct_l5": 0.1881,
-      "barrel_pct": 0.0913,
-      "stuff_plus": 93.3,
-      "location_plus": 98.4,
-      "pitching_plus": 92.8,
+      "name": "JP Sears",
+      "mlbamid": "676664",
+      "team": "San Diego Padres",
+      "opp": "vs Atlanta Braves",
+      "hand": "L",
+      "ha": "Home",
+      "rec": "UNDER",
+      "line": 4.0,
+      "conf": "21.4%",
+      "pred_k": 3.0,
+      "avg_ip": 4.74,
+      "k_pct": 0.1538,
+      "k_pct_l5": 0.1942,
+      "barrel_pct": 0.0526,
+      "stuff_plus": 84.7,
+      "location_plus": 95.3,
+      "pitching_plus": 81.8,
       "result": null,
       "actual_k": null,
       "pushers_up": [
         {
-          "label": "Changeup usage %",
-          "feat": "changeup_usage",
-          "val": 0.2705,
-          "pp": 52.5
+          "label": "Sinker spin rate",
+          "feat": "spin_SI",
+          "val": 1911.4,
+          "pp": 20.6
         },
         {
-          "label": "Zone swing-miss rate",
-          "feat": "in_zone_swing_miss",
-          "val": 0.1088,
-          "pp": 24.6
+          "label": "Opp O-Swing%",
+          "feat": "opp_o_swing_pct",
+          "val": 0.363,
+          "pp": 7.1
         },
         {
-          "label": "PSI+ (composite strikeout index)",
-          "feat": "PSI_plus",
-          "val": 98.1,
-          "pp": 11.1
+          "label": "Changeup drop",
+          "feat": "changeup_vertical_drop",
+          "val": 32.79,
+          "pp": 5.0
         },
         {
-          "label": "Opp Z-Swing%",
-          "feat": "opp_z_swing_pct",
-          "val": 0.6938,
-          "pp": 7.4
+          "label": "Fastball horizontal movement",
+          "feat": "fastball_x_movement",
+          "val": 5.663,
+          "pp": 4.2
         },
         {
-          "label": "Swinging-strike + whiff rate (SLWR)",
-          "feat": "SLWR",
-          "val": 0.1626,
-          "pp": 7.0
-        },
-        {
-          "label": "Pitch hand (L/R)",
-          "feat": "pitch_hand",
-          "val": 1.0,
-          "pp": 2.7
+          "label": "Opp K% vs changeup",
+          "feat": "opp_k_pct_vs_changeup",
+          "val": 0.233,
+          "pp": 4.2
         }
       ],
       "pushers_down": [
         {
-          "label": "Stuff+ rating",
-          "feat": "Stuff+",
-          "val": 93.31,
-          "pp": 14.9
-        },
-        {
           "label": "Days since last start",
           "feat": "days_since_last_start",
-          "val": 11.0,
-          "pp": 13.7
+          "val": 269.0,
+          "pp": 53.4
+        },
+        {
+          "label": "Stuff+ rating",
+          "feat": "Stuff+",
+          "val": 84.6536,
+          "pp": 52.0
+        },
+        {
+          "label": "Pitching+ rating",
+          "feat": "Pitching+",
+          "val": 81.7696,
+          "pp": 24.5
         },
         {
           "label": "Opp O-Contact%",
           "feat": "opp_o_contact_pct",
-          "val": 0.686,
-          "pp": 13.2
+          "val": 0.6562,
+          "pp": 18.6
         },
         {
-          "label": "Opp K% vs fastball",
-          "feat": "opp_k_pct_vs_fastball",
-          "val": 0.165,
-          "pp": 9.0
+          "label": "Opp K% vs breaking ball",
+          "feat": "opp_k_pct_vs_breaking",
+          "val": 0.239,
+          "pp": 12.5
         },
         {
-          "label": "Opp whiff rate vs fastball",
-          "feat": "opp_whiff_rate_vs_fastball",
-          "val": 0.196,
-          "pp": 8.0
-        },
-        {
-          "label": "Opp whiff rate vs changeup",
-          "feat": "opp_whiff_rate_vs_changeup",
-          "val": 0.234,
-          "pp": 4.9
+          "label": "PSI+ (composite strikeout index)",
+          "feat": "PSI_plus",
+          "val": 90.8,
+          "pp": 11.8
         }
       ]
     },
