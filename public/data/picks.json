@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-29 13:19",
+  "updated": "2026-06-29 13:43",
   "picks_date": "2026-06-29",
   "season": {
     "record": "512-421",
@@ -1975,91 +1975,6 @@
           "feat": "opp_k_pct_vs_fastball",
           "val": 0.17,
           "pp": 8.4
-        }
-      ]
-    },
-    {
-      "name": "Miles Mikolas",
-      "mlbamid": "571945",
-      "team": "Washington Nationals",
-      "opp": "vs Boston Red Sox",
-      "hand": "R",
-      "ha": "Away",
-      "rec": "UNDER",
-      "line": 2.5,
-      "conf": "17.8%",
-      "pred_k": 3.0,
-      "avg_ip": 4.23,
-      "k_pct": 0.161,
-      "k_pct_l5": 0.1605,
-      "barrel_pct": 0.1348,
-      "stuff_plus": 91.0,
-      "location_plus": 115.5,
-      "pitching_plus": 103.6,
-      "result": null,
-      "actual_k": null,
-      "pushers_up": [
-        {
-          "label": "Pitching+ rating",
-          "feat": "Pitching+",
-          "val": 103.5996,
-          "pp": 8.9
-        },
-        {
-          "label": "Opp Z-Swing%",
-          "feat": "opp_z_swing_pct",
-          "val": 0.6655,
-          "pp": 2.5
-        },
-        {
-          "label": "Opp K% vs changeup",
-          "feat": "opp_k_pct_vs_changeup",
-          "val": 0.276,
-          "pp": 1.9
-        },
-        {
-          "label": "Opp whiff rate vs breaking",
-          "feat": "opp_whiff_rate_vs_breaking",
-          "val": 0.346,
-          "pp": 0.8
-        }
-      ],
-      "pushers_down": [
-        {
-          "label": "Zone swing-miss rate",
-          "feat": "in_zone_swing_miss",
-          "val": 0.0734,
-          "pp": 33.2
-        },
-        {
-          "label": "Stuff+ rating",
-          "feat": "Stuff+",
-          "val": 90.9694,
-          "pp": 33.0
-        },
-        {
-          "label": "Fastball usage %",
-          "feat": "fastball_usage",
-          "val": 0.4773,
-          "pp": 28.3
-        },
-        {
-          "label": "Days since last start",
-          "feat": "days_since_last_start",
-          "val": 15.0,
-          "pp": 24.2
-        },
-        {
-          "label": "PSI_vaa",
-          "feat": "PSI_vaa",
-          "val": -6.227,
-          "pp": 23.1
-        },
-        {
-          "label": "Swinging-strike + whiff rate (SLWR)",
-          "feat": "SLWR",
-          "val": 0.062,
-          "pp": 23.0
         }
       ]
     },
