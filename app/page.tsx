@@ -45,6 +45,9 @@ interface PicksData {
 export default function Page() {
   const [data, setData] = useState<PicksData | null>(null)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [heroTab, setHeroTab] = useState<'picks'|'psi'|'record'|'form'>('form')
+  const [psiLb, setPsiLb] = useState<{name:string;id?:string;psi:number;team?:string}[]|null>(null)
+  const [resultsMap, setResultsMap] = useState<Record<string,string>>({})
   const [filter, setFilter] = useState<{hand:string;dir:string;ha:string}>({ hand:'all', dir:'all', ha:'all' })
   const [chartReady, setChartReady] = useState(false)
   const [chartMode] = useState<'cumulative' | 'rolling'>('rolling')
@@ -57,6 +60,10 @@ export default function Page() {
 
   useEffect(() => {
     fetch('/data/picks.json').then(r => r.json()).then(setData).catch(() => {})
+    fetch('/data/psi_leaderboard_2026.json').then(r => r.json()).then(d => {
+      const rows = Array.isArray(d) ? d : []
+      setPsiLb(rows.filter((r:any) => r.role === 'starter').sort((a:any,b:any) => b.psi - a.psi).slice(0,10))
+    }).catch(() => {})
   }, [])
 
   useEffect(() => {
@@ -68,8 +75,38 @@ export default function Page() {
 
     // Auto-poll MLB results every hour — use picks_date (actual game date) not generation timestamp
     const dateStr = data.picks_date || data.updated.slice(0, 10)
-    pollResults(data.picks, dateStr)
-    const interval = setInterval(() => pollResults(data.picks, dateStr), 60 * 60 * 1000)
+
+    const fetchResults = async () => {
+      pollResults(data.picks, dateStr)
+      // Also build a resultsMap for the hero panel (pollResults only touches the DOM)
+      const ids = data.picks.map(p => {
+        const teamId = TEAM_IDS[p.team || '']
+        return teamId ? `${p.mlbamid}:${teamId}` : p.mlbamid
+      }).filter(Boolean)
+      if (!ids.length) return
+      try {
+        const res = await fetch(`/api/results?date=${dateStr}&ids=${ids.join(',')}`)
+        if (!res.ok) return
+        const mlbData: Record<string, { actual_k: number | null; game_state: string; started: boolean }> = await res.json()
+        const map: Record<string,string> = {}
+        for (const pick of data.picks) {
+          const info = mlbData[pick.mlbamid]
+          if (!info) continue
+          if (info.game_state === 'Postponed') { map[pick.mlbamid] = 'ppd'; continue }
+          if (info.game_state !== 'Final') continue
+          if (!info.started) { map[pick.mlbamid] = 'void'; continue }
+          const k = info.actual_k
+          if (k === null) continue
+          if (k === pick.line) { map[pick.mlbamid] = 'push' }
+          else if (pick.rec === 'OVER')  { map[pick.mlbamid] = k > pick.line ? 'win' : 'loss' }
+          else if (pick.rec === 'UNDER') { map[pick.mlbamid] = k < pick.line ? 'win' : 'loss' }
+        }
+        setResultsMap(map)
+      } catch {}
+    }
+
+    fetchResults()
+    const interval = setInterval(fetchResults, 60 * 60 * 1000)
     return () => clearInterval(interval)
   }, [data])
 
@@ -128,53 +165,420 @@ export default function Page() {
           <div className="nav-logo-badge"><span>StatPacks</span></div>
         </div>
         <div className="nav-links">
-          <a href="#">Home</a>
-          <a href="/psi" style={{color:'var(--gold)'}}>PSI+</a>
-          <a href="#picks">Picks</a>
+          <a href="/">Home</a>
+          <a href="/#picks">Picks</a>
           <a href="/performance">Performance</a>
-          <a href="#method">About</a>
         </div>
         <button className={`nav-hamburger${menuOpen?' open':''}`} aria-label="Menu" onClick={() => setMenuOpen(o=>!o)}>
           <span/><span/><span/>
         </button>
       </nav>
       <div className={`nav-mobile${menuOpen?' open':''}`}>
-        <a href="#" onClick={()=>setMenuOpen(false)}>Home</a>
-        <a href="/psi" onClick={()=>setMenuOpen(false)} style={{color:'var(--gold)'}}>PSI+</a>
-        <a href="#picks" onClick={()=>setMenuOpen(false)}>Picks</a>
+        <a href="/" onClick={()=>setMenuOpen(false)}>Home</a>
+        <a href="/#picks" onClick={()=>setMenuOpen(false)}>Picks</a>
         <a href="/performance" onClick={()=>setMenuOpen(false)}>Performance</a>
-        <a href="#method" onClick={()=>setMenuOpen(false)}>About</a>
       </div>
 
       {/* HERO */}
-      <section className="hero">
+      <section className="hero" style={{textAlign:'left',alignItems:'stretch',padding:'0 40px',minHeight:'100vh',display:'flex',flexDirection:'column',justifyContent:'center'}}>
         <div className="hero-grid"/>
         <div className="hero-vignette"/>
-        <div className="hero-content">
-          <div className="hero-eyebrow">Sports Analytics · Predictive Models</div>
-          <div className="hero-title">Stat<span>Packs</span></div>
-          <div className="hero-sub">Built on Data. Tracked Transparently.</div>
-          <div className="hero-record">
-            <div className="hr-block"><div className="hr-lbl">Season Record</div><div className="hr-val" id="hr-record">--</div><div className="hr-pct o" id="hr-opct">--%</div></div>
-            <div className="hr-block"><div className="hr-lbl">Unders</div><div className="hr-val" id="hr-unders">--</div><div className="hr-pct g" id="hr-upct">--%</div></div>
-            <div className="hr-block"><div className="hr-lbl">Overs</div><div className="hr-val" id="hr-overs">--</div><div className="hr-pct r" id="hr-ovpct">--%</div></div>
-            <div className="hr-block"><div className="hr-lbl">Picks</div><div className="hr-val" id="hr-picks">--</div><div className="hr-pct" style={{color:'rgba(245,241,230,0.35)'}} id="hr-range">--</div></div>
+        <div className="hero-split" style={{position:'relative',zIndex:2,maxWidth:'1200px',margin:'0 auto',width:'100%',display:'grid',gridTemplateColumns:'1fr 1fr',gap:'80px',alignItems:'stretch',padding:'80px 0'}}>
+
+          {/* LEFT — brand */}
+          <div style={{textAlign:'center',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',height:'100%'}}>
+            <div className="hero-eyebrow" style={{justifyContent:'center',width:'100%'}}>Sports Analytics · Predictive Models</div>
+            <div className="hero-title" style={{fontSize:'clamp(42px,6vw,76px)',marginBottom:'20px'}}>Stat<span>Packs</span></div>
+            <div className="hero-sub" style={{marginBottom:'36px',maxWidth:'420px'}}>Built on Data. Tracked Transparently.</div>
+            <div style={{display:'flex',gap:'12px',flexWrap:'wrap',justifyContent:'center'}}>
+              <a href="#picks" className="btn btn-secondary">Today&apos;s Picks</a>
+              <a href="/models" className="btn" style={{background:'transparent',borderColor:'rgba(245,241,230,0.2)',color:'rgba(245,241,230,0.6)'}}>All Models</a>
+            </div>
           </div>
-          <div className="hero-cta" style={{justifyContent:'center'}}>
-            <a href="#picks" className="btn btn-secondary">Today&apos;s Top Picks</a>
-          </div>
+
+          {/* RIGHT — tabbed hero panel */}
+          {data && (() => {
+            const picks = data.picks
+            const season = data.season
+            const tabs: {key:'picks'|'psi'|'record'|'form', label:string}[] = [
+              {key:'form',  label:'Recent Form'},
+              {key:'picks', label:"Today's Picks"},
+              {key:'psi',   label:'PSI+ Leaders'},
+              {key:'record',label:'Season Record'},
+            ]
+            return (
+              <div style={{background:'rgba(13,30,53,0.95)',border:'1px solid rgba(212,175,55,0.2)',borderRadius:'12px',overflow:'hidden',boxShadow:'0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(212,175,55,0.05)',position:'relative'}}>
+                {/* Gold top accent */}
+                <div style={{position:'absolute',top:0,left:0,right:0,height:'2px',background:'linear-gradient(90deg,transparent,var(--gold),transparent)',opacity:0.7}}/>
+                {/* Layout: left sidebar + right content */}
+                <div style={{display:'flex',minHeight:'380px'}}>
+
+                {/* LEFT SIDEBAR */}
+                <div style={{width:'48px',flexShrink:0,borderRight:'1px solid rgba(255,255,255,0.06)',display:'flex',flexDirection:'column',alignItems:'center',paddingTop:'12px',gap:'4px'}}>
+                  {tabs.map(t => {
+                    const active = heroTab === t.key
+                    const tooltips: Record<string,string> = { picks:"Today's Picks", psi:'PSI+ Leaders', record:'Season Record', form:'Recent Form' }
+                    const iconColor = active ? 'var(--gold)' : 'rgba(245,241,230,0.5)'
+                    const svgIcons: Record<string, JSX.Element> = {
+                      picks: (
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                          <rect x="2" y="3" width="12" height="2" rx="1" fill={iconColor}/>
+                          <rect x="2" y="7" width="9" height="2" rx="1" fill={iconColor}/>
+                          <rect x="2" y="11" width="6" height="2" rx="1" fill={iconColor}/>
+                        </svg>
+                      ),
+                      psi: (
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                          <rect x="2"  y="9"  width="3" height="5" rx="1" fill={iconColor}/>
+                          <rect x="6.5" y="5" width="3" height="9" rx="1" fill={iconColor}/>
+                          <rect x="11" y="2"  width="3" height="12" rx="1" fill={iconColor}/>
+                        </svg>
+                      ),
+                      record: (
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                          <polyline points="2,12 5,8 8,9 11,5 14,3" stroke={iconColor} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                          <polyline points="11,3 14,3 14,6" stroke={iconColor} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                      ),
+                      form: (
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                          <circle cx="8" cy="8" r="5.5" stroke={iconColor} strokeWidth="1.5"/>
+                          <polyline points="8,5 8,8 10,10" stroke={iconColor} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                      ),
+                    }
+                    return (
+                      <button
+                        key={t.key}
+                        title={tooltips[t.key]}
+                        onClick={() => setHeroTab(t.key)}
+                        style={{
+                          width:'36px',height:'36px',borderRadius:'8px',
+                          background: active ? 'rgba(212,175,55,0.12)' : 'transparent',
+                          border: active ? '1px solid rgba(212,175,55,0.3)' : '1px solid transparent',
+                          cursor:'pointer',
+                          display:'flex',alignItems:'center',justifyContent:'center',
+                          transition:'all .15s',
+                        }}
+                      >
+                        {svgIcons[t.key]}
+                      </button>
+                    )
+                  })}
+                </div>
+
+                {/* RIGHT CONTENT */}
+                <div style={{flex:1,minWidth:0,display:'flex',flexDirection:'column'}}>
+
+                {/* PICKS TAB */}
+                {heroTab === 'picks' && (
+                  <>
+                    <div style={{padding:'14px 16px 10px',borderBottom:'1px solid rgba(255,255,255,0.05)',display:'flex',justifyContent:'space-between',alignItems:'baseline'}}>
+                      <span style={{fontFamily:"'Inter',sans-serif",fontSize:'10px',letterSpacing:'0.2em',textTransform:'uppercase',color:'var(--gold)',fontWeight:600}}>Today&apos;s Picks</span>
+                      <span style={{fontFamily:"'Inter',sans-serif",fontSize:'10px',color:'rgba(245,241,230,0.5)'}}>MLB · {picks.length} total</span>
+                    </div>
+                    <div style={{maxHeight:'320px',overflowY:'auto'}}>
+                      {picks.map((p, i) => {
+                        const edge = (p.pred_k - p.line).toFixed(1)
+                        const edgeNum = parseFloat(edge)
+                        const res = resultsMap[p.mlbamid]
+                        const dotColor = res === 'win' ? '#3ab05a' : res === 'loss' ? '#C44536' : res === 'push' ? 'var(--gold)' : res === 'ppd' ? 'var(--blue)' : 'rgba(245,241,230,0.2)'
+                        const isOver = p.rec === 'OVER'
+                        const recColor = isOver ? '#c8a84b' : '#a04545'
+                        return (
+                          <div key={i} style={{padding:'12px 20px',borderBottom:'1px solid rgba(255,255,255,0.04)',display:'flex',alignItems:'center',gap:'12px'}}>
+                            <img
+                              src={`https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_48,q_auto:best/v1/people/${p.mlbamid}/headshot/67/current`}
+                              alt={p.name}
+                              style={{width:'34px',height:'34px',borderRadius:'50%',objectFit:'cover',flexShrink:0,background:'rgba(255,255,255,0.04)',border:'1px solid rgba(212,175,55,0.1)'}}
+                              onError={(e)=>{(e.target as HTMLImageElement).style.opacity='0'}}
+                            />
+                            <div style={{flex:1,minWidth:0}}>
+                              <div style={{fontFamily:"'Inter',sans-serif",fontSize:'12px',fontWeight:600,color:'var(--cream)',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{p.name}</div>
+                              <div style={{fontFamily:"'Inter',sans-serif",fontSize:'10px',color:'rgba(245,241,230,0.55)',marginTop:'2px'}}>{p.team} {p.ha==='H'?'vs':'@'} {p.opp.replace(/^(vs |@ )/,'')}</div>
+                            </div>
+                            <div style={{textAlign:'right',flexShrink:0}}>
+                              <div style={{fontFamily:"'Inter',sans-serif",fontSize:'10px',fontWeight:700,color:'var(--cream)',letterSpacing:'0.05em'}}>{p.rec} {p.line}K</div>
+                              <div style={{fontFamily:"'Inter',sans-serif",fontSize:'10px',color: edgeNum > 0 ? '#3ab05a' : 'var(--red)',marginTop:'2px'}}>
+                                {edgeNum > 0 ? '+' : ''}{edge} edge
+                              </div>
+                            </div>
+                            <div style={{width:'6px',height:'6px',borderRadius:'50%',background:dotColor,flexShrink:0}}/>
+                          </div>
+                        )
+                      })}
+                    </div>
+                    <div style={{padding:'12px 20px',borderTop:'1px solid rgba(255,255,255,0.05)',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
+                      <span style={{fontFamily:"'Inter',sans-serif",fontSize:'10px',color:'rgba(245,241,230,0.5)'}}>
+                        <span style={{display:'flex',alignItems:'center',gap:'5px'}}>
+                          <span style={{width:'5px',height:'5px',borderRadius:'50%',background:'#3ab05a',display:'inline-block'}}/>
+                          {picks.length} picks today
+                        </span>
+                      </span>
+                      <a href="#picks" style={{fontFamily:"'Inter',sans-serif",fontSize:'10px',letterSpacing:'0.15em',color:'var(--gold)',textTransform:'uppercase',fontWeight:600}}>Full view →</a>
+                    </div>
+                  </>
+                )}
+
+                {/* PSI+ TAB */}
+                {heroTab === 'psi' && (() => {
+                  const ranked = psiLb || []
+                  const maxPsi = ranked[0]?.psi || 100
+                  const psiColor = (v: number) => {
+                    if (v >= 120) return '#3ab05a'
+                    if (v >= 110) return '#7ec85a'
+                    if (v >= 90)  return 'var(--cream)'
+                    if (v >= 80)  return '#e08060'
+                    return '#C44536'
+                  }
+                  return (
+                  <>
+                    <div style={{padding:'14px 16px 10px',borderBottom:'1px solid rgba(255,255,255,0.05)',display:'flex',justifyContent:'space-between',alignItems:'baseline'}}>
+                      <span style={{fontFamily:"'Inter',sans-serif",fontSize:'10px',letterSpacing:'0.2em',textTransform:'uppercase',color:'var(--gold)',fontWeight:600}}>PSI+ Leaders</span>
+                      <span style={{fontFamily:"'Inter',sans-serif",fontSize:'10px',color:'rgba(245,241,230,0.5)'}}>Today · MLB</span>
+                    </div>
+                    <div style={{maxHeight:'320px',overflowY:'auto'}}>
+                      {ranked.length === 0 && (
+                        <div style={{padding:'32px',textAlign:'center',fontFamily:"'Inter',sans-serif",fontSize:'11px',color:'rgba(245,241,230,0.2)'}}>Loading leaderboard…</div>
+                      )}
+                      {ranked.map((p, i) => {
+                        const psi = p.psi || 0
+                        const barPct = (psi / maxPsi) * 100
+                        const col = psiColor(psi)
+                        return (
+                          <div key={i} style={{padding:'10px 16px',borderBottom:'1px solid rgba(255,255,255,0.04)',display:'flex',alignItems:'center',gap:'10px'}}>
+                            <span style={{fontFamily:"'Orbitron',sans-serif",fontSize:'9px',fontWeight:700,color:'rgba(245,241,230,0.3)',width:'14px',flexShrink:0,textAlign:'center'}}>{i+1}</span>
+                            <div style={{flexShrink:0}}>
+                              <img
+                                src={p.id ? `https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_48,q_auto:best/v1/people/${p.id}/headshot/67/current` : ''}
+                                alt={p.name}
+                                style={{width:'34px',height:'34px',borderRadius:'50%',objectFit:'cover',display:'block',background:'rgba(255,255,255,0.04)',border:'1px solid rgba(212,175,55,0.1)'}}
+                                onError={(e)=>{(e.target as HTMLImageElement).style.opacity='0'}}
+                              />
+                            </div>
+                            <div style={{flex:1,minWidth:0}}>
+                              <div style={{fontFamily:"'Inter',sans-serif",fontSize:'12px',fontWeight:600,color:'rgba(245,241,230,0.9)',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis',marginBottom:'5px'}}>{p.name}</div>
+                              <div style={{height:'3px',borderRadius:'2px',background:'rgba(255,255,255,0.06)',overflow:'hidden'}}>
+                                <div style={{height:'100%',width:`${barPct}%`,background:col,borderRadius:'2px'}}/>
+                              </div>
+                            </div>
+                            <div style={{textAlign:'right',flexShrink:0,minWidth:'44px'}}>
+                              <div style={{fontFamily:"'Orbitron',sans-serif",fontSize:'14px',fontWeight:700,color:col,lineHeight:1}}>{psi.toFixed(0)}</div>
+                              <div style={{fontFamily:"'Inter',sans-serif",fontSize:'8px',color:'rgba(245,241,230,0.5)',letterSpacing:'0.12em',textTransform:'uppercase',marginTop:'3px'}}>PSI+</div>
+                            </div>
+                          </div>
+                        )
+                      })}
+                    </div>
+                    <div style={{padding:'12px 16px',borderTop:'1px solid rgba(255,255,255,0.05)'}}>
+                      <a href="/psi" style={{fontFamily:"'Inter',sans-serif",fontSize:'10px',letterSpacing:'0.15em',color:'var(--gold)',textTransform:'uppercase',fontWeight:600}}>Full PSI+ Rankings →</a>
+                    </div>
+                  </>
+                )})()}
+
+                {/* RECORD TAB */}
+                {heroTab === 'record' && season && (
+                  <>
+                    <div style={{flex:1,display:'flex',flexDirection:'column',padding:'24px 16px 20px',overflowY:'auto'}}>
+                      <div style={{fontFamily:"'Inter',sans-serif",fontSize:'8px',letterSpacing:'0.3em',color:'var(--gold)',textTransform:'uppercase',textAlign:'center',marginBottom:'20px',opacity:0.7}}>— Season Stats —</div>
+                      <div style={{display:'flex',background:'rgba(245,241,230,0.03)',border:'1px solid rgba(255,255,255,0.07)',borderRadius:'8px',overflow:'hidden'}}>
+                        {(() => {
+                          const pctColor = (p: string) => {
+                            const v = parseFloat(p)
+                            return v >= 52.4 ? '#3ab05a' : v >= 50 ? 'var(--gold)' : '#C44536'
+                          }
+                          return [
+                            {lbl:'Season Record', val:season.record,        pct:season.overall_pct, pctCol:pctColor(season.overall_pct)},
+                            {lbl:'Unders',        val:season.unders,        pct:season.under_pct,   pctCol:pctColor(season.under_pct)},
+                            {lbl:'Overs',         val:season.overs,         pct:season.over_pct,    pctCol:pctColor(season.over_pct)},
+                            {lbl:'Picks',         val:String(season.picks), pct:season.date_range,  pctCol:'rgba(245,241,230,0.55)'},
+                          ]
+                        })().map((b,i) => (
+                          <div key={i} style={{
+                            flex:1, textAlign:'center', padding:'20px 6px',
+                            borderRight: i < 3 ? '1px solid rgba(255,255,255,0.07)' : 'none',
+                          }}>
+                            <div style={{fontFamily:"'Inter',sans-serif",fontSize:'7px',letterSpacing:'0.2em',color:'rgba(245,241,230,0.55)',textTransform:'uppercase',marginBottom:'10px'}}>{b.lbl}</div>
+                            <div style={{fontFamily:"'Playfair Display',serif",fontSize:'clamp(16px,2vw,26px)',fontWeight:700,color:'var(--cream)',lineHeight:1}}>{b.val}</div>
+                            <div style={{fontFamily:"'Inter',sans-serif",fontSize:'11px',fontWeight:600,color:b.pctCol,marginTop:'7px'}}>{b.pct}</div>
+                          </div>
+                        ))}
+                      </div>
+                      {/* Monthly bar chart */}
+                      {data && data.daily && data.daily.length > 0 && (() => {
+                        const MONTH_NAMES = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+                        const now = new Date()
+                        const currentMonthKey = String(now.getMonth() + 1)
+                        const monthMap: Record<string,{w:number;l:number}> = {}
+                        for (const day of data.daily) {
+                          const monthNum = parseInt(day.d.split('/')[0])
+                          const key = String(monthNum)
+                          if (!monthMap[key]) monthMap[key] = {w:0,l:0}
+                          monthMap[key].w += day.w
+                          monthMap[key].l += day.l
+                        }
+                        const months = Object.keys(monthMap).sort()
+                        if (months.length === 0) return null
+                        const barCol = (w:number, l:number) => {
+                          const pct = (w+l) === 0 ? 0 : w/(w+l)
+                          return pct >= 0.524 ? '#3ab05a' : pct >= 0.5 ? '#D4AF37' : '#C44536'
+                        }
+                        const maxTotal = Math.max(...months.map(m => monthMap[m].w + monthMap[m].l))
+                        return (
+                          <div style={{marginTop:'16px',background:'rgba(245,241,230,0.02)',border:'1px solid rgba(255,255,255,0.06)',borderRadius:'8px',padding:'12px 14px 10px'}}>
+                            <div style={{marginBottom:'10px'}}>
+                              <span style={{fontFamily:"'Inter',sans-serif",fontSize:'8px',letterSpacing:'0.2em',textTransform:'uppercase',color:'rgba(245,241,230,0.35)'}}>Monthly Win %</span>
+                            </div>
+                            {(() => {
+                              const CHART_H = 72
+                              const BAR_AREA_H = 52 // px available for bars
+                              const LABEL_H = 14   // px for month label below
+                              const PCT_LABEL_H = 12 // px for % label above
+                              // dynamic y scale: pad around actual range
+                              const pcts = months.map(k => { const {w,l} = monthMap[k]; return (w+l)===0?0:w/(w+l) })
+                              const yMin = Math.max(0, Math.min(...pcts) - 0.08)
+                              const yMax = Math.min(1, Math.max(...pcts) + 0.08)
+                              const toY = (p: number) => BAR_AREA_H - Math.round(((p - yMin) / (yMax - yMin)) * BAR_AREA_H)
+                              const baselineY = toY(0.5)
+                              return (
+                                <div style={{overflowX:'auto',overflowY:'hidden',WebkitOverflowScrolling:'touch' as any}}>
+                                  <div style={{minWidth:`${months.length * 52}px`,width:'100%',paddingTop:`${PCT_LABEL_H}px`,paddingRight:'6px'}}>
+                                    {/* Bar chart with baseline */}
+                                    <div style={{position:'relative',height:`${BAR_AREA_H}px`,display:'flex',alignItems:'flex-end',gap:'6px'}}>
+                                      {/* 50% baseline */}
+                                      <div style={{position:'absolute',left:0,right:0,top:`${baselineY}px`,borderTop:'1px dashed rgba(212,175,55,0.35)',zIndex:1,pointerEvents:'none'}}/>
+                                      {months.map(key => {
+                                        const {w, l} = monthMap[key]
+                                        const total = w + l
+                                        const pct = total === 0 ? 0.5 : w / total
+                                        const col = barCol(w, l)
+                                        const isCurrent = key === currentMonthKey
+                                        const barH = Math.max(3, BAR_AREA_H - toY(pct))
+                                        return (
+                                          <div key={key} style={{flex:'1 0 46px',position:'relative',display:'flex',flexDirection:'column',alignItems:'center'}}>
+                                            {/* % label above bar */}
+                                            <span style={{
+                                              position:'absolute',
+                                              top: `-${PCT_LABEL_H + 2}px`,
+                                              fontFamily:"'Inter',sans-serif",
+                                              fontSize:'8px',fontWeight:600,
+                                              color:col,lineHeight:1,
+                                            }}>{total > 0 ? `${(pct*100).toFixed(0)}%` : ''}</span>
+                                            {/* bar */}
+                                            <div style={{
+                                              width:'100%',
+                                              height:`${barH}px`,
+                                              background: col,
+                                              opacity: isCurrent ? 0.6 : 1,
+                                              borderRadius:'3px 3px 2px 2px',
+                                              outline: isCurrent ? `1px solid ${col}` : 'none',
+                                              outlineOffset:'2px',
+                                              zIndex:2,
+                                            }}/>
+                                          </div>
+                                        )
+                                      })}
+                                    </div>
+                                    {/* Month labels */}
+                                    <div style={{display:'flex',gap:'6px',marginTop:'5px'}}>
+                                      {months.map(key => {
+                                        const isCurrent = key === currentMonthKey
+                                        const monthIdx = parseInt(key) - 1
+                                        return (
+                                          <div key={key} style={{flex:'1 0 46px',textAlign:'center'}}>
+                                            <span style={{fontFamily:"'Inter',sans-serif",fontSize:'8px',color: isCurrent ? 'rgba(245,241,230,0.85)':'rgba(245,241,230,0.55)',letterSpacing:'0.03em'}}>
+                                              {MONTH_NAMES[monthIdx]}
+                                            </span>
+                                          </div>
+                                        )
+                                      })}
+                                    </div>
+                                  </div>
+                                </div>
+                              )
+                            })()}
+                            {months.length > 4 && <div style={{marginTop:'6px',textAlign:'right'}}>
+                              <span style={{fontFamily:"'Inter',sans-serif",fontSize:'7px',color:'rgba(212,175,55,0.5)',letterSpacing:'0.05em'}}>scroll →</span>
+                            </div>}
+                          </div>
+                        )
+                      })()}
+                      <div style={{textAlign:'center',marginTop:'16px'}}>
+                        <a href="/performance" style={{fontFamily:"'Inter',sans-serif",fontSize:'10px',letterSpacing:'0.15em',color:'rgba(212,175,55,0.6)',textTransform:'uppercase',fontWeight:600}}>Full Season Tracker →</a>
+                      </div>
+                    </div>
+                  </>
+                )}
+
+
+                {/* RECENT FORM TAB */}
+                {heroTab === 'form' && data && (() => {
+                  const pctColor = (w:number, l:number) => {
+                    const pct = (w+l) === 0 ? 0 : w/(w+l)
+                    return pct >= 0.524 ? '#3ab05a' : pct >= 0.5 ? '#D4AF37' : '#C44536'
+                  }
+                  // build from data.daily in reverse (most recent first)
+                  const days = [...data.daily].reverse()
+                  const windows = [
+                    { label: 'Last 7 Days',  days: 7  },
+                    { label: 'Last 14 Days', days: 14 },
+                    { label: 'Last 30 Days', days: 30 },
+                  ]
+                  const stats = windows.map(({ label, days: n }) => {
+                    let w = 0, l = 0
+                    for (const day of days.slice(0, n)) { w += day.w; l += day.l }
+                    const total = w + l
+                    const pct = total === 0 ? 0 : w / total
+                    return { label, w, l, pct, col: pctColor(w, l) }
+                  })
+                  return (
+                    <>
+                      <div style={{padding:'14px 16px 10px',borderBottom:'1px solid rgba(255,255,255,0.05)',display:'flex',justifyContent:'space-between',alignItems:'baseline'}}>
+                        <span style={{fontFamily:"'Inter',sans-serif",fontSize:'10px',letterSpacing:'0.2em',textTransform:'uppercase',color:'var(--gold)',fontWeight:600}}>Recent Form</span>
+                        <span style={{fontFamily:"'Inter',sans-serif",fontSize:'10px',color:'rgba(245,241,230,0.4)'}}>MLB</span>
+                      </div>
+                      <div style={{flex:1,display:'flex',flexDirection:'column',justifyContent:'center',padding:'8px 20px 20px',gap:'0'}}>
+                        {stats.map((s, i) => {
+                          const barPct = s.pct * 100
+                          return (
+                            <div key={i} style={{padding:'16px 0',borderBottom: i < 2 ? '1px solid rgba(255,255,255,0.05)' : 'none'}}>
+                              <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'10px'}}>
+                                <span style={{fontFamily:"'Inter',sans-serif",fontSize:'10px',letterSpacing:'0.12em',textTransform:'uppercase',color:'rgba(245,241,230,0.5)'}}>{s.label}</span>
+                                <div style={{display:'flex',alignItems:'baseline',gap:'8px'}}>
+                                  <span style={{fontFamily:"'Playfair Display',serif",fontSize:'18px',fontWeight:700,color:'var(--cream)',lineHeight:1}}>{s.w}-{s.l}</span>
+                                  <span style={{fontFamily:"'Orbitron',sans-serif",fontSize:'11px',fontWeight:700,color:s.col}}>{(s.pct*100).toFixed(1)}%</span>
+                                </div>
+                              </div>
+                              <div style={{height:'3px',borderRadius:'2px',background:'rgba(255,255,255,0.06)',overflow:'hidden'}}>
+                                <div style={{height:'100%',width:`${barPct}%`,background:s.col,borderRadius:'2px',transition:'width 0.6s ease'}}/>
+                              </div>
+                            </div>
+                          )
+                        })}
+                      </div>
+                      <div style={{padding:'12px 16px',borderTop:'1px solid rgba(255,255,255,0.05)'}}>
+                        <a href="/performance" style={{fontFamily:"'Inter',sans-serif",fontSize:'10px',letterSpacing:'0.15em',color:'var(--gold)',textTransform:'uppercase',fontWeight:600}}>Full Season Tracker →</a>
+                      </div>
+                    </>
+                  )
+                })()}
+
+                </div>{/* end right content */}
+                </div>{/* end sidebar layout */}
+              </div>
+            )
+          })()}
+
+          {/* Placeholder while data loads */}
+          {!data && (
+            <div style={{background:'rgba(13,30,53,0.6)',border:'1px solid rgba(212,175,55,0.1)',borderRadius:'12px',height:'300px',display:'flex',alignItems:'center',justifyContent:'center'}}>
+              <span style={{fontSize:'11px',color:'rgba(245,241,230,0.2)',letterSpacing:'0.15em',textTransform:'uppercase',fontFamily:"'Inter',sans-serif"}}>Loading…</span>
+            </div>
+          )}
+
         </div>
         <div className="hero-scroll"><div className="scroll-line"/><div className="scroll-txt">Scroll</div></div>
       </section>
-
-      {/* STATS BAND */}
-      <div className="stats-band"><div className="stats-band-inner">
-        <div className="stat-item fade-in"><div className="stat-lbl">Model</div><div className="stat-num" style={{fontSize:'20px',fontFamily:"'Playfair Display',serif"}}>LightGBM</div><div className="stat-detail">Binary Classification</div></div>
-        <div className="stat-item fade-in"><div className="stat-lbl">Thresholds</div><div className="stat-num" style={{color:'var(--blue)'}}>6</div><div className="stat-detail">3.5K through 8.5K</div></div>
-        <div className="stat-item fade-in"><div className="stat-lbl">Breakeven</div><div className="stat-num" style={{color:'rgba(245,241,230,0.5)'}}>52.4<span style={{fontSize:'18px'}}>%</span></div><div className="stat-detail">At -110 juice</div></div>
-        <div className="stat-item fade-in"><div className="stat-lbl">Edge</div><div className="stat-num"><span id="stat-edge">—</span><span style={{fontSize:'18px'}}>pp</span></div><div className="stat-detail" id="stat-edge-label">—</div></div>
-        <div className="stat-item fade-in"><div className="stat-lbl" id="stat-best-seg-lbl">Best Segment</div><div className="stat-num" style={{color:'#3ab05a'}} id="stat-best-seg-name">Loading…</div><div className="stat-detail" id="stat-best-seg-record">—</div></div>
-      </div></div>
 
       {/* PICKS */}
       <section className="picks-section" id="picks"><div className="picks-inner">
@@ -208,102 +612,6 @@ export default function Page() {
           </div>
         )}
         <div className="cards-grid" id="cards-grid"/>
-      </div></section>
-
-      <div className="divider"/>
-
-      {/* TRACKER */}
-      <section className="tracker-section" id="tracker"><div className="tracker-inner">
-        <div className="sec-header fade-in">
-          <div className="sec-eyebrow">Season Tracker</div>
-          <div className="sec-title">Full Model Performance</div>
-          <div className="sec-sub">Complete season history. Every pick, every result, nothing hidden.</div>
-        </div>
-        <div className="trend-card fade-in">
-          <div className="trend-header">
-            <span className="trend-title">Rolling Win Rate</span>
-            <div className="legend">
-              <div className="leg"><div className="leg-line" style={{background:'#4EABDE'}}/> 7-Day</div>
-              <div className="leg"><div className="leg-line" style={{background:'#3ab05a'}}/> 30-Day</div>
-              <div className="leg"><div className="leg-line" style={{background:'#D4AF37',opacity:0.8}}/> PSI+ Added</div>
-            </div>
-          </div>
-          <div id="chartScroll" style={{overflowX: chartMode === 'rolling' ? 'auto' : 'hidden', overflowY:'hidden', WebkitOverflowScrolling:'touch' as any, display:'flex'}}>
-            {chartMode === 'rolling' && (
-              <div style={{position:'sticky',left:0,zIndex:2,background:'var(--surf)',flex:'0 0 auto',height:'160px'}}>
-                <canvas id="axisChart" ref={axisRef}/>
-              </div>
-            )}
-            <div style={{position:'relative',height:'160px',minWidth:'100%',flex:'1 0 auto'}}><canvas id="trendChart" ref={chartRef}/></div>
-          </div>
-          {chartMode === 'rolling' && (
-            <div style={{textAlign:'right',fontSize:'9px',color:'rgba(212,175,55,0.35)',marginTop:'4px',letterSpacing:'0.05em'}}>← scroll to view earlier dates</div>
-          )}
-        </div>
-        <div className="fade-in" style={{marginBottom:'6px',display:'flex',alignItems:'flex-end',justifyContent:'space-between'}}>
-          <div>
-            <div className="sec-eyebrow">Daily Calendar</div>
-            {data && (() => {
-              const monthNames: Record<string,string> = {'3':'March','4':'April','5':'May','6':'June','7':'July','8':'August','9':'September','10':'October'}
-              const months = Array.from(new Set(data.daily.map(d => d.d.split('/')[0]))).sort((a,b) => +a - +b)
-              return (
-                <select className="filter-select" value={calMonth}
-                  onChange={e => setCalMonth(e.target.value)}
-                  style={{fontSize:'9px',padding:'4px 24px 4px 8px',minWidth:'unset',marginTop:'6px'}}>
-                  <option value="all">Full Season</option>
-                  {months.map(m => <option key={m} value={m}>{monthNames[m] || m}</option>)}
-                </select>
-              )
-            })()}
-          </div>
-          {data && (() => {
-            const monthNames: Record<string,string> = {'3':'March','4':'April','5':'May','6':'June','7':'July','8':'August','9':'September','10':'October'}
-            const filtered = calMonth === 'all' ? data.daily : data.daily.filter(d => d.d.split('/')[0] === calMonth)
-            const tw = filtered.reduce((a,d) => a + d.w, 0)
-            const tl = filtered.reduce((a,d) => a + d.l, 0)
-            const pct = tw + tl > 0 ? ((tw / (tw + tl)) * 100).toFixed(1) : '0.0'
-            const label = calMonth === 'all' ? 'Full Season' : (monthNames[calMonth] || calMonth)
-            const good = parseFloat(pct) >= 52.4
-            return (
-              <div style={{textAlign:'right'}}>
-                <div style={{fontSize:'10px',fontWeight:500,color: good ? '#3ab05a' : '#C44536',marginBottom:'2px'}}>{pct}%</div>
-                <div style={{fontSize:'14px',fontWeight:600,color:'#fff',lineHeight:1.1}}>{tw}-{tl}</div>
-              </div>
-            )
-          })()}
-        </div>
-        <div className="cal-grid fade-in" id="cal"/>
-        <div className="segs-grid fade-in" style={{marginTop:'32px'}}>
-          <div><div className="seg-col-h">Over Segments</div><div id="ov-segs"/></div>
-          <div><div className="seg-col-h">Under Segments</div><div id="un-segs"/></div>
-        </div>
-      </div></section>
-
-      <div className="divider"/>
-
-      {/* METHOD */}
-      <section className="method-section" id="method"><div className="method-inner">
-        <div className="sec-header fade-in">
-          <div className="sec-eyebrow">Methodology</div>
-          <div className="sec-title">How the Model Works</div>
-          <div className="sec-sub">A clear, data-driven system for predicting MLB pitcher strikeouts.</div>
-        </div>
-        <div className="method-grid">
-          {[
-            {n:'01',title:'Feature Engineering',desc:'We analyze over 30 key details for every start: the pitcher\'s strikeout history, pitch quality, speed and movement, and how opposing batters typically perform against those pitches.',tag:'30+ features'},
-            {n:'02',title:'Six separate models (Binary Classifiers)',desc:'Each answers one straightforward question: "Will the pitcher exceed a specific strikeout total?" (covering common lines from 3.5 to 8.5 Ks).',tag:'LightGBM · 6 thresholds'},
-            {n:'03',title:'Beta-Binomial Layer',desc:'We convert the raw predictions into reliable percentage probabilities that account for the natural variation in baseball.',tag:'Probabilistic · overdispersion'},
-            {n:'04',title:'Agreement Filter',desc:'We only display a pick when all the models agree on the same direction (Over or Under). Disagreements are excluded entirely.',tag:'Dual-model consensus'},
-          ].map(m => (
-            <div key={m.n} className="method-card fade-in">
-              <div className="method-num">{m.n}</div>
-              <div className="method-icon"><svg viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7" stroke="#D4AF37" strokeWidth="1.2"/></svg></div>
-              <div className="method-title">{m.title}</div>
-              <div className="method-desc">{m.desc}</div>
-              <div className="method-tag">{m.tag}</div>
-            </div>
-          ))}
-        </div>
       </div></section>
 
       {/* FOOTER */}

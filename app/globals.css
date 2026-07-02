@@ -41,7 +41,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .hero-vignette{position:absolute;inset:0;background:radial-gradient(ellipse 90% 80% at 50% 50%,transparent 20%,rgba(10,22,40,0.9) 100%);z-index:1}
 .hero-content{position:relative;z-index:2;max-width:960px}
 .hero-eyebrow{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:0.35em;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;justify-content:center;gap:14px;text-transform:uppercase}
-.hero-eyebrow::before,.hero-eyebrow::after{content:'';flex:1;max-width:80px;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';flex:1;max-width:200px;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
 .hero-eyebrow::after{background:linear-gradient(90deg,var(--gold),transparent)}
 .hero-title{font-family:'Playfair Display',serif;font-size:clamp(60px,10vw,110px);font-weight:900;color:var(--cream);letter-spacing:-0.01em;line-height:0.92;margin-bottom:16px}
 .hero-title span{color:var(--red);font-style:italic}
@@ -386,7 +386,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
   .nav-hamburger{display:flex}
   .nav-links{display:none}
   .nav-mobile{display:block}
-  .hero{padding:60px 20px 80px}
+  .hero{padding:20px 20px 40px}
   .hero-title{font-size:clamp(42px,14vw,80px)}
   .hero-record{flex-direction:column;width:100%}
   .hr-block{padding:14px 20px}
@@ -408,4 +408,25 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
   .method-grid{grid-template-columns:1fr}
   .footer{padding:32px 16px}
   .pod-name{font-size:20px}
+
+  /* Split hero — stack to single column on mobile */
+  .hero-split{
+    grid-template-columns:1fr !important;
+    gap:32px !important;
+    padding:24px 0 40px !important;
+  }
+  .hero-split > div:first-child{
+    height:auto !important;
+  }
+  /* Eyebrow — tighten letter spacing so it fits one line */
+  .hero-split .hero-eyebrow{
+    font-size:9px !important;
+    letter-spacing:0.18em !important;
+  }
+  /* Constrain panel height so it doesn't overflow the screen */
+  .hero-split > div:last-child > div{
+    min-height:320px !important;
+    max-height:60vh;
+    overflow-y:auto;
+  }
 }
