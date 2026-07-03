@@ -388,6 +388,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
   .nav-mobile{display:block}
   .hero{padding:20px 20px 40px}
   .hero-title{font-size:clamp(42px,14vw,80px)}
+  .hero-title::after{display:none}
   .hero-record{flex-direction:column;width:100%}
   .hr-block{padding:14px 20px}
   .hr-block+.hr-block{border-left:none;border-top:1px solid rgba(212,175,55,0.15)}
