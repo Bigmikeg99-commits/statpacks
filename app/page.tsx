@@ -45,6 +45,7 @@ interface PicksData {
 export default function Page() {
   const [data, setData] = useState<PicksData | null>(null)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
   const [heroTab, setHeroTab] = useState<'picks'|'psi'|'record'|'form'>('form')
   const [psiLb, setPsiLb] = useState<{name:string;id?:string;psi:number;team?:string}[]|null>(null)
   const [resultsMap, setResultsMap] = useState<Record<string,string>>({})
@@ -57,6 +58,13 @@ export default function Page() {
   const chartSeenRef = useRef(false)
   const axisRef      = useRef<HTMLCanvasElement>(null)
   const axisInstRef  = useRef<any>(null)
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
 
   useEffect(() => {
     fetch('/data/picks.json').then(r => r.json()).then(setData).catch(() => {})
@@ -182,10 +190,10 @@ export default function Page() {
       </div>
 
       {/* HERO */}
-      <section className="hero" style={{textAlign:'left',alignItems:'stretch',padding:'0 40px',minHeight:'100vh',display:'flex',flexDirection:'column',justifyContent:'center'}}>
+      <section className="hero" style={{textAlign:'left',alignItems:'stretch',padding:isMobile?'0 20px':'0 40px',minHeight:'100vh',display:'flex',flexDirection:'column',justifyContent:'center'}}>
         <div className="hero-grid"/>
         <div className="hero-vignette"/>
-        <div className="hero-split" style={{position:'relative',zIndex:2,maxWidth:'1200px',margin:'0 auto',width:'100%',display:'grid',gridTemplateColumns:'1fr 1fr',gap:'80px',alignItems:'stretch',padding:'80px 0'}}>
+        <div className="hero-split" style={{position:'relative',zIndex:2,maxWidth:'1200px',margin:'0 auto',width:'100%',display:'grid',gridTemplateColumns:isMobile?'1fr':'1fr 1fr',gap:isMobile?'24px':'80px',alignItems:'stretch',padding:isMobile?'20px 0 32px':'80px 0'}}>
 
           {/* LEFT — brand */}
           <div style={{textAlign:'center',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',height:'100%'}}>
