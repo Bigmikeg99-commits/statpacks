@@ -59,6 +59,7 @@ export default function ModelsPage() {
           <a href="/">Home</a>
           <a href="/#picks">Picks</a>
           <a href="/performance">Performance</a>
+          <a href="/psi" style={{color:'var(--gold)'}}>PSI+</a>
         </div>
         <button
           className={`nav-hamburger${menuOpen ? ' open' : ''}`}
@@ -72,6 +73,7 @@ export default function ModelsPage() {
         <a href="/" onClick={() => setMenuOpen(false)}>Home</a>
         <a href="/#picks" onClick={() => setMenuOpen(false)}>Picks</a>
         <a href="/performance" onClick={() => setMenuOpen(false)}>Performance</a>
+        <a href="/psi" onClick={() => setMenuOpen(false)} style={{color:'var(--gold)'}}>PSI+</a>
       </div>
 
       {/* PAGE HEADER */}

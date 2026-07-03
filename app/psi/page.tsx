@@ -149,6 +149,15 @@ export default function PSIPage() {
   const [showAll,       setShowAll]       = useState(false)
   const [asOf,          setAsOf]          = useState<string|null>(null)
   const [showWhyName,   setShowWhyName]   = useState(false)
+  const [isMobile,      setIsMobile]      = useState(false)
+  const [flippedCards,  setFlippedCards]  = useState<Set<number>>(new Set())
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 600)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
 
   useEffect(() => {
     fetch('/data/psi_meta.json').then(r=>r.json()).then(d=>setAsOf(d?.asOf ?? null)).catch(()=>setAsOf(null))
@@ -299,10 +308,10 @@ export default function PSIPage() {
             <h2 className="sec-title">What Goes Into PSI+</h2>
           </div>
 
-          <div style={{display:'grid',gridTemplateColumns:'repeat(2,1fr)',gap:'16px'}}>
+          <div style={{display:'grid',gridTemplateColumns:isMobile?'1fr':'repeat(2,1fr)',gap:'16px'}}>
 
             {/* 01 — CLW */}
-            <div className="flip-card" style={{height:'340px'}}>
+            <div className={`flip-card${flippedCards.has(0)?' flipped':''}`} style={{height:'340px'}} onClick={()=>isMobile&&setFlippedCards(p=>{const n=new Set(p);n.has(0)?n.delete(0):n.add(0);return n})}>
               <div className="flip-card-inner">
                 <div className="flip-card-front" style={{background:'var(--surf)',border:'1px solid rgba(58,176,90,0.25)',padding:'26px'}}>
                   <div style={{position:'absolute',top:0,left:0,bottom:0,width:'2px',background:'linear-gradient(180deg,transparent,#3ab05a,transparent)'}}/>
@@ -313,7 +322,7 @@ export default function PSIPage() {
                   </div>
                   <div className="method-title">Count-Leveraged Whiff Rate</div>
                   <p className="method-desc" style={{color:'rgba(245,241,230,0.72)',lineHeight:1.85}}>Measures how often a pitcher misses bats when it matters most. Two-strike whiffs count double. First-pitch misses count half. The heaviest component in PSI+.</p>
-                  <div style={{position:'absolute',bottom:'18px',left:0,right:0,textAlign:'center',fontSize:'9px',letterSpacing:'0.15em',color:'rgba(58,176,90,0.4)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase'}}>Hover to see the formula ↺</div>
+                  <div style={{position:'absolute',bottom:'18px',left:0,right:0,textAlign:'center',fontSize:'9px',letterSpacing:'0.15em',color:'rgba(58,176,90,0.4)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase'}}>{isMobile?'Tap':'Hover'} to see the formula ↺</div>
                 </div>
                 <div className="flip-card-back" style={{background:'#0c1b30',border:'1px solid rgba(58,176,90,0.25)',borderLeft:'3px solid #3ab05a',padding:'26px',display:'flex',flexDirection:'column',gap:'14px'}}>
                   <div style={{fontFamily:"'Playfair Display',serif",fontSize:'16px',fontWeight:700,color:'var(--cream)',lineHeight:1.4}}>Count-Leveraged Whiff Rate (CLW)</div>
@@ -336,7 +345,7 @@ export default function PSIPage() {
             </div>
 
             {/* 02 — VELO P95 */}
-            <div className="flip-card" style={{height:'340px'}}>
+            <div className={`flip-card${flippedCards.has(1)?' flipped':''}`} style={{height:'340px'}} onClick={()=>isMobile&&setFlippedCards(p=>{const n=new Set(p);n.has(1)?n.delete(1):n.add(1);return n})}>
               <div className="flip-card-inner">
                 <div className="flip-card-front" style={{background:'var(--surf)',border:'1px solid rgba(78,171,222,0.25)',padding:'26px'}}>
                   <div style={{position:'absolute',top:0,left:0,bottom:0,width:'2px',background:'linear-gradient(180deg,transparent,#4EABDE,transparent)'}}/>
@@ -347,7 +356,7 @@ export default function PSIPage() {
                   </div>
                   <div className="method-title">Fastball Velocity Ceiling</div>
                   <p className="method-desc" style={{color:'rgba(245,241,230,0.72)',lineHeight:1.85}}>Captures the top-end speed a pitcher can reach when the moment demands it. Not average velocity — the high gear they can access in big counts.</p>
-                  <div style={{position:'absolute',bottom:'18px',left:0,right:0,textAlign:'center',fontSize:'9px',letterSpacing:'0.15em',color:'rgba(78,171,222,0.4)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase'}}>Hover to see the formula ↺</div>
+                  <div style={{position:'absolute',bottom:'18px',left:0,right:0,textAlign:'center',fontSize:'9px',letterSpacing:'0.15em',color:'rgba(78,171,222,0.4)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase'}}>{isMobile?'Tap':'Hover'} to see the formula ↺</div>
                 </div>
                 <div className="flip-card-back" style={{background:'#0c1b30',border:'1px solid rgba(78,171,222,0.25)',borderLeft:'3px solid #4EABDE',padding:'26px',display:'flex',flexDirection:'column',gap:'14px'}}>
                   <div style={{fontFamily:"'Playfair Display',serif",fontSize:'16px',fontWeight:700,color:'var(--cream)',lineHeight:1.4}}>Fastball Velocity Ceiling (Velo P95)</div>
@@ -361,7 +370,7 @@ export default function PSIPage() {
             </div>
 
             {/* 03 — VAA */}
-            <div className="flip-card" style={{height:'340px'}}>
+            <div className={`flip-card${flippedCards.has(2)?' flipped':''}`} style={{height:'340px'}} onClick={()=>isMobile&&setFlippedCards(p=>{const n=new Set(p);n.has(2)?n.delete(2):n.add(2);return n})}>
               <div className="flip-card-inner">
                 <div className="flip-card-front" style={{background:'var(--surf)',border:'1px solid rgba(212,175,55,0.25)',padding:'26px'}}>
                   <div style={{position:'absolute',top:0,left:0,bottom:0,width:'2px',background:'linear-gradient(180deg,transparent,var(--gold),transparent)'}}/>
@@ -372,7 +381,7 @@ export default function PSIPage() {
                   </div>
                   <div className="method-title">Fastball Vertical Approach Angle</div>
                   <p className="method-desc" style={{color:'rgba(245,241,230,0.72)',lineHeight:1.85}}>Measures how flat or steep a fastball enters the strike zone. Flatter angles are harder for hitters to square up. A smaller component, but stable year over year.</p>
-                  <div style={{position:'absolute',bottom:'18px',left:0,right:0,textAlign:'center',fontSize:'9px',letterSpacing:'0.15em',color:'rgba(212,175,55,0.4)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase'}}>Hover to see the formula ↺</div>
+                  <div style={{position:'absolute',bottom:'18px',left:0,right:0,textAlign:'center',fontSize:'9px',letterSpacing:'0.15em',color:'rgba(212,175,55,0.4)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase'}}>{isMobile?'Tap':'Hover'} to see the formula ↺</div>
                 </div>
                 <div className="flip-card-back" style={{background:'#0c1b30',border:'1px solid rgba(212,175,55,0.25)',borderLeft:'3px solid var(--gold)',padding:'26px',display:'flex',flexDirection:'column',gap:'14px'}}>
                   <div style={{fontFamily:"'Playfair Display',serif",fontSize:'16px',fontWeight:700,color:'var(--cream)',lineHeight:1.4}}>Fastball Vertical Approach Angle (VAA)</div>
@@ -386,7 +395,7 @@ export default function PSIPage() {
             </div>
 
             {/* 04 — SLWR */}
-            <div className="flip-card" style={{height:'340px'}}>
+            <div className={`flip-card${flippedCards.has(3)?' flipped':''}`} style={{height:'340px'}} onClick={()=>isMobile&&setFlippedCards(p=>{const n=new Set(p);n.has(3)?n.delete(3):n.add(3);return n})}>
               <div className="flip-card-inner">
                 <div className="flip-card-front" style={{background:'var(--surf)',border:'1px solid rgba(224,123,84,0.25)',padding:'26px'}}>
                   <div style={{position:'absolute',top:0,left:0,bottom:0,width:'2px',background:'linear-gradient(180deg,transparent,#E07B54,transparent)'}}/>
@@ -397,7 +406,7 @@ export default function PSIPage() {
                   </div>
                   <div className="method-title">Secondary Leverage Whiff Rate</div>
                   <p className="method-desc" style={{color:'rgba(245,241,230,0.72)',lineHeight:1.85}}>The same count-leverage logic as CLW. Applied only to secondary pitches — breaking balls, changeups, and off-speed offerings. Only included when a pitcher has thrown at least 50 secondary pitches.</p>
-                  <div style={{position:'absolute',bottom:'18px',left:0,right:0,textAlign:'center',fontSize:'9px',letterSpacing:'0.15em',color:'rgba(224,123,84,0.4)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase'}}>Hover to see the formula ↺</div>
+                  <div style={{position:'absolute',bottom:'18px',left:0,right:0,textAlign:'center',fontSize:'9px',letterSpacing:'0.15em',color:'rgba(224,123,84,0.4)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase'}}>{isMobile?'Tap':'Hover'} to see the formula ↺</div>
                 </div>
                 <div className="flip-card-back" style={{background:'#0c1b30',border:'1px solid rgba(224,123,84,0.25)',borderLeft:'3px solid #E07B54',padding:'26px',display:'flex',flexDirection:'column',gap:'14px'}}>
                   <div style={{fontFamily:"'Playfair Display',serif",fontSize:'16px',fontWeight:700,color:'var(--cream)',lineHeight:1.4}}>Secondary Leverage Whiff Rate (SLWR)</div>
@@ -642,11 +651,12 @@ export default function PSIPage() {
                   <LineChart data={trajectoryData} margin={{top:8,right:48,bottom:8,left:8}}>
                     <CartesianGrid strokeDasharray="3 3" stroke="rgba(212,175,55,0.08)"/>
                     <XAxis dataKey="date"
-                      tick={{fill:'rgba(245,241,230,0.6)',fontSize:11,fontFamily:'Inter'}}
+                      tick={{fill:'rgba(245,241,230,0.6)',fontSize:isMobile?9:11,fontFamily:'Inter'}}
                       axisLine={{stroke:'rgba(245,241,230,0.1)'}} tickLine={false}
-                      interval={Math.floor(trajectoryData.length / 7)}
+                      interval={Math.floor(trajectoryData.length / (isMobile ? 4 : 7))}
                       tickFormatter={(d:string)=>{
                         const dt = new Date(d)
+                        if (isMobile) return `'${String(dt.getFullYear()).slice(2)}`
                         return `${dt.toLocaleString('en',{month:'short'})} '${String(dt.getFullYear()).slice(2)}`
                       }}/>
                     <YAxis domain={[70,145]}
@@ -771,10 +781,10 @@ export default function PSIPage() {
                 <tbody>
                   {CORR_TABLE.map((row,i)=>(
                     <tr key={row.metric} style={{borderBottom:'1px solid rgba(212,175,55,0.05)',background:i%2?'transparent':'rgba(255,255,255,0.01)'}}>
-                      <td style={{padding:'10px 8px',fontSize:'13px',fontWeight:row.metric==='PSI+'?700:500,color:row.metric==='PSI+'?'var(--gold)':'rgba(245,241,230,0.65)'}}>{row.metric}</td>
-                      <td style={{padding:'10px 8px',textAlign:'center',fontFamily:"'Orbitron',sans-serif",fontSize:'11px',color:'rgba(245,241,230,0.6)'}}>{row.all}</td>
-                      <td style={{padding:'10px 8px',textAlign:'center',fontFamily:"'Orbitron',sans-serif",fontSize:'12px',fontWeight:row.metric==='PSI+'?700:400,color:row.metric==='PSI+'?'#3ab05a':'rgba(245,241,230,0.6)'}}>{row.starters}</td>
-                      <td style={{padding:'10px 8px',textAlign:'center',fontFamily:"'Orbitron',sans-serif",fontSize:'11px',color:'rgba(245,241,230,0.6)'}}>{row.relievers}</td>
+                      <td style={{padding:isMobile?'8px 6px':'10px 8px',fontSize:'13px',fontWeight:row.metric==='PSI+'?700:500,color:row.metric==='PSI+'?'var(--gold)':'rgba(245,241,230,0.65)'}}>{row.metric}</td>
+                      <td style={{padding:isMobile?'8px 6px':'10px 8px',textAlign:'center',fontFamily:"'Orbitron',sans-serif",fontSize:'11px',color:'rgba(245,241,230,0.6)',whiteSpace:'nowrap'}}>{row.all}</td>
+                      <td style={{padding:isMobile?'8px 6px':'10px 8px',textAlign:'center',fontFamily:"'Orbitron',sans-serif",fontSize:'12px',fontWeight:row.metric==='PSI+'?700:400,color:row.metric==='PSI+'?'#3ab05a':'rgba(245,241,230,0.6)',whiteSpace:'nowrap'}}>{row.starters}</td>
+                      <td style={{padding:isMobile?'8px 6px':'10px 8px',textAlign:'center',fontFamily:"'Orbitron',sans-serif",fontSize:'11px',color:'rgba(245,241,230,0.6)',whiteSpace:'nowrap'}}>{row.relievers}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -801,14 +811,14 @@ export default function PSIPage() {
               </thead>
               <tbody>
                 {[
-                  {label:'Predictive accuracy · starters', v1:'0.6799', v2:'0.6906'},
-                  {label:'Predictive accuracy · overall',  v1:'0.5815', v2:'0.5910'},
-                  {label:'YoY stability · starters',       v1:'0.6542', v2:'0.6669'},
+                  {label:'Predictive accuracy · starters', short:'Acc. · starters', v1:'0.6799', v2:'0.6906'},
+                  {label:'Predictive accuracy · overall',  short:'Acc. · overall',  v1:'0.5815', v2:'0.5910'},
+                  {label:'YoY stability · starters',       short:'YoY stability',   v1:'0.6542', v2:'0.6669'},
                 ].map((row,i)=>(
                   <tr key={i} style={{borderBottom:'1px solid rgba(212,175,55,0.05)',background:i%2?'transparent':'rgba(255,255,255,0.01)'}}>
-                    <td style={{padding:'10px 8px',fontSize:'13px',color:'rgba(245,241,230,0.65)',fontFamily:"'Inter',sans-serif"}}>{row.label}</td>
-                    <td style={{padding:'10px 8px',textAlign:'center',fontFamily:"'Orbitron',sans-serif",fontSize:'11px',color:'rgba(245,241,230,0.4)'}}>{row.v1}</td>
-                    <td style={{padding:'10px 8px',textAlign:'center',fontFamily:"'Orbitron',sans-serif",fontSize:'12px',fontWeight:700,color:'#3ab05a'}}>{row.v2} ↑</td>
+                    <td style={{padding:isMobile?'8px 6px':'10px 8px',fontSize:isMobile?'11px':'13px',color:'rgba(245,241,230,0.65)',fontFamily:"'Inter',sans-serif"}}>{isMobile?row.short:row.label}</td>
+                    <td style={{padding:isMobile?'8px 6px':'10px 8px',textAlign:'center',fontFamily:"'Orbitron',sans-serif",fontSize:'11px',color:'rgba(245,241,230,0.4)',whiteSpace:'nowrap'}}>{row.v1}</td>
+                    <td style={{padding:isMobile?'8px 6px':'10px 8px',textAlign:'center',fontFamily:"'Orbitron',sans-serif",fontSize:'12px',fontWeight:700,color:'#3ab05a',whiteSpace:'nowrap'}}>{row.v2} ↑</td>
                   </tr>
                 ))}
               </tbody>
@@ -906,13 +916,17 @@ export default function PSIPage() {
                 ))}
               </div>
               <div style={{background:'#0d1e35',border:'1px solid rgba(212,175,55,0.12)',borderRadius:'6px',padding:'20px 20px 20px 0'}}>
-                <ResponsiveContainer width="100%" height={520}>
-                  <BarChart data={sigChart} layout="vertical" margin={{left:172,right:48,top:4,bottom:4}}>
+                <ResponsiveContainer width="100%" height={isMobile ? 480 : 520}>
+                  <BarChart
+                    data={sigChart.map(s=>({...s, name: isMobile ? s.name.slice(0,15) : s.name}))}
+                    layout="vertical"
+                    margin={isMobile ? {left:0,right:36,top:4,bottom:4} : {left:172,right:48,top:4,bottom:4}}
+                  >
                     <CartesianGrid strokeDasharray="3 3" stroke="rgba(212,175,55,0.08)" horizontal={false}/>
-                    <XAxis type="number" domain={[0,0.68]} tickFormatter={v=>v.toFixed(2)} tick={{fill:'rgba(245,241,230,0.6)',fontSize:11,fontFamily:'Inter'}} axisLine={{stroke:'rgba(245,241,230,0.1)'}} tickLine={false}/>
-                    <YAxis type="category" dataKey="name" tick={{fill:'rgba(245,241,230,0.7)',fontSize:11,fontFamily:'Inter'}} axisLine={false} tickLine={false} width={168}/>
+                    <XAxis type="number" domain={[0,0.68]} tickFormatter={v=>v.toFixed(2)} tick={{fill:'rgba(245,241,230,0.6)',fontSize:isMobile?9:11,fontFamily:'Inter'}} axisLine={{stroke:'rgba(245,241,230,0.1)'}} tickLine={false}/>
+                    <YAxis type="category" dataKey="name" tick={{fill:'rgba(245,241,230,0.7)',fontSize:isMobile?9:11,fontFamily:'Inter'}} axisLine={false} tickLine={false} width={isMobile?108:168}/>
                     <Tooltip cursor={false} content={(p:any)=><ChartTip {...p} fmt={(v:any)=>Number(v).toFixed(4)} />}/>
-                    <Bar dataKey="r" radius={[0,3,3,0]} label={{position:'right',fill:'rgba(245,241,230,0.45)',fontSize:9,fontFamily:'Inter',formatter:(v:any)=>Number(v).toFixed(4)}}>
+                    <Bar dataKey="r" radius={[0,3,3,0]} label={{position:'right',fill:'rgba(245,241,230,0.45)',fontSize:9,fontFamily:'Inter',formatter:(v:any)=>Number(v).toFixed(3)}}>
                       {sigChart.map((s,i)=>(
                         <Cell key={i} fill={s.cat==='NOVEL'?'#3ab05a':s.cat==='BENCHMARK'?'rgba(212,175,55,0.55)':'rgba(78,171,222,0.55)'}/>
                       ))}
