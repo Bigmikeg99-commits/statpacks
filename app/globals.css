@@ -426,7 +426,5 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
   /* Constrain panel height so it doesn't overflow the screen */
   .hero-split > div:last-child > div{
     min-height:320px !important;
-    max-height:60vh;
-    overflow-y:auto;
   }
 }
