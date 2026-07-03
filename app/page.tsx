@@ -259,7 +259,7 @@ export default function Page() {
                     return (
                       <button
                         key={t.key}
-                        title={tooltips[t.key]}
+                        title={isMobile ? undefined : tooltips[t.key]}
                         onClick={() => setHeroTab(t.key)}
                         style={{
                           width:'36px',height:'36px',borderRadius:'8px',
