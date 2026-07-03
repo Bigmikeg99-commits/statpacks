@@ -166,9 +166,9 @@ export default function Page() {
         </div>
         <div className="nav-links">
           <a href="/">Home</a>
+          <a href="/psi" style={{color:'var(--gold)'}}>PSI+</a>
           <a href="/#picks">Picks</a>
           <a href="/performance">Performance</a>
-          <a href="/psi" style={{color:'var(--gold)'}}>PSI+</a>
         </div>
         <button className={`nav-hamburger${menuOpen?' open':''}`} aria-label="Menu" onClick={() => setMenuOpen(o=>!o)}>
           <span/><span/><span/>
@@ -176,9 +176,9 @@ export default function Page() {
       </nav>
       <div className={`nav-mobile${menuOpen?' open':''}`}>
         <a href="/" onClick={()=>setMenuOpen(false)}>Home</a>
+        <a href="/psi" onClick={()=>setMenuOpen(false)} style={{color:'var(--gold)'}}>PSI+</a>
         <a href="/#picks" onClick={()=>setMenuOpen(false)}>Picks</a>
         <a href="/performance" onClick={()=>setMenuOpen(false)}>Performance</a>
-        <a href="/psi" onClick={()=>setMenuOpen(false)} style={{color:'var(--gold)'}}>PSI+</a>
       </div>
 
       {/* HERO */}

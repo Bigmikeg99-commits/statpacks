@@ -284,9 +284,9 @@ export default function PerformancePage() {
         </div>
         <div className="nav-links">
           <Link href="/">Home</Link>
+          <Link href="/psi" style={{color:'var(--gold)'}}>PSI+</Link>
           <Link href="/#picks">Picks</Link>
           <Link href="/performance">Performance</Link>
-          <Link href="/psi" style={{color:'var(--gold)'}}>PSI+</Link>
         </div>
         <button className={`nav-hamburger${menuOpen ? ' open' : ''}`} aria-label="Menu"
           onClick={() => setMenuOpen(o => !o)}>
@@ -295,9 +295,9 @@ export default function PerformancePage() {
       </nav>
       <div className={`nav-mobile${menuOpen ? ' open' : ''}`}>
         <Link href="/"            onClick={() => setMenuOpen(false)}>Home</Link>
+        <Link href="/psi"         onClick={() => setMenuOpen(false)} style={{color:'var(--gold)'}}>PSI+</Link>
         <Link href="/#picks"      onClick={() => setMenuOpen(false)}>Picks</Link>
         <Link href="/performance" onClick={() => setMenuOpen(false)}>Performance</Link>
-        <Link href="/psi"         onClick={() => setMenuOpen(false)} style={{color:'var(--gold)'}}>PSI+</Link>
       </div>
 
       {/* PAGE BODY */}
