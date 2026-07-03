@@ -423,8 +423,4 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
     font-size:9px !important;
     letter-spacing:0.18em !important;
   }
-  /* Constrain panel height so it doesn't overflow the screen */
-  .hero-split > div:last-child > div{
-    min-height:320px !important;
-  }
 }

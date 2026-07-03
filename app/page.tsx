@@ -218,7 +218,7 @@ export default function Page() {
             return (
               <div style={{background:'rgba(13,30,53,0.95)',border:'1px solid rgba(212,175,55,0.2)',borderRadius:'12px',overflow:'hidden',boxShadow:'0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(212,175,55,0.05)',position:'relative'}}>
                 {/* Gold top accent */}
-                <div style={{position:'absolute',top:0,left:0,right:0,height:'2px',background:'linear-gradient(90deg,transparent,var(--gold),transparent)',opacity:0.7}}/>
+                <div style={{position:'absolute',top:0,left:0,right:0,height:'2px',background:'linear-gradient(90deg,transparent,var(--gold),transparent)',opacity:0.7,pointerEvents:'none'}}/>
                 {/* Layout: left sidebar + right content */}
                 <div style={{display:'flex',minHeight:'380px'}}>
 
