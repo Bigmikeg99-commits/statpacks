@@ -194,7 +194,6 @@ export default function Page() {
             <div className="hero-sub" style={{marginBottom:'36px',maxWidth:'420px'}}>Built on Data. Tracked Transparently.</div>
             <div style={{display:'flex',gap:'12px',flexWrap:'wrap',justifyContent:'center'}}>
               <a href="#picks" className="btn btn-secondary">Today&apos;s Picks</a>
-              <a href="/models" className="btn" style={{background:'transparent',borderColor:'rgba(245,241,230,0.2)',color:'rgba(245,241,230,0.6)'}}>All Models</a>
             </div>
           </div>
 
