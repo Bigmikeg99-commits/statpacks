@@ -371,8 +371,8 @@ export default function Page() {
                                 <div style={{height:'100%',width:`${barPct}%`,background:col,borderRadius:'2px'}}/>
                               </div>
                             </div>
-                            <div style={{textAlign:'right',flexShrink:0,minWidth:'44px'}}>
-                              <div style={{fontFamily:"'Orbitron',sans-serif",fontSize:'14px',fontWeight:700,color:col,lineHeight:1}}>{psi.toFixed(0)}</div>
+                            <div style={{textAlign:'right',flexShrink:0,minWidth:'54px'}}>
+                              <div style={{fontFamily:"'Orbitron',sans-serif",fontSize:'14px',fontWeight:700,color:col,lineHeight:1}}>{psi.toFixed(1)}</div>
                               <div style={{fontFamily:"'Inter',sans-serif",fontSize:'8px',color:'rgba(245,241,230,0.5)',letterSpacing:'0.12em',textTransform:'uppercase',marginTop:'3px'}}>PSI+</div>
                             </div>
                           </div>
