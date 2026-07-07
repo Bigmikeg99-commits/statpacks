@@ -386,7 +386,7 @@ export default function PerformancePage() {
               <div>
                 <div className="perf-section-eyebrow">Breakdown</div>
                 <h2 className="perf-section-title" style={{marginBottom:'4px'}}>Performance by K Line Threshold</h2>
-                <p className="perf-section-sub">Where the model is strongest — and where to be cautious.</p>
+                <p className="perf-section-sub">Where the model is strongest and where to be cautious.</p>
               </div>
               <select
                 className="filter-select"
