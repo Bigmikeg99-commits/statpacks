@@ -25,6 +25,12 @@ interface PerfData {
   underSegs: Seg[]
   updated: string
 }
+interface ArchivePick {
+  name: string; team: string; opp: string; hand: string; ha: string
+  rec: string; line: number; pred_k: number; edge: number
+  actual_k: number | null; result: string | null; mlbamid?: string
+}
+interface ArchiveDay { date: string; picks: ArchivePick[] }
 
 /* ---- helpers ---- */
 function gradeColor(pct: number): string {
@@ -220,11 +226,16 @@ export default function PerformancePage() {
   const [calMonth,    setCalMonth]   = useState<string>(String(new Date().getMonth() + 1))
   const [threshMonth, setThreshMonth] = useState<string>('all')
   const [menuOpen,    setMenuOpen]   = useState(false)
+  const [archive,        setArchive]       = useState<ArchiveDay[]>([])
+  const [selectedCalDay, setSelectedCalDay] = useState<string | null>(null)
   const chartRef = useRef<HTMLCanvasElement>(null)
   const axisRef  = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
     fetch('/data/picks.json').then(r => r.json()).then(setData).catch(() => {})
+    fetch('/data/picks_archive.json').then(r => r.json()).then((d: ArchiveDay[]) => {
+      setArchive(d)
+    }).catch(() => {})
   }, [])
 
   useEffect(() => {
@@ -490,18 +501,22 @@ export default function PerformancePage() {
             <div className="cal-grid">
               {filteredDays.map((d, i) => {
                 const col = dayColor(d.p)
+                const [m, day] = d.d.split('/')
+                const isoDate = `2026-${m.padStart(2,'0')}-${day.padStart(2,'0')}`
+                const hasArchive = archive.some(a => a.date === isoDate)
                 return (
                   <div
                     key={i}
                     className="day fade-in"
-                    title={`${d.d}  ${d.w}-${d.l}  (${d.p.toFixed(1)}%)`}
+                    onClick={() => hasArchive && setSelectedCalDay(isoDate)}
                     style={{
                       background: col.bg,
                       border: `1px solid ${col.border}`,
                       borderRadius: '6px',
                       padding: '7px 6px 5px',
                       textAlign: 'center',
-                      cursor: 'default',
+                      cursor: hasArchive ? 'pointer' : 'default',
+                      position: 'relative',
                     }}
                   >
                     <div style={{fontFamily:"'Inter',sans-serif",fontSize:'8px',color:'rgba(245,241,230,0.5)',letterSpacing:'0.04em',marginBottom:'3px'}}>{d.d}</div>
@@ -511,6 +526,11 @@ export default function PerformancePage() {
                 )
               })}
             </div>
+            {archive.length > 0 && (
+              <div style={{marginTop:'8px',textAlign:'center',fontFamily:"'Inter',sans-serif",fontSize:'10px',color:'rgba(245,241,230,0.35)',letterSpacing:'0.05em'}}>
+                Click a day to view its picks
+              </div>
+            )}
           </div>
         ) : null}
 
@@ -555,6 +575,95 @@ export default function PerformancePage() {
             </div>
           </div>
         ) : null}
+
+        {/* ARCHIVE MODAL */}
+        {selectedCalDay && (() => {
+          const archivePicks = archive.find(d => d.date === selectedCalDay)?.picks || []
+          const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+          const [y, m, dd] = selectedCalDay.split('-')
+          const label = `${months[parseInt(m)-1]} ${parseInt(dd)}, ${y}`
+          const dotColor = (r: string | null) => {
+            if (r === 'W') return '#3ab05a'
+            if (r === 'L') return '#C44536'
+            if (r === 'P') return '#D4AF37'
+            if (r === 'PPD') return 'var(--blue)'
+            return 'rgba(245,241,230,0.2)'
+          }
+          const rec = archivePicks.reduce((a, p) => {
+            if (p.result === 'W') a.w++
+            else if (p.result === 'L') a.l++
+            return a
+          }, {w:0, l:0})
+          return (
+            <div
+              onClick={() => setSelectedCalDay(null)}
+              style={{position:'fixed',inset:0,background:'rgba(5,14,28,0.75)',zIndex:1000,display:'flex',alignItems:'center',justifyContent:'center',padding:'20px'}}
+            >
+              <div
+                onClick={e => e.stopPropagation()}
+                style={{background:'rgba(13,30,53,0.98)',border:'1px solid rgba(212,175,55,0.2)',borderRadius:'12px',width:'100%',maxWidth:'520px',maxHeight:'80vh',display:'flex',flexDirection:'column',boxShadow:'0 24px 64px rgba(0,0,0,0.6)'}}
+              >
+                {/* Header */}
+                <div style={{padding:'16px 20px',borderBottom:'1px solid rgba(255,255,255,0.06)',display:'flex',alignItems:'center',justifyContent:'space-between',flexShrink:0}}>
+                  <div>
+                    <div style={{fontFamily:"'Inter',sans-serif",fontSize:'10px',letterSpacing:'0.2em',textTransform:'uppercase',color:'var(--gold)',fontWeight:600,marginBottom:'3px'}}>Pick Archive</div>
+                    <div style={{fontFamily:"'Playfair Display',serif",fontSize:'18px',fontWeight:700,color:'var(--cream)'}}>{label}</div>
+                  </div>
+                  <div style={{display:'flex',alignItems:'center',gap:'12px'}}>
+                    {(rec.w + rec.l) > 0 && (
+                      <span style={{fontFamily:"'Inter',sans-serif",fontSize:'13px',fontWeight:600,color: rec.w/(rec.w+rec.l) >= 0.524 ? '#3ab05a' : rec.w/(rec.w+rec.l) >= 0.5 ? 'var(--gold)' : '#C44536'}}>
+                        {rec.w}-{rec.l}
+                      </span>
+                    )}
+                    <button
+                      onClick={() => setSelectedCalDay(null)}
+                      style={{background:'rgba(255,255,255,0.06)',border:'none',borderRadius:'6px',width:'28px',height:'28px',cursor:'pointer',color:'rgba(245,241,230,0.5)',fontSize:'16px',display:'flex',alignItems:'center',justifyContent:'center'}}
+                    >×</button>
+                  </div>
+                </div>
+
+                {/* Pick rows */}
+                <div style={{overflowY:'auto',flex:1}}>
+                  {archivePicks.map((p, i) => {
+                    const edgeStr = (p.edge >= 0 ? '+' : '') + p.edge.toFixed(1)
+                    const initials = p.name.split(' ').map((n:string) => n[0]).slice(0,2).join('')
+                    return (
+                      <div key={i} style={{padding:'12px 20px',borderBottom: i < archivePicks.length-1 ? '1px solid rgba(255,255,255,0.04)' : 'none',display:'flex',alignItems:'center',gap:'12px'}}>
+                        <div style={{width:'34px',height:'34px',borderRadius:'50%',flexShrink:0,background:'rgba(212,175,55,0.08)',border:'1px solid rgba(212,175,55,0.15)',overflow:'hidden',display:'flex',alignItems:'center',justifyContent:'center',fontFamily:"'Inter',sans-serif",fontSize:'11px',fontWeight:700,color:'rgba(212,175,55,0.7)'}}>
+                          {p.mlbamid
+                            ? <img src={`https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_67,q_auto:best/v1/people/${p.mlbamid}/headshot/67/current`} alt={p.name} style={{width:'100%',height:'100%',objectFit:'cover'}} onError={e=>{(e.target as HTMLImageElement).style.display='none'}}/>
+                            : initials}
+                        </div>
+                        <div style={{flex:1,minWidth:0}}>
+                          <div style={{fontFamily:"'Inter',sans-serif",fontSize:'12px',fontWeight:600,color:'var(--cream)',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{p.name}</div>
+                          <div style={{fontFamily:"'Inter',sans-serif",fontSize:'10px',color:'rgba(245,241,230,0.65)',marginTop:'2px'}}>{p.team} {p.ha==='Home'?'vs':'@'} {p.opp}</div>
+                        </div>
+                        <div style={{textAlign:'right',flexShrink:0}}>
+                          <div style={{fontFamily:"'Inter',sans-serif",fontSize:'10px',fontWeight:700,color:'var(--cream)',letterSpacing:'0.05em'}}>{p.rec} {p.line}K</div>
+                          <div style={{fontFamily:"'Inter',sans-serif",fontSize:'10px',color: p.edge > 0 ? '#3ab05a' : '#C44536',marginTop:'2px'}}>{edgeStr} edge</div>
+                          {p.actual_k != null && (
+                            <div style={{fontFamily:"'Inter',sans-serif",fontSize:'10px',color:'rgba(245,241,230,0.65)',marginTop:'2px'}}>Strikeouts: {p.actual_k}</div>
+                          )}
+                        </div>
+                        <div style={{width:'8px',height:'8px',borderRadius:'50%',background:dotColor(p.result),flexShrink:0,border: p.result == null ? '1px solid rgba(245,241,230,0.2)' : 'none'}}/>
+                      </div>
+                    )
+                  })}
+                </div>
+
+                {/* Legend */}
+                <div style={{padding:'12px 20px',borderTop:'1px solid rgba(255,255,255,0.06)',display:'flex',gap:'16px',flexShrink:0}}>
+                  {[['#3ab05a','Win'],['#C44536','Loss'],['#D4AF37','Push'],['var(--blue)','PPD']].map(([c,l]) => (
+                    <span key={l} style={{display:'flex',alignItems:'center',gap:'5px',fontFamily:"'Inter',sans-serif",fontSize:'10px',color:'rgba(245,241,230,0.6)'}}>
+                      <span style={{width:'8px',height:'8px',borderRadius:'50%',background:c,display:'inline-block',flexShrink:0}}/>
+                      {l}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )
+        })()}
 
         {/* FOOTER */}
         <div className="perf-footer-note fade-in">
