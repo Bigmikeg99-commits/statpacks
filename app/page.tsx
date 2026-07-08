@@ -944,7 +944,7 @@ function buildCardHTML(p: Pick, podName: string, rank = 1): string {
             <span class="live-pulse-dot"></span>LIVE
           </span>
           <span style="font-family:'Orbitron',sans-serif;font-size:14px;font-weight:700;color:var(--cream)"><span class="live-k-val">0</span><span style="font-size:8px;opacity:0.55;margin-left:1px">K</span></span>
-          <span class="live-situation" style="font-family:'Inter',sans-serif;font-size:9px;color:rgba(245,241,230,0.45)"></span>
+          <span class="live-situation" style="font-family:'Inter',sans-serif;font-size:10px;color:rgba(245,241,230,0.65)"></span>
         </div>
         <div style="background:rgba(255,255,255,0.08);border-radius:3px;height:4px;overflow:hidden">
           <div class="live-fill" style="height:100%;width:0%;border-radius:3px;transition:width 1.5s ease"></div>
