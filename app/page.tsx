@@ -2,6 +2,9 @@
 import React, { useEffect, useState, useRef } from 'react'
 import Script from 'next/script'
 
+/* ---- season config (update each year) ---- */
+const PSI_V2_SPLIT = '6/11' // date PSI+ V2 model went live — marks chart split line
+
 /* ---- types ---- */
 interface Shap { label: string; feat: string; val: number; pp: number }
 interface Pick {
@@ -49,6 +52,7 @@ export default function Page() {
   const [heroTab, setHeroTab] = useState<'picks'|'psi'|'record'|'form'>('form')
   const [psiLb, setPsiLb] = useState<{name:string;id?:string;psi:number;team?:string}[]|null>(null)
   const [resultsMap, setResultsMap] = useState<Record<string,string>>({})
+  const [sweepData, setSweepData] = useState<Record<string,{actual_k:number|null;game_state:string;started:boolean;innings_pitched:string|null}>>({})
   const [filter, setFilter] = useState<{hand:string;dir:string;ha:string}>({ hand:'all', dir:'all', ha:'all' })
   const [chartReady, setChartReady] = useState(false)
   const [chartMode] = useState<'cumulative' | 'rolling'>('rolling')
@@ -117,6 +121,34 @@ export default function Page() {
     const interval = setInterval(fetchResults, 60 * 60 * 1000)
     return () => clearInterval(interval)
   }, [data])
+
+  // Fast-poll for live sweat tracker (every 90 seconds)
+  useEffect(() => {
+    if (!data) return
+    const dateStr = data.picks_date || data.updated.slice(0, 10)
+    const ids = data.picks.map((p: any) => {
+      const teamId = TEAM_IDS[p.team || '']
+      return teamId ? `${p.mlbamid}:${teamId}` : p.mlbamid
+    }).filter(Boolean)
+    if (!ids.length) return
+    const fetchSweep = async () => {
+      try {
+        const res = await fetch(`/api/results?date=${dateStr}&ids=${ids.join(',')}`)
+        if (!res.ok) return
+        const d = await res.json()
+        setSweepData(d)
+        updateLiveBars(d)
+      } catch {}
+    }
+    fetchSweep()
+    const iv = setInterval(fetchSweep, 90_000)
+    return () => clearInterval(iv)
+  }, [data])
+
+  // Re-run live bars when cards re-render (filter change)
+  useEffect(() => {
+    if (Object.keys(sweepData).length) updateLiveBars(sweepData)
+  }, [sweepData])
 
   // Re-render calendar whenever data or month filter changes
   useEffect(() => {
@@ -291,28 +323,61 @@ export default function Page() {
                         const edge = (p.pred_k - p.line).toFixed(1)
                         const edgeNum = parseFloat(edge)
                         const res = resultsMap[p.mlbamid]
-                        const dotColor = res === 'win' ? '#3ab05a' : res === 'loss' ? '#C44536' : res === 'push' ? 'var(--gold)' : res === 'ppd' ? 'var(--blue)' : 'rgba(245,241,230,0.2)'
                         const isOver = p.rec === 'OVER'
-                        const recColor = isOver ? '#c8a84b' : '#a04545'
+                        const ld = sweepData[p.mlbamid]
+                        const isLive = ld?.game_state === 'Live'
+                        const isFinalWithLine = ld?.game_state === 'Final' && ld?.started && ld?.actual_k != null
+                        const showPitchingLine = isLive || isFinalWithLine
+                        const liveK = ld?.actual_k ?? 0
+                        const winThreshold = Math.ceil(p.line + 0.001)
+                        const livePct = Math.min((liveK / winThreshold) * 100, 100)
+                        const needed = isOver ? Math.max(winThreshold - liveK, 0) : Math.max(winThreshold - liveK, 0)
+                        let liveBarColor = 'rgba(245,241,230,0.25)'
+                        let liveDotColor = 'rgba(245,241,230,0.4)'
+                        if (showPitchingLine) {
+                          if (isOver) {
+                            if (liveK >= winThreshold) { liveBarColor = '#3ab05a'; liveDotColor = '#3ab05a' }
+                            else if (needed === 1)      { liveBarColor = '#D4AF37'; liveDotColor = '#D4AF37' }
+                            else                        { liveBarColor = 'rgba(245,241,230,0.3)'; liveDotColor = 'rgba(245,241,230,0.4)' }
+                          } else {
+                            if (liveK >= winThreshold) { liveBarColor = '#C44536'; liveDotColor = '#C44536' }
+                            else if (needed === 1)     { liveBarColor = '#D4AF37'; liveDotColor = '#D4AF37' }
+                            else                       { liveBarColor = '#3ab05a'; liveDotColor = '#3ab05a' }
+                          }
+                        }
+                        const dotColor = isLive ? liveDotColor : (res === 'win' ? '#3ab05a' : res === 'loss' ? '#C44536' : res === 'push' ? 'var(--gold)' : res === 'ppd' ? 'var(--blue)' : 'rgba(245,241,230,0.2)')
                         return (
-                          <div key={i} style={{padding:'12px 20px',borderBottom:'1px solid rgba(255,255,255,0.04)',display:'flex',alignItems:'center',gap:'12px'}}>
-                            <img
-                              src={`https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_48,q_auto:best/v1/people/${p.mlbamid}/headshot/67/current`}
-                              alt={p.name}
-                              style={{width:'34px',height:'34px',borderRadius:'50%',objectFit:'cover',flexShrink:0,background:'rgba(255,255,255,0.04)',border:'1px solid rgba(212,175,55,0.1)'}}
-                              onError={(e)=>{(e.target as HTMLImageElement).style.opacity='0'}}
-                            />
-                            <div style={{flex:1,minWidth:0}}>
-                              <div style={{fontFamily:"'Inter',sans-serif",fontSize:'12px',fontWeight:600,color:'var(--cream)',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{p.name}</div>
-                              <div style={{fontFamily:"'Inter',sans-serif",fontSize:'10px',color:'rgba(245,241,230,0.55)',marginTop:'2px'}}>{p.team} {p.ha==='H'?'vs':'@'} {p.opp.replace(/^(vs |@ )/,'')}</div>
-                            </div>
-                            <div style={{textAlign:'right',flexShrink:0}}>
-                              <div style={{fontFamily:"'Inter',sans-serif",fontSize:'10px',fontWeight:700,color:'var(--cream)',letterSpacing:'0.05em'}}>{p.rec} {p.line}K</div>
-                              <div style={{fontFamily:"'Inter',sans-serif",fontSize:'10px',color: edgeNum > 0 ? '#3ab05a' : 'var(--red)',marginTop:'2px'}}>
-                                {edgeNum > 0 ? '+' : ''}{edge} edge
+                          <div key={i} style={{borderBottom:'1px solid rgba(255,255,255,0.04)'}}>
+                            <div style={{padding:'12px 20px',display:'flex',alignItems:'center',gap:'12px'}}>
+                              <img
+                                src={`https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_48,q_auto:best/v1/people/${p.mlbamid}/headshot/67/current`}
+                                alt={p.name}
+                                style={{width:'34px',height:'34px',borderRadius:'50%',objectFit:'cover',flexShrink:0,background:'rgba(255,255,255,0.04)',border:'1px solid rgba(212,175,55,0.1)'}}
+                                onError={(e)=>{(e.target as HTMLImageElement).style.opacity='0'}}
+                              />
+                              <div style={{flex:1,minWidth:0}}>
+                                <div style={{fontFamily:"'Inter',sans-serif",fontSize:'12px',fontWeight:600,color:'var(--cream)',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{p.name}</div>
+                                <div style={{fontFamily:"'Inter',sans-serif",fontSize:'10px',color:'rgba(245,241,230,0.55)',marginTop:'2px'}}>{p.team} {p.ha==='H'?'vs':'@'} {p.opp.replace(/^(vs |@ )/,'')}</div>
                               </div>
+                              <div style={{textAlign:'right',flexShrink:0}}>
+                                <div style={{fontFamily:"'Inter',sans-serif",fontSize:'10px',fontWeight:700,color:'var(--cream)',letterSpacing:'0.05em'}}>{p.rec} {p.line}K</div>
+                                {showPitchingLine
+                                  ? <div style={{fontFamily:"'Inter',sans-serif",fontSize:'10px',color:liveDotColor,marginTop:'2px',display:'flex',alignItems:'center',gap:'3px'}}>
+                                      {isLive && <span className="live-pulse-dot" style={{width:'4px',height:'4px'}}/>}
+                                      {liveK} Ks{ld?.innings_pitched ? ` · ${ld.innings_pitched} IP` : ''}
+                                    </div>
+                                  : <div style={{fontFamily:"'Inter',sans-serif",fontSize:'10px',color: edgeNum > 0 ? '#3ab05a' : 'var(--red)',marginTop:'2px'}}>
+                                      {edgeNum > 0 ? '+' : ''}{edge} edge
+                                    </div>
+                                }
+                              </div>
+                              <div style={{width:'6px',height:'6px',borderRadius:'50%',background:dotColor,flexShrink:0}}/>
                             </div>
-                            <div style={{width:'6px',height:'6px',borderRadius:'50%',background:dotColor,flexShrink:0}}/>
+                            {showPitchingLine && (
+                              <div style={{height:'3px',background:'rgba(255,255,255,0.06)',margin:'0 20px 0'}}>
+                                <div style={{height:'100%',width:`${livePct}%`,background:liveBarColor,transition:'width 1.5s ease',borderRadius:'2px'}}/>
+                              </div>
+                            )}
                           </div>
                         )
                       })}
@@ -873,6 +938,19 @@ function buildCardHTML(p: Pick, podName: string, rank = 1): string {
         <div class="card-rec-badge" style="background:${badgeBg};border:1px solid ${badgeBorder};color:${badgeColor}">${p.rec} ${p.line}K</div>
         <div class="card-pick-val" style="color:${badgeColor}">${displayConf}</div>
       </div>
+      <div class="card-live-bar" style="display:none;padding:8px 14px 4px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px">
+          <span style="display:flex;align-items:center;gap:4px;font-family:'Inter',sans-serif;font-size:9px;font-weight:700;letter-spacing:0.15em;color:#e06b5f">
+            <span class="live-pulse-dot"></span>LIVE
+          </span>
+          <span style="font-family:'Orbitron',sans-serif;font-size:14px;font-weight:700;color:var(--cream)"><span class="live-k-val">0</span><span style="font-size:8px;opacity:0.55;margin-left:1px">K</span></span>
+          <span class="live-ip" style="font-family:'Inter',sans-serif;font-size:9px;color:rgba(245,241,230,0.45)"></span>
+        </div>
+        <div style="background:rgba(255,255,255,0.08);border-radius:3px;height:4px;overflow:hidden">
+          <div class="live-fill" style="height:100%;width:0%;border-radius:3px;transition:width 1.5s ease"></div>
+        </div>
+        <div class="live-status-text" style="font-family:'Inter',sans-serif;font-size:9px;margin-top:4px;text-align:right;color:rgba(245,241,230,0.5)"></div>
+      </div>
       <div class="card-tap-hint">tap to flip</div>
       <div class="card-footer-strip">
         <span>StatPacks · PSI+ V2</span><span>${p.hand}HP · ${p.ha}</span>
@@ -1044,7 +1122,7 @@ function renderChart(
     const liveRoll   = roll(daily,   7).map((v, i) => liveDates.has(allDates[i]) ? v : null)
     const liveRoll30 = roll(daily,  30).map((v, i) => liveDates.has(allDates[i]) ? v : null)
 
-    const splitIdx = allDates.indexOf('6/11')
+    const splitIdx = allDates.indexOf(PSI_V2_SPLIT)
     const PSI_COLOR = '#D4AF37'
     const LIVE_COLOR = '#4EABDE'
 
@@ -1255,6 +1333,50 @@ async function pollResults(picks: Pick[], dateStr: string) {
     }
   } catch (e) {
     console.warn('[pollResults]', e)
+  }
+}
+
+function updateLiveBars(mlbData: Record<string, { actual_k: number | null; game_state: string; started: boolean; innings_pitched: string | null }>) {
+  for (const [mlbamid, info] of Object.entries(mlbData)) {
+    const scene = document.querySelector(`[data-mlbamid="${mlbamid}"]`) as HTMLElement | null
+    if (!scene) continue
+    const liveBar = scene.querySelector('.card-live-bar') as HTMLElement | null
+    if (!liveBar) continue
+
+    const isLive = info.game_state === 'Live'
+    liveBar.style.display = isLive ? 'block' : 'none'
+    if (!isLive) continue
+
+    const line = parseFloat(scene.dataset.line ?? '0')
+    const rec  = scene.dataset.rec ?? ''
+    const k    = info.actual_k ?? 0
+    const isOver = rec === 'OVER'
+    // Win threshold: smallest integer that beats the line (e.g. 4.5 → 5, 5.0 → 6)
+    const winThreshold = Math.ceil(line + 0.001)
+    const pct  = Math.min((k / winThreshold) * 100, 100)
+
+    let barColor: string, statusText: string, statusColor: string
+    if (isOver) {
+      const needed = Math.max(winThreshold - k, 0)
+      if (k >= winThreshold) { barColor = '#3ab05a'; statusText = 'Line cleared'; statusColor = '#3ab05a' }
+      else if (needed === 1)  { barColor = '#D4AF37'; statusText = `${needed} more needed`; statusColor = '#D4AF37' }
+      else { barColor = 'rgba(245,241,230,0.3)'; statusText = `${needed} more needed`; statusColor = 'rgba(245,241,230,0.45)' }
+    } else {
+      const margin = Math.max(winThreshold - k, 0)
+      if (k >= winThreshold) { barColor = '#C44536'; statusText = 'Line exceeded'; statusColor = '#C44536' }
+      else if (margin === 1) { barColor = '#D4AF37'; statusText = `${margin}K margin`; statusColor = '#D4AF37' }
+      else { barColor = '#3ab05a'; statusText = `${margin}K under`; statusColor = '#3ab05a' }
+    }
+
+    const kEl     = scene.querySelector('.live-k-val') as HTMLElement | null
+    const ipEl    = scene.querySelector('.live-ip') as HTMLElement | null
+    const fillEl  = scene.querySelector('.live-fill') as HTMLElement | null
+    const statEl  = scene.querySelector('.live-status-text') as HTMLElement | null
+
+    if (kEl)   kEl.textContent = String(k)
+    if (ipEl)  ipEl.textContent = info.innings_pitched ? `${info.innings_pitched} IP` : ''
+    if (fillEl) { fillEl.style.width = `${pct}%`; fillEl.style.background = barColor }
+    if (statEl) { statEl.textContent = statusText; statEl.style.color = statusColor }
   }
 }
 

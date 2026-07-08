@@ -61,7 +61,7 @@ export async function GET(req: NextRequest) {
 
     // 2. Fetch boxscores in parallel, extract pitcher Ks by MLBAM ID
     const idSet = new Set(ids)
-    const results: Record<string, { actual_k: number | null; game_state: string; started: boolean }> = {}
+    const results: Record<string, { actual_k: number | null; game_state: string; started: boolean; innings_pitched: string | null }> = {}
 
     await Promise.all(
       gamePks.map(async (pk) => {
@@ -86,6 +86,7 @@ export async function GET(req: NextRequest) {
                 actual_k: pitching.strikeOuts ?? null,
                 game_state: gameState,
                 started: pidStr === starterId,
+                innings_pitched: pitching.inningsPitched ?? null,
               }
             }
           }
@@ -102,9 +103,9 @@ export async function GET(req: NextRequest) {
       const teamId = mlbamToTeam[mlbamid]
       if (!teamId) continue
       if (postponedTeamIds.has(teamId)) {
-        results[mlbamid] = { actual_k: null, game_state: 'Postponed', started: false }
+        results[mlbamid] = { actual_k: null, game_state: 'Postponed', started: false, innings_pitched: null }
       } else if (teamGameState[teamId] === 'Final') {
-        results[mlbamid] = { actual_k: null, game_state: 'Final', started: false }
+        results[mlbamid] = { actual_k: null, game_state: 'Final', started: false, innings_pitched: null }
       }
     }
 

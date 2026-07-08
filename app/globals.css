@@ -291,6 +291,8 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 @keyframes gridDrift{0%{transform:translate(0,0)}100%{transform:translate(70px,70px)}}
 @keyframes redGlow{0%,100%{opacity:0.18;transform:scale(1)}50%{opacity:0.32;transform:scale(1.08)}}
 @keyframes shimmer{0%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.live-pulse-dot{width:5px;height:5px;border-radius:50%;background:#e06b5f;display:inline-block;animation:pulse 1.5s ease-in-out infinite}
 .hero-grid{background-image:repeating-linear-gradient(0deg,rgba(78,171,222,0.05) 0,rgba(78,171,222,0.05) 1px,transparent 1px,transparent 70px),repeating-linear-gradient(90deg,rgba(78,171,222,0.05) 0,rgba(78,171,222,0.05) 1px,transparent 1px,transparent 70px);animation:gridDrift 18s linear infinite alternate}
 @media(min-width:769px){.hero-title::after{content:'';position:absolute;top:50%;left:65%;width:480px;height:300px;transform:translate(-50%,-50%);background:radial-gradient(ellipse at center,rgba(196,69,54,0.2) 0%,transparent 68%);pointer-events:none;z-index:-1;animation:redGlow 4s ease-in-out infinite}}
 .hero-eyebrow{opacity:0;animation:heroFadeUp .7s ease forwards;animation-delay:.1s}

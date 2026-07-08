@@ -86,8 +86,9 @@ function renderRollingChart(
   const yMax = allVals.length ? Math.ceil((Math.max(...allVals) + 4) / 5) * 5 : 90
   const yMin = allVals.length ? Math.floor((Math.min(...allVals) - 4) / 5) * 5 : 30
 
-  // PSI+ marker at 6/11
-  const splitIdx = allDates.indexOf('6/11')
+  // PSI+ V2 split — update each season
+  const PSI_V2_SPLIT = '6/11'
+  const splitIdx = allDates.indexOf(PSI_V2_SPLIT)
 
   const endLabelPlugin = {
     id: 'endLabel',
@@ -264,8 +265,9 @@ export default function PerformancePage() {
   const edgePos  = totalPct >= 52.4
 
   const MONTH_NAMES: Record<string, string> = {
-    '3':'March','4':'April','5':'May','6':'June',
-    '7':'July','8':'August','9':'September','10':'October'
+    '1':'January','2':'February','3':'March','4':'April',
+    '5':'May','6':'June','7':'July','8':'August',
+    '9':'September','10':'October','11':'November','12':'December'
   }
 
   const calMonths = data?.daily
