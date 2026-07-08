@@ -338,11 +338,11 @@ export default function Page() {
                           if (isOver) {
                             if (liveK >= winThreshold) { liveBarColor = '#3ab05a'; liveDotColor = '#3ab05a' }
                             else if (needed === 1)      { liveBarColor = '#D4AF37'; liveDotColor = '#D4AF37' }
-                            else                        { liveBarColor = 'rgba(245,241,230,0.3)'; liveDotColor = 'rgba(245,241,230,0.4)' }
+                            else                        { liveBarColor = 'rgba(245,241,230,0.25)'; liveDotColor = 'rgba(245,241,230,0.4)' }
                           } else {
                             if (liveK >= winThreshold) { liveBarColor = '#C44536'; liveDotColor = '#C44536' }
-                            else if (needed === 1)     { liveBarColor = '#D4AF37'; liveDotColor = '#D4AF37' }
-                            else                       { liveBarColor = '#3ab05a'; liveDotColor = '#3ab05a' }
+                            else if (needed === 1)      { liveBarColor = '#D4AF37'; liveDotColor = '#D4AF37' }
+                            else                        { liveBarColor = '#3ab05a'; liveDotColor = '#3ab05a' }
                           }
                         }
                         const dotColor = isLive ? liveDotColor : (res === 'win' ? '#3ab05a' : res === 'loss' ? '#C44536' : res === 'push' ? 'var(--gold)' : res === 'ppd' ? 'var(--blue)' : 'rgba(245,241,230,0.2)')
@@ -949,7 +949,6 @@ function buildCardHTML(p: Pick, podName: string, rank = 1): string {
         <div style="background:rgba(255,255,255,0.08);border-radius:3px;height:4px;overflow:hidden">
           <div class="live-fill" style="height:100%;width:0%;border-radius:3px;transition:width 1.5s ease"></div>
         </div>
-        <div class="live-status-text" style="font-family:'Inter',sans-serif;font-size:9px;margin-top:4px;text-align:right;color:rgba(245,241,230,0.5)"></div>
       </div>
       <div class="card-tap-hint">tap to flip</div>
       <div class="card-footer-strip">
@@ -1359,13 +1358,13 @@ function updateLiveBars(mlbData: Record<string, { actual_k: number | null; game_
     if (isOver) {
       const needed = Math.max(winThreshold - k, 0)
       if (k >= winThreshold) { barColor = '#3ab05a'; statusText = 'Line cleared'; statusColor = '#3ab05a' }
-      else if (needed === 1)  { barColor = '#D4AF37'; statusText = `${needed} more needed`; statusColor = '#D4AF37' }
-      else { barColor = 'rgba(245,241,230,0.3)'; statusText = `${needed} more needed`; statusColor = 'rgba(245,241,230,0.45)' }
+      else if (needed === 1)  { barColor = '#D4AF37'; statusText = `${needed} more to win`; statusColor = '#D4AF37' }
+      else { barColor = 'rgba(245,241,230,0.3)'; statusText = `${needed} more to win`; statusColor = 'rgba(245,241,230,0.45)' }
     } else {
       const margin = Math.max(winThreshold - k, 0)
       if (k >= winThreshold) { barColor = '#C44536'; statusText = 'Line exceeded'; statusColor = '#C44536' }
-      else if (margin === 1) { barColor = '#D4AF37'; statusText = `${margin}K margin`; statusColor = '#D4AF37' }
-      else { barColor = '#3ab05a'; statusText = `${margin}K under`; statusColor = '#3ab05a' }
+      else if (margin === 1) { barColor = '#D4AF37'; statusText = `1K from line`; statusColor = '#D4AF37' }
+      else { barColor = '#3ab05a'; statusText = `${margin}K buffer`; statusColor = '#3ab05a' }
     }
 
     const kEl     = scene.querySelector('.live-k-val') as HTMLElement | null
@@ -1376,7 +1375,6 @@ function updateLiveBars(mlbData: Record<string, { actual_k: number | null; game_
     if (kEl)   kEl.textContent = String(k)
     if (ipEl)  ipEl.textContent = info.innings_pitched ? `${info.innings_pitched} IP` : ''
     if (fillEl) { fillEl.style.width = `${pct}%`; fillEl.style.background = barColor }
-    if (statEl) { statEl.textContent = statusText; statEl.style.color = statusColor }
   }
 }
 
