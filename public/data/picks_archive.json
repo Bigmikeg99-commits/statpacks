@@ -1,5 +1,136 @@
 [
   {
+    "date": "2026-07-07",
+    "picks": [
+      {
+        "name": "Justin Wrobleski",
+        "mlbamid": "680736",
+        "team": "Los Angeles Dodgers",
+        "opp": "Colorado Rockies",
+        "hand": "L",
+        "ha": "Home",
+        "rec": "UNDER",
+        "line": 5.5,
+        "pred_k": 2.5,
+        "edge": 32.0,
+        "actual_k": 9.0,
+        "result": "L"
+      },
+      {
+        "name": "Seth Lugo",
+        "mlbamid": "607625",
+        "team": "Kansas City Royals",
+        "opp": "New York Mets",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "UNDER",
+        "line": 5.0,
+        "pred_k": 2.5,
+        "edge": 25.8,
+        "actual_k": 4.0,
+        "result": "W"
+      },
+      {
+        "name": "Will Warren",
+        "mlbamid": "701542",
+        "team": "New York Yankees",
+        "opp": "Tampa Bay Rays",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 4.5,
+        "pred_k": 5.49,
+        "edge": 22.8,
+        "actual_k": 3.0,
+        "result": "L"
+      },
+      {
+        "name": "Max Meyer",
+        "mlbamid": "676974",
+        "team": "Miami Marlins",
+        "opp": "Seattle Mariners",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "UNDER",
+        "line": 6.5,
+        "pred_k": 5.41,
+        "edge": 22.4,
+        "actual_k": 4.0,
+        "result": "W"
+      },
+      {
+        "name": "Payton Tolle",
+        "mlbamid": "801139",
+        "team": "Boston Red Sox",
+        "opp": "Chicago White Sox",
+        "hand": "L",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 5.5,
+        "pred_k": 4.92,
+        "edge": 22.2,
+        "actual_k": 6.0,
+        "result": "W"
+      },
+      {
+        "name": "Jacob deGrom",
+        "mlbamid": "594798",
+        "team": "Texas Rangers",
+        "opp": "Los Angeles Angels",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "UNDER",
+        "line": 7.5,
+        "pred_k": 6.05,
+        "edge": 22.0,
+        "actual_k": 7.0,
+        "result": "W"
+      },
+      {
+        "name": "Andrew Abbott",
+        "mlbamid": "671096",
+        "team": "Cincinnati Reds",
+        "opp": "Philadelphia Phillies",
+        "hand": "L",
+        "ha": "Home",
+        "rec": "UNDER",
+        "line": 5.5,
+        "pred_k": 4.47,
+        "edge": 21.2,
+        "actual_k": 8.0,
+        "result": "L"
+      },
+      {
+        "name": "Jacob Misiorowski",
+        "mlbamid": "694819",
+        "team": "Milwaukee Brewers",
+        "opp": "St. Louis Cardinals",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 7.5,
+        "pred_k": 7.16,
+        "edge": 21.0,
+        "actual_k": 11.0,
+        "result": "W"
+      },
+      {
+        "name": "Shane Baz",
+        "mlbamid": "669358",
+        "team": "Baltimore Orioles",
+        "opp": "Chicago Cubs",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "UNDER",
+        "line": 5.5,
+        "pred_k": 4.42,
+        "edge": 20.7,
+        "actual_k": 3.0,
+        "result": "W"
+      }
+    ]
+  },
+  {
     "date": "2026-07-06",
     "picks": [
       {
@@ -42,7 +173,7 @@
         "pred_k": 2.5,
         "edge": 24.3,
         "actual_k": 3.0,
-        "result": "P"
+        "result": null
       },
       {
         "name": "Cristopher Sánchez",
@@ -159,7 +290,7 @@
         "pred_k": 4.09,
         "edge": 25.6,
         "actual_k": 4.0,
-        "result": "P"
+        "result": null
       },
       {
         "name": "Eduardo Rodriguez",
@@ -1254,7 +1385,7 @@
         "pred_k": 3.28,
         "edge": 8.9,
         "actual_k": 4.0,
-        "result": "P"
+        "result": null
       },
       {
         "name": "Will Warren",
@@ -1600,7 +1731,7 @@
         "pred_k": 3.7,
         "edge": 7.3,
         "actual_k": 5.0,
-        "result": "P"
+        "result": null
       }
     ]
   },
@@ -1778,7 +1909,7 @@
         "pred_k": 2.58,
         "edge": 13.4,
         "actual_k": 4.0,
-        "result": "P"
+        "result": null
       },
       {
         "name": "Shota Imanaga",
@@ -1853,7 +1984,7 @@
         "pred_k": 2.86,
         "edge": 18.5,
         "actual_k": 5.0,
-        "result": "P"
+        "result": null
       },
       {
         "name": "Jack Perkins",
@@ -2349,7 +2480,7 @@
         "pred_k": 2.79,
         "edge": 13.9,
         "actual_k": 5.0,
-        "result": "P"
+        "result": null
       },
       {
         "name": "Casey Mize",
@@ -3453,7 +3584,7 @@
         "pred_k": 2.5,
         "edge": 18.8,
         "actual_k": 3.0,
-        "result": "P"
+        "result": null
       }
     ]
   },
@@ -3533,7 +3664,7 @@
         "pred_k": 2.5,
         "edge": 39.2,
         "actual_k": 4.0,
-        "result": "P"
+        "result": null
       },
       {
         "name": "Cam Schlittler",
@@ -4693,7 +4824,7 @@
         "pred_k": 5.33,
         "edge": 16.7,
         "actual_k": 5.0,
-        "result": "P"
+        "result": null
       },
       {
         "name": "Kumar Rocker",
@@ -11264,7 +11395,7 @@
         "pred_k": null,
         "edge": 32.9,
         "actual_k": 4.0,
-        "result": "P"
+        "result": null
       },
       {
         "name": "Kyle Leahy",
@@ -11610,7 +11741,7 @@
         "pred_k": null,
         "edge": 18.7,
         "actual_k": 4.0,
-        "result": "P"
+        "result": null
       },
       {
         "name": "Connelly Early",
@@ -12666,7 +12797,7 @@
         "pred_k": null,
         "edge": 42.0,
         "actual_k": 6.0,
-        "result": "P"
+        "result": null
       },
       {
         "name": "Chris Bassitt",
@@ -13152,7 +13283,7 @@
         "pred_k": null,
         "edge": 41.2,
         "actual_k": 6.0,
-        "result": "P"
+        "result": null
       }
     ]
   },
@@ -13718,7 +13849,7 @@
         "pred_k": 1.77,
         "edge": 45.0,
         "actual_k": 4.0,
-        "result": "P"
+        "result": null
       }
     ]
   },
@@ -14565,7 +14696,7 @@
         "pred_k": 7.17,
         "edge": null,
         "actual_k": 6.0,
-        "result": "P"
+        "result": null
       },
       {
         "name": "Nolan McLean",
