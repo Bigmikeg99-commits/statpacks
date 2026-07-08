@@ -52,7 +52,7 @@ export default function Page() {
   const [heroTab, setHeroTab] = useState<'picks'|'psi'|'record'|'form'>('form')
   const [psiLb, setPsiLb] = useState<{name:string;id?:string;psi:number;team?:string}[]|null>(null)
   const [resultsMap, setResultsMap] = useState<Record<string,string>>({})
-  const [sweepData, setSweepData] = useState<Record<string,{actual_k:number|null;game_state:string;started:boolean;innings_pitched:string|null}>>({})
+  const [sweepData, setSweepData] = useState<Record<string,{actual_k:number|null;game_state:string;started:boolean;innings_pitched:string|null;game_situation:string|null}>>({})
   const [filter, setFilter] = useState<{hand:string;dir:string;ha:string}>({ hand:'all', dir:'all', ha:'all' })
   const [chartReady, setChartReady] = useState(false)
   const [chartMode] = useState<'cumulative' | 'rolling'>('rolling')
@@ -364,7 +364,7 @@ export default function Page() {
                                 {showPitchingLine
                                   ? <div style={{fontFamily:"'Inter',sans-serif",fontSize:'10px',color:liveDotColor,marginTop:'2px',display:'flex',alignItems:'center',gap:'3px'}}>
                                       {isLive && <span className="live-pulse-dot" style={{width:'4px',height:'4px'}}/>}
-                                      {liveK} Ks{ld?.innings_pitched ? ` · ${ld.innings_pitched} IP` : ''}
+                                      {liveK} Ks{ld?.game_situation ? ` · ${ld.game_situation}` : ''}
                                     </div>
                                   : <div style={{fontFamily:"'Inter',sans-serif",fontSize:'10px',color: edgeNum > 0 ? '#3ab05a' : 'var(--red)',marginTop:'2px'}}>
                                       {edgeNum > 0 ? '+' : ''}{edge} edge
@@ -944,7 +944,7 @@ function buildCardHTML(p: Pick, podName: string, rank = 1): string {
             <span class="live-pulse-dot"></span>LIVE
           </span>
           <span style="font-family:'Orbitron',sans-serif;font-size:14px;font-weight:700;color:var(--cream)"><span class="live-k-val">0</span><span style="font-size:8px;opacity:0.55;margin-left:1px">K</span></span>
-          <span class="live-ip" style="font-family:'Inter',sans-serif;font-size:9px;color:rgba(245,241,230,0.45)"></span>
+          <span class="live-situation" style="font-family:'Inter',sans-serif;font-size:9px;color:rgba(245,241,230,0.45)"></span>
         </div>
         <div style="background:rgba(255,255,255,0.08);border-radius:3px;height:4px;overflow:hidden">
           <div class="live-fill" style="height:100%;width:0%;border-radius:3px;transition:width 1.5s ease"></div>
@@ -1335,7 +1335,7 @@ async function pollResults(picks: Pick[], dateStr: string) {
   }
 }
 
-function updateLiveBars(mlbData: Record<string, { actual_k: number | null; game_state: string; started: boolean; innings_pitched: string | null }>) {
+function updateLiveBars(mlbData: Record<string, { actual_k: number | null; game_state: string; started: boolean; innings_pitched: string | null; game_situation: string | null }>) {
   for (const [mlbamid, info] of Object.entries(mlbData)) {
     const scene = document.querySelector(`[data-mlbamid="${mlbamid}"]`) as HTMLElement | null
     if (!scene) continue
@@ -1368,12 +1368,12 @@ function updateLiveBars(mlbData: Record<string, { actual_k: number | null; game_
     }
 
     const kEl     = scene.querySelector('.live-k-val') as HTMLElement | null
-    const ipEl    = scene.querySelector('.live-ip') as HTMLElement | null
+    const ipEl    = scene.querySelector('.live-situation') as HTMLElement | null
     const fillEl  = scene.querySelector('.live-fill') as HTMLElement | null
     const statEl  = scene.querySelector('.live-status-text') as HTMLElement | null
 
     if (kEl)   kEl.textContent = String(k)
-    if (ipEl)  ipEl.textContent = info.innings_pitched ? `${info.innings_pitched} IP` : ''
+    if (ipEl)  ipEl.textContent = info.game_situation ?? ''
     if (fillEl) { fillEl.style.width = `${pct}%`; fillEl.style.background = barColor }
   }
 }
