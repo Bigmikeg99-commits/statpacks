@@ -2,6 +2,7 @@
 import { useEffect, useState, useRef } from 'react'
 import Script from 'next/script'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 /* ---- types ---- */
 interface ThresholdBucket {
@@ -231,6 +232,7 @@ export default function PerformancePage() {
   const [selectedCalDay, setSelectedCalDay] = useState<string | null>(null)
   const chartRef = useRef<HTMLCanvasElement>(null)
   const axisRef  = useRef<HTMLCanvasElement>(null)
+  const router   = useRouter()
 
   useEffect(() => {
     fetch('/data/picks.json').then(r => r.json()).then(setData).catch(() => {})
@@ -510,7 +512,7 @@ export default function PerformancePage() {
                   <div
                     key={i}
                     className="day fade-in"
-                    onClick={() => hasArchive && setSelectedCalDay(isoDate)}
+                    onClick={() => { if (hasArchive) { setSelectedCalDay(isoDate); router.push('/picks/' + isoDate) } }}
                     style={{
                       background: col.bg,
                       border: `1px solid ${col.border}`,
@@ -587,7 +589,7 @@ export default function PerformancePage() {
           const dotColor = (r: string | null) => {
             if (r === 'W') return '#3ab05a'
             if (r === 'L') return '#C44536'
-            if (r === 'P') return '#D4AF37'
+            if (r === 'push' || r === 'P') return '#D4AF37'
             if (r === 'PPD') return 'var(--blue)'
             return 'rgba(245,241,230,0.2)'
           }
@@ -611,12 +613,18 @@ export default function PerformancePage() {
                     <div style={{fontFamily:"'Inter',sans-serif",fontSize:'10px',letterSpacing:'0.2em',textTransform:'uppercase',color:'var(--gold)',fontWeight:600,marginBottom:'3px'}}>Pick Archive</div>
                     <div style={{fontFamily:"'Playfair Display',serif",fontSize:'18px',fontWeight:700,color:'var(--cream)'}}>{label}</div>
                   </div>
-                  <div style={{display:'flex',alignItems:'center',gap:'12px'}}>
+                  <div style={{display:'flex',alignItems:'center',gap:'10px'}}>
                     {(rec.w + rec.l) > 0 && (
                       <span style={{fontFamily:"'Inter',sans-serif",fontSize:'13px',fontWeight:600,color: rec.w/(rec.w+rec.l) >= 0.524 ? '#3ab05a' : rec.w/(rec.w+rec.l) >= 0.5 ? 'var(--gold)' : '#C44536'}}>
                         {rec.w}-{rec.l}
                       </span>
                     )}
+                    <Link
+                      href={`/picks/${selectedCalDay}`}
+                      style={{fontFamily:"'Inter',sans-serif",fontSize:'10px',color:'rgba(245,241,230,0.45)',border:'1px solid rgba(255,255,255,0.1)',borderRadius:'5px',padding:'4px 7px',textDecoration:'none',letterSpacing:'0.04em',whiteSpace:'nowrap'}}
+                    >
+                      ↗ Permalink
+                    </Link>
                     <button
                       onClick={() => setSelectedCalDay(null)}
                       style={{background:'rgba(255,255,255,0.06)',border:'none',borderRadius:'6px',width:'28px',height:'28px',cursor:'pointer',color:'rgba(245,241,230,0.5)',fontSize:'16px',display:'flex',alignItems:'center',justifyContent:'center'}}
