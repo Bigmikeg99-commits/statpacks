@@ -60,7 +60,7 @@ export async function generateMetadata({
 
 /* ---- pick row ---- */
 function PickRow({ p, isLast }: { p: ArchivePick; isLast: boolean }) {
-  const edgeStr = (p.edge >= 0 ? '+' : '') + p.edge.toFixed(1)
+  const edgeStr = p.edge != null ? (p.edge >= 0 ? '+' : '') + p.edge.toFixed(1) : null
   const initials = p.name.split(' ').map((n: string) => n[0]).slice(0, 2).join('')
   const dot = dotColor(p.result)
   const hasDot = p.result !== null
@@ -151,16 +151,18 @@ function PickRow({ p, isLast }: { p: ArchivePick; isLast: boolean }) {
         >
           {p.rec} {p.line}K
         </div>
-        <div
-          style={{
-            fontFamily: "'Inter',sans-serif",
-            fontSize: '10px',
-            color: p.edge > 0 ? '#3ab05a' : '#C44536',
-            marginTop: '2px',
-          }}
-        >
-          {edgeStr} edge
-        </div>
+        {edgeStr != null && (
+          <div
+            style={{
+              fontFamily: "'Inter',sans-serif",
+              fontSize: '10px',
+              color: p.edge != null && p.edge > 0 ? '#3ab05a' : '#C44536',
+              marginTop: '2px',
+            }}
+          >
+            {edgeStr} edge
+          </div>
+        )}
         {p.actual_k != null && (
           <div
             style={{
