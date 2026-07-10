@@ -2,7 +2,6 @@
 import { useEffect, useState, useRef } from 'react'
 import Script from 'next/script'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 
 /* ---- types ---- */
 interface ThresholdBucket {
@@ -232,7 +231,6 @@ export default function PerformancePage() {
   const [selectedCalDay, setSelectedCalDay] = useState<string | null>(null)
   const chartRef = useRef<HTMLCanvasElement>(null)
   const axisRef  = useRef<HTMLCanvasElement>(null)
-  const router   = useRouter()
 
   useEffect(() => {
     fetch('/data/picks.json').then(r => r.json()).then(setData).catch(() => {})
@@ -512,7 +510,7 @@ export default function PerformancePage() {
                   <div
                     key={i}
                     className="day fade-in"
-                    onClick={() => { if (hasArchive) { setSelectedCalDay(isoDate); router.push('/picks/' + isoDate) } }}
+                    onClick={() => hasArchive && setSelectedCalDay(isoDate)}
                     style={{
                       background: col.bg,
                       border: `1px solid ${col.border}`,
