@@ -1,5 +1,197 @@
 [
   {
+    "date": "2026-07-09",
+    "picks": [
+      {
+        "name": "Nathan Eovaldi",
+        "mlbamid": "543135",
+        "team": "Texas Rangers",
+        "opp": "Los Angeles Angels",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "UNDER",
+        "line": 7.5,
+        "pred_k": 6.47,
+        "edge": 43.8,
+        "actual_k": 10.0,
+        "result": "L"
+      },
+      {
+        "name": "Andre Pallante",
+        "mlbamid": "669467",
+        "team": "St. Louis Cardinals",
+        "opp": "Milwaukee Brewers",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 3.5,
+        "pred_k": 2.62,
+        "edge": 29.8,
+        "actual_k": 2.0,
+        "result": "L"
+      },
+      {
+        "name": "Ryan Feltner",
+        "mlbamid": "663372",
+        "team": "Colorado Rockies",
+        "opp": "San Francisco Giants",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 3.5,
+        "pred_k": 4.29,
+        "edge": 28.8,
+        "actual_k": 3.0,
+        "result": "L"
+      },
+      {
+        "name": "Bryce Miller",
+        "mlbamid": "682243",
+        "team": "Seattle Mariners",
+        "opp": "Miami Marlins",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 5.5,
+        "pred_k": 6.5,
+        "edge": 26.0,
+        "actual_k": 3.0,
+        "result": "L"
+      },
+      {
+        "name": "Janson Junk",
+        "mlbamid": "676083",
+        "team": "Miami Marlins",
+        "opp": "Seattle Mariners",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 3.5,
+        "pred_k": 2.97,
+        "edge": 23.6,
+        "actual_k": 5.0,
+        "result": "W"
+      },
+      {
+        "name": "Brady Singer",
+        "mlbamid": "663903",
+        "team": "Cincinnati Reds",
+        "opp": "Philadelphia Phillies",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "UNDER",
+        "line": 5.0,
+        "pred_k": 3.05,
+        "edge": 21.9,
+        "actual_k": 5.0,
+        "result": null
+      }
+    ]
+  },
+  {
+    "date": "2026-07-08",
+    "picks": [
+      {
+        "name": "Dylan Cease",
+        "mlbamid": "656302",
+        "team": "Toronto Blue Jays",
+        "opp": "San Francisco Giants",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "UNDER",
+        "line": 7.5,
+        "pred_k": 5.14,
+        "edge": 26.5,
+        "actual_k": 11.0,
+        "result": "L"
+      },
+      {
+        "name": "Jake Bennett",
+        "mlbamid": "687562",
+        "team": "Boston Red Sox",
+        "opp": "Chicago White Sox",
+        "hand": "L",
+        "ha": "Away",
+        "rec": "UNDER",
+        "line": 4.5,
+        "pred_k": 2.5,
+        "edge": 26.2,
+        "actual_k": 4.0,
+        "result": "W"
+      },
+      {
+        "name": "Gerrit Cole",
+        "mlbamid": "543037",
+        "team": "New York Yankees",
+        "opp": "Tampa Bay Rays",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "UNDER",
+        "line": 5.5,
+        "pred_k": 2.91,
+        "edge": 24.2,
+        "actual_k": 6.0,
+        "result": "L"
+      },
+      {
+        "name": "George Kirby",
+        "mlbamid": "669923",
+        "team": "Seattle Mariners",
+        "opp": "Miami Marlins",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "UNDER",
+        "line": 5.5,
+        "pred_k": 3.98,
+        "edge": 22.5,
+        "actual_k": 7.0,
+        "result": "L"
+      },
+      {
+        "name": "Slade Cecconi",
+        "mlbamid": "677944",
+        "team": "Cleveland Guardians",
+        "opp": "Minnesota Twins",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 3.5,
+        "pred_k": 2.63,
+        "edge": 21.3,
+        "actual_k": 4.0,
+        "result": "W"
+      },
+      {
+        "name": "Connor Prielipp",
+        "mlbamid": "687570",
+        "team": "Minnesota Twins",
+        "opp": "Cleveland Guardians",
+        "hand": "L",
+        "ha": "Home",
+        "rec": "UNDER",
+        "line": 6.0,
+        "pred_k": 2.79,
+        "edge": 20.4,
+        "actual_k": 6.0,
+        "result": null
+      },
+      {
+        "name": "Spencer Arrighetti",
+        "mlbamid": "681293",
+        "team": "Houston Astros",
+        "opp": "Washington Nationals",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 4.5,
+        "pred_k": 3.86,
+        "edge": 20.2,
+        "actual_k": 2.0,
+        "result": "L"
+      }
+    ]
+  },
+  {
     "date": "2026-07-07",
     "picks": [
       {
