@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-12 09:56",
+  "updated": "2026-07-12 10:20",
   "picks_date": "2026-07-12",
   "season": {
     "record": "568-457",
@@ -3155,6 +3155,103 @@
           "feat": "spin_FC",
           "val": 1998.5,
           "pp": 13.8
+        }
+      ]
+    },
+    {
+      "name": "José Soriano",
+      "mlbamid": "667755",
+      "team": "Los Angeles Angels",
+      "opp": "vs Minnesota Twins",
+      "hand": "R",
+      "ha": "Away",
+      "rec": "OVER",
+      "line": 5.0,
+      "conf": "72.1%",
+      "pred_k": 6.3,
+      "avg_ip": 5.12,
+      "k_pct": 0.2578,
+      "k_pct_l5": 0.2545,
+      "barrel_pct": 0.0833,
+      "stuff_plus": 99.3,
+      "location_plus": 104.3,
+      "pitching_plus": 106.0,
+      "result": null,
+      "actual_k": null,
+      "pushers_up": [
+        {
+          "label": "Opp K% vs breaking ball",
+          "feat": "opp_k_pct_vs_breaking",
+          "val": 0.337,
+          "pp": 20.9
+        },
+        {
+          "label": "Swinging-strike + whiff rate (SLWR)",
+          "feat": "SLWR",
+          "val": 0.1922,
+          "pp": 19.2
+        },
+        {
+          "label": "Zone swing-miss rate",
+          "feat": "in_zone_swing_miss",
+          "val": 0.1345,
+          "pp": 18.5
+        },
+        {
+          "label": "Changeup usage %",
+          "feat": "changeup_usage",
+          "val": 0.0,
+          "pp": 17.5
+        },
+        {
+          "label": "Fastball extension",
+          "feat": "ext_FB",
+          "val": 6.751,
+          "pp": 13.9
+        },
+        {
+          "label": "Opp O-Contact%",
+          "feat": "opp_o_contact_pct",
+          "val": 0.6045,
+          "pp": 8.1
+        }
+      ],
+      "pushers_down": [
+        {
+          "label": "Fastball usage %",
+          "feat": "fastball_usage",
+          "val": 0.4885,
+          "pp": 26.7
+        },
+        {
+          "label": "Opp K% vs fastball",
+          "feat": "opp_k_pct_vs_fastball",
+          "val": 0.177,
+          "pp": 15.8
+        },
+        {
+          "label": "PSI+ 95th-pct velocity",
+          "feat": "PSI_velo_p95",
+          "val": 98.8,
+          "pp": 8.2
+        },
+        {
+          "label": "Opp whiff rate vs fastball",
+          "feat": "opp_whiff_rate_vs_fastball",
+          "val": 0.205,
+          "pp": 5.1
+        },
+        {
+          "label": "Sinker spin rate",
+          "feat": "spin_SI",
+          "val": 1911.0,
+          "pp": 2.4
+        },
+        {
+          "label": "Opp whiff rate vs breaking",
+          "feat": "opp_whiff_rate_vs_breaking",
+          "val": 0.339,
+          "pp": 2.2
         }
       ]
     },
