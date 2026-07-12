@@ -1,5 +1,108 @@
 [
   {
+    "date": "2026-07-10",
+    "picks": [
+      {
+        "name": "Sandy Alcantara",
+        "mlbamid": "645261",
+        "team": "Miami Marlins",
+        "opp": "Cleveland Guardians",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "UNDER",
+        "line": 5.5,
+        "pred_k": 2.59,
+        "edge": 26.3,
+        "actual_k": 8.0,
+        "result": "L"
+      },
+      {
+        "name": "Robbie Ray",
+        "mlbamid": "592662",
+        "team": "San Francisco Giants",
+        "opp": "Colorado Rockies",
+        "hand": "L",
+        "ha": "Home",
+        "rec": "UNDER",
+        "line": 5.5,
+        "pred_k": 2.76,
+        "edge": 30.3,
+        "actual_k": 4.0,
+        "result": "W"
+      },
+      {
+        "name": "Ryan Weathers",
+        "mlbamid": "677960",
+        "team": "New York Yankees",
+        "opp": "Washington Nationals",
+        "hand": "L",
+        "ha": "Away",
+        "rec": "UNDER",
+        "line": 5.5,
+        "pred_k": 4.42,
+        "edge": 25.6,
+        "actual_k": 6.0,
+        "result": "L"
+      },
+      {
+        "name": "Eduardo Rodriguez",
+        "mlbamid": "593958",
+        "team": "Arizona Diamondbacks",
+        "opp": "Los Angeles Dodgers",
+        "hand": "L",
+        "ha": "Away",
+        "rec": "UNDER",
+        "line": 4.5,
+        "pred_k": 3.11,
+        "edge": 24.3,
+        "actual_k": 5.0,
+        "result": "L"
+      },
+      {
+        "name": "Tanner Gordon",
+        "mlbamid": "685299",
+        "team": "Colorado Rockies",
+        "opp": "San Francisco Giants",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "UNDER",
+        "line": 4.5,
+        "pred_k": 3.1,
+        "edge": 24.2,
+        "actual_k": 1.0,
+        "result": "W"
+      },
+      {
+        "name": "Nick Martinez",
+        "mlbamid": "607259",
+        "team": "Tampa Bay Rays",
+        "opp": "Seattle Mariners",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 4.0,
+        "pred_k": 4.31,
+        "edge": 21.2,
+        "actual_k": 1.0,
+        "result": "L"
+      },
+      {
+        "name": "Shohei Ohtani",
+        "mlbamid": "660271",
+        "team": "Los Angeles Dodgers",
+        "opp": "Arizona Diamondbacks",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 6.0,
+        "pred_k": 6.13,
+        "edge": 20.5,
+        "actual_k": null,
+        "result": null
+      }
+    ]
+  },
+  {
     "date": "2026-07-09",
     "picks": [
       {
