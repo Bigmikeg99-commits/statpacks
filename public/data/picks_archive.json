@@ -1,5 +1,136 @@
 [
   {
+    "date": "2026-07-11",
+    "picks": [
+      {
+        "name": "Javier Assad",
+        "mlbamid": "665871",
+        "team": "Chicago Cubs",
+        "opp": "Cincinnati Reds",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "UNDER",
+        "line": 3.5,
+        "pred_k": 2.5,
+        "edge": 25.5,
+        "actual_k": 4.0,
+        "result": "L"
+      },
+      {
+        "name": "Bubba Chandler",
+        "mlbamid": "696149",
+        "team": "Pittsburgh Pirates",
+        "opp": "Milwaukee Brewers",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 4.0,
+        "pred_k": 4.03,
+        "edge": 25.1,
+        "actual_k": 6.0,
+        "result": "W"
+      },
+      {
+        "name": "Joe Ryan",
+        "mlbamid": "657746",
+        "team": "Minnesota Twins",
+        "opp": "Los Angeles Angels",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "UNDER",
+        "line": 7.5,
+        "pred_k": 4.71,
+        "edge": 23.7,
+        "actual_k": 6.0,
+        "result": "W"
+      },
+      {
+        "name": "Brandon Pfaadt",
+        "mlbamid": "694297",
+        "team": "Arizona Diamondbacks",
+        "opp": "Los Angeles Dodgers",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 3.5,
+        "pred_k": 2.8,
+        "edge": 23.6,
+        "actual_k": 2.0,
+        "result": "L"
+      },
+      {
+        "name": "Kumar Rocker",
+        "mlbamid": "677958",
+        "team": "Texas Rangers",
+        "opp": "Houston Astros",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 4.0,
+        "pred_k": 4.2,
+        "edge": 23.1,
+        "actual_k": 6.0,
+        "result": "W"
+      },
+      {
+        "name": "Tyler Mahle",
+        "mlbamid": "641816",
+        "team": "San Francisco Giants",
+        "opp": "Colorado Rockies",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "UNDER",
+        "line": 5.5,
+        "pred_k": 2.92,
+        "edge": 25.8,
+        "actual_k": 4.0,
+        "result": "W"
+      },
+      {
+        "name": "Trey Yesavage",
+        "mlbamid": "702056",
+        "team": "Toronto Blue Jays",
+        "opp": "San Diego Padres",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 5.0,
+        "pred_k": 4.73,
+        "edge": 20.7,
+        "actual_k": 1.0,
+        "result": "L"
+      },
+      {
+        "name": "Casey Mize",
+        "mlbamid": "663554",
+        "team": "Detroit Tigers",
+        "opp": "Philadelphia Phillies",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "UNDER",
+        "line": 5.5,
+        "pred_k": 4.2,
+        "edge": 20.4,
+        "actual_k": 5.0,
+        "result": "W"
+      },
+      {
+        "name": "Shane Drohan",
+        "mlbamid": "675660",
+        "team": "Milwaukee Brewers",
+        "opp": "Pittsburgh Pirates",
+        "hand": "L",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 4.5,
+        "pred_k": 5.03,
+        "edge": 22.1,
+        "actual_k": 6.0,
+        "result": "W"
+      }
+    ]
+  },
+  {
     "date": "2026-07-10",
     "picks": [
       {
