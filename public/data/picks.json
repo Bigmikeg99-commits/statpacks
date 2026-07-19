@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-19 16:44",
+  "updated": "2026-07-19 17:01",
   "picks_date": "2026-07-19",
   "season": {
     "record": "577-468",
@@ -2757,6 +2757,7 @@
       "stuff_plus": 101.5,
       "location_plus": 93.7,
       "pitching_plus": 99.2,
+      "psi_plus": 100.3,
       "result": null,
       "actual_k": null,
       "pushers_up": [
@@ -2836,6 +2837,7 @@
       "stuff_plus": 96.4,
       "location_plus": 108.3,
       "pitching_plus": 106.9,
+      "psi_plus": 117.0,
       "result": null,
       "actual_k": null,
       "pushers_up": [
@@ -2921,6 +2923,7 @@
       "stuff_plus": 99.8,
       "location_plus": 99.0,
       "pitching_plus": 94.9,
+      "psi_plus": 107.7,
       "result": null,
       "actual_k": null,
       "pushers_up": [
@@ -3006,6 +3009,7 @@
       "stuff_plus": 99.0,
       "location_plus": 103.0,
       "pitching_plus": 101.0,
+      "psi_plus": 93.9,
       "result": null,
       "actual_k": null,
       "pushers_up": [
@@ -3103,6 +3107,7 @@
       "stuff_plus": 102.2,
       "location_plus": 98.0,
       "pitching_plus": 102.9,
+      "psi_plus": 94.3,
       "result": null,
       "actual_k": null,
       "pushers_up": [
@@ -3188,6 +3193,7 @@
       "stuff_plus": 98.2,
       "location_plus": 109.3,
       "pitching_plus": 107.1,
+      "psi_plus": 110.0,
       "result": null,
       "actual_k": null,
       "pushers_up": [
@@ -3279,6 +3285,7 @@
       "stuff_plus": 105.1,
       "location_plus": 90.5,
       "pitching_plus": 90.9,
+      "psi_plus": 94.3,
       "result": null,
       "actual_k": null,
       "pushers_up": [
@@ -3364,6 +3371,7 @@
       "stuff_plus": 97.8,
       "location_plus": 106.1,
       "pitching_plus": 104.5,
+      "psi_plus": 97.3,
       "result": null,
       "actual_k": null,
       "pushers_up": [
