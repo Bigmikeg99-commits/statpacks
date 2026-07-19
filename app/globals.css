@@ -212,9 +212,9 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .pred-cell+.pred-cell{border-left:1px solid rgba(212,175,55,0.1);padding-left:10px}
 .pred-lbl{font-size:7px;line-height:1.2;white-space:nowrap;color:rgba(212,175,55,0.65);letter-spacing:0.04em;font-family:'Inter',sans-serif;margin-bottom:3px;text-transform:uppercase}
 .pred-val{font-family:'Playfair Display',serif;font-size:12px;font-weight:700;color:#f0e6c8}
-.shap-block{margin-bottom:6px;flex:1}
-.shap-hdr{font-size:7.5px;color:rgba(212,175,55,0.7);letter-spacing:0.16em;font-family:'Inter',sans-serif;text-transform:uppercase;margin-bottom:5px}
-.shap-row{display:flex;align-items:center;gap:5px;margin-bottom:5px}
+.shap-block{margin-bottom:4px}
+.shap-hdr{font-size:7.5px;color:rgba(212,175,55,0.7);letter-spacing:0.16em;font-family:'Inter',sans-serif;text-transform:uppercase;margin-bottom:4px}
+.shap-row{display:flex;align-items:center;gap:5px;margin-bottom:4px}
 .shap-lbl{font-size:8px;color:rgba(240,230,200,0.9);font-family:'Inter',sans-serif;width:100px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .shap-track{flex:1;height:4px;background:rgba(0,0,0,0.3);border-radius:2px;overflow:hidden}
 .shap-fill{height:100%;border-radius:2px}

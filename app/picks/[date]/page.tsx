@@ -18,7 +18,9 @@ const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov
 // Single config constant for model version ranges — update when a new model ships
 const MODEL_VERSIONS = [
   { from: '2026-03-26', to: '2026-06-10', label: 'V1 Model' },
-  { from: '2026-06-11', to: null as string | null, label: 'PSI+ V2' },
+  { from: '2026-06-11', to: '2026-06-29', label: 'PSI+ V2' },
+  { from: '2026-06-30', to: '2026-07-15', label: 'PSI+ V2 + T20' },
+  { from: '2026-07-16', to: null as string | null, label: 'Poisson V6' },
 ]
 
 function formatDate(iso: string) {
