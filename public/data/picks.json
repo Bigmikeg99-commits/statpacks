@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-03 13:25",
+  "updated": "2026-08-03 16:25",
   "picks_date": "2026-08-03",
   "season": {
     "record": "616-491",
@@ -3200,6 +3200,74 @@
           "feat": "fastball_usage",
           "val": 0.6413,
           "pp": -1.1
+        }
+      ]
+    },
+    {
+      "name": "Brandon Pfaadt",
+      "mlbamid": "694297",
+      "team": "Arizona Diamondbacks",
+      "opp": "vs San Diego Padres",
+      "hand": "R",
+      "ha": "Home",
+      "rec": "OVER",
+      "line": 3.5,
+      "conf": "69.8%",
+      "pred_k": 4.75,
+      "avg_ip": 5.22,
+      "k_pct": null,
+      "k_pct_l5": null,
+      "barrel_pct": null,
+      "stuff_plus": 95.5,
+      "location_plus": 98.6,
+      "pitching_plus": 95.9,
+      "psi_plus": 96.1,
+      "result": null,
+      "actual_k": null,
+      "pushers_up": [
+        {
+          "label": "Opp O-Contact%",
+          "feat": "opp_o_contact_pct",
+          "val": 0.6146,
+          "pp": 3.1
+        },
+        {
+          "label": "Home/Away",
+          "feat": "home_away",
+          "val": 1.0,
+          "pp": 2.9
+        },
+        {
+          "label": "Avg innings per start",
+          "feat": "avg_IP_per_start",
+          "val": 5.22,
+          "pp": 1.7
+        },
+        {
+          "label": "Days since last start",
+          "feat": "days_since_last_start",
+          "val": 6.0,
+          "pp": 1.1
+        }
+      ],
+      "pushers_down": [
+        {
+          "label": "Stuff+ rating",
+          "feat": "Stuff+",
+          "val": 95.485,
+          "pp": -3.3
+        },
+        {
+          "label": "Opp Z-Contact%",
+          "feat": "opp_z_contact_pct",
+          "val": 0.8754,
+          "pp": -3.2
+        },
+        {
+          "label": "Swinging-strike rate (SwStr%)",
+          "feat": "swstr_pct",
+          "val": 0.0935,
+          "pp": -1.6
         }
       ]
     },
