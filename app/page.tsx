@@ -5,14 +5,28 @@ import Script from 'next/script'
 /* ---- season config (update each year) ---- */
 const PSI_V2_SPLIT = '6/11' // date PSI+ V2 model went live — marks chart split line
 
+/* ---- model version labels (update when a new model ships) ---- */
+const MODEL_VERSIONS = [
+  { from: '2026-03-26', to: '2026-06-10', label: 'V1 Model' },
+  { from: '2026-06-11', to: '2026-06-29', label: 'PSI+ V2' },
+  { from: '2026-06-30', to: '2026-07-15', label: 'PSI+ V2 + T20' },
+  { from: '2026-07-16', to: null as string | null, label: 'Poisson V6' },
+]
+function getModelLabel(date: string) {
+  for (const v of MODEL_VERSIONS) {
+    if (date >= v.from && (v.to === null || date <= v.to)) return v.label
+  }
+  return 'PSI+ V2'
+}
+
 /* ---- types ---- */
 interface Shap { label: string; feat: string; val: number; pp: number }
 interface Pick {
   name: string; mlbamid: string; team?: string; opp: string; hand: string; ha: string
-  rec: string; line: number; conf: string; pred_k: number
+  rec: string; line: number; conf: string; pred_k: number; edge?: number | null
   pushers_up: Shap[]; pushers_down: Shap[]
   result: string | null; actual_k: number | null; pick_status?: string
-  avg_ip?: number; k_pct?: number; barrel_pct?: number; stuff_plus?: number
+  avg_ip?: number; psi_plus?: number | null; stuff_plus?: number
   location_plus?: number; pitching_plus?: number; k_pct_l5?: number
 }
 
@@ -167,7 +181,7 @@ export default function Page() {
       (filter.dir  === 'all' || p.rec  === filter.dir)  &&
       (filter.ha   === 'all' || p.ha.toLowerCase()[0] === filter.ha[0])
     )
-    renderCards(filtered, data.pod.name, data.updated)
+    renderCards(filtered, data.pod.name, data.updated, getModelLabel(data.picks_date || data.updated.slice(0,10)))
   }, [data, filter])
 
   useEffect(() => {
@@ -802,7 +816,7 @@ function setText(id: string, val: string) {
   const el = document.getElementById(id); if (el) el.textContent = val
 }
 
-function renderCards(picks: Pick[], podName: string, updated: string) {
+function renderCards(picks: Pick[], podName: string, updated: string, modelLabel = 'PSI+ V2') {
   const grid = document.getElementById('cards-grid')
   if (!grid) return
   grid.innerHTML = ''
@@ -823,7 +837,7 @@ function renderCards(picks: Pick[], podName: string, updated: string) {
     if (p.result === 'push') scene.classList.add('result-push')
     if (p.pick_status === 'PPD') scene.classList.add('result-ppd')
     scene.addEventListener('click', () => scene.classList.toggle('flipped'))
-    scene.innerHTML = buildCardHTML(p, podName, i + 1)
+    scene.innerHTML = buildCardHTML(p, podName, i + 1, modelLabel)
     grid.appendChild(scene)
     scene.style.opacity = '0'
     setTimeout(() => { scene.style.opacity = ''; scene.classList.add('cascade-in') }, 120 + i * 80)
@@ -831,7 +845,7 @@ function renderCards(picks: Pick[], podName: string, updated: string) {
 }
 
 
-function buildCardHTML(p: Pick, podName: string, rank = 1): string {
+function buildCardHTML(p: Pick, podName: string, rank = 1, modelLabel = 'PSI+ V2'): string {
   const recClass = p.rec === 'OVER' ? 'over' : 'under'
   const confColor = p.rec === 'OVER' ? '#4EABDE' : '#e06050'
   // For UNDER picks, display confidence in the under direction (100 - P(Line))
@@ -854,9 +868,8 @@ function buildCardHTML(p: Pick, podName: string, rank = 1): string {
   const allFeats = [...(p.pushers_up||[]), ...(p.pushers_down||[])]
   const fv = (k: string) => allFeats.find(x => x.feat === k)?.val ?? null
   const fmt = (v: number|null|undefined, dec=1) => v != null ? v.toFixed(dec) : '--'
-  const bAvgIP = p.avg_ip ?? fv('avg_IP_per_start')
-  const bKPct = p.k_pct ?? fv('K%')
-  const bKL5 = p.k_pct_l5 ?? fv('K%_recent')
+  const bAvgIP  = p.avg_ip   ?? fv('avg_IP_per_start')
+  const bPsiPlus = p.psi_plus ?? fv('PSI+') ?? fv('psi_plus')
   const pctStr = (v: number|null|undefined) => v != null ? (v*100).toFixed(1)+'%' : '--'
 
   // SHAP bars — V2 model feature labels
@@ -911,6 +924,9 @@ function buildCardHTML(p: Pick, podName: string, rank = 1): string {
       return `<div class="shap-row"><div class="shap-lbl">${friendlyLabel(f.label)}</div><div class="shap-track"><div class="shap-fill" style="width:${w}%;background:${color}"></div></div><div class="shap-num" style="color:${color}">${sign}${f.pp.toFixed(0)}</div></div>`
     }).join('')
   const hasShap = (p.pushers_up?.length||0)+(p.pushers_down?.length||0) > 0
+  const gapNum = p.pred_k != null ? p.pred_k - p.line : null
+  const gapStr = gapNum != null ? (gapNum >= 0 ? '+' : '') + gapNum.toFixed(1) : '--'
+  const gapColor = gapNum != null && gapNum !== 0 ? (gapNum > 0 ? '#3ab05a' : '#C44536') : 'rgba(245,241,230,0.5)'
   const podTag = isPod ? `<div class="card-pod-tag">★ Pick of the Day</div>` : ''
   const rankBadge = isPod ? '' : `<div class="card-rank-badge${rank <= 5 ? ' top' : ''}">#${rank}</div>`
   const resultOverlay = resultClass ? `<div class="card-result-overlay ${resultClass}"></div>` : ''
@@ -952,7 +968,7 @@ function buildCardHTML(p: Pick, podName: string, rank = 1): string {
       </div>
       <div class="card-tap-hint">tap to flip</div>
       <div class="card-footer-strip">
-        <span>StatPacks · PSI+ V2</span><span>${p.hand}HP · ${p.ha}</span>
+        <span>StatPacks · ${modelLabel}</span><span>${p.hand}HP · ${p.ha}</span>
       </div>
     </div>
     <div class="card-back">
@@ -965,11 +981,10 @@ function buildCardHTML(p: Pick, podName: string, rank = 1): string {
       </div>
       <div class="back-stats-hdr">2026 Season Stats</div>
       <table class="back-stats-table">
-        <tr><th>Avg IP</th><th>K%</th><th>Barrel %</th><th>Stuff+</th><th>Loc+</th><th>Pitch+</th></tr>
+        <tr><th>Avg IP</th><th>PSI+</th><th>Stuff+</th><th>Loc+</th><th>Pitch+</th></tr>
         <tr>
           <td>${fmt(bAvgIP as number)}</td>
-          <td>${pctStr(bKPct as number)}</td>
-          <td>${p.barrel_pct!=null?(p.barrel_pct*100).toFixed(1)+'%':'--'}</td>
+          <td>${fmt(bPsiPlus as number, 0)}</td>
           <td>${fmt(p.stuff_plus,0)}</td>
           <td>${fmt(p.location_plus,0)}</td>
           <td>${fmt(p.pitching_plus,0)}</td>
@@ -977,7 +992,7 @@ function buildCardHTML(p: Pick, podName: string, rank = 1): string {
       </table>
       <div class="back-divider"></div>
       <div class="pred-row">
-        <div class="pred-cell"><div class="pred-lbl">Median K</div><div class="pred-val">${fmt(p.pred_k)}</div></div>
+        <div class="pred-cell"><div class="pred-lbl">Predicted Ks</div><div class="pred-val">${fmt(p.pred_k)}</div></div>
         <div class="pred-cell"><div class="pred-lbl">Line</div><div class="pred-val">${p.line}</div></div>
         <div class="pred-cell"><div class="pred-lbl">Model Confidence</div><div class="pred-val" style="color:${confColor}">${displayConf}</div></div>
         <div class="pred-cell"><div class="pred-lbl">Actual Ks</div><div class="pred-val pred-actual-k" style="color:${p.actual_k != null ? (p.result === 'win' ? '#3ab05a' : p.result === 'push' ? '#999' : '#C44536') : p.pick_status === 'PPD' ? '#4EABDE' : 'rgba(245,241,230,0.35)'}">${p.actual_k != null ? p.actual_k : p.pick_status === 'PPD' ? 'PPD' : '--'}</div></div>
@@ -985,10 +1000,16 @@ function buildCardHTML(p: Pick, podName: string, rank = 1): string {
       ${hasShap
         ? `<div class="shap-block"><div class="shap-hdr">More Strikeouts</div>${shapRows(p.pushers_up,'#3ab05a','+')}</div>
            <div class="shap-block"><div class="shap-hdr">Fewer Strikeouts</div>${shapRows(p.pushers_down,'#C44536','-')}</div>`
-        : '<div class="no-shap">no model data</div>'
+        : `<div class="shap-block">
+          <div class="shap-hdr">Model Forecast</div>
+          <div style="font-family:'Inter',sans-serif;font-size:9px;color:rgba(240,230,200,0.8);line-height:2">
+            <div>Pred K <strong style="color:#F5F1E6">${fmt(p.pred_k)}</strong> &nbsp;·&nbsp; Line <strong style="color:#F5F1E6">${p.line}</strong> &nbsp;·&nbsp; Gap <strong style="color:${gapColor}">${gapStr}</strong></div>
+            ${p.edge != null ? `<div style="color:rgba(212,175,55,0.85)">Edge: ${p.edge >= 0 ? '+' : ''}${p.edge.toFixed(1)} pp over breakeven</div>` : ''}
+          </div>
+        </div>`
       }
       <div class="back-footer">
-        <div class="back-footer-txt">StatPacks · PSI+ V2</div>
+        <div class="back-footer-txt">StatPacks · ${modelLabel}</div>
         <div class="back-footer-txt">${p.hand}HP · ${p.ha}</div>
       </div>
     </div>
