@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-10 17:27",
+  "updated": "2026-08-10 18:09",
   "picks_date": "2026-08-10",
   "season": {
     "record": "640-512",
@@ -1575,19 +1575,81 @@
       "ha": "Home",
       "rec": "UNDER",
       "line": 5.5,
-      "conf": "nan%",
-      "pred_k": null,
-      "avg_ip": null,
+      "conf": "25.8%",
+      "pred_k": 4.27,
+      "avg_ip": 5.01,
       "k_pct": null,
-      "k_pct_l5": null,
+      "k_pct_l5": 0.25,
       "barrel_pct": null,
-      "stuff_plus": null,
-      "location_plus": null,
-      "pitching_plus": null,
+      "stuff_plus": 89.5,
+      "location_plus": 92.8,
+      "pitching_plus": 86.0,
       "result": null,
       "actual_k": null,
-      "pushers_up": [],
-      "pushers_down": []
+      "pushers_up": [
+        {
+          "label": "Opp O-Contact%",
+          "feat": "opp_o_contact_pct",
+          "val": 0.6013,
+          "pp": 3.1
+        },
+        {
+          "label": "PSI+ CLW component",
+          "feat": "PSI_CLW",
+          "val": 0.1298,
+          "pp": 3.0
+        },
+        {
+          "label": "Home/Away",
+          "feat": "home_away",
+          "val": 1.0,
+          "pp": 2.8
+        },
+        {
+          "label": "Swinging-strike + whiff rate (SLWR)",
+          "feat": "SLWR",
+          "val": 0.1933,
+          "pp": 2.4
+        },
+        {
+          "label": "Days since last start",
+          "feat": "days_since_last_start",
+          "val": 5.0,
+          "pp": 2.0
+        },
+        {
+          "label": "Swinging-strike rate (SwStr%)",
+          "feat": "swstr_pct",
+          "val": 0.1231,
+          "pp": 1.4
+        }
+      ],
+      "pushers_down": [
+        {
+          "label": "Stuff+ rating",
+          "feat": "Stuff+",
+          "val": 89.4542,
+          "pp": -11.2
+        },
+        {
+          "label": "Pitching+ rating",
+          "feat": "Pitching+",
+          "val": 85.975,
+          "pp": -7.4
+        },
+        {
+          "label": "PSI+ vertical approach angle",
+          "feat": "PSI_vaa",
+          "val": -6.175,
+          "pp": -5.0
+        },
+        {
+          "label": "Fastball extension",
+          "feat": "ext_FB",
+          "val": 6.154,
+          "pp": -1.5
+        }
+      ]
     },
     {
       "name": "Hunter Dobbins",
@@ -1598,19 +1660,75 @@
       "ha": "Home",
       "rec": "OVER",
       "line": 3.5,
-      "conf": "nan%",
-      "pred_k": null,
-      "avg_ip": null,
+      "conf": "69.0%",
+      "pred_k": 4.7,
+      "avg_ip": 4.71,
       "k_pct": null,
-      "k_pct_l5": null,
+      "k_pct_l5": 0.2281,
       "barrel_pct": null,
-      "stuff_plus": null,
-      "location_plus": null,
-      "pitching_plus": null,
+      "stuff_plus": 97.5,
+      "location_plus": 101.3,
+      "pitching_plus": 98.0,
       "result": null,
       "actual_k": null,
-      "pushers_up": [],
-      "pushers_down": []
+      "pushers_up": [
+        {
+          "label": "PSI+ vertical approach angle",
+          "feat": "PSI_vaa",
+          "val": -5.278,
+          "pp": 2.9
+        },
+        {
+          "label": "Home/Away",
+          "feat": "home_away",
+          "val": 1.0,
+          "pp": 2.8
+        },
+        {
+          "label": "Stuff+ rating",
+          "feat": "Stuff+",
+          "val": 97.4577,
+          "pp": 2.1
+        },
+        {
+          "label": "Days since last start",
+          "feat": "days_since_last_start",
+          "val": 6.0,
+          "pp": 1.2
+        },
+        {
+          "label": "4-seam fastball spin rate",
+          "feat": "spin_FF",
+          "val": 2381.7,
+          "pp": 1.0
+        }
+      ],
+      "pushers_down": [
+        {
+          "label": "PSI+ CLW component",
+          "feat": "PSI_CLW",
+          "val": 0.0995,
+          "pp": -3.8
+        },
+        {
+          "label": "Opp Z-Contact%",
+          "feat": "opp_z_contact_pct",
+          "val": 0.8717,
+          "pp": -3.0
+        },
+        {
+          "label": "Avg innings per start",
+          "feat": "avg_IP_per_start",
+          "val": 4.7133,
+          "pp": -2.9
+        },
+        {
+          "label": "Swinging-strike + whiff rate (SLWR)",
+          "feat": "SLWR",
+          "val": 0.1286,
+          "pp": -1.1
+        }
+      ]
     },
     {
       "name": "Andrew Painter",
@@ -1621,19 +1739,81 @@
       "ha": "Away",
       "rec": "OVER",
       "line": 3.5,
-      "conf": "nan%",
-      "pred_k": null,
-      "avg_ip": null,
+      "conf": "68.2%",
+      "pred_k": 4.65,
+      "avg_ip": 4.52,
       "k_pct": null,
-      "k_pct_l5": null,
+      "k_pct_l5": 0.1781,
       "barrel_pct": null,
-      "stuff_plus": null,
-      "location_plus": null,
-      "pitching_plus": null,
+      "stuff_plus": 100.7,
+      "location_plus": 101.8,
+      "pitching_plus": 104.1,
       "result": null,
       "actual_k": null,
-      "pushers_up": [],
-      "pushers_down": []
+      "pushers_up": [
+        {
+          "label": "Stuff+ rating",
+          "feat": "Stuff+",
+          "val": 100.7158,
+          "pp": 6.2
+        },
+        {
+          "label": "Changeup usage %",
+          "feat": "changeup_usage",
+          "val": 0.0226,
+          "pp": 4.2
+        },
+        {
+          "label": "Pitching+ rating",
+          "feat": "Pitching+",
+          "val": 104.1173,
+          "pp": 1.5
+        },
+        {
+          "label": "Days since last start",
+          "feat": "days_since_last_start",
+          "val": 5.0,
+          "pp": 1.4
+        }
+      ],
+      "pushers_down": [
+        {
+          "label": "Opp O-Contact%",
+          "feat": "opp_o_contact_pct",
+          "val": 0.6486,
+          "pp": -4.3
+        },
+        {
+          "label": "Avg innings per start",
+          "feat": "avg_IP_per_start",
+          "val": 4.52,
+          "pp": -4.1
+        },
+        {
+          "label": "Home/Away",
+          "feat": "home_away",
+          "val": 0.0,
+          "pp": -2.6
+        },
+        {
+          "label": "PSI+ CLW component",
+          "feat": "PSI_CLW",
+          "val": 0.1095,
+          "pp": -2.3
+        },
+        {
+          "label": "Opp SwStr%",
+          "feat": "opp_swstr_pct",
+          "val": 0.106,
+          "pp": -1.5
+        },
+        {
+          "label": "Opp O-Swing%",
+          "feat": "opp_o_swing_pct",
+          "val": 0.3291,
+          "pp": -1.3
+        }
+      ]
     },
     {
       "name": "Blade Tidwell",
@@ -1644,19 +1824,75 @@
       "ha": "Home",
       "rec": "OVER",
       "line": 3.5,
-      "conf": "nan%",
-      "pred_k": null,
-      "avg_ip": null,
+      "conf": "67.8%",
+      "pred_k": 4.62,
+      "avg_ip": 5.0,
       "k_pct": null,
-      "k_pct_l5": null,
+      "k_pct_l5": 0.1875,
       "barrel_pct": null,
-      "stuff_plus": null,
-      "location_plus": null,
-      "pitching_plus": null,
+      "stuff_plus": 107.8,
+      "location_plus": 94.1,
+      "pitching_plus": 96.2,
       "result": null,
       "actual_k": null,
-      "pushers_up": [],
-      "pushers_down": []
+      "pushers_up": [
+        {
+          "label": "Stuff+ rating",
+          "feat": "Stuff+",
+          "val": 107.8035,
+          "pp": 14.5
+        },
+        {
+          "label": "Home/Away",
+          "feat": "home_away",
+          "val": 1.0,
+          "pp": 3.9
+        },
+        {
+          "label": "Days since last start",
+          "feat": "days_since_last_start",
+          "val": 6.0,
+          "pp": 1.1
+        }
+      ],
+      "pushers_down": [
+        {
+          "label": "PSI+ CLW component",
+          "feat": "PSI_CLW",
+          "val": null,
+          "pp": -7.8
+        },
+        {
+          "label": "PSI+ 95th-pct velocity",
+          "feat": "PSI_velo_p95",
+          "val": null,
+          "pp": -3.7
+        },
+        {
+          "label": "PSI+ vertical approach angle",
+          "feat": "PSI_vaa",
+          "val": null,
+          "pp": -3.6
+        },
+        {
+          "label": "Swinging-strike + whiff rate (SLWR)",
+          "feat": "SLWR",
+          "val": null,
+          "pp": -2.3
+        },
+        {
+          "label": "Fastball extension",
+          "feat": "ext_FB",
+          "val": null,
+          "pp": -2.1
+        },
+        {
+          "label": "Opp O-Contact%",
+          "feat": "opp_o_contact_pct",
+          "val": 0.6311,
+          "pp": -1.9
+        }
+      ]
     },
     {
       "name": "Christian Scott",
@@ -1667,19 +1903,93 @@
       "ha": "Away",
       "rec": "UNDER",
       "line": 5.5,
-      "conf": "nan%",
-      "pred_k": null,
-      "avg_ip": null,
+      "conf": "31.6%",
+      "pred_k": 4.61,
+      "avg_ip": 4.44,
       "k_pct": null,
-      "k_pct_l5": null,
+      "k_pct_l5": 0.2857,
       "barrel_pct": null,
-      "stuff_plus": null,
-      "location_plus": null,
-      "pitching_plus": null,
+      "stuff_plus": 107.3,
+      "location_plus": 99.6,
+      "pitching_plus": 103.9,
       "result": null,
       "actual_k": null,
-      "pushers_up": [],
-      "pushers_down": []
+      "pushers_up": [
+        {
+          "label": "Stuff+ rating",
+          "feat": "Stuff+",
+          "val": 107.2675,
+          "pp": 10.8
+        },
+        {
+          "label": "Fastball extension",
+          "feat": "ext_FB",
+          "val": 6.947,
+          "pp": 2.8
+        },
+        {
+          "label": "PSI+ vertical approach angle",
+          "feat": "PSI_vaa",
+          "val": -4.404,
+          "pp": 1.7
+        },
+        {
+          "label": "Pitching+ rating",
+          "feat": "Pitching+",
+          "val": 103.8533,
+          "pp": 1.4
+        },
+        {
+          "label": "Days since last start",
+          "feat": "days_since_last_start",
+          "val": 5.0,
+          "pp": 1.3
+        },
+        {
+          "label": "4-seam fastball spin rate",
+          "feat": "spin_FF",
+          "val": 2283.5,
+          "pp": 1.1
+        }
+      ],
+      "pushers_down": [
+        {
+          "label": "Opp O-Contact%",
+          "feat": "opp_o_contact_pct",
+          "val": 0.6582,
+          "pp": -5.8
+        },
+        {
+          "label": "Avg innings per start",
+          "feat": "avg_IP_per_start",
+          "val": 4.4367,
+          "pp": -5.6
+        },
+        {
+          "label": "Home/Away",
+          "feat": "home_away",
+          "val": 0.0,
+          "pp": -4.1
+        },
+        {
+          "label": "PSI+ CLW component",
+          "feat": "PSI_CLW",
+          "val": 0.1103,
+          "pp": -2.4
+        },
+        {
+          "label": "Opp Z-Contact%",
+          "feat": "opp_z_contact_pct",
+          "val": 0.8699,
+          "pp": -2.2
+        },
+        {
+          "label": "Batters faced (rolling avg)",
+          "feat": "BF_rolling_avg",
+          "val": 18.6,
+          "pp": -1.9
+        }
+      ]
     },
     {
       "name": "Trevor Rogers",
@@ -1690,19 +2000,81 @@
       "ha": "Away",
       "rec": "OVER",
       "line": 4.5,
-      "conf": "nan%",
-      "pred_k": null,
-      "avg_ip": null,
+      "conf": "61.0%",
+      "pred_k": 5.3,
+      "avg_ip": 5.92,
       "k_pct": null,
-      "k_pct_l5": null,
+      "k_pct_l5": 0.1966,
       "barrel_pct": null,
-      "stuff_plus": null,
-      "location_plus": null,
-      "pitching_plus": null,
+      "stuff_plus": 101.4,
+      "location_plus": 104.4,
+      "pitching_plus": 102.8,
       "result": null,
       "actual_k": null,
-      "pushers_up": [],
-      "pushers_down": []
+      "pushers_up": [
+        {
+          "label": "Stuff+ rating",
+          "feat": "Stuff+",
+          "val": 101.3712,
+          "pp": 8.1
+        },
+        {
+          "label": "Avg innings per start",
+          "feat": "avg_IP_per_start",
+          "val": 5.92,
+          "pp": 3.0
+        },
+        {
+          "label": "Opp O-Contact%",
+          "feat": "opp_o_contact_pct",
+          "val": 0.6077,
+          "pp": 2.0
+        },
+        {
+          "label": "Location+ rating",
+          "feat": "Location+",
+          "val": 104.3737,
+          "pp": 1.5
+        },
+        {
+          "label": "Pitching+ rating",
+          "feat": "Pitching+",
+          "val": 102.8176,
+          "pp": 1.4
+        },
+        {
+          "label": "4-seam fastball spin rate",
+          "feat": "spin_FF",
+          "val": 2483.3,
+          "pp": 1.2
+        }
+      ],
+      "pushers_down": [
+        {
+          "label": "Home/Away",
+          "feat": "home_away",
+          "val": 0.0,
+          "pp": -3.5
+        },
+        {
+          "label": "PSI+ CLW component",
+          "feat": "PSI_CLW",
+          "val": 0.0997,
+          "pp": -3.2
+        },
+        {
+          "label": "Opp Z-Contact%",
+          "feat": "opp_z_contact_pct",
+          "val": 0.8623,
+          "pp": -1.3
+        },
+        {
+          "label": "Changeup usage %",
+          "feat": "changeup_usage",
+          "val": 0.2219,
+          "pp": -1.1
+        }
+      ]
     }
   ],
   "thresholdStats": [],
