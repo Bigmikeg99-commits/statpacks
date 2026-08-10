@@ -693,7 +693,7 @@
         "pred_k": 4.39,
         "edge": 19.8,
         "actual_k": null,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Jake Bennett",
@@ -946,7 +946,7 @@
         "pred_k": 4.28,
         "edge": 21.6,
         "actual_k": 5.0,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Sonny Gray",
@@ -1312,7 +1312,7 @@
         "pred_k": 3.26,
         "edge": 24.6,
         "actual_k": null,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Brandon Pfaadt",
@@ -1359,7 +1359,7 @@
         "pred_k": 3.95,
         "edge": 26.9,
         "actual_k": 5.0,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Gabriel Hughes",
@@ -1504,7 +1504,7 @@
         "pred_k": 5.7,
         "edge": 14.9,
         "actual_k": null,
-        "result": NaN
+        "result": null
       }
     ]
   },
@@ -1654,7 +1654,7 @@
         "pred_k": 4.3,
         "edge": 21.3,
         "actual_k": 5.0,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Robert Gasser",
@@ -1701,7 +1701,7 @@
         "pred_k": 3.38,
         "edge": 22.4,
         "actual_k": 4.0,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Spencer Arrighetti",
@@ -1715,7 +1715,7 @@
         "pred_k": 5.14,
         "edge": 21.7,
         "actual_k": 6.0,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Brandon Pfaadt",
@@ -1743,7 +1743,7 @@
         "pred_k": 5.28,
         "edge": 19.6,
         "actual_k": 6.0,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Dustin May",
@@ -1799,7 +1799,7 @@
         "pred_k": 6.89,
         "edge": 16.1,
         "actual_k": null,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Patrick Sandoval",
@@ -1860,7 +1860,7 @@
         "pred_k": 4.18,
         "edge": 23.2,
         "actual_k": 5.0,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Jake Bennett",
@@ -2281,7 +2281,7 @@
         "pred_k": 6.13,
         "edge": 18.1,
         "actual_k": null,
-        "result": NaN
+        "result": null
       }
     ]
   },
@@ -2370,7 +2370,7 @@
         "pred_k": 3.05,
         "edge": 19.5,
         "actual_k": 5.0,
-        "result": NaN
+        "result": null
       }
     ]
   },
@@ -2459,7 +2459,7 @@
         "pred_k": 2.79,
         "edge": 18.0,
         "actual_k": 6.0,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Spencer Arrighetti",
@@ -2651,7 +2651,7 @@
         "pred_k": 2.5,
         "edge": 21.9,
         "actual_k": 3.0,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Cristopher Sánchez",
@@ -2768,7 +2768,7 @@
         "pred_k": 4.09,
         "edge": 23.2,
         "actual_k": 4.0,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Eduardo Rodriguez",
@@ -2857,7 +2857,7 @@
         "pred_k": 2.5,
         "edge": 30.0,
         "actual_k": null,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Hunter Brown",
@@ -3905,7 +3905,7 @@
         "pred_k": 3.28,
         "edge": 6.5,
         "actual_k": 4.0,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Joey Cantillo",
@@ -4008,7 +4008,7 @@
         "pred_k": 4.25,
         "edge": 8.5,
         "actual_k": null,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Michael McGreevy",
@@ -4022,7 +4022,7 @@
         "pred_k": 2.5,
         "edge": 7.5,
         "actual_k": null,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Seth Lugo",
@@ -4050,7 +4050,7 @@
         "pred_k": 2.92,
         "edge": 6.5,
         "actual_k": null,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Kevin Gausman",
@@ -4209,7 +4209,7 @@
         "pred_k": 3.7,
         "edge": 4.9,
         "actual_k": 5.0,
-        "result": NaN
+        "result": null
       }
     ]
   },
@@ -4270,7 +4270,7 @@
         "pred_k": 2.5,
         "edge": 11.4,
         "actual_k": null,
-        "result": NaN
+        "result": null
       },
       {
         "name": "JR Ritchie",
@@ -4401,7 +4401,7 @@
         "pred_k": 2.58,
         "edge": 11.0,
         "actual_k": 4.0,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Shota Imanaga",
@@ -4415,7 +4415,7 @@
         "pred_k": 4.15,
         "edge": 0.5,
         "actual_k": null,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Michael Wacha",
@@ -4490,7 +4490,7 @@
         "pred_k": 2.86,
         "edge": 16.1,
         "actual_k": 5.0,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Payton Tolle",
@@ -4546,7 +4546,7 @@
         "pred_k": 4.36,
         "edge": 7.8,
         "actual_k": null,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Michael Lorenzen",
@@ -4794,7 +4794,7 @@
         "pred_k": 3.94,
         "edge": 18.7,
         "actual_k": null,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Randy Vásquez",
@@ -5000,7 +5000,7 @@
         "pred_k": 2.79,
         "edge": 11.5,
         "actual_k": 5.0,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Brandon Sproat",
@@ -5379,7 +5379,7 @@
         "pred_k": 2.62,
         "edge": 32.7,
         "actual_k": null,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Grayson Rodriguez",
@@ -5547,7 +5547,7 @@
         "pred_k": 3.3,
         "edge": 1.8,
         "actual_k": null,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Emmet Sheehan",
@@ -5664,7 +5664,7 @@
         "pred_k": 2.74,
         "edge": 10.3,
         "actual_k": null,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Noah Cameron",
@@ -5842,7 +5842,7 @@
         "pred_k": 2.79,
         "edge": 8.6,
         "actual_k": null,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Tyler Phillips",
@@ -6062,7 +6062,7 @@
         "pred_k": 2.5,
         "edge": 16.4,
         "actual_k": 3.0,
-        "result": NaN
+        "result": null
       }
     ]
   },
@@ -6142,7 +6142,7 @@
         "pred_k": 2.5,
         "edge": 36.8,
         "actual_k": 4.0,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Cam Schlittler",
@@ -6301,7 +6301,7 @@
         "pred_k": 4.52,
         "edge": 23.9,
         "actual_k": null,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Tanner Gordon",
@@ -6315,7 +6315,7 @@
         "pred_k": 2.56,
         "edge": 21.6,
         "actual_k": null,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Bryce Miller",
@@ -6413,7 +6413,7 @@
         "pred_k": 2.5,
         "edge": 15.6,
         "actual_k": null,
-        "result": NaN
+        "result": null
       }
     ]
   },
@@ -6937,7 +6937,7 @@
         "pred_k": 2.5,
         "edge": 14.2,
         "actual_k": null,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Randy Vasquez",
@@ -7302,7 +7302,7 @@
         "pred_k": 5.33,
         "edge": 14.3,
         "actual_k": 5.0,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Kumar Rocker",
@@ -8027,7 +8027,7 @@
         "pred_k": 0.0,
         "edge": 28.7,
         "actual_k": null,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Tanner Bibee",
@@ -8088,7 +8088,7 @@
         "pred_k": 0.0,
         "edge": 35.1,
         "actual_k": null,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Brandon Young",
@@ -8247,7 +8247,7 @@
         "pred_k": 0.0,
         "edge": 25.5,
         "actual_k": null,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Brayan Bello",
@@ -8261,7 +8261,7 @@
         "pred_k": 0.0,
         "edge": 41.3,
         "actual_k": null,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Colin Rea",
@@ -8289,7 +8289,7 @@
         "pred_k": 0.0,
         "edge": 15.2,
         "actual_k": null,
-        "result": NaN
+        "result": null
       },
       {
         "name": "JT Ginn",
@@ -9421,7 +9421,7 @@
         "pred_k": 0.0,
         "edge": 19.3,
         "actual_k": null,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Emerson Hancock",
@@ -10076,7 +10076,7 @@
         "pred_k": 0.0,
         "edge": 37.8,
         "actual_k": null,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Andrew Abbott",
@@ -10249,7 +10249,7 @@
         "pred_k": 0.0,
         "edge": 22.6,
         "actual_k": null,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Michael Wacha",
@@ -10670,7 +10670,7 @@
         "pred_k": 0.0,
         "edge": 29.1,
         "actual_k": null,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Will Warren",
@@ -11002,7 +11002,7 @@
         "pred_k": 0.0,
         "edge": 15.9,
         "actual_k": null,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Chase Petty",
@@ -11119,7 +11119,7 @@
         "pred_k": 0.0,
         "edge": 18.8,
         "actual_k": null,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Justin Wrobleski",
@@ -11643,7 +11643,7 @@
         "pred_k": 0.0,
         "edge": 43.1,
         "actual_k": null,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Brandon Williamson",
@@ -11671,7 +11671,7 @@
         "pred_k": 0.0,
         "edge": 33.7,
         "actual_k": null,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Eduardo Rodriguez",
@@ -12387,7 +12387,7 @@
         "pred_k": 0.0,
         "edge": 8.4,
         "actual_k": 1.0,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Cade Cavalli",
@@ -13873,7 +13873,7 @@
         "pred_k": 0.0,
         "edge": 32.8,
         "actual_k": 4.0,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Kyle Leahy",
@@ -13901,7 +13901,7 @@
         "pred_k": 0.0,
         "edge": 37.6,
         "actual_k": 4.0,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Chris Bassitt",
@@ -14219,7 +14219,7 @@
         "pred_k": 0.0,
         "edge": 18.6,
         "actual_k": 4.0,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Connelly Early",
@@ -15275,7 +15275,7 @@
         "pred_k": 0.0,
         "edge": 37.6,
         "actual_k": 6.0,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Chris Bassitt",
@@ -15663,7 +15663,7 @@
         "pred_k": 0.0,
         "edge": 21.9,
         "actual_k": 6.0,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Nolan McLean",
@@ -15761,7 +15761,7 @@
         "pred_k": 0.0,
         "edge": 37.6,
         "actual_k": 6.0,
-        "result": NaN
+        "result": null
       }
     ]
   },
@@ -16327,7 +16327,7 @@
         "pred_k": 1.77,
         "edge": 45.0,
         "actual_k": 4.0,
-        "result": NaN
+        "result": null
       }
     ]
   },
@@ -16416,7 +16416,7 @@
         "pred_k": 5.3,
         "edge": 14.8,
         "actual_k": 3.0,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Rhett Lowder",
@@ -17174,7 +17174,7 @@
         "pred_k": 7.17,
         "edge": 0.0,
         "actual_k": 6.0,
-        "result": NaN
+        "result": null
       },
       {
         "name": "Nolan McLean",
