@@ -1,18 +1,18 @@
 {
-  "updated": "2026-08-09 10:26",
-  "picks_date": "2026-08-09",
+  "updated": "2026-08-10 14:08",
+  "picks_date": "2026-08-10",
   "season": {
-    "record": "638-510",
-    "overs": "315-274",
-    "unders": "323-236",
-    "picks": 1148,
+    "record": "640-512",
+    "overs": "317-275",
+    "unders": "323-237",
+    "picks": 1152,
     "overall_pct": "55.6",
     "over_pct": "53.5",
-    "under_pct": "57.8",
-    "date_range": "3/26-8/8"
+    "under_pct": "57.7",
+    "date_range": "3/26-8/9"
   },
   "pod": {
-    "name": "Jacob Misiorowski"
+    "name": "Dean Kremer"
   },
   "daily": [
     {
@@ -1324,6 +1324,16 @@
       "uw": 1,
       "ul": 1,
       "p": 44.4
+    },
+    {
+      "d": "8/9",
+      "w": 2,
+      "l": 2,
+      "ow": 2,
+      "ol": 1,
+      "uw": 0,
+      "ul": 1,
+      "p": 50.0
     }
   ],
   "backtestDaily": [
@@ -1589,14 +1599,14 @@
     }
   ],
   "performanceSeason": {
-    "record": "638-510",
-    "overs": "315-274",
-    "unders": "323-236",
-    "picks": 1148,
+    "record": "640-512",
+    "overs": "317-275",
+    "unders": "323-237",
+    "picks": 1152,
     "overall_pct": "55.6",
     "over_pct": "53.5",
-    "under_pct": "57.8",
-    "date_range": "3/26-8/8"
+    "under_pct": "57.7",
+    "date_range": "3/26-8/9"
   },
   "performanceDaily": [
     {
@@ -2908,6 +2918,16 @@
       "uw": 1,
       "ul": 1,
       "p": 44.4
+    },
+    {
+      "d": "8/9",
+      "w": 2,
+      "l": 2,
+      "ow": 2,
+      "ol": 1,
+      "uw": 0,
+      "ul": 1,
+      "p": 50.0
     }
   ],
   "overSegs": [
@@ -2927,10 +2947,10 @@
     },
     {
       "l": "RHP Home (all)",
-      "w": 126,
+      "w": 127,
       "lo": 90,
-      "pct": 58.3,
-      "e": 0.5
+      "pct": 58.5,
+      "e": 0.7
     },
     {
       "l": "P(Line) 80-85%",
@@ -2941,10 +2961,10 @@
     },
     {
       "l": "Line 4.5",
-      "w": 110,
+      "w": 111,
       "lo": 83,
-      "pct": 57.0,
-      "e": -0.8
+      "pct": 57.2,
+      "e": -0.6
     },
     {
       "l": "P(Line) 65-70%",
@@ -2956,9 +2976,9 @@
     {
       "l": "Line ≤4.0",
       "w": 88,
-      "lo": 73,
-      "pct": 54.7,
-      "e": -3.1
+      "lo": 74,
+      "pct": 54.3,
+      "e": -3.5
     },
     {
       "l": "LHP Home",
@@ -2990,17 +3010,24 @@
     },
     {
       "l": "RHP Away",
-      "w": 112,
-      "lo": 108,
+      "w": 113,
+      "lo": 109,
       "pct": 50.9,
       "e": -6.9
     },
     {
       "l": "RHP Home >5.5",
-      "w": 14,
+      "w": 15,
       "lo": 16,
-      "pct": 46.7,
-      "e": -11.1
+      "pct": 48.4,
+      "e": -9.4
+    },
+    {
+      "l": "Line 6.0+",
+      "w": 33,
+      "lo": 40,
+      "pct": 45.2,
+      "e": -12.6
     },
     {
       "l": "P(Line) 75-80%",
@@ -3008,13 +3035,6 @@
       "lo": 27,
       "pct": 44.9,
       "e": -12.9
-    },
-    {
-      "l": "Line 6.0+",
-      "w": 32,
-      "lo": 40,
-      "pct": 44.4,
-      "e": -13.4
     },
     {
       "l": "P(Line) 70-75%",
@@ -3061,18 +3081,18 @@
       "e": 4.9
     },
     {
-      "l": "LHP (all)",
-      "w": 104,
-      "lo": 68,
-      "pct": 60.5,
-      "e": 2.7
-    },
-    {
       "l": "P(Line) 10-15%",
       "w": 50,
       "lo": 33,
       "pct": 60.2,
       "e": 2.4
+    },
+    {
+      "l": "LHP (all)",
+      "w": 104,
+      "lo": 69,
+      "pct": 60.1,
+      "e": 2.3
     },
     {
       "l": "RHP Away",
@@ -3098,9 +3118,9 @@
     {
       "l": "Away (all)",
       "w": 158,
-      "lo": 112,
-      "pct": 58.5,
-      "e": 0.7
+      "lo": 113,
+      "pct": 58.3,
+      "e": 0.5
     },
     {
       "l": "RHP Home",
@@ -3119,9 +3139,9 @@
     {
       "l": "LHP Away",
       "w": 51,
-      "lo": 41,
-      "pct": 55.4,
-      "e": -2.4
+      "lo": 42,
+      "pct": 54.8,
+      "e": -3.0
     },
     {
       "l": "Line ≤3.5",
@@ -3133,119 +3153,297 @@
     {
       "l": "Line 5.0-5.5",
       "w": 82,
-      "lo": 79,
-      "pct": 50.9,
-      "e": -6.9
+      "lo": 80,
+      "pct": 50.6,
+      "e": -7.2
     }
   ],
   "picks": [
     {
-      "name": "Jacob Misiorowski",
-      "mlbamid": "694819",
-      "team": "Milwaukee Brewers",
-      "opp": "vs Minnesota Twins",
+      "name": "Dean Kremer",
+      "mlbamid": "665152",
+      "team": "Minnesota Twins",
+      "opp": "vs Baltimore Orioles",
       "hand": "R",
       "ha": "Home",
-      "rec": "OVER",
-      "line": 8.5,
-      "conf": "60.0%",
-      "pred_k": 9.43,
-      "avg_ip": 6.3,
+      "rec": "UNDER",
+      "line": 5.5,
+      "conf": "25.8%",
+      "pred_k": 4.27,
+      "avg_ip": 5.01,
       "k_pct": null,
       "k_pct_l5": null,
       "barrel_pct": null,
-      "stuff_plus": 127.5,
-      "location_plus": 101.9,
-      "pitching_plus": 129.5,
-      "psi_plus": 122.8,
+      "stuff_plus": 89.5,
+      "location_plus": 92.8,
+      "pitching_plus": 86.0,
+      "psi_plus": 104.8,
+      "result": null,
+      "actual_k": null,
+      "pushers_up": [
+        {
+          "label": "Opp O-Contact%",
+          "feat": "opp_o_contact_pct",
+          "val": 0.6013,
+          "pp": 3.1
+        },
+        {
+          "label": "PSI+ CLW component",
+          "feat": "PSI_CLW",
+          "val": 0.1298,
+          "pp": 3.0
+        },
+        {
+          "label": "Home/Away",
+          "feat": "home_away",
+          "val": 1.0,
+          "pp": 2.8
+        },
+        {
+          "label": "Swinging-strike + whiff rate (SLWR)",
+          "feat": "SLWR",
+          "val": 0.1933,
+          "pp": 2.4
+        },
+        {
+          "label": "Days since last start",
+          "feat": "days_since_last_start",
+          "val": 5.0,
+          "pp": 2.0
+        },
+        {
+          "label": "Swinging-strike rate (SwStr%)",
+          "feat": "swstr_pct",
+          "val": 0.1231,
+          "pp": 1.4
+        }
+      ],
+      "pushers_down": [
+        {
+          "label": "Stuff+ rating",
+          "feat": "Stuff+",
+          "val": 89.4542,
+          "pp": -11.2
+        },
+        {
+          "label": "Pitching+ rating",
+          "feat": "Pitching+",
+          "val": 85.975,
+          "pp": -7.4
+        },
+        {
+          "label": "PSI+ vertical approach angle",
+          "feat": "PSI_vaa",
+          "val": -6.175,
+          "pp": -5.0
+        },
+        {
+          "label": "Fastball extension",
+          "feat": "ext_FB",
+          "val": 6.154,
+          "pp": -1.5
+        }
+      ]
+    },
+    {
+      "name": "Hunter Dobbins",
+      "mlbamid": "690928",
+      "team": "St. Louis Cardinals",
+      "opp": "vs Philadelphia Phillies",
+      "hand": "R",
+      "ha": "Home",
+      "rec": "OVER",
+      "line": 3.5,
+      "conf": "69.0%",
+      "pred_k": 4.7,
+      "avg_ip": 4.71,
+      "k_pct": null,
+      "k_pct_l5": null,
+      "barrel_pct": null,
+      "stuff_plus": 97.5,
+      "location_plus": 101.3,
+      "pitching_plus": 98.0,
+      "psi_plus": 97.6,
+      "result": null,
+      "actual_k": null,
+      "pushers_up": [
+        {
+          "label": "PSI+ vertical approach angle",
+          "feat": "PSI_vaa",
+          "val": -5.278,
+          "pp": 2.9
+        },
+        {
+          "label": "Home/Away",
+          "feat": "home_away",
+          "val": 1.0,
+          "pp": 2.8
+        },
+        {
+          "label": "Stuff+ rating",
+          "feat": "Stuff+",
+          "val": 97.4577,
+          "pp": 2.1
+        },
+        {
+          "label": "Days since last start",
+          "feat": "days_since_last_start",
+          "val": 6.0,
+          "pp": 1.2
+        },
+        {
+          "label": "4-seam fastball spin rate",
+          "feat": "spin_FF",
+          "val": 2381.7,
+          "pp": 1.0
+        }
+      ],
+      "pushers_down": [
+        {
+          "label": "PSI+ CLW component",
+          "feat": "PSI_CLW",
+          "val": 0.0995,
+          "pp": -3.8
+        },
+        {
+          "label": "Opp Z-Contact%",
+          "feat": "opp_z_contact_pct",
+          "val": 0.8717,
+          "pp": -3.0
+        },
+        {
+          "label": "Avg innings per start",
+          "feat": "avg_IP_per_start",
+          "val": 4.7133,
+          "pp": -2.9
+        },
+        {
+          "label": "Swinging-strike + whiff rate (SLWR)",
+          "feat": "SLWR",
+          "val": 0.1286,
+          "pp": -1.1
+        }
+      ]
+    },
+    {
+      "name": "Andrew Painter",
+      "mlbamid": "691725",
+      "team": "Philadelphia Phillies",
+      "opp": "vs St. Louis Cardinals",
+      "hand": "R",
+      "ha": "Away",
+      "rec": "OVER",
+      "line": 3.5,
+      "conf": "68.2%",
+      "pred_k": 4.65,
+      "avg_ip": 4.52,
+      "k_pct": null,
+      "k_pct_l5": null,
+      "barrel_pct": null,
+      "stuff_plus": 100.7,
+      "location_plus": 101.8,
+      "pitching_plus": 104.1,
+      "psi_plus": 102.1,
       "result": null,
       "actual_k": null,
       "pushers_up": [
         {
           "label": "Stuff+ rating",
           "feat": "Stuff+",
-          "val": 127.4577,
-          "pp": 26.2
+          "val": 100.7158,
+          "pp": 6.2
         },
         {
-          "label": "Fastball extension",
-          "feat": "ext_FB",
-          "val": 7.594,
-          "pp": 8.7
-        },
-        {
-          "label": "PSI+ CLW component",
-          "feat": "PSI_CLW",
-          "val": 0.1885,
-          "pp": 7.6
+          "label": "Changeup usage %",
+          "feat": "changeup_usage",
+          "val": 0.0226,
+          "pp": 4.2
         },
         {
           "label": "Pitching+ rating",
           "feat": "Pitching+",
-          "val": 129.4772,
-          "pp": 6.9
+          "val": 104.1173,
+          "pp": 1.5
         },
         {
-          "label": "PSI+ vertical approach angle",
-          "feat": "PSI_vaa",
-          "val": -3.978,
-          "pp": 5.8
+          "label": "Days since last start",
+          "feat": "days_since_last_start",
+          "val": 5.0,
+          "pp": 1.4
+        }
+      ],
+      "pushers_down": [
+        {
+          "label": "Opp O-Contact%",
+          "feat": "opp_o_contact_pct",
+          "val": 0.6486,
+          "pp": -4.3
+        },
+        {
+          "label": "Avg innings per start",
+          "feat": "avg_IP_per_start",
+          "val": 4.52,
+          "pp": -4.1
+        },
+        {
+          "label": "Home/Away",
+          "feat": "home_away",
+          "val": 0.0,
+          "pp": -2.6
+        },
+        {
+          "label": "PSI+ CLW component",
+          "feat": "PSI_CLW",
+          "val": 0.1095,
+          "pp": -2.3
+        },
+        {
+          "label": "Opp SwStr%",
+          "feat": "opp_swstr_pct",
+          "val": 0.106,
+          "pp": -1.5
+        },
+        {
+          "label": "Opp O-Swing%",
+          "feat": "opp_o_swing_pct",
+          "val": 0.3291,
+          "pp": -1.3
+        }
+      ]
+    },
+    {
+      "name": "Blade Tidwell",
+      "mlbamid": "694918",
+      "team": "San Francisco Giants",
+      "opp": "vs Houston Astros",
+      "hand": "R",
+      "ha": "Home",
+      "rec": "OVER",
+      "line": 3.5,
+      "conf": "67.8%",
+      "pred_k": 4.62,
+      "avg_ip": 5.0,
+      "k_pct": null,
+      "k_pct_l5": null,
+      "barrel_pct": null,
+      "stuff_plus": 107.8,
+      "location_plus": 94.1,
+      "pitching_plus": 96.2,
+      "psi_plus": null,
+      "result": null,
+      "actual_k": null,
+      "pushers_up": [
+        {
+          "label": "Stuff+ rating",
+          "feat": "Stuff+",
+          "val": 107.8035,
+          "pp": 14.5
         },
         {
           "label": "Home/Away",
           "feat": "home_away",
           "val": 1.0,
-          "pp": 4.7
-        }
-      ],
-      "pushers_down": [
-        {
-          "label": "Fastball usage %",
-          "feat": "fastball_usage",
-          "val": 0.6319,
-          "pp": -1.4
-        }
-      ]
-    },
-    {
-      "name": "Cristian Javier",
-      "mlbamid": "664299",
-      "team": "Houston Astros",
-      "opp": "vs San Diego Padres",
-      "hand": "R",
-      "ha": "Away",
-      "rec": "OVER",
-      "line": 3.5,
-      "conf": "59.2%",
-      "pred_k": 4.13,
-      "avg_ip": 4.32,
-      "k_pct": null,
-      "k_pct_l5": null,
-      "barrel_pct": null,
-      "stuff_plus": 95.0,
-      "location_plus": 94.2,
-      "pitching_plus": 89.2,
-      "psi_plus": 92.8,
-      "result": null,
-      "actual_k": null,
-      "pushers_up": [
-        {
-          "label": "PSI+ vertical approach angle",
-          "feat": "PSI_vaa",
-          "val": -4.209,
-          "pp": 3.1
-        },
-        {
-          "label": "Opp O-Contact%",
-          "feat": "opp_o_contact_pct",
-          "val": 0.618,
-          "pp": 2.4
-        },
-        {
-          "label": "Swinging-strike rate (SwStr%)",
-          "feat": "swstr_pct",
-          "val": 0.134,
-          "pp": 2.3
+          "pp": 3.9
         },
         {
           "label": "Days since last start",
@@ -3256,61 +3454,159 @@
       ],
       "pushers_down": [
         {
-          "label": "Pitching+ rating",
-          "feat": "Pitching+",
-          "val": 89.1776,
-          "pp": -6.6
+          "label": "PSI+ CLW component",
+          "feat": "PSI_CLW",
+          "val": null,
+          "pp": -7.8
         },
         {
-          "label": "Opp Z-Contact%",
-          "feat": "opp_z_contact_pct",
-          "val": 0.8746,
-          "pp": -4.8
+          "label": "PSI+ 95th-pct velocity",
+          "feat": "PSI_velo_p95",
+          "val": null,
+          "pp": -3.7
+        },
+        {
+          "label": "PSI+ vertical approach angle",
+          "feat": "PSI_vaa",
+          "val": null,
+          "pp": -3.6
+        },
+        {
+          "label": "Swinging-strike + whiff rate (SLWR)",
+          "feat": "SLWR",
+          "val": null,
+          "pp": -2.3
+        },
+        {
+          "label": "Fastball extension",
+          "feat": "ext_FB",
+          "val": null,
+          "pp": -2.1
+        },
+        {
+          "label": "Opp O-Contact%",
+          "feat": "opp_o_contact_pct",
+          "val": 0.6311,
+          "pp": -1.9
+        }
+      ]
+    },
+    {
+      "name": "Christian Scott",
+      "mlbamid": "681035",
+      "team": "New York Mets",
+      "opp": "vs Atlanta Braves",
+      "hand": "R",
+      "ha": "Away",
+      "rec": "UNDER",
+      "line": 5.5,
+      "conf": "31.6%",
+      "pred_k": 4.61,
+      "avg_ip": 4.44,
+      "k_pct": null,
+      "k_pct_l5": null,
+      "barrel_pct": null,
+      "stuff_plus": 107.3,
+      "location_plus": 99.6,
+      "pitching_plus": 103.9,
+      "psi_plus": 98.0,
+      "result": null,
+      "actual_k": null,
+      "pushers_up": [
+        {
+          "label": "Stuff+ rating",
+          "feat": "Stuff+",
+          "val": 107.2675,
+          "pp": 10.8
+        },
+        {
+          "label": "Fastball extension",
+          "feat": "ext_FB",
+          "val": 6.947,
+          "pp": 2.8
+        },
+        {
+          "label": "PSI+ vertical approach angle",
+          "feat": "PSI_vaa",
+          "val": -4.404,
+          "pp": 1.7
+        },
+        {
+          "label": "Pitching+ rating",
+          "feat": "Pitching+",
+          "val": 103.8533,
+          "pp": 1.4
+        },
+        {
+          "label": "Days since last start",
+          "feat": "days_since_last_start",
+          "val": 5.0,
+          "pp": 1.3
+        },
+        {
+          "label": "4-seam fastball spin rate",
+          "feat": "spin_FF",
+          "val": 2283.5,
+          "pp": 1.1
+        }
+      ],
+      "pushers_down": [
+        {
+          "label": "Opp O-Contact%",
+          "feat": "opp_o_contact_pct",
+          "val": 0.6582,
+          "pp": -5.8
         },
         {
           "label": "Avg innings per start",
           "feat": "avg_IP_per_start",
-          "val": 4.3233,
-          "pp": -3.3
+          "val": 4.4367,
+          "pp": -5.6
         },
         {
           "label": "Home/Away",
           "feat": "home_away",
           "val": 0.0,
-          "pp": -3.2
+          "pp": -4.1
         },
         {
-          "label": "Stuff+ rating",
-          "feat": "Stuff+",
-          "val": 95.0065,
-          "pp": -2.7
+          "label": "PSI+ CLW component",
+          "feat": "PSI_CLW",
+          "val": 0.1103,
+          "pp": -2.4
         },
         {
-          "label": "Fastball extension",
-          "feat": "ext_FB",
-          "val": 6.064,
-          "pp": -1.3
+          "label": "Opp Z-Contact%",
+          "feat": "opp_z_contact_pct",
+          "val": 0.8699,
+          "pp": -2.2
+        },
+        {
+          "label": "Batters faced (rolling avg)",
+          "feat": "BF_rolling_avg",
+          "val": 18.6,
+          "pp": -1.9
         }
       ]
     },
     {
-      "name": "Connor Prielipp",
-      "mlbamid": "687570",
-      "team": "Minnesota Twins",
-      "opp": "vs Milwaukee Brewers",
+      "name": "Trevor Rogers",
+      "mlbamid": "669432",
+      "team": "Baltimore Orioles",
+      "opp": "vs Minnesota Twins",
       "hand": "L",
       "ha": "Away",
-      "rec": "UNDER",
-      "line": 5.5,
-      "conf": "30.7%",
-      "pred_k": 4.56,
-      "avg_ip": 5.21,
+      "rec": "OVER",
+      "line": 4.5,
+      "conf": "61.0%",
+      "pred_k": 5.3,
+      "avg_ip": 5.92,
       "k_pct": null,
       "k_pct_l5": null,
       "barrel_pct": null,
-      "stuff_plus": 102.3,
-      "location_plus": 102.8,
-      "pitching_plus": 101.7,
+      "stuff_plus": 101.4,
+      "location_plus": 104.4,
+      "pitching_plus": 102.8,
       "psi_plus": 93.4,
       "result": null,
       "actual_k": null,
@@ -3318,168 +3614,64 @@
         {
           "label": "Stuff+ rating",
           "feat": "Stuff+",
-          "val": 102.315,
-          "pp": 7.4
-        },
-        {
-          "label": "PSI+ vertical approach angle",
-          "feat": "PSI_vaa",
-          "val": -4.991,
-          "pp": 2.6
+          "val": 101.3712,
+          "pp": 8.1
         },
         {
           "label": "Avg innings per start",
           "feat": "avg_IP_per_start",
-          "val": 5.2133,
-          "pp": 2.0
-        },
-        {
-          "label": "PSI+ 95th-pct velocity",
-          "feat": "PSI_velo_p95",
-          "val": 96.6,
-          "pp": 1.6
-        },
-        {
-          "label": "Pitching+ rating",
-          "feat": "Pitching+",
-          "val": 101.6727,
-          "pp": 1.1
-        }
-      ],
-      "pushers_down": [
-        {
-          "label": "Opp Z-Contact%",
-          "feat": "opp_z_contact_pct",
-          "val": 0.8716,
-          "pp": -4.2
-        },
-        {
-          "label": "PSI+ CLW component",
-          "feat": "PSI_CLW",
-          "val": 0.095,
-          "pp": -4.1
-        },
-        {
-          "label": "Home/Away",
-          "feat": "home_away",
-          "val": 0.0,
-          "pp": -3.4
-        },
-        {
-          "label": "Opp SwStr%",
-          "feat": "opp_swstr_pct",
-          "val": 0.0941,
-          "pp": -2.7
-        },
-        {
-          "label": "Fastball extension",
-          "feat": "ext_FB",
-          "val": 5.85,
-          "pp": -2.2
-        },
-        {
-          "label": "Swinging-strike rate (SwStr%)",
-          "feat": "swstr_pct",
-          "val": 0.0952,
-          "pp": -1.3
-        }
-      ]
-    },
-    {
-      "name": "Grayson Rodriguez",
-      "mlbamid": "680570",
-      "team": "Los Angeles Angels",
-      "opp": "vs Miami Marlins",
-      "hand": "R",
-      "ha": "Away",
-      "rec": "OVER",
-      "line": 4.5,
-      "conf": "60.4%",
-      "pred_k": 5.26,
-      "avg_ip": 4.23,
-      "k_pct": null,
-      "k_pct_l5": null,
-      "barrel_pct": null,
-      "stuff_plus": 104.7,
-      "location_plus": 99.6,
-      "pitching_plus": 102.6,
-      "psi_plus": 109.2,
-      "result": null,
-      "actual_k": null,
-      "pushers_up": [
-        {
-          "label": "Stuff+ rating",
-          "feat": "Stuff+",
-          "val": 104.6988,
-          "pp": 7.0
-        },
-        {
-          "label": "PSI+ CLW component",
-          "feat": "PSI_CLW",
-          "val": 0.1366,
-          "pp": 5.1
+          "val": 5.92,
+          "pp": 3.0
         },
         {
           "label": "Opp O-Contact%",
           "feat": "opp_o_contact_pct",
-          "val": 0.6141,
-          "pp": 3.0
+          "val": 0.6077,
+          "pp": 2.0
         },
         {
-          "label": "Fastball extension",
-          "feat": "ext_FB",
-          "val": 7.234,
-          "pp": 3.0
+          "label": "Location+ rating",
+          "feat": "Location+",
+          "val": 104.3737,
+          "pp": 1.5
         },
         {
-          "label": "PSI+ vertical approach angle",
-          "feat": "PSI_vaa",
-          "val": -4.573,
-          "pp": 2.5
+          "label": "Pitching+ rating",
+          "feat": "Pitching+",
+          "val": 102.8176,
+          "pp": 1.4
         },
         {
-          "label": "Days since last start",
-          "feat": "days_since_last_start",
-          "val": 5.0,
-          "pp": 1.6
+          "label": "4-seam fastball spin rate",
+          "feat": "spin_FF",
+          "val": 2483.3,
+          "pp": 1.2
         }
       ],
       "pushers_down": [
         {
-          "label": "Avg innings per start",
-          "feat": "avg_IP_per_start",
-          "val": 4.23,
-          "pp": -4.4
-        },
-        {
           "label": "Home/Away",
           "feat": "home_away",
           "val": 0.0,
-          "pp": -2.9
+          "pp": -3.5
+        },
+        {
+          "label": "PSI+ CLW component",
+          "feat": "PSI_CLW",
+          "val": 0.0997,
+          "pp": -3.2
         },
         {
           "label": "Opp Z-Contact%",
           "feat": "opp_z_contact_pct",
-          "val": 0.8709,
-          "pp": -2.9
-        },
-        {
-          "label": "Swinging-strike rate (SwStr%)",
-          "feat": "swstr_pct",
-          "val": 0.0931,
-          "pp": -2.4
-        },
-        {
-          "label": "Batters faced (rolling avg)",
-          "feat": "BF_rolling_avg",
-          "val": 20.0,
-          "pp": -1.0
+          "val": 0.8623,
+          "pp": -1.3
         },
         {
           "label": "Changeup usage %",
           "feat": "changeup_usage",
-          "val": 0.235,
-          "pp": -1.0
+          "val": 0.2219,
+          "pp": -1.1
         }
       ]
     }
@@ -3490,9 +3682,9 @@
       "label": "3.5 Ks",
       "over": {
         "w": 79,
-        "l": 66,
-        "pct": 54.5,
-        "n": 145
+        "l": 67,
+        "pct": 54.1,
+        "n": 146
       },
       "under": {
         "w": 38,
@@ -3502,19 +3694,19 @@
       },
       "total": {
         "w": 117,
-        "l": 94,
-        "pct": 55.5,
-        "n": 211
+        "l": 95,
+        "pct": 55.2,
+        "n": 212
       }
     },
     {
       "line": 4.5,
       "label": "4.5 Ks",
       "over": {
-        "w": 110,
+        "w": 111,
         "l": 83,
-        "pct": 57.0,
-        "n": 193
+        "pct": 57.2,
+        "n": 194
       },
       "under": {
         "w": 117,
@@ -3523,10 +3715,10 @@
         "n": 198
       },
       "total": {
-        "w": 227,
+        "w": 228,
         "l": 164,
-        "pct": 58.1,
-        "n": 391
+        "pct": 58.2,
+        "n": 392
       }
     },
     {
@@ -3540,15 +3732,15 @@
       },
       "under": {
         "w": 71,
-        "l": 69,
-        "pct": 50.7,
-        "n": 140
+        "l": 70,
+        "pct": 50.4,
+        "n": 141
       },
       "total": {
         "w": 147,
-        "l": 138,
-        "pct": 51.6,
-        "n": 285
+        "l": 139,
+        "pct": 51.4,
+        "n": 286
       }
     },
     {
@@ -3577,10 +3769,10 @@
       "line": 7.5,
       "label": "7.0+ Ks",
       "over": {
-        "w": 6,
+        "w": 7,
         "l": 3,
-        "pct": 66.7,
-        "n": 9
+        "pct": 70.0,
+        "n": 10
       },
       "under": {
         "w": 28,
@@ -3589,10 +3781,10 @@
         "n": 39
       },
       "total": {
-        "w": 34,
+        "w": 35,
         "l": 14,
-        "pct": 70.8,
-        "n": 48
+        "pct": 71.4,
+        "n": 49
       }
     }
   ],
@@ -4141,9 +4333,9 @@
         "label": "3.5 Ks",
         "over": {
           "w": 8,
-          "l": 6,
-          "pct": 57.1,
-          "n": 14
+          "l": 7,
+          "pct": 53.3,
+          "n": 15
         },
         "under": {
           "w": 0,
@@ -4153,19 +4345,19 @@
         },
         "total": {
           "w": 8,
-          "l": 6,
-          "pct": 57.1,
-          "n": 14
+          "l": 7,
+          "pct": 53.3,
+          "n": 15
         }
       },
       {
         "line": 4.5,
         "label": "4.5 Ks",
         "over": {
-          "w": 7,
+          "w": 8,
           "l": 5,
-          "pct": 58.3,
-          "n": 12
+          "pct": 61.5,
+          "n": 13
         },
         "under": {
           "w": 2,
@@ -4174,10 +4366,10 @@
           "n": 3
         },
         "total": {
-          "w": 9,
+          "w": 10,
           "l": 6,
-          "pct": 60.0,
-          "n": 15
+          "pct": 62.5,
+          "n": 16
         }
       },
       {
@@ -4191,15 +4383,15 @@
         },
         "under": {
           "w": 2,
-          "l": 1,
-          "pct": 66.7,
-          "n": 3
+          "l": 2,
+          "pct": 50.0,
+          "n": 4
         },
         "total": {
           "w": 2,
-          "l": 6,
-          "pct": 25.0,
-          "n": 8
+          "l": 7,
+          "pct": 22.2,
+          "n": 9
         }
       },
       {
@@ -4228,10 +4420,10 @@
         "line": 7.5,
         "label": "7.0+ Ks",
         "over": {
-          "w": 0,
+          "w": 1,
           "l": 0,
-          "pct": 0,
-          "n": 0
+          "pct": 100.0,
+          "n": 1
         },
         "under": {
           "w": 3,
@@ -4240,10 +4432,10 @@
           "n": 5
         },
         "total": {
-          "w": 3,
+          "w": 4,
           "l": 2,
-          "pct": 60.0,
-          "n": 5
+          "pct": 66.7,
+          "n": 6
         }
       }
     ]
