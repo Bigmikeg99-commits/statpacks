@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-10 18:11",
+  "updated": "2026-08-10 18:22",
   "picks_date": "2026-08-10",
   "season": {
     "record": "640-512",
@@ -1584,6 +1584,7 @@
       "stuff_plus": 89.5,
       "location_plus": 92.8,
       "pitching_plus": 86.0,
+      "psi_plus": 104.8,
       "result": null,
       "actual_k": null,
       "pushers_up": [
@@ -1669,6 +1670,7 @@
       "stuff_plus": 97.5,
       "location_plus": 101.3,
       "pitching_plus": 98.0,
+      "psi_plus": 97.6,
       "result": null,
       "actual_k": null,
       "pushers_up": [
@@ -1748,6 +1750,7 @@
       "stuff_plus": 100.7,
       "location_plus": 101.8,
       "pitching_plus": 104.1,
+      "psi_plus": 102.1,
       "result": null,
       "actual_k": null,
       "pushers_up": [
@@ -1833,6 +1836,7 @@
       "stuff_plus": 107.8,
       "location_plus": 94.1,
       "pitching_plus": 96.2,
+      "psi_plus": null,
       "result": null,
       "actual_k": null,
       "pushers_up": [
@@ -1912,6 +1916,7 @@
       "stuff_plus": 107.3,
       "location_plus": 99.6,
       "pitching_plus": 103.9,
+      "psi_plus": 98.0,
       "result": null,
       "actual_k": null,
       "pushers_up": [
@@ -2009,6 +2014,7 @@
       "stuff_plus": 101.4,
       "location_plus": 104.4,
       "pitching_plus": 102.8,
+      "psi_plus": 93.4,
       "result": null,
       "actual_k": null,
       "pushers_up": [
