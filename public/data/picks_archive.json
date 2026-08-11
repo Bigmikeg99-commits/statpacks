@@ -1,5 +1,94 @@
 [
   {
+    "date": "2026-08-10",
+    "picks": [
+      {
+        "name": "Dean Kremer",
+        "mlbamid": "665152",
+        "team": "Minnesota Twins",
+        "opp": "Baltimore Orioles",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "UNDER",
+        "line": 5.5,
+        "pred_k": 4.27,
+        "edge": 21.8,
+        "actual_k": 7.0,
+        "result": "L"
+      },
+      {
+        "name": "Hunter Dobbins",
+        "mlbamid": "690928",
+        "team": "St. Louis Cardinals",
+        "opp": "Philadelphia Phillies",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 3.5,
+        "pred_k": 4.7,
+        "edge": 16.6,
+        "actual_k": 6.0,
+        "result": "W"
+      },
+      {
+        "name": "Christian Scott",
+        "mlbamid": "681035",
+        "team": "New York Mets",
+        "opp": "Atlanta Braves",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "UNDER",
+        "line": 5.5,
+        "pred_k": 4.61,
+        "edge": 16.0,
+        "actual_k": 6.0,
+        "result": "L"
+      },
+      {
+        "name": "Andrew Painter",
+        "mlbamid": "691725",
+        "team": "Philadelphia Phillies",
+        "opp": "St. Louis Cardinals",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 3.5,
+        "pred_k": 4.65,
+        "edge": 15.8,
+        "actual_k": 6.0,
+        "result": "W"
+      },
+      {
+        "name": "Blade Tidwell",
+        "mlbamid": "694918",
+        "team": "San Francisco Giants",
+        "opp": "Houston Astros",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 3.5,
+        "pred_k": 4.62,
+        "edge": 15.4,
+        "actual_k": 6.0,
+        "result": "W"
+      },
+      {
+        "name": "Trevor Rogers",
+        "mlbamid": "669432",
+        "team": "Baltimore Orioles",
+        "opp": "Minnesota Twins",
+        "hand": "L",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 4.5,
+        "pred_k": 5.3,
+        "edge": 8.6,
+        "actual_k": 4.0,
+        "result": "L"
+      }
+    ]
+  },
+  {
     "date": "2026-08-09",
     "picks": [
       {
