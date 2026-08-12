@@ -1,5 +1,122 @@
 [
   {
+    "date": "2026-08-11",
+    "picks": [
+      {
+        "name": "Hunter Brown",
+        "mlbamid": "686613",
+        "team": "Houston Astros",
+        "opp": "San Francisco Giants",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "UNDER",
+        "line": 5.5,
+        "pred_k": 4.67,
+        "edge": 15.0,
+        "actual_k": 4.0,
+        "result": "W"
+      },
+      {
+        "name": "Andre Pallante",
+        "mlbamid": "669467",
+        "team": "St. Louis Cardinals",
+        "opp": "Philadelphia Phillies",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 3.5,
+        "pred_k": 4.98,
+        "edge": 20.8,
+        "actual_k": 2.0,
+        "result": "L"
+      },
+      {
+        "name": "Carson Whisenhunt",
+        "mlbamid": "687931",
+        "team": "San Francisco Giants",
+        "opp": "Houston Astros",
+        "hand": "L",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 3.5,
+        "pred_k": 4.65,
+        "edge": 15.8,
+        "actual_k": 2.0,
+        "result": "L"
+      },
+      {
+        "name": "Drew Anderson",
+        "mlbamid": "623454",
+        "team": "Detroit Tigers",
+        "opp": "Cleveland Guardians",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 3.5,
+        "pred_k": 4.57,
+        "edge": 14.5,
+        "actual_k": 4.0,
+        "result": "W"
+      },
+      {
+        "name": "Shota Imanaga",
+        "mlbamid": "684007",
+        "team": "Chicago Cubs",
+        "opp": "Washington Nationals",
+        "hand": "L",
+        "ha": "Away",
+        "rec": "UNDER",
+        "line": 5.5,
+        "pred_k": 4.71,
+        "edge": 14.3,
+        "actual_k": 5.0,
+        "result": "W"
+      },
+      {
+        "name": "Eury Pérez",
+        "mlbamid": "691587",
+        "team": "Miami Marlins",
+        "opp": "Pittsburgh Pirates",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 6.5,
+        "pred_k": 7.74,
+        "edge": 13.0,
+        "actual_k": 7.0,
+        "result": "W"
+      },
+      {
+        "name": "Nick Martinez",
+        "mlbamid": "607259",
+        "team": "Tampa Bay Rays",
+        "opp": "Athletics",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 3.5,
+        "pred_k": 4.43,
+        "edge": 12.2,
+        "actual_k": 5.0,
+        "result": "W"
+      },
+      {
+        "name": "Kyle Harrison",
+        "mlbamid": "690986",
+        "team": "Milwaukee Brewers",
+        "opp": "San Diego Padres",
+        "hand": "L",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 5.5,
+        "pred_k": 6.35,
+        "edge": 8.5,
+        "actual_k": 3.0,
+        "result": "L"
+      }
+    ]
+  },
+  {
     "date": "2026-08-10",
     "picks": [
       {
