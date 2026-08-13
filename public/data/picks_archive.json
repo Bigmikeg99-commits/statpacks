@@ -1,5 +1,80 @@
 [
   {
+    "date": "2026-08-12",
+    "picks": [
+      {
+        "name": "Eric Lauer",
+        "mlbamid": "641778",
+        "team": "Los Angeles Dodgers",
+        "opp": "Kansas City Royals",
+        "hand": "L",
+        "ha": "Home",
+        "rec": "UNDER",
+        "line": 4.5,
+        "pred_k": 3.42,
+        "edge": 21.6,
+        "actual_k": 6.0,
+        "result": "L"
+      },
+      {
+        "name": "Bryce Miller",
+        "mlbamid": "682243",
+        "team": "Seattle Mariners",
+        "opp": "New York Yankees",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 5.5,
+        "pred_k": 7.31,
+        "edge": 21.3,
+        "actual_k": 5.0,
+        "result": "L"
+      },
+      {
+        "name": "Tyler Mahle",
+        "mlbamid": "641816",
+        "team": "Atlanta Braves",
+        "opp": "New York Mets",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "UNDER",
+        "line": 5.5,
+        "pred_k": 4.48,
+        "edge": 18.2,
+        "actual_k": 7.0,
+        "result": "L"
+      },
+      {
+        "name": "Foster Griffin",
+        "mlbamid": "656492",
+        "team": "Cleveland Guardians",
+        "opp": "Detroit Tigers",
+        "hand": "L",
+        "ha": "Away",
+        "rec": "UNDER",
+        "line": 5.5,
+        "pred_k": 4.64,
+        "edge": 15.5,
+        "actual_k": 3.0,
+        "result": "W"
+      },
+      {
+        "name": "Will Warren",
+        "mlbamid": "701542",
+        "team": "New York Yankees",
+        "opp": "Seattle Mariners",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 4.5,
+        "pred_k": 5.3,
+        "edge": 8.6,
+        "actual_k": 3.0,
+        "result": "L"
+      }
+    ]
+  },
+  {
     "date": "2026-08-11",
     "picks": [
       {
