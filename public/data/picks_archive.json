@@ -1,5 +1,108 @@
 [
   {
+    "date": "2026-08-13",
+    "picks": [
+      {
+        "name": "Tyler Phillips",
+        "mlbamid": "663969",
+        "team": "Miami Marlins",
+        "opp": "Pittsburgh Pirates",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 3.5,
+        "pred_k": 4.58,
+        "edge": 14.7,
+        "actual_k": 6.0,
+        "result": "W"
+      },
+      {
+        "name": "Kevin Gausman",
+        "mlbamid": "592332",
+        "team": "Chicago Cubs",
+        "opp": "Washington Nationals",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 4.5,
+        "pred_k": 5.63,
+        "edge": 13.8,
+        "actual_k": 7.0,
+        "result": "W"
+      },
+      {
+        "name": "Taj Bradley",
+        "mlbamid": "671737",
+        "team": "Minnesota Twins",
+        "opp": "Philadelphia Phillies",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 5.5,
+        "pred_k": 6.64,
+        "edge": 12.7,
+        "actual_k": 3.0,
+        "result": "L"
+      },
+      {
+        "name": "Walbert Urena",
+        "mlbamid": "700712",
+        "team": "Los Angeles Angels",
+        "opp": "Texas Rangers",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 4.5,
+        "pred_k": 5.29,
+        "edge": 8.5,
+        "actual_k": 5.0,
+        "result": "W"
+      },
+      {
+        "name": "Shane Drohan",
+        "mlbamid": "675660",
+        "team": "Milwaukee Brewers",
+        "opp": "Los Angeles Dodgers",
+        "hand": "L",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 4.5,
+        "pred_k": 5.28,
+        "edge": 8.3,
+        "actual_k": 5.0,
+        "result": "W"
+      },
+      {
+        "name": "Payton Tolle",
+        "mlbamid": "801139",
+        "team": "Boston Red Sox",
+        "opp": "Toronto Blue Jays",
+        "hand": "L",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 5.5,
+        "pred_k": 6.29,
+        "edge": 7.6,
+        "actual_k": 4.0,
+        "result": "L"
+      },
+      {
+        "name": "Roki Sasaki",
+        "mlbamid": "808963",
+        "team": "Los Angeles Dodgers",
+        "opp": "Milwaukee Brewers",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 5.5,
+        "pred_k": 6.27,
+        "edge": 7.3,
+        "actual_k": 2.0,
+        "result": "L"
+      }
+    ]
+  },
+  {
     "date": "2026-08-12",
     "picks": [
       {
