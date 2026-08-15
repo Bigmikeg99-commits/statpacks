@@ -1,18 +1,18 @@
 {
-  "updated": "2026-08-10 17:27",
-  "picks_date": "2026-08-10",
+  "updated": "2026-08-15 11:39",
+  "picks_date": "2026-08-15",
   "season": {
-    "record": "640-512",
-    "overs": "317-275",
-    "unders": "323-237",
-    "picks": 1152,
-    "overall_pct": "55.6",
-    "over_pct": "53.5",
-    "under_pct": "57.7",
-    "date_range": "3/26-8/9"
+    "record": "658-527",
+    "overs": "331-286",
+    "unders": "327-241",
+    "picks": 1185,
+    "overall_pct": "55.5",
+    "over_pct": "53.6",
+    "under_pct": "57.6",
+    "date_range": "3/26-8/14"
   },
   "pod": {
-    "name": "Dean Kremer"
+    "name": "Jared Jones"
   },
   "daily": [
     {
@@ -1334,6 +1334,56 @@
       "uw": 0,
       "ul": 1,
       "p": 50.0
+    },
+    {
+      "d": "8/10",
+      "w": 3,
+      "l": 3,
+      "ow": 3,
+      "ol": 1,
+      "uw": 0,
+      "ul": 2,
+      "p": 50.0
+    },
+    {
+      "d": "8/11",
+      "w": 5,
+      "l": 3,
+      "ow": 3,
+      "ol": 3,
+      "uw": 2,
+      "ul": 0,
+      "p": 62.5
+    },
+    {
+      "d": "8/12",
+      "w": 1,
+      "l": 4,
+      "ow": 0,
+      "ol": 2,
+      "uw": 1,
+      "ul": 2,
+      "p": 20.0
+    },
+    {
+      "d": "8/13",
+      "w": 4,
+      "l": 3,
+      "ow": 4,
+      "ol": 3,
+      "uw": 0,
+      "ul": 0,
+      "p": 57.1
+    },
+    {
+      "d": "8/14",
+      "w": 5,
+      "l": 2,
+      "ow": 4,
+      "ol": 2,
+      "uw": 1,
+      "ul": 0,
+      "p": 71.4
     }
   ],
   "backtestDaily": [],
@@ -1346,13 +1396,6 @@
       "e": 27.9
     },
     {
-      "l": "LHP Away",
-      "w": 18,
-      "lo": 9,
-      "pct": 66.7,
-      "e": 8.9
-    },
-    {
       "l": "P(Line) 85%+",
       "w": 6,
       "lo": 3,
@@ -1360,25 +1403,25 @@
       "e": 8.9
     },
     {
+      "l": "LHP Away",
+      "w": 20,
+      "lo": 12,
+      "pct": 62.5,
+      "e": 4.7
+    },
+    {
       "l": "RHP Home ≤4.5",
-      "w": 59,
-      "lo": 40,
-      "pct": 59.6,
-      "e": 1.8
+      "w": 65,
+      "lo": 43,
+      "pct": 60.2,
+      "e": 2.4
     },
     {
       "l": "LHP Home",
-      "w": 29,
-      "lo": 20,
-      "pct": 59.2,
-      "e": 1.4
-    },
-    {
-      "l": "RHP Home ≤5.5",
-      "w": 83,
-      "lo": 59,
-      "pct": 58.5,
-      "e": 0.7
+      "w": 30,
+      "lo": 21,
+      "pct": 58.8,
+      "e": 1.0
     },
     {
       "l": "P(Line) 65-70%",
@@ -1388,23 +1431,37 @@
       "e": 0.5
     },
     {
+      "l": "RHP Home ≤5.5",
+      "w": 89,
+      "lo": 64,
+      "pct": 58.2,
+      "e": 0.4
+    },
+    {
       "l": "RHP Home (all)",
-      "w": 93,
-      "lo": 68,
-      "pct": 57.8,
-      "e": 0.0
+      "w": 101,
+      "lo": 73,
+      "pct": 58.0,
+      "e": 0.2
+    },
+    {
+      "l": "Line ≤4.0",
+      "w": 77,
+      "lo": 56,
+      "pct": 57.9,
+      "e": 0.1
     },
     {
       "l": "Line 4.5",
-      "w": 82,
-      "lo": 60,
-      "pct": 57.7,
-      "e": -0.1
+      "w": 87,
+      "lo": 64,
+      "pct": 57.6,
+      "e": -0.2
     },
     {
-      "l": "Line 5.0-5.5",
-      "w": 60,
-      "lo": 45,
+      "l": "RHP Home >5.5",
+      "w": 12,
+      "lo": 9,
       "pct": 57.1,
       "e": -0.7
     },
@@ -1416,32 +1473,25 @@
       "e": -0.7
     },
     {
-      "l": "Line ≤4.0",
-      "w": 71,
-      "lo": 54,
-      "pct": 56.8,
-      "e": -1.0
-    },
-    {
       "l": "RHP Away",
-      "w": 83,
-      "lo": 68,
-      "pct": 55.0,
-      "e": -2.8
+      "w": 86,
+      "lo": 70,
+      "pct": 55.1,
+      "e": -2.7
     },
     {
-      "l": "RHP Home >5.5",
-      "w": 10,
-      "lo": 9,
-      "pct": 52.6,
-      "e": -5.2
+      "l": "Line 5.0-5.5",
+      "w": 60,
+      "lo": 50,
+      "pct": 54.5,
+      "e": -3.3
     },
     {
       "l": "Line 6.0+",
-      "w": 19,
+      "w": 22,
       "lo": 20,
-      "pct": 48.7,
-      "e": -9.1
+      "pct": 52.4,
+      "e": -5.4
     },
     {
       "l": "P(Line) 70-75%",
@@ -1469,9 +1519,9 @@
     {
       "l": "LHP Home",
       "w": 32,
-      "lo": 19,
-      "pct": 62.7,
-      "e": 4.9
+      "lo": 20,
+      "pct": 61.5,
+      "e": 3.7
     },
     {
       "l": "P(Line) 15-20%",
@@ -1488,32 +1538,32 @@
       "e": 1.0
     },
     {
+      "l": "RHP Away",
+      "w": 65,
+      "lo": 49,
+      "pct": 57.0,
+      "e": -0.8
+    },
+    {
       "l": "Home (all)",
       "w": 82,
-      "lo": 59,
-      "pct": 58.2,
-      "e": 0.4
-    },
-    {
-      "l": "RHP Away",
-      "w": 64,
-      "lo": 48,
-      "pct": 57.1,
-      "e": -0.7
-    },
-    {
-      "l": "RHP Home",
-      "w": 50,
-      "lo": 40,
-      "pct": 55.6,
-      "e": -2.2
+      "lo": 62,
+      "pct": 56.9,
+      "e": -0.9
     },
     {
       "l": "LHP (all)",
-      "w": 58,
-      "lo": 47,
-      "pct": 55.2,
-      "e": -2.6
+      "w": 61,
+      "lo": 48,
+      "pct": 56.0,
+      "e": -1.8
+    },
+    {
+      "l": "Away (all)",
+      "w": 94,
+      "lo": 77,
+      "pct": 55.0,
+      "e": -2.8
     },
     {
       "l": "Line ≤3.5",
@@ -1523,11 +1573,11 @@
       "e": -3.0
     },
     {
-      "l": "Away (all)",
-      "w": 90,
-      "lo": 76,
-      "pct": 54.2,
-      "e": -3.6
+      "l": "RHP Home",
+      "w": 50,
+      "lo": 42,
+      "pct": 54.3,
+      "e": -3.5
     },
     {
       "l": "P(Line) 25-30%",
@@ -1539,23 +1589,23 @@
     {
       "l": "Line 4.0-4.5",
       "w": 63,
-      "lo": 56,
-      "pct": 52.9,
-      "e": -4.9
+      "lo": 57,
+      "pct": 52.5,
+      "e": -5.3
     },
     {
       "l": "LHP Away",
-      "w": 26,
+      "w": 29,
       "lo": 28,
-      "pct": 48.1,
-      "e": -9.7
+      "pct": 50.9,
+      "e": -6.9
     },
     {
       "l": "Line 5.0-5.5",
-      "w": 47,
-      "lo": 55,
-      "pct": 46.1,
-      "e": -11.7
+      "w": 51,
+      "lo": 58,
+      "pct": 46.8,
+      "e": -11.0
     },
     {
       "l": "P(Line) 10-15%",
@@ -1567,142 +1617,176 @@
   ],
   "picks": [
     {
-      "name": "Dean Kremer",
-      "mlbamid": "665152",
-      "team": "Minnesota Twins",
-      "opp": "vs Baltimore Orioles",
+      "name": "Jared Jones",
+      "mlbamid": "683003",
+      "team": "Pittsburgh Pirates",
+      "opp": "vs Boston Red Sox",
       "hand": "R",
       "ha": "Home",
-      "rec": "UNDER",
-      "line": 5.5,
-      "conf": "nan%",
-      "pred_k": null,
-      "avg_ip": null,
-      "k_pct": null,
-      "k_pct_l5": null,
-      "barrel_pct": null,
-      "stuff_plus": null,
-      "location_plus": null,
-      "pitching_plus": null,
-      "result": null,
-      "actual_k": null,
-      "pushers_up": [],
-      "pushers_down": []
-    },
-    {
-      "name": "Hunter Dobbins",
-      "mlbamid": "690928",
-      "team": "St. Louis Cardinals",
-      "opp": "vs Philadelphia Phillies",
-      "hand": "R",
-      "ha": "Home",
-      "rec": "OVER",
-      "line": 3.5,
-      "conf": "nan%",
-      "pred_k": null,
-      "avg_ip": null,
-      "k_pct": null,
-      "k_pct_l5": null,
-      "barrel_pct": null,
-      "stuff_plus": null,
-      "location_plus": null,
-      "pitching_plus": null,
-      "result": null,
-      "actual_k": null,
-      "pushers_up": [],
-      "pushers_down": []
-    },
-    {
-      "name": "Andrew Painter",
-      "mlbamid": "691725",
-      "team": "Philadelphia Phillies",
-      "opp": "vs St. Louis Cardinals",
-      "hand": "R",
-      "ha": "Away",
-      "rec": "OVER",
-      "line": 3.5,
-      "conf": "nan%",
-      "pred_k": null,
-      "avg_ip": null,
-      "k_pct": null,
-      "k_pct_l5": null,
-      "barrel_pct": null,
-      "stuff_plus": null,
-      "location_plus": null,
-      "pitching_plus": null,
-      "result": null,
-      "actual_k": null,
-      "pushers_up": [],
-      "pushers_down": []
-    },
-    {
-      "name": "Blade Tidwell",
-      "mlbamid": "694918",
-      "team": "San Francisco Giants",
-      "opp": "vs Houston Astros",
-      "hand": "R",
-      "ha": "Home",
-      "rec": "OVER",
-      "line": 3.5,
-      "conf": "nan%",
-      "pred_k": null,
-      "avg_ip": null,
-      "k_pct": null,
-      "k_pct_l5": null,
-      "barrel_pct": null,
-      "stuff_plus": null,
-      "location_plus": null,
-      "pitching_plus": null,
-      "result": null,
-      "actual_k": null,
-      "pushers_up": [],
-      "pushers_down": []
-    },
-    {
-      "name": "Christian Scott",
-      "mlbamid": "681035",
-      "team": "New York Mets",
-      "opp": "vs Atlanta Braves",
-      "hand": "R",
-      "ha": "Away",
-      "rec": "UNDER",
-      "line": 5.5,
-      "conf": "nan%",
-      "pred_k": null,
-      "avg_ip": null,
-      "k_pct": null,
-      "k_pct_l5": null,
-      "barrel_pct": null,
-      "stuff_plus": null,
-      "location_plus": null,
-      "pitching_plus": null,
-      "result": null,
-      "actual_k": null,
-      "pushers_up": [],
-      "pushers_down": []
-    },
-    {
-      "name": "Trevor Rogers",
-      "mlbamid": "669432",
-      "team": "Baltimore Orioles",
-      "opp": "vs Minnesota Twins",
-      "hand": "L",
-      "ha": "Away",
       "rec": "OVER",
       "line": 4.5,
-      "conf": "nan%",
-      "pred_k": null,
-      "avg_ip": null,
+      "conf": "66.8%",
+      "pred_k": 5.67,
+      "avg_ip": 4.51,
       "k_pct": null,
-      "k_pct_l5": null,
+      "k_pct_l5": 0.2791,
       "barrel_pct": null,
-      "stuff_plus": null,
-      "location_plus": null,
-      "pitching_plus": null,
+      "stuff_plus": 100.8,
+      "location_plus": 105.6,
+      "pitching_plus": 108.8,
+      "psi_plus": 107.1,
       "result": null,
       "actual_k": null,
-      "pushers_up": [],
-      "pushers_down": []
+      "pushers_up": [
+        {
+          "label": "Stuff+ rating",
+          "feat": "Stuff+",
+          "val": 100.8475,
+          "pp": 7.4
+        },
+        {
+          "label": "Pitching+ rating",
+          "feat": "Pitching+",
+          "val": 108.8159,
+          "pp": 4.5
+        },
+        {
+          "label": "Home/Away",
+          "feat": "home_away",
+          "val": 1.0,
+          "pp": 3.0
+        },
+        {
+          "label": "PSI+ vertical approach angle",
+          "feat": "PSI_vaa",
+          "val": -4.214,
+          "pp": 2.9
+        },
+        {
+          "label": "4-seam fastball spin rate",
+          "feat": "spin_FF",
+          "val": 2543.5,
+          "pp": 2.0
+        },
+        {
+          "label": "PSI+ CLW component",
+          "feat": "PSI_CLW",
+          "val": 0.1248,
+          "pp": 1.8
+        }
+      ],
+      "pushers_down": [
+        {
+          "label": "Avg innings per start",
+          "feat": "avg_IP_per_start",
+          "val": 4.5067,
+          "pp": -3.9
+        },
+        {
+          "label": "Batters faced (rolling avg)",
+          "feat": "BF_rolling_avg",
+          "val": 19.0,
+          "pp": -2.2
+        },
+        {
+          "label": "Opp Z-Contact%",
+          "feat": "opp_z_contact_pct",
+          "val": 0.8688,
+          "pp": -2.1
+        }
+      ]
+    },
+    {
+      "name": "Reid Detmers",
+      "mlbamid": "672282",
+      "team": "Los Angeles Angels",
+      "opp": "vs Kansas City Royals",
+      "hand": "L",
+      "ha": "Home",
+      "rec": "UNDER",
+      "line": 6.5,
+      "conf": "31.4%",
+      "pred_k": 5.5,
+      "avg_ip": 5.41,
+      "k_pct": null,
+      "k_pct_l5": 0.2817,
+      "barrel_pct": null,
+      "stuff_plus": 104.3,
+      "location_plus": 108.0,
+      "pitching_plus": 109.0,
+      "psi_plus": 108.4,
+      "result": null,
+      "actual_k": null,
+      "pushers_up": [
+        {
+          "label": "Stuff+ rating",
+          "feat": "Stuff+",
+          "val": 104.2809,
+          "pp": 9.0
+        },
+        {
+          "label": "Pitching+ rating",
+          "feat": "Pitching+",
+          "val": 109.0029,
+          "pp": 4.7
+        },
+        {
+          "label": "PSI+ CLW component",
+          "feat": "PSI_CLW",
+          "val": 0.1436,
+          "pp": 4.4
+        },
+        {
+          "label": "Home/Away",
+          "feat": "home_away",
+          "val": 1.0,
+          "pp": 3.7
+        },
+        {
+          "label": "PSI+ vertical approach angle",
+          "feat": "PSI_vaa",
+          "val": -4.927,
+          "pp": 2.7
+        },
+        {
+          "label": "Avg innings per start",
+          "feat": "avg_IP_per_start",
+          "val": 5.41,
+          "pp": 1.3
+        }
+      ],
+      "pushers_down": [
+        {
+          "label": "Opp Z-Contact%",
+          "feat": "opp_z_contact_pct",
+          "val": 0.8843,
+          "pp": -4.8
+        },
+        {
+          "label": "Opp O-Contact%",
+          "feat": "opp_o_contact_pct",
+          "val": 0.6521,
+          "pp": -4.6
+        },
+        {
+          "label": "Batters faced (rolling avg)",
+          "feat": "BF_rolling_avg",
+          "val": 19.6,
+          "pp": -2.5
+        },
+        {
+          "label": "4-seam fastball spin rate",
+          "feat": "spin_FF",
+          "val": 2139.8,
+          "pp": -2.2
+        },
+        {
+          "label": "Opp SwStr%",
+          "feat": "opp_swstr_pct",
+          "val": 0.0994,
+          "pp": -1.4
+        }
+      ]
     }
   ],
   "thresholdStats": [],
