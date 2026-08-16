@@ -1,5 +1,38 @@
 [
   {
+    "date": "2026-08-15",
+    "picks": [
+      {
+        "name": "Reid Detmers",
+        "mlbamid": "672282",
+        "team": "Los Angeles Angels",
+        "opp": "Kansas City Royals",
+        "hand": "L",
+        "ha": "Home",
+        "rec": "UNDER",
+        "line": 6.5,
+        "pred_k": 5.5,
+        "edge": 16.2,
+        "actual_k": 11.0,
+        "result": "L"
+      },
+      {
+        "name": "Jared Jones",
+        "mlbamid": "683003",
+        "team": "Pittsburgh Pirates",
+        "opp": "Boston Red Sox",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 4.5,
+        "pred_k": 5.67,
+        "edge": 14.4,
+        "actual_k": 7.0,
+        "result": "W"
+      }
+    ]
+  },
+  {
     "date": "2026-08-14",
     "picks": [
       {
