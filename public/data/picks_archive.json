@@ -1,5 +1,108 @@
 [
   {
+    "date": "2026-08-16",
+    "picks": [
+      {
+        "name": "Gabriel Hughes",
+        "mlbamid": "687312",
+        "team": "Colorado Rockies",
+        "opp": "San Francisco Giants",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "UNDER",
+        "line": 4.0,
+        "pred_k": 3.29,
+        "edge": 24.0,
+        "actual_k": 2.0,
+        "result": "W"
+      },
+      {
+        "name": "Ryan Johnson",
+        "mlbamid": "696270",
+        "team": "Los Angeles Angels",
+        "opp": "Kansas City Royals",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "UNDER",
+        "line": 4.0,
+        "pred_k": 3.32,
+        "edge": 23.5,
+        "actual_k": 4.0,
+        "result": null
+      },
+      {
+        "name": "Freddy Peralta",
+        "mlbamid": "642547",
+        "team": "Tampa Bay Rays",
+        "opp": "Baltimore Orioles",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "UNDER",
+        "line": 6.5,
+        "pred_k": 5.14,
+        "edge": 21.7,
+        "actual_k": 2.0,
+        "result": "W"
+      },
+      {
+        "name": "Blade Tidwell",
+        "mlbamid": "694918",
+        "team": "San Francisco Giants",
+        "opp": "Colorado Rockies",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 4.5,
+        "pred_k": 5.93,
+        "edge": 18.1,
+        "actual_k": 1.0,
+        "result": "L"
+      },
+      {
+        "name": "Andrew Painter",
+        "mlbamid": "691725",
+        "team": "Philadelphia Phillies",
+        "opp": "Minnesota Twins",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 3.5,
+        "pred_k": 4.79,
+        "edge": 18.0,
+        "actual_k": 2.0,
+        "result": "L"
+      },
+      {
+        "name": "Hunter Dobbins",
+        "mlbamid": "690928",
+        "team": "St. Louis Cardinals",
+        "opp": "Chicago Cubs",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 3.5,
+        "pred_k": 4.56,
+        "edge": 14.4,
+        "actual_k": 7.0,
+        "result": "W"
+      },
+      {
+        "name": "Eury Pérez",
+        "mlbamid": "691587",
+        "team": "Miami Marlins",
+        "opp": "Cincinnati Reds",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 6.5,
+        "pred_k": 7.21,
+        "edge": 5.7,
+        "actual_k": 5.0,
+        "result": "L"
+      }
+    ]
+  },
+  {
     "date": "2026-08-15",
     "picks": [
       {
