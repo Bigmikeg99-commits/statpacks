@@ -1,5 +1,108 @@
 [
   {
+    "date": "2026-08-17",
+    "picks": [
+      {
+        "name": "Framber Valdez",
+        "mlbamid": "664285",
+        "team": "Detroit Tigers",
+        "opp": "Pittsburgh Pirates",
+        "hand": "L",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 4.5,
+        "pred_k": 5.75,
+        "edge": 15.6,
+        "actual_k": 5.0,
+        "result": "W"
+      },
+      {
+        "name": "Andre Pallante",
+        "mlbamid": "669467",
+        "team": "St. Louis Cardinals",
+        "opp": "Cincinnati Reds",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 4.5,
+        "pred_k": 5.69,
+        "edge": 14.7,
+        "actual_k": 5.0,
+        "result": "W"
+      },
+      {
+        "name": "Brandon Young",
+        "mlbamid": "687064",
+        "team": "Baltimore Orioles",
+        "opp": "Tampa Bay Rays",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 3.5,
+        "pred_k": 4.49,
+        "edge": 13.2,
+        "actual_k": 3.0,
+        "result": "L"
+      },
+      {
+        "name": "Cristopher Sánchez",
+        "mlbamid": "650911",
+        "team": "Philadelphia Phillies",
+        "opp": "Miami Marlins",
+        "hand": "L",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 6.5,
+        "pred_k": 7.72,
+        "edge": 12.7,
+        "actual_k": 6.0,
+        "result": "L"
+      },
+      {
+        "name": "Nolan McLean",
+        "mlbamid": "690997",
+        "team": "New York Mets",
+        "opp": "San Diego Padres",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 5.5,
+        "pred_k": 6.57,
+        "edge": 11.7,
+        "actual_k": 3.0,
+        "result": "L"
+      },
+      {
+        "name": "Shane McClanahan",
+        "mlbamid": "663556",
+        "team": "Tampa Bay Rays",
+        "opp": "Baltimore Orioles",
+        "hand": "L",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 4.5,
+        "pred_k": 5.4,
+        "edge": 10.3,
+        "actual_k": 3.0,
+        "result": "L"
+      },
+      {
+        "name": "Michael Wacha",
+        "mlbamid": "608379",
+        "team": "Kansas City Royals",
+        "opp": "Athletics",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 4.5,
+        "pred_k": 5.26,
+        "edge": 8.0,
+        "actual_k": 3.0,
+        "result": "L"
+      }
+    ]
+  },
+  {
     "date": "2026-08-16",
     "picks": [
       {
