@@ -1,5 +1,122 @@
 [
   {
+    "date": "2026-08-18",
+    "picks": [
+      {
+        "name": "Jackson Kent",
+        "mlbamid": "800600",
+        "team": "Washington Nationals",
+        "opp": "Texas Rangers",
+        "hand": "L",
+        "ha": "Away",
+        "rec": "UNDER",
+        "line": 4.5,
+        "pred_k": 2.75,
+        "edge": 33.1,
+        "actual_k": 3.0,
+        "result": "W"
+      },
+      {
+        "name": "Foster Griffin",
+        "mlbamid": "656492",
+        "team": "Cleveland Guardians",
+        "opp": "San Francisco Giants",
+        "hand": "L",
+        "ha": "Home",
+        "rec": "UNDER",
+        "line": 5.5,
+        "pred_k": 4.44,
+        "edge": 18.9,
+        "actual_k": 6.0,
+        "result": "L"
+      },
+      {
+        "name": "Carlos Rodón",
+        "mlbamid": "607074",
+        "team": "New York Yankees",
+        "opp": "Baltimore Orioles",
+        "hand": "L",
+        "ha": "Away",
+        "rec": "UNDER",
+        "line": 5.5,
+        "pred_k": 4.5,
+        "edge": 17.9,
+        "actual_k": 4.0,
+        "result": "W"
+      },
+      {
+        "name": "Ranger Suarez",
+        "mlbamid": "624133",
+        "team": "Boston Red Sox",
+        "opp": "Arizona Diamondbacks",
+        "hand": "L",
+        "ha": "Home",
+        "rec": "UNDER",
+        "line": 4.5,
+        "pred_k": 3.62,
+        "edge": 17.9,
+        "actual_k": 3.0,
+        "result": "W"
+      },
+      {
+        "name": "Keider Montero",
+        "mlbamid": "672456",
+        "team": "Detroit Tigers",
+        "opp": "Pittsburgh Pirates",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 3.5,
+        "pred_k": 4.51,
+        "edge": 13.5,
+        "actual_k": 3.0,
+        "result": "L"
+      },
+      {
+        "name": "Jack Perkins",
+        "mlbamid": "678022",
+        "team": "Athletics",
+        "opp": "Kansas City Royals",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 3.5,
+        "pred_k": 4.46,
+        "edge": 12.7,
+        "actual_k": 4.0,
+        "result": "W"
+      },
+      {
+        "name": "Bryce Miller",
+        "mlbamid": "682243",
+        "team": "Seattle Mariners",
+        "opp": "Milwaukee Brewers",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 5.5,
+        "pred_k": 6.57,
+        "edge": 11.7,
+        "actual_k": 3.0,
+        "result": "L"
+      },
+      {
+        "name": "Cristian Javier",
+        "mlbamid": "664299",
+        "team": "Houston Astros",
+        "opp": "Los Angeles Angels",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 4.5,
+        "pred_k": 5.48,
+        "edge": 11.5,
+        "actual_k": 5.0,
+        "result": "W"
+      }
+    ]
+  },
+  {
     "date": "2026-08-17",
     "picks": [
       {
