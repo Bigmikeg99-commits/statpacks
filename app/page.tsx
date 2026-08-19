@@ -1307,13 +1307,10 @@ async function pollResults(picks: Pick[], dateStr: string) {
 
       if (!isFinal) continue
 
-      // Opener/DNP — pitcher didn't start
+      // Resolve result by actual K total regardless of starter/opener role
       let resultClass = ''
       let stampText   = ''
-      if (!info.started) {
-        resultClass = 'void'
-        stampText   = 'DNP'
-      } else if (k !== null) {
+      if (k !== null) {
         if (k === line) {
           resultClass = 'push'
         } else if (rec === 'OVER') {
