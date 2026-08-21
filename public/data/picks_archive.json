@@ -1,5 +1,197 @@
 [
   {
+    "date": "2026-08-20",
+    "picks": [
+      {
+        "name": "Gavin Williams",
+        "mlbamid": "668909",
+        "team": "Cleveland Guardians",
+        "opp": "San Francisco Giants",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "UNDER",
+        "line": 7.5,
+        "pred_k": 6.2,
+        "edge": 19.2,
+        "actual_k": 11.0,
+        "result": "L"
+      },
+      {
+        "name": "Ian Seymour",
+        "mlbamid": "693855",
+        "team": "Tampa Bay Rays",
+        "opp": "Toronto Blue Jays",
+        "hand": "L",
+        "ha": "Home",
+        "rec": "UNDER",
+        "line": 5.5,
+        "pred_k": 4.45,
+        "edge": 18.7,
+        "actual_k": 8.0,
+        "result": "L"
+      },
+      {
+        "name": "Grayson Rodriguez",
+        "mlbamid": "680570",
+        "team": "Los Angeles Angels",
+        "opp": "Houston Astros",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 4.5,
+        "pred_k": 5.49,
+        "edge": 11.7,
+        "actual_k": 6.0,
+        "result": "W"
+      },
+      {
+        "name": "Jacob deGrom",
+        "mlbamid": "594798",
+        "team": "Texas Rangers",
+        "opp": "Washington Nationals",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 5.5,
+        "pred_k": 6.45,
+        "edge": 10.0,
+        "actual_k": 10.0,
+        "result": "W"
+      }
+    ]
+  },
+  {
+    "date": "2026-08-19",
+    "picks": [
+      {
+        "name": "Parker Messick",
+        "mlbamid": "800048",
+        "team": "Cleveland Guardians",
+        "opp": "San Francisco Giants",
+        "hand": "L",
+        "ha": "Home",
+        "rec": "UNDER",
+        "line": 6.5,
+        "pred_k": 4.99,
+        "edge": 24.0,
+        "actual_k": 10.0,
+        "result": "L"
+      },
+      {
+        "name": "Roki Sasaki",
+        "mlbamid": "808963",
+        "team": "Los Angeles Dodgers",
+        "opp": "Colorado Rockies",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 4.5,
+        "pred_k": 6.23,
+        "edge": 22.1,
+        "actual_k": 6.0,
+        "result": "W"
+      },
+      {
+        "name": "Payton Tolle",
+        "mlbamid": "801139",
+        "team": "Boston Red Sox",
+        "opp": "Arizona Diamondbacks",
+        "hand": "L",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 5.5,
+        "pred_k": 7.22,
+        "edge": 20.3,
+        "actual_k": 6.0,
+        "result": "W"
+      },
+      {
+        "name": "Jackson Jobe",
+        "mlbamid": "695549",
+        "team": "Detroit Tigers",
+        "opp": "Pittsburgh Pirates",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 4.5,
+        "pred_k": 5.87,
+        "edge": 17.3,
+        "actual_k": 3.0,
+        "result": "L"
+      },
+      {
+        "name": "Kyle Freeland",
+        "mlbamid": "607536",
+        "team": "Colorado Rockies",
+        "opp": "Los Angeles Dodgers",
+        "hand": "L",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 3.5,
+        "pred_k": 4.71,
+        "edge": 16.8,
+        "actual_k": 5.0,
+        "result": "W"
+      },
+      {
+        "name": "Robert Stock",
+        "mlbamid": "476594",
+        "team": "New York Mets",
+        "opp": "San Diego Padres",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 3.5,
+        "pred_k": 4.68,
+        "edge": 16.3,
+        "actual_k": 6.0,
+        "result": "W"
+      },
+      {
+        "name": "Brandon Pfaadt",
+        "mlbamid": "694297",
+        "team": "Arizona Diamondbacks",
+        "opp": "Boston Red Sox",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 3.5,
+        "pred_k": 4.59,
+        "edge": 14.9,
+        "actual_k": 8.0,
+        "result": "W"
+      },
+      {
+        "name": "Aaron Nola",
+        "mlbamid": "605400",
+        "team": "Philadelphia Phillies",
+        "opp": "Miami Marlins",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 5.5,
+        "pred_k": 6.32,
+        "edge": 8.0,
+        "actual_k": 8.0,
+        "result": "W"
+      },
+      {
+        "name": "Chase Burns",
+        "mlbamid": "695505",
+        "team": "Cincinnati Reds",
+        "opp": "St. Louis Cardinals",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 6.5,
+        "pred_k": 7.36,
+        "edge": 7.8,
+        "actual_k": 8.0,
+        "result": "W"
+      }
+    ]
+  },
+  {
     "date": "2026-08-18",
     "picks": [
       {
