@@ -1,5 +1,66 @@
 [
   {
+    "date": "2026-08-21",
+    "picks": [
+      {
+        "name": "Sean Burke",
+        "mlbamid": "680732",
+        "team": "Chicago White Sox",
+        "opp": "New York Mets",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "UNDER",
+        "line": 6.5,
+        "pred_k": 5.48,
+        "edge": 16.5,
+        "actual_k": 4.0,
+        "result": "W"
+      },
+      {
+        "name": "Connor Prielipp",
+        "mlbamid": "687570",
+        "team": "Minnesota Twins",
+        "opp": "San Diego Padres",
+        "hand": "L",
+        "ha": "Away",
+        "rec": "UNDER",
+        "line": 5.5,
+        "pred_k": 4.75,
+        "edge": 13.6,
+        "actual_k": 7.0,
+        "result": "L"
+      },
+      {
+        "name": "Emerson Hancock",
+        "mlbamid": "676106",
+        "team": "Seattle Mariners",
+        "opp": "Chicago Cubs",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 4.5,
+        "pred_k": 5.6,
+        "edge": 13.4,
+        "actual_k": 6.0,
+        "result": "W"
+      },
+      {
+        "name": "Logan Webb",
+        "mlbamid": "657277",
+        "team": "San Francisco Giants",
+        "opp": "Boston Red Sox",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 4.5,
+        "pred_k": 5.28,
+        "edge": 8.3,
+        "actual_k": 2.0,
+        "result": "L"
+      }
+    ]
+  },
+  {
     "date": "2026-08-20",
     "picks": [
       {
