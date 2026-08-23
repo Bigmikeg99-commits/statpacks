@@ -1,5 +1,122 @@
 [
   {
+    "date": "2026-08-22",
+    "picks": [
+      {
+        "name": "Patrick Sandoval",
+        "mlbamid": "663776",
+        "team": "Boston Red Sox",
+        "opp": "San Francisco Giants",
+        "hand": "L",
+        "ha": "Home",
+        "rec": "UNDER",
+        "line": 5.5,
+        "pred_k": 4.35,
+        "edge": 20.4,
+        "actual_k": 6.0,
+        "result": "L"
+      },
+      {
+        "name": "Andrew Painter",
+        "mlbamid": "691725",
+        "team": "Philadelphia Phillies",
+        "opp": "St. Louis Cardinals",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 3.5,
+        "pred_k": 4.87,
+        "edge": 19.2,
+        "actual_k": 8.0,
+        "result": "W"
+      },
+      {
+        "name": "Christian Scott",
+        "mlbamid": "681035",
+        "team": "New York Mets",
+        "opp": "Chicago White Sox",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "UNDER",
+        "line": 6.5,
+        "pred_k": 5.31,
+        "edge": 19.2,
+        "actual_k": 6.0,
+        "result": "W"
+      },
+      {
+        "name": "Hunter Brown",
+        "mlbamid": "686613",
+        "team": "Houston Astros",
+        "opp": "Athletics",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "UNDER",
+        "line": 6.5,
+        "pred_k": 5.49,
+        "edge": 16.4,
+        "actual_k": 4.0,
+        "result": "W"
+      },
+      {
+        "name": "Blade Tidwell",
+        "mlbamid": "694918",
+        "team": "San Francisco Giants",
+        "opp": "Boston Red Sox",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 3.5,
+        "pred_k": 4.69,
+        "edge": 16.5,
+        "actual_k": 7.0,
+        "result": "W"
+      },
+      {
+        "name": "Brandon Young",
+        "mlbamid": "687064",
+        "team": "Baltimore Orioles",
+        "opp": "Tampa Bay Rays",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 3.5,
+        "pred_k": 4.58,
+        "edge": 14.7,
+        "actual_k": 3.0,
+        "result": "L"
+      },
+      {
+        "name": "Logan Henderson",
+        "mlbamid": "701656",
+        "team": "Milwaukee Brewers",
+        "opp": "Atlanta Braves",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "UNDER",
+        "line": 6.5,
+        "pred_k": 5.61,
+        "edge": 14.5,
+        "actual_k": 4.0,
+        "result": "W"
+      },
+      {
+        "name": "Shane McClanahan",
+        "mlbamid": "663556",
+        "team": "Tampa Bay Rays",
+        "opp": "Baltimore Orioles",
+        "hand": "L",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 4.5,
+        "pred_k": 5.65,
+        "edge": 14.1,
+        "actual_k": 5.0,
+        "result": "W"
+      }
+    ]
+  },
+  {
     "date": "2026-08-21",
     "picks": [
       {
