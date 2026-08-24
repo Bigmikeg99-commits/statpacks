@@ -1,5 +1,66 @@
 [
   {
+    "date": "2026-08-23",
+    "picks": [
+      {
+        "name": "Tyler Mahle",
+        "mlbamid": "641816",
+        "team": "Atlanta Braves",
+        "opp": "Milwaukee Brewers",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "UNDER",
+        "line": 5.5,
+        "pred_k": 4.27,
+        "edge": 21.8,
+        "actual_k": 4.0,
+        "result": "W"
+      },
+      {
+        "name": "Bryce Miller",
+        "mlbamid": "682243",
+        "team": "Seattle Mariners",
+        "opp": "Chicago Cubs",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 5.5,
+        "pred_k": 6.53,
+        "edge": 11.1,
+        "actual_k": 5.0,
+        "result": "L"
+      },
+      {
+        "name": "Nick Martinez",
+        "mlbamid": "607259",
+        "team": "Tampa Bay Rays",
+        "opp": "Baltimore Orioles",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 3.5,
+        "pred_k": 4.28,
+        "edge": 9.5,
+        "actual_k": 4.0,
+        "result": "W"
+      },
+      {
+        "name": "Walker Buehler",
+        "mlbamid": "621111",
+        "team": "San Diego Padres",
+        "opp": "Minnesota Twins",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 3.5,
+        "pred_k": 4.26,
+        "edge": 9.2,
+        "actual_k": 4.0,
+        "result": "W"
+      }
+    ]
+  },
+  {
     "date": "2026-08-22",
     "picks": [
       {
