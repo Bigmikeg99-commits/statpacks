@@ -1,5 +1,94 @@
 [
   {
+    "date": "2026-08-24",
+    "picks": [
+      {
+        "name": "Zack Wheeler",
+        "mlbamid": "554430",
+        "team": "Philadelphia Phillies",
+        "opp": "Seattle Mariners",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "UNDER",
+        "line": 7.5,
+        "pred_k": 6.25,
+        "edge": 18.5,
+        "actual_k": 4.0,
+        "result": "W"
+      },
+      {
+        "name": "Jeffrey Springs",
+        "mlbamid": "605488",
+        "team": "Athletics",
+        "opp": "Minnesota Twins",
+        "hand": "L",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 3.5,
+        "pred_k": 4.81,
+        "edge": 18.3,
+        "actual_k": 3.0,
+        "result": "L"
+      },
+      {
+        "name": "Merrill Kelly",
+        "mlbamid": "518876",
+        "team": "Arizona Diamondbacks",
+        "opp": "Chicago Cubs",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 3.5,
+        "pred_k": 4.77,
+        "edge": 17.7,
+        "actual_k": 4.0,
+        "result": "W"
+      },
+      {
+        "name": "Parker Messick",
+        "mlbamid": "800048",
+        "team": "Cleveland Guardians",
+        "opp": "Los Angeles Angels",
+        "hand": "L",
+        "ha": "Away",
+        "rec": "UNDER",
+        "line": 7.5,
+        "pred_k": 6.39,
+        "edge": 16.5,
+        "actual_k": 4.0,
+        "result": "W"
+      },
+      {
+        "name": "Cade Cavalli",
+        "mlbamid": "676917",
+        "team": "Washington Nationals",
+        "opp": "Colorado Rockies",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "UNDER",
+        "line": 6.5,
+        "pred_k": 5.48,
+        "edge": 16.5,
+        "actual_k": 7.0,
+        "result": "L"
+      },
+      {
+        "name": "Braxton Ashcraft",
+        "mlbamid": "677952",
+        "team": "Pittsburgh Pirates",
+        "opp": "San Diego Padres",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 5.5,
+        "pred_k": 6.31,
+        "edge": 7.9,
+        "actual_k": 2.0,
+        "result": "L"
+      }
+    ]
+  },
+  {
     "date": "2026-08-23",
     "picks": [
       {
