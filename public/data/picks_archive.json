@@ -1,5 +1,52 @@
 [
   {
+    "date": "2026-08-25",
+    "picks": [
+      {
+        "name": "Gavin Williams",
+        "mlbamid": "668909",
+        "team": "Cleveland Guardians",
+        "opp": "Los Angeles Angels",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "UNDER",
+        "line": 8.5,
+        "pred_k": 7.22,
+        "edge": 17.6,
+        "actual_k": 3.0,
+        "result": "W"
+      },
+      {
+        "name": "George Kirby",
+        "mlbamid": "669923",
+        "team": "Seattle Mariners",
+        "opp": "Philadelphia Phillies",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 4.5,
+        "pred_k": 5.49,
+        "edge": 11.7,
+        "actual_k": 9.0,
+        "result": "W"
+      },
+      {
+        "name": "Anthony Kay",
+        "mlbamid": "641743",
+        "team": "Chicago White Sox",
+        "opp": "Texas Rangers",
+        "hand": "L",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 4.5,
+        "pred_k": 5.25,
+        "edge": 7.8,
+        "actual_k": 4.0,
+        "result": "L"
+      }
+    ]
+  },
+  {
     "date": "2026-08-24",
     "picks": [
       {
