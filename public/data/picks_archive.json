@@ -1,5 +1,66 @@
 [
   {
+    "date": "2026-08-27",
+    "picks": [
+      {
+        "name": "Jacob Misiorowski",
+        "mlbamid": "694819",
+        "team": "Milwaukee Brewers",
+        "opp": "New York Mets",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "UNDER",
+        "line": 8.5,
+        "pred_k": 7.26,
+        "edge": 17.1,
+        "actual_k": 6.0,
+        "result": "W"
+      },
+      {
+        "name": "Yoshinobu Yamamoto",
+        "mlbamid": "808967",
+        "team": "Los Angeles Dodgers",
+        "opp": "Atlanta Braves",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "UNDER",
+        "line": 6.5,
+        "pred_k": 5.52,
+        "edge": 15.9,
+        "actual_k": 8.0,
+        "result": "L"
+      },
+      {
+        "name": "Sean Manaea",
+        "mlbamid": "640455",
+        "team": "New York Mets",
+        "opp": "Milwaukee Brewers",
+        "hand": "L",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 4.5,
+        "pred_k": 5.71,
+        "edge": 15.0,
+        "actual_k": 3.0,
+        "result": "L"
+      },
+      {
+        "name": "Hayden Wesneski",
+        "mlbamid": "669713",
+        "team": "Houston Astros",
+        "opp": "New York Yankees",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 4.5,
+        "pred_k": 5.43,
+        "edge": 10.7,
+        "actual_k": 6.0,
+        "result": "W"
+      }
+    ]
+  },
+  {
     "date": "2026-08-26",
     "picks": [
       {
