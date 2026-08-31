@@ -1,5 +1,122 @@
 [
   {
+    "date": "2026-08-30",
+    "picks": [
+      {
+        "name": "Logan Gilbert",
+        "mlbamid": "669302",
+        "team": "Seattle Mariners",
+        "opp": "Toronto Blue Jays",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 4.5,
+        "pred_k": 6.13,
+        "edge": 20.8,
+        "actual_k": 4.0,
+        "result": "L"
+      },
+      {
+        "name": "Tyler Mahle",
+        "mlbamid": "641816",
+        "team": "Atlanta Braves",
+        "opp": "Colorado Rockies",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "UNDER",
+        "line": 5.5,
+        "pred_k": 4.37,
+        "edge": 20.1,
+        "actual_k": 9.0,
+        "result": "L"
+      },
+      {
+        "name": "Ranger Suarez",
+        "mlbamid": "624133",
+        "team": "Boston Red Sox",
+        "opp": "New York Yankees",
+        "hand": "L",
+        "ha": "Away",
+        "rec": "UNDER",
+        "line": 5.5,
+        "pred_k": 4.43,
+        "edge": 19.1,
+        "actual_k": 2.0,
+        "result": "W"
+      },
+      {
+        "name": "Dustin May",
+        "mlbamid": "669160",
+        "team": "Milwaukee Brewers",
+        "opp": "Texas Rangers",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 4.5,
+        "pred_k": 5.65,
+        "edge": 14.1,
+        "actual_k": 4.0,
+        "result": "L"
+      },
+      {
+        "name": "Andrew Alvarez",
+        "mlbamid": "674841",
+        "team": "Washington Nationals",
+        "opp": "Miami Marlins",
+        "hand": "L",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 3.5,
+        "pred_k": 4.42,
+        "edge": 12.0,
+        "actual_k": 6.0,
+        "result": "W"
+      },
+      {
+        "name": "Tyler Glasnow",
+        "mlbamid": "607192",
+        "team": "Los Angeles Dodgers",
+        "opp": "Detroit Tigers",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 5.5,
+        "pred_k": 6.35,
+        "edge": 8.5,
+        "actual_k": 6.0,
+        "result": "W"
+      },
+      {
+        "name": "Will Warren",
+        "mlbamid": "701542",
+        "team": "New York Yankees",
+        "opp": "Boston Red Sox",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 4.5,
+        "pred_k": 5.27,
+        "edge": 8.2,
+        "actual_k": 7.0,
+        "result": "W"
+      },
+      {
+        "name": "Zebby Matthews",
+        "mlbamid": "805673",
+        "team": "Minnesota Twins",
+        "opp": "Chicago White Sox",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 4.5,
+        "pred_k": 5.25,
+        "edge": 7.8,
+        "actual_k": 5.0,
+        "result": "W"
+      }
+    ]
+  },
+  {
     "date": "2026-08-29",
     "picks": [
       {
