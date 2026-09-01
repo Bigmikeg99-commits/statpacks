@@ -1,5 +1,108 @@
 [
   {
+    "date": "2026-08-31",
+    "picks": [
+      {
+        "name": "Jackson Jobe",
+        "mlbamid": "695549",
+        "team": "Detroit Tigers",
+        "opp": "Minnesota Twins",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 3.5,
+        "pred_k": 4.9,
+        "edge": 19.7,
+        "actual_k": 4.0,
+        "result": "W"
+      },
+      {
+        "name": "Will Dion",
+        "mlbamid": "702021",
+        "team": "Washington Nationals",
+        "opp": "Miami Marlins",
+        "hand": "L",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 3.5,
+        "pred_k": 4.9,
+        "edge": 19.7,
+        "actual_k": 1.0,
+        "result": "L"
+      },
+      {
+        "name": "Ian Seymour",
+        "mlbamid": "693855",
+        "team": "Tampa Bay Rays",
+        "opp": "New York Mets",
+        "hand": "L",
+        "ha": "Home",
+        "rec": "UNDER",
+        "line": 6.5,
+        "pred_k": 5.32,
+        "edge": 19.0,
+        "actual_k": 10.0,
+        "result": "L"
+      },
+      {
+        "name": "Brandon Pfaadt",
+        "mlbamid": "694297",
+        "team": "Arizona Diamondbacks",
+        "opp": "Philadelphia Phillies",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 3.5,
+        "pred_k": 4.68,
+        "edge": 16.3,
+        "actual_k": 1.0,
+        "result": "L"
+      },
+      {
+        "name": "Payton Tolle",
+        "mlbamid": "801139",
+        "team": "Boston Red Sox",
+        "opp": "Seattle Mariners",
+        "hand": "L",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 6.5,
+        "pred_k": 7.7,
+        "edge": 12.5,
+        "actual_k": 6.0,
+        "result": "L"
+      },
+      {
+        "name": "Aaron Nola",
+        "mlbamid": "605400",
+        "team": "Philadelphia Phillies",
+        "opp": "Arizona Diamondbacks",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 4.5,
+        "pred_k": 5.42,
+        "edge": 10.6,
+        "actual_k": 4.0,
+        "result": "L"
+      },
+      {
+        "name": "George Kirby",
+        "mlbamid": "669923",
+        "team": "Seattle Mariners",
+        "opp": "Boston Red Sox",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 4.5,
+        "pred_k": 5.35,
+        "edge": 9.5,
+        "actual_k": 2.0,
+        "result": "L"
+      }
+    ]
+  },
+  {
     "date": "2026-08-30",
     "picks": [
       {
