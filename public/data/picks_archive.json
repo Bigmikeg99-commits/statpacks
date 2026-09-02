@@ -1,5 +1,136 @@
 [
   {
+    "date": "2026-09-01",
+    "picks": [
+      {
+        "name": "Paul Skenes",
+        "mlbamid": "694973",
+        "team": "Pittsburgh Pirates",
+        "opp": "San Francisco Giants",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "UNDER",
+        "line": 6.5,
+        "pred_k": 5.23,
+        "edge": 20.4,
+        "actual_k": 4.0,
+        "result": "W"
+      },
+      {
+        "name": "Gavin Williams",
+        "mlbamid": "668909",
+        "team": "Cleveland Guardians",
+        "opp": "Toronto Blue Jays",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "UNDER",
+        "line": 6.5,
+        "pred_k": 5.71,
+        "edge": 12.9,
+        "actual_k": 13.0,
+        "result": "L"
+      },
+      {
+        "name": "Randy Vásquez",
+        "mlbamid": "681190",
+        "team": "San Diego Padres",
+        "opp": "Cincinnati Reds",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 3.5,
+        "pred_k": 4.46,
+        "edge": 12.7,
+        "actual_k": 3.0,
+        "result": "L"
+      },
+      {
+        "name": "Jesús Luzardo",
+        "mlbamid": "666200",
+        "team": "Philadelphia Phillies",
+        "opp": "Arizona Diamondbacks",
+        "hand": "L",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 5.5,
+        "pred_k": 6.56,
+        "edge": 11.6,
+        "actual_k": 6.0,
+        "result": "W"
+      },
+      {
+        "name": "Troy Melton",
+        "mlbamid": "675512",
+        "team": "Detroit Tigers",
+        "opp": "Minnesota Twins",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 4.5,
+        "pred_k": 5.44,
+        "edge": 10.9,
+        "actual_k": 4.0,
+        "result": "L"
+      },
+      {
+        "name": "Robert Gasser",
+        "mlbamid": "688107",
+        "team": "Milwaukee Brewers",
+        "opp": "Chicago Cubs",
+        "hand": "L",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 4.5,
+        "pred_k": 5.4,
+        "edge": 10.3,
+        "actual_k": 4.0,
+        "result": "L"
+      },
+      {
+        "name": "Logan Webb",
+        "mlbamid": "657277",
+        "team": "San Francisco Giants",
+        "opp": "Pittsburgh Pirates",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 4.5,
+        "pred_k": 5.38,
+        "edge": 9.9,
+        "actual_k": 1.0,
+        "result": "L"
+      },
+      {
+        "name": "Grayson Rodriguez",
+        "mlbamid": "680570",
+        "team": "Los Angeles Angels",
+        "opp": "New York Yankees",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 5.5,
+        "pred_k": 6.38,
+        "edge": 8.9,
+        "actual_k": 7.0,
+        "result": "W"
+      },
+      {
+        "name": "Bryan Woo",
+        "mlbamid": "693433",
+        "team": "Seattle Mariners",
+        "opp": "Boston Red Sox",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 4.5,
+        "pred_k": 5.31,
+        "edge": 8.8,
+        "actual_k": 7.0,
+        "result": "W"
+      }
+    ]
+  },
+  {
     "date": "2026-08-31",
     "picks": [
       {
