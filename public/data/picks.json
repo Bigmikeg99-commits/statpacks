@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-03 17:58",
+  "updated": "2026-09-03 18:23",
   "picks_date": "2026-09-03",
   "season": {
     "record": "716-586",
@@ -1827,8 +1827,76 @@
       "psi_plus": null,
       "result": null,
       "actual_k": null,
-      "pushers_up": [],
-      "pushers_down": []
+      "pushers_up": [
+        {
+          "feat": "ose_k_rate_season_to_date_split",
+          "label": "Opponent K rate vs pitcher hand",
+          "pp": 3.2,
+          "val": 0.2456436200112422
+        },
+        {
+          "feat": "home_away",
+          "label": "Home/Away",
+          "pp": 2.9,
+          "val": 1.0
+        },
+        {
+          "feat": "days_since_last_start",
+          "label": "Days since last start",
+          "pp": 2.4,
+          "val": 5.0
+        },
+        {
+          "feat": "swstr_pct",
+          "label": "Swinging-strike rate (SwStr%)",
+          "pp": 2.3,
+          "val": 0.1144578313253012
+        },
+        {
+          "feat": "Location+",
+          "label": "Location+ rating",
+          "pp": 1.3,
+          "val": 87.36999999999999
+        }
+      ],
+      "pushers_down": [
+        {
+          "feat": "K_PIT",
+          "label": "Pitcher K rate (point-in-time)",
+          "pp": -5.0,
+          "val": null
+        },
+        {
+          "feat": "Pitching+",
+          "label": "Pitching+ rating",
+          "pp": -3.8,
+          "val": 87.10975
+        },
+        {
+          "feat": "PSI_vaa",
+          "label": "PSI+ vertical approach angle",
+          "pp": -1.7,
+          "val": null
+        },
+        {
+          "feat": "PSI_velo_p95",
+          "label": "PSI+ 95th-pct velocity",
+          "pp": -1.4,
+          "val": null
+        },
+        {
+          "feat": "avg_IP_per_start",
+          "label": "Avg innings per start",
+          "pp": -1.4,
+          "val": 5.0
+        },
+        {
+          "feat": "PSI_CLW",
+          "label": "PSI+ CLW component",
+          "pp": -1.4,
+          "val": null
+        }
+      ]
     },
     {
       "name": "Cal Quantrill",
@@ -1842,7 +1910,7 @@
       "conf": "46.2%",
       "pred_k": 3.495780235222575,
       "avg_ip": 5.43,
-      "k_pct": null,
+      "k_pct": 0.2258,
       "k_pct_l5": null,
       "barrel_pct": null,
       "stuff_plus": 89.5,
@@ -1851,8 +1919,64 @@
       "psi_plus": null,
       "result": null,
       "actual_k": null,
-      "pushers_up": [],
-      "pushers_down": []
+      "pushers_up": [
+        {
+          "feat": "home_away",
+          "label": "Home/Away",
+          "pp": 2.5,
+          "val": 1.0
+        },
+        {
+          "feat": "avg_IP_per_start",
+          "label": "Avg innings per start",
+          "pp": 2.1,
+          "val": 5.433333333333334
+        },
+        {
+          "feat": "changeup_vertical_drop",
+          "label": "Changeup drop",
+          "pp": 1.3,
+          "val": null
+        }
+      ],
+      "pushers_down": [
+        {
+          "feat": "ose_k_rate_season_to_date_split",
+          "label": "Opponent K rate vs pitcher hand",
+          "pp": -9.9,
+          "val": 0.1857696566998892
+        },
+        {
+          "feat": "Stuff+",
+          "label": "Stuff+ rating",
+          "pp": -7.8,
+          "val": 89.4725079738736
+        },
+        {
+          "feat": "ose_csw_rate_season_to_date_split",
+          "label": "Opponent called-strike + whiff rate",
+          "pp": -4.8,
+          "val": 0.2645444566410538
+        },
+        {
+          "feat": "spin_FF",
+          "label": "4-seam fastball spin rate",
+          "pp": -2.5,
+          "val": 2125.2
+        },
+        {
+          "feat": "Location+",
+          "label": "Location+ rating",
+          "pp": -2.5,
+          "val": 106.05410227577906
+        },
+        {
+          "feat": "ose_pitches_per_pa_season_to_date_split",
+          "label": "Opponent pitches per PA",
+          "pp": -2.1,
+          "val": 3.7832225913621262
+        }
+      ]
     }
   ],
   "thresholdStats": [],
