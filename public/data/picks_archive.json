@@ -1,5 +1,52 @@
 [
   {
+    "date": "2026-09-02",
+    "picks": [
+      {
+        "name": "Griffin Jax",
+        "mlbamid": "643377",
+        "team": "Tampa Bay Rays",
+        "opp": "New York Mets",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 4.5,
+        "pred_k": 5.84,
+        "edge": 16.9,
+        "actual_k": 1.0,
+        "result": "L"
+      },
+      {
+        "name": "Bryce Miller",
+        "mlbamid": "682243",
+        "team": "Seattle Mariners",
+        "opp": "Boston Red Sox",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 4.5,
+        "pred_k": 5.61,
+        "edge": 13.5,
+        "actual_k": 3.0,
+        "result": "L"
+      },
+      {
+        "name": "Landen Roupp",
+        "mlbamid": "694738",
+        "team": "San Francisco Giants",
+        "opp": "Pittsburgh Pirates",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 4.5,
+        "pred_k": 5.35,
+        "edge": 9.5,
+        "actual_k": 4.0,
+        "result": "L"
+      }
+    ]
+  },
+  {
     "date": "2026-09-01",
     "picks": [
       {
