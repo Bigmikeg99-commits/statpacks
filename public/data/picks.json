@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-03 18:23",
+  "updated": "2026-09-03 18:59",
   "picks_date": "2026-09-03",
   "season": {
     "record": "716-586",
@@ -1916,7 +1916,7 @@
       "stuff_plus": 89.5,
       "location_plus": 106.1,
       "pitching_plus": 95.1,
-      "psi_plus": null,
+      "psi_plus": 91.5,
       "result": null,
       "actual_k": null,
       "pushers_up": [
