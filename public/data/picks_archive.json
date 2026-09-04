@@ -1,5 +1,38 @@
 [
   {
+    "date": "2026-09-03",
+    "picks": [
+      {
+        "name": "Kade Anderson",
+        "mlbamid": "807739",
+        "team": "",
+        "opp": "Athletics",
+        "hand": "L",
+        "ha": "Home",
+        "rec": "UNDER",
+        "line": 5.5,
+        "pred_k": 4.51,
+        "edge": 17.8,
+        "actual_k": 3.0,
+        "result": "W"
+      },
+      {
+        "name": "Cal Quantrill",
+        "mlbamid": "615698",
+        "team": "",
+        "opp": "Tampa Bay Rays",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "UNDER",
+        "line": 3.0,
+        "pred_k": 3.5,
+        "edge": 1.4,
+        "actual_k": 5.0,
+        "result": "L"
+      }
+    ]
+  },
+  {
     "date": "2026-09-02",
     "picks": [
       {
