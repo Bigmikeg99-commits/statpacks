@@ -1,5 +1,80 @@
 [
   {
+    "date": "2026-09-04",
+    "picks": [
+      {
+        "name": "Daniel Lynch IV",
+        "mlbamid": "663738",
+        "team": "",
+        "opp": "Toronto Blue Jays",
+        "hand": "L",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 2.5,
+        "pred_k": 3.72,
+        "edge": 19.4,
+        "actual_k": 0.0,
+        "result": "L"
+      },
+      {
+        "name": "Andre Pallante",
+        "mlbamid": "669467",
+        "team": "",
+        "opp": "Colorado Rockies",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 2.5,
+        "pred_k": 3.72,
+        "edge": 19.4,
+        "actual_k": 1.0,
+        "result": "L"
+      },
+      {
+        "name": "Ranger Suarez",
+        "mlbamid": "624133",
+        "team": "",
+        "opp": "Baltimore Orioles",
+        "hand": "L",
+        "ha": "Away",
+        "rec": "UNDER",
+        "line": 5.5,
+        "pred_k": 4.47,
+        "edge": 18.4,
+        "actual_k": 3.0,
+        "result": "W"
+      },
+      {
+        "name": "Foster Griffin",
+        "mlbamid": "656492",
+        "team": "",
+        "opp": "Detroit Tigers",
+        "hand": "L",
+        "ha": "Home",
+        "rec": "UNDER",
+        "line": 5.5,
+        "pred_k": 4.51,
+        "edge": 17.7,
+        "actual_k": 3.0,
+        "result": "W"
+      },
+      {
+        "name": "Shane Drohan",
+        "mlbamid": "675660",
+        "team": "",
+        "opp": "Cincinnati Reds",
+        "hand": "L",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 5.5,
+        "pred_k": 5.99,
+        "edge": 2.8,
+        "actual_k": 5.0,
+        "result": "L"
+      }
+    ]
+  },
+  {
     "date": "2026-09-03",
     "picks": [
       {
