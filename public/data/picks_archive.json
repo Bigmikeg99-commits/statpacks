@@ -1,5 +1,52 @@
 [
   {
+    "date": "2026-09-06",
+    "picks": [
+      {
+        "name": "Kyle Leahy",
+        "mlbamid": "681517",
+        "team": "",
+        "opp": "Colorado Rockies",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 2.5,
+        "pred_k": 4.72,
+        "edge": 32.6,
+        "actual_k": 6.0,
+        "result": "W"
+      },
+      {
+        "name": "MacKenzie Gore",
+        "mlbamid": "669022",
+        "team": "",
+        "opp": "Tampa Bay Rays",
+        "hand": "L",
+        "ha": "Home",
+        "rec": "UNDER",
+        "line": 5.0,
+        "pred_k": 4.87,
+        "edge": 11.4,
+        "actual_k": 1.0,
+        "result": "W"
+      },
+      {
+        "name": "Gage Jump",
+        "mlbamid": "695611",
+        "team": "",
+        "opp": "Seattle Mariners",
+        "hand": "L",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 5.5,
+        "pred_k": 5.72,
+        "edge": -1.6,
+        "actual_k": 7.0,
+        "result": "W"
+      }
+    ]
+  },
+  {
     "date": "2026-09-04",
     "picks": [
       {
