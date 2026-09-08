@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-08 16:57",
+  "updated": "2026-09-08 17:13",
   "picks_date": "2026-09-08",
   "season": {
     "record": "725-593",
@@ -12,7 +12,7 @@
     "date_range": "3/26-9/7"
   },
   "pod": {
-    "name": "Corbin Burnes"
+    "name": "AJ Smith-Shawver"
   },
   "daily": [
     {
@@ -1847,100 +1847,100 @@
   ],
   "picks": [
     {
-      "name": "Corbin Burnes",
-      "mlbamid": "669203",
-      "team": "Arizona Diamondbacks",
-      "opp": "vs Kansas City Royals",
+      "name": "AJ Smith-Shawver",
+      "mlbamid": "700363",
+      "team": "Atlanta Braves",
+      "opp": "vs Tampa Bay Rays",
       "hand": "R",
-      "ha": "Away",
-      "rec": "OVER",
-      "line": 2.5,
-      "conf": "84.3%",
-      "pred_k": 4.657616317800589,
-      "avg_ip": 6.0,
-      "k_pct": 0.2747,
+      "ha": "Home",
+      "rec": "UNDER",
+      "line": 4.0,
+      "conf": "41.3%",
+      "pred_k": 4.215635555020857,
+      "avg_ip": 4.9,
+      "k_pct": 0.1869,
       "k_pct_l5": null,
       "barrel_pct": null,
-      "stuff_plus": null,
-      "location_plus": null,
-      "pitching_plus": null,
-      "psi_plus": 108.6,
+      "stuff_plus": 102.1,
+      "location_plus": 97.6,
+      "pitching_plus": 100.2,
+      "psi_plus": 107.7,
       "result": null,
       "actual_k": null,
       "pushers_up": [
         {
-          "feat": "K_PIT",
-          "label": "Pitcher K rate (point-in-time)",
-          "pp": 10.1,
-          "val": 0.274746911950212
+          "feat": "PSI_velo_p95",
+          "label": "PSI+ 95th-pct velocity",
+          "pp": 2.8,
+          "val": 98.31
         },
         {
-          "feat": "avg_IP_per_start",
-          "label": "Avg innings per start",
-          "pp": 3.3,
-          "val": 6.0
-        },
-        {
-          "feat": "Location+",
-          "label": "Location+ rating",
+          "feat": "ext_FB",
+          "label": "Fastball extension",
           "pp": 2.6,
-          "val": null
-        },
-        {
-          "feat": "BF_rolling_avg",
-          "label": "Batters faced (rolling avg)",
-          "pp": 2.5,
-          "val": 25.0
-        },
-        {
-          "feat": "SLWR",
-          "label": "Swinging-strike + whiff rate (SLWR)",
-          "pp": 2.0,
-          "val": 0.20186
-        },
-        {
-          "feat": "PSI_CLW",
-          "label": "PSI+ CLW component",
-          "pp": 1.6,
-          "val": 0.1312
-        }
-      ],
-      "pushers_down": [
-        {
-          "feat": "days_since_last_start",
-          "label": "Days since last start",
-          "pp": -9.5,
-          "val": 464.0
-        },
-        {
-          "feat": "ose_k_rate_season_to_date_split",
-          "label": "Opponent K rate vs pitcher hand",
-          "pp": -5.1,
-          "val": 0.2029490616621983
+          "val": 6.811
         },
         {
           "feat": "home_away",
           "label": "Home/Away",
-          "pp": -2.5,
-          "val": 0.0
+          "pp": 2.3,
+          "val": 1.0
+        },
+        {
+          "feat": "Stuff+",
+          "label": "Stuff+ rating",
+          "pp": 2.2,
+          "val": 102.08299999999998
         },
         {
           "feat": "PSI_vaa",
           "label": "PSI+ vertical approach angle",
-          "pp": -2.3,
-          "val": -6.077
+          "pp": 1.8,
+          "val": -4.986
         },
         {
-          "feat": "ose_pitches_per_pa_season_to_date_split",
-          "label": "Opponent pitches per PA",
-          "pp": -2.0,
-          "val": 3.817962466487936
+          "feat": "swstr_pct",
+          "label": "Swinging-strike rate (SwStr%)",
+          "pp": 1.7,
+          "val": 0.115625
+        }
+      ],
+      "pushers_down": [
+        {
+          "feat": "ose_k_rate_season_to_date_split",
+          "label": "Opponent K rate vs pitcher hand",
+          "pp": -8.8,
+          "val": 0.1857335127860027
         },
         {
-          "feat": "fastball_usage",
-          "label": "Fastball usage %",
-          "pp": -1.6,
-          "val": null
+          "feat": "K_PIT",
+          "label": "Pitcher K rate (point-in-time)",
+          "pp": -6.0,
+          "val": 0.1868723032478976
+        },
+        {
+          "feat": "ose_csw_rate_season_to_date_split",
+          "label": "Opponent called-strike + whiff rate",
+          "pp": -4.3,
+          "val": 0.2646786705572556
+        },
+        {
+          "feat": "spin_FF",
+          "label": "4-seam fastball spin rate",
+          "pp": -3.8,
+          "val": 2113.6
+        },
+        {
+          "feat": "avg_IP_per_start",
+          "label": "Avg innings per start",
+          "pp": -2.7,
+          "val": 4.9
+        },
+        {
+          "feat": "BF_rolling_avg",
+          "label": "Batters faced (rolling avg)",
+          "pp": -2.5,
+          "val": 19.2
         }
       ]
     },
@@ -2277,104 +2277,6 @@
       ]
     },
     {
-      "name": "AJ Smith-Shawver",
-      "mlbamid": "700363",
-      "team": "Atlanta Braves",
-      "opp": "vs Tampa Bay Rays",
-      "hand": "R",
-      "ha": "Home",
-      "rec": "UNDER",
-      "line": 4.0,
-      "conf": "41.3%",
-      "pred_k": 4.215635555020857,
-      "avg_ip": 4.9,
-      "k_pct": 0.1869,
-      "k_pct_l5": null,
-      "barrel_pct": null,
-      "stuff_plus": 102.1,
-      "location_plus": 97.6,
-      "pitching_plus": 100.2,
-      "psi_plus": 107.7,
-      "result": null,
-      "actual_k": null,
-      "pushers_up": [
-        {
-          "feat": "PSI_velo_p95",
-          "label": "PSI+ 95th-pct velocity",
-          "pp": 2.8,
-          "val": 98.31
-        },
-        {
-          "feat": "ext_FB",
-          "label": "Fastball extension",
-          "pp": 2.6,
-          "val": 6.811
-        },
-        {
-          "feat": "home_away",
-          "label": "Home/Away",
-          "pp": 2.3,
-          "val": 1.0
-        },
-        {
-          "feat": "Stuff+",
-          "label": "Stuff+ rating",
-          "pp": 2.2,
-          "val": 102.08299999999998
-        },
-        {
-          "feat": "PSI_vaa",
-          "label": "PSI+ vertical approach angle",
-          "pp": 1.8,
-          "val": -4.986
-        },
-        {
-          "feat": "swstr_pct",
-          "label": "Swinging-strike rate (SwStr%)",
-          "pp": 1.7,
-          "val": 0.115625
-        }
-      ],
-      "pushers_down": [
-        {
-          "feat": "ose_k_rate_season_to_date_split",
-          "label": "Opponent K rate vs pitcher hand",
-          "pp": -8.8,
-          "val": 0.1857335127860027
-        },
-        {
-          "feat": "K_PIT",
-          "label": "Pitcher K rate (point-in-time)",
-          "pp": -6.0,
-          "val": 0.1868723032478976
-        },
-        {
-          "feat": "ose_csw_rate_season_to_date_split",
-          "label": "Opponent called-strike + whiff rate",
-          "pp": -4.3,
-          "val": 0.2646786705572556
-        },
-        {
-          "feat": "spin_FF",
-          "label": "4-seam fastball spin rate",
-          "pp": -3.8,
-          "val": 2113.6
-        },
-        {
-          "feat": "avg_IP_per_start",
-          "label": "Avg innings per start",
-          "pp": -2.7,
-          "val": 4.9
-        },
-        {
-          "feat": "BF_rolling_avg",
-          "label": "Batters faced (rolling avg)",
-          "pp": -2.5,
-          "val": 19.2
-        }
-      ]
-    },
-    {
       "name": "Cam Schlittler",
       "mlbamid": "693645",
       "team": "New York Yankees",
@@ -2531,6 +2433,104 @@
           "label": "Avg innings per start",
           "pp": -3.9,
           "val": 4.366666666666665
+        }
+      ]
+    },
+    {
+      "name": "Corbin Burnes",
+      "mlbamid": "669203",
+      "team": "Arizona Diamondbacks",
+      "opp": "vs Kansas City Royals",
+      "hand": "R",
+      "ha": "Away",
+      "rec": "OVER",
+      "line": 2.5,
+      "conf": "84.3%",
+      "pred_k": 4.657616317800589,
+      "avg_ip": 6.0,
+      "k_pct": 0.2747,
+      "k_pct_l5": null,
+      "barrel_pct": null,
+      "stuff_plus": null,
+      "location_plus": null,
+      "pitching_plus": null,
+      "psi_plus": 108.6,
+      "result": null,
+      "actual_k": null,
+      "pushers_up": [
+        {
+          "feat": "K_PIT",
+          "label": "Pitcher K rate (point-in-time)",
+          "pp": 10.1,
+          "val": 0.274746911950212
+        },
+        {
+          "feat": "avg_IP_per_start",
+          "label": "Avg innings per start",
+          "pp": 3.3,
+          "val": 6.0
+        },
+        {
+          "feat": "Location+",
+          "label": "Location+ rating",
+          "pp": 2.6,
+          "val": null
+        },
+        {
+          "feat": "BF_rolling_avg",
+          "label": "Batters faced (rolling avg)",
+          "pp": 2.5,
+          "val": 25.0
+        },
+        {
+          "feat": "SLWR",
+          "label": "Swinging-strike + whiff rate (SLWR)",
+          "pp": 2.0,
+          "val": 0.20186
+        },
+        {
+          "feat": "PSI_CLW",
+          "label": "PSI+ CLW component",
+          "pp": 1.6,
+          "val": 0.1312
+        }
+      ],
+      "pushers_down": [
+        {
+          "feat": "days_since_last_start",
+          "label": "Days since last start",
+          "pp": -9.5,
+          "val": 464.0
+        },
+        {
+          "feat": "ose_k_rate_season_to_date_split",
+          "label": "Opponent K rate vs pitcher hand",
+          "pp": -5.1,
+          "val": 0.2029490616621983
+        },
+        {
+          "feat": "home_away",
+          "label": "Home/Away",
+          "pp": -2.5,
+          "val": 0.0
+        },
+        {
+          "feat": "PSI_vaa",
+          "label": "PSI+ vertical approach angle",
+          "pp": -2.3,
+          "val": -6.077
+        },
+        {
+          "feat": "ose_pitches_per_pa_season_to_date_split",
+          "label": "Opponent pitches per PA",
+          "pp": -2.0,
+          "val": 3.817962466487936
+        },
+        {
+          "feat": "fastball_usage",
+          "label": "Fastball usage %",
+          "pp": -1.6,
+          "val": null
         }
       ]
     }

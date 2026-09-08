@@ -60,7 +60,7 @@
       },
       {
         "name": "Jonah Tong",
-        "mlbamid": "804636",
+        "mlbamid": "",
         "team": "",
         "opp": "Miami Marlins",
         "hand": "R",
@@ -140,7 +140,7 @@
     "picks": [
       {
         "name": "Daniel Lynch IV",
-        "mlbamid": "663738",
+        "mlbamid": "",
         "team": "",
         "opp": "Toronto Blue Jays",
         "hand": "L",
@@ -215,7 +215,7 @@
     "picks": [
       {
         "name": "Kade Anderson",
-        "mlbamid": "807739",
+        "mlbamid": "",
         "team": "",
         "opp": "Athletics",
         "hand": "L",
@@ -229,7 +229,7 @@
       },
       {
         "name": "Cal Quantrill",
-        "mlbamid": "615698",
+        "mlbamid": "",
         "team": "",
         "opp": "Tampa Bay Rays",
         "hand": "R",
@@ -426,7 +426,7 @@
     "picks": [
       {
         "name": "Jackson Jobe",
-        "mlbamid": "695549",
+        "mlbamid": "",
         "team": "Detroit Tigers",
         "opp": "Minnesota Twins",
         "hand": "R",
@@ -440,7 +440,7 @@
       },
       {
         "name": "Will Dion",
-        "mlbamid": "702021",
+        "mlbamid": "",
         "team": "Washington Nationals",
         "opp": "Miami Marlins",
         "hand": "L",
@@ -646,7 +646,7 @@
     "picks": [
       {
         "name": "Kade Anderson",
-        "mlbamid": "807739",
+        "mlbamid": "",
         "team": "Seattle Mariners",
         "opp": "Toronto Blue Jays",
         "hand": "L",
@@ -777,7 +777,7 @@
     "picks": [
       {
         "name": "Quinn Mathews",
-        "mlbamid": "687273",
+        "mlbamid": "",
         "team": "St. Louis Cardinals",
         "opp": "Pittsburgh Pirates",
         "hand": "L",
@@ -997,7 +997,7 @@
       },
       {
         "name": "AJ Smith-Shawver",
-        "mlbamid": "700363",
+        "mlbamid": "",
         "team": "Atlanta Braves",
         "opp": "Los Angeles Dodgers",
         "hand": "R",
@@ -1053,7 +1053,7 @@
       },
       {
         "name": "Robert Stock",
-        "mlbamid": "476594",
+        "mlbamid": "",
         "team": "New York Mets",
         "opp": "Milwaukee Brewers",
         "hand": "R",
@@ -1550,7 +1550,7 @@
       },
       {
         "name": "Jackson Jobe",
-        "mlbamid": "695549",
+        "mlbamid": "",
         "team": "Detroit Tigers",
         "opp": "Pittsburgh Pirates",
         "hand": "R",
@@ -1578,7 +1578,7 @@
       },
       {
         "name": "Robert Stock",
-        "mlbamid": "476594",
+        "mlbamid": "",
         "team": "New York Mets",
         "opp": "San Diego Padres",
         "hand": "R",
@@ -1639,7 +1639,7 @@
     "picks": [
       {
         "name": "Jackson Kent",
-        "mlbamid": "800600",
+        "mlbamid": "",
         "team": "Washington Nationals",
         "opp": "Texas Rangers",
         "hand": "L",
@@ -1667,7 +1667,7 @@
       },
       {
         "name": "Carlos Rodón",
-        "mlbamid": "607074",
+        "mlbamid": "",
         "team": "New York Yankees",
         "opp": "Baltimore Orioles",
         "hand": "L",
@@ -2009,7 +2009,7 @@
       },
       {
         "name": "Jackson Jobe",
-        "mlbamid": "695549",
+        "mlbamid": "",
         "team": "Detroit Tigers",
         "opp": "Chicago White Sox",
         "hand": "R",
@@ -2304,7 +2304,7 @@
       },
       {
         "name": "Carson Whisenhunt",
-        "mlbamid": "687931",
+        "mlbamid": "",
         "team": "San Francisco Giants",
         "opp": "Houston Astros",
         "hand": "L",
