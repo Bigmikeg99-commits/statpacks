@@ -1,5 +1,94 @@
 [
   {
+    "date": "2026-09-07",
+    "picks": [
+      {
+        "name": "Chase Burns",
+        "mlbamid": "695505",
+        "team": "",
+        "opp": "Los Angeles Dodgers",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 4.5,
+        "pred_k": 6.47,
+        "edge": 24.9,
+        "actual_k": 5.0,
+        "result": "W"
+      },
+      {
+        "name": "Trevor Rogers",
+        "mlbamid": "669432",
+        "team": "",
+        "opp": "Cleveland Guardians",
+        "hand": "L",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 4.5,
+        "pred_k": 6.2,
+        "edge": 21.7,
+        "actual_k": 6.0,
+        "result": "W"
+      },
+      {
+        "name": "Eury Pérez",
+        "mlbamid": "691587",
+        "team": "",
+        "opp": "New York Mets",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 5.5,
+        "pred_k": 7.17,
+        "edge": 19.6,
+        "actual_k": 5.0,
+        "result": "L"
+      },
+      {
+        "name": "Jesús Luzardo",
+        "mlbamid": "666200",
+        "team": "",
+        "opp": "Atlanta Braves",
+        "hand": "L",
+        "ha": "Home",
+        "rec": "UNDER",
+        "line": 7.0,
+        "pred_k": 6.79,
+        "edge": 10.6,
+        "actual_k": 12.0,
+        "result": "L"
+      },
+      {
+        "name": "Jonah Tong",
+        "mlbamid": "804636",
+        "team": "",
+        "opp": "Miami Marlins",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "UNDER",
+        "line": 5.0,
+        "pred_k": 3.8,
+        "edge": 29.2,
+        "actual_k": 7.0,
+        "result": "L"
+      },
+      {
+        "name": "Dylan Cease",
+        "mlbamid": "656302",
+        "team": "",
+        "opp": "Athletics",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "UNDER",
+        "line": 7.0,
+        "pred_k": 7.2,
+        "edge": 4.5,
+        "actual_k": 6.0,
+        "result": "W"
+      }
+    ]
+  },
+  {
     "date": "2026-09-06",
     "picks": [
       {
