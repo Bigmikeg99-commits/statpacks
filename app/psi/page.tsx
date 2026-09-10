@@ -12,7 +12,7 @@ interface LBRow {
   k_pct: number; clw: number; velo: number; vaa: number; n: number
   slwr?: number | null
 }
-interface RollingRow { id: string; date: string; psi: number; clw: number; velo: number; vaa: number; n: number }
+interface RollingRow { id: string; date: string; psi: number | null }
 
 /* ───── Frozen public validation data ───── */
 const STABILITY = [
