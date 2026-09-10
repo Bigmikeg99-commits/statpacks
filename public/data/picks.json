@@ -1,18 +1,18 @@
 {
-  "updated": "2026-09-09 12:39",
-  "picks_date": "2026-09-09",
+  "updated": "2026-09-10 10:52",
+  "picks_date": "2026-09-10",
   "season": {
-    "record": "728-598",
-    "overs": "373-337",
-    "unders": "355-261",
-    "picks": 1326,
+    "record": "730-600",
+    "overs": "375-337",
+    "unders": "355-263",
+    "picks": 1330,
     "overall_pct": "54.9",
-    "over_pct": "52.5",
-    "under_pct": "57.6",
-    "date_range": "3/26-9/8"
+    "over_pct": "52.7",
+    "under_pct": "57.4",
+    "date_range": "3/26-9/9"
   },
   "pod": {
-    "name": "Daniel Lynch IV"
+    "name": "Cristian Javier"
   },
   "daily": [
     {
@@ -1624,6 +1624,16 @@
       "uw": 2,
       "ul": 2,
       "p": 37.5
+    },
+    {
+      "d": "9/9",
+      "w": 2,
+      "l": 2,
+      "ow": 2,
+      "ol": 0,
+      "uw": 0,
+      "ul": 2,
+      "p": 50.0
     }
   ],
   "backtestDaily": [],
@@ -1693,10 +1703,10 @@
     },
     {
       "l": "Line ≤4.0",
-      "w": 94,
+      "w": 96,
       "lo": 74,
-      "pct": 56.0,
-      "e": -1.8
+      "pct": 56.5,
+      "e": -1.3
     },
     {
       "l": "Line 4.5",
@@ -1714,17 +1724,17 @@
     },
     {
       "l": "LHP Home",
-      "w": 34,
+      "w": 35,
       "lo": 30,
-      "pct": 53.1,
-      "e": -4.7
+      "pct": 53.8,
+      "e": -4.0
     },
     {
       "l": "RHP Away",
-      "w": 101,
+      "w": 102,
       "lo": 93,
-      "pct": 52.1,
-      "e": -5.7
+      "pct": 52.3,
+      "e": -5.5
     },
     {
       "l": "Line 6.0+",
@@ -1735,10 +1745,10 @@
     },
     {
       "l": "P(Line) 70-75%",
-      "w": 15,
+      "w": 16,
       "lo": 22,
-      "pct": 40.5,
-      "e": -17.3
+      "pct": 42.1,
+      "e": -15.7
     }
   ],
   "underSegs": [
@@ -1755,13 +1765,6 @@
       "lo": 20,
       "pct": 63.0,
       "e": 5.2
-    },
-    {
-      "l": "P(Line) 20-25%",
-      "w": 10,
-      "lo": 7,
-      "pct": 58.8,
-      "e": 1.0
     },
     {
       "l": "RHP Away",
@@ -1806,11 +1809,11 @@
       "e": -2.2
     },
     {
-      "l": "Home (all)",
-      "w": 96,
-      "lo": 78,
-      "pct": 55.2,
-      "e": -2.6
+      "l": "P(Line) 20-25%",
+      "w": 10,
+      "lo": 8,
+      "pct": 55.6,
+      "e": -2.2
     },
     {
       "l": "LHP Away",
@@ -1820,18 +1823,11 @@
       "e": -3.3
     },
     {
-      "l": "RHP Home",
-      "w": 58,
-      "lo": 49,
-      "pct": 54.2,
-      "e": -3.6
-    },
-    {
-      "l": "Line 4.0-4.5",
-      "w": 69,
-      "lo": 59,
-      "pct": 53.9,
-      "e": -3.9
+      "l": "Home (all)",
+      "w": 96,
+      "lo": 80,
+      "pct": 54.5,
+      "e": -3.3
     },
     {
       "l": "Line ≤3.5",
@@ -1841,11 +1837,25 @@
       "e": -4.3
     },
     {
+      "l": "Line 4.0-4.5",
+      "w": 69,
+      "lo": 60,
+      "pct": 53.5,
+      "e": -4.3
+    },
+    {
+      "l": "RHP Home",
+      "w": 58,
+      "lo": 51,
+      "pct": 53.2,
+      "e": -4.6
+    },
+    {
       "l": "Line 5.0-5.5",
       "w": 60,
-      "lo": 65,
-      "pct": 48.0,
-      "e": -9.8
+      "lo": 66,
+      "pct": 47.6,
+      "e": -10.2
     },
     {
       "l": "P(Line) 10-15%",
@@ -1857,358 +1867,272 @@
   ],
   "picks": [
     {
-      "name": "Daniel Lynch IV",
-      "mlbamid": "663738",
-      "team": "Kansas City Royals",
-      "opp": "vs Arizona Diamondbacks",
-      "hand": "L",
-      "ha": "Home",
+      "name": "Cristian Javier",
+      "mlbamid": "664299",
+      "team": "Houston Astros",
+      "opp": "vs Philadelphia Phillies",
+      "hand": "R",
+      "ha": "Away",
       "rec": "OVER",
-      "line": 2.5,
-      "conf": "70.8%",
-      "pred_k": 3.6626277844483757,
-      "avg_ip": 4.23,
-      "k_pct": 0.1399,
+      "line": 3.5,
+      "conf": "75.9%",
+      "pred_k": 5.175310699378537,
+      "avg_ip": 4.47,
+      "k_pct": 0.314,
       "k_pct_l5": null,
       "barrel_pct": null,
-      "stuff_plus": 103.1,
-      "location_plus": 96.4,
-      "pitching_plus": 102.8,
-      "psi_plus": 102.5,
-      "result": null,
-      "actual_k": null,
-      "pushers_up": [
-        {
-          "feat": "Stuff+",
-          "label": "Stuff+ rating",
-          "pp": 3.4,
-          "val": 103.12150467637056
-        },
-        {
-          "feat": "ose_pitches_per_pa_season_to_date_split",
-          "label": "Opponent pitches per PA",
-          "pp": 2.4,
-          "val": 3.9336399474375825
-        },
-        {
-          "feat": "days_since_last_start",
-          "label": "Days since last start",
-          "pp": 1.7,
-          "val": 5.0
-        },
-        {
-          "feat": "home_away",
-          "label": "Home/Away",
-          "pp": 1.5,
-          "val": 1.0
-        },
-        {
-          "feat": "changeup_vertical_drop",
-          "label": "Changeup drop",
-          "pp": 1.5,
-          "val": 1.5625785923403177
-        }
-      ],
-      "pushers_down": [
-        {
-          "feat": "K_PIT",
-          "label": "Pitcher K rate (point-in-time)",
-          "pp": -12.0,
-          "val": 0.1398948343015399
-        },
-        {
-          "feat": "ose_k_rate_season_to_date_split",
-          "label": "Opponent K rate vs pitcher hand",
-          "pp": -7.9,
-          "val": 0.1813403416557161
-        },
-        {
-          "feat": "BF_rolling_avg",
-          "label": "Batters faced (rolling avg)",
-          "pp": -6.7,
-          "val": 16.2
-        },
-        {
-          "feat": "avg_IP_per_start",
-          "label": "Avg innings per start",
-          "pp": -4.1,
-          "val": 4.2333333333333325
-        },
-        {
-          "feat": "ose_csw_rate_season_to_date_split",
-          "label": "Opponent called-strike + whiff rate",
-          "pp": -3.2,
-          "val": 0.2771003841656923
-        },
-        {
-          "feat": "PSI_vaa",
-          "label": "PSI+ vertical approach angle",
-          "pp": -1.8,
-          "val": -5.758
-        }
-      ]
-    },
-    {
-      "name": "Reynaldo López",
-      "mlbamid": "625643",
-      "team": "Atlanta Braves",
-      "opp": "vs Tampa Bay Rays",
-      "hand": "R",
-      "ha": "Home",
-      "rec": "UNDER",
-      "line": 4.0,
-      "conf": "23.2%",
-      "pred_k": 3.268012484458803,
-      "avg_ip": 4.87,
-      "k_pct": 0.2254,
-      "k_pct_l5": null,
-      "barrel_pct": null,
-      "stuff_plus": 90.4,
-      "location_plus": 99.6,
-      "pitching_plus": 89.9,
-      "psi_plus": 98.3,
-      "result": null,
-      "actual_k": null,
-      "pushers_up": [
-        {
-          "feat": "home_away",
-          "label": "Home/Away",
-          "pp": 1.8,
-          "val": 1.0
-        },
-        {
-          "feat": "PSI_vaa",
-          "label": "PSI+ vertical approach angle",
-          "pp": 1.4,
-          "val": -4.815
-        }
-      ],
-      "pushers_down": [
-        {
-          "feat": "days_since_last_start",
-          "label": "Days since last start",
-          "pp": -10.0,
-          "val": 45.0
-        },
-        {
-          "feat": "ose_k_rate_season_to_date_split",
-          "label": "Opponent K rate vs pitcher hand",
-          "pp": -8.0,
-          "val": 0.1861148197596795
-        },
-        {
-          "feat": "ose_csw_rate_season_to_date_split",
-          "label": "Opponent called-strike + whiff rate",
-          "pp": -5.1,
-          "val": 0.2647909174247232
-        },
-        {
-          "feat": "Stuff+",
-          "label": "Stuff+ rating",
-          "pp": -3.3,
-          "val": 90.44764596527668
-        },
-        {
-          "feat": "avg_IP_per_start",
-          "label": "Avg innings per start",
-          "pp": -3.2,
-          "val": 4.866666666666665
-        },
-        {
-          "feat": "spin_FF",
-          "label": "4-seam fastball spin rate",
-          "pp": -3.1,
-          "val": 2075.5
-        }
-      ]
-    },
-    {
-      "name": "Will Warren",
-      "mlbamid": "701542",
-      "team": "New York Yankees",
-      "opp": "vs Colorado Rockies",
-      "hand": "R",
-      "ha": "Home",
-      "rec": "UNDER",
-      "line": 5.0,
-      "conf": "37.2%",
-      "pred_k": 4.933984037088751,
-      "avg_ip": 4.63,
-      "k_pct": 0.2336,
-      "k_pct_l5": null,
-      "barrel_pct": null,
-      "stuff_plus": 103.3,
-      "location_plus": 105.7,
-      "pitching_plus": 110.8,
-      "psi_plus": 91.2,
+      "stuff_plus": 99.7,
+      "location_plus": 102.6,
+      "pitching_plus": 100.4,
+      "psi_plus": 100.6,
       "result": null,
       "actual_k": null,
       "pushers_up": [
         {
           "feat": "K_PIT",
           "label": "Pitcher K rate (point-in-time)",
-          "pp": 5.1,
-          "val": 0.2336471697078292
+          "pp": 13.7,
+          "val": 0.3139731731174643
         },
         {
-          "feat": "spin_FF",
-          "label": "4-seam fastball spin rate",
-          "pp": 3.9,
-          "val": 2528.3
-        },
-        {
-          "feat": "home_away",
-          "label": "Home/Away",
-          "pp": 3.7,
-          "val": 1.0
-        },
-        {
-          "feat": "ext_FB",
-          "label": "Fastball extension",
-          "pp": 1.9,
-          "val": 6.769
-        },
-        {
-          "feat": "days_since_last_start",
-          "label": "Days since last start",
-          "pp": 1.7,
-          "val": 5.0
-        },
-        {
-          "feat": "Stuff+",
-          "label": "Stuff+ rating",
-          "pp": 1.4,
-          "val": 103.32501598379967
-        }
-      ],
-      "pushers_down": [
-        {
-          "feat": "avg_IP_per_start",
-          "label": "Avg innings per start",
-          "pp": -3.3,
-          "val": 4.633333333333334
-        },
-        {
-          "feat": "PSI_CLW",
-          "label": "PSI+ CLW component",
-          "pp": -2.3,
-          "val": 0.0985499999999999
-        },
-        {
-          "feat": "fastball_usage",
-          "label": "Fastball usage %",
-          "pp": -2.2,
-          "val": 0.6229508196721311
-        },
-        {
-          "feat": "BF_rolling_avg",
-          "label": "Batters faced (rolling avg)",
-          "pp": -2.2,
-          "val": 19.6
+          "feat": "PSI_vaa",
+          "label": "PSI+ vertical approach angle",
+          "pp": 2.5,
+          "val": -4.318
         },
         {
           "feat": "swstr_pct",
           "label": "Swinging-strike rate (SwStr%)",
-          "pp": -1.8,
-          "val": 0.090595340811044
+          "pp": 2.4,
+          "val": 0.1455555555555555
+        },
+        {
+          "feat": "days_since_last_start",
+          "label": "Days since last start",
+          "pp": 2.0,
+          "val": 6.0
+        },
+        {
+          "feat": "PSI_CLW",
+          "label": "PSI+ CLW component",
+          "pp": 1.8,
+          "val": 0.1416699999999999
+        }
+      ],
+      "pushers_down": [
+        {
+          "feat": "avg_IP_per_start",
+          "label": "Avg innings per start",
+          "pp": -2.6,
+          "val": 4.466666666666667
+        },
+        {
+          "feat": "home_away",
+          "label": "Home/Away",
+          "pp": -2.6,
+          "val": 0.0
+        },
+        {
+          "feat": "BF_rolling_avg",
+          "label": "Batters faced (rolling avg)",
+          "pp": -2.5,
+          "val": 19.6
         },
         {
           "feat": "ose_csw_rate_season_to_date_split",
           "label": "Opponent called-strike + whiff rate",
-          "pp": -1.8,
-          "val": 0.2582253240279162
+          "pp": -1.1,
+          "val": 0.2799130789080537
+        },
+        {
+          "feat": "ose_k_rate_season_to_date_split",
+          "label": "Opponent K rate vs pitcher hand",
+          "pp": -1.1,
+          "val": 0.2209915611814345
+        },
+        {
+          "feat": "ext_FB",
+          "label": "Fastball extension",
+          "pp": -1.1,
+          "val": 6.123
         }
       ]
     },
     {
-      "name": "Tomoyuki Sugano",
-      "mlbamid": "608372",
+      "name": "Martín Pérez",
+      "mlbamid": "527048",
+      "team": "Atlanta Braves",
+      "opp": "vs Tampa Bay Rays",
+      "hand": "L",
+      "ha": "Home",
+      "rec": "UNDER",
+      "line": 3.0,
+      "conf": "33.7%",
+      "pred_k": 2.9313195771778044,
+      "avg_ip": 4.77,
+      "k_pct": 0.1736,
+      "k_pct_l5": null,
+      "barrel_pct": null,
+      "stuff_plus": 86.3,
+      "location_plus": 101.0,
+      "pitching_plus": 90.5,
+      "psi_plus": 85.5,
+      "result": null,
+      "actual_k": null,
+      "pushers_up": [
+        {
+          "feat": "home_away",
+          "label": "Home/Away",
+          "pp": 2.8,
+          "val": 1.0
+        },
+        {
+          "feat": "SLWR",
+          "label": "Swinging-strike + whiff rate (SLWR)",
+          "pp": 1.8,
+          "val": 0.1700599999999999
+        },
+        {
+          "feat": "days_since_last_start",
+          "label": "Days since last start",
+          "pp": 1.4,
+          "val": 5.0
+        },
+        {
+          "feat": "spin_FC",
+          "label": "Cutter spin rate",
+          "pp": 1.1,
+          "val": 2235.9
+        },
+        {
+          "feat": "BF_rolling_avg",
+          "label": "Batters faced (rolling avg)",
+          "pp": 1.0,
+          "val": 22.8
+        }
+      ],
+      "pushers_down": [
+        {
+          "feat": "ose_k_rate_season_to_date_split",
+          "label": "Opponent K rate vs pitcher hand",
+          "pp": -10.2,
+          "val": 0.18006993006993
+        },
+        {
+          "feat": "ose_csw_rate_season_to_date_split",
+          "label": "Opponent called-strike + whiff rate",
+          "pp": -8.1,
+          "val": 0.2622745098039215
+        },
+        {
+          "feat": "K_PIT",
+          "label": "Pitcher K rate (point-in-time)",
+          "pp": -7.9,
+          "val": 0.1735517491569711
+        },
+        {
+          "feat": "PSI_velo_p95",
+          "label": "PSI+ 95th-pct velocity",
+          "pp": -7.5,
+          "val": 90.86000000000001
+        },
+        {
+          "feat": "Stuff+",
+          "label": "Stuff+ rating",
+          "pp": -7.3,
+          "val": 86.34926236188262
+        },
+        {
+          "feat": "PSI_vaa",
+          "label": "PSI+ vertical approach angle",
+          "pp": -3.7,
+          "val": -6.147
+        }
+      ]
+    },
+    {
+      "name": "Ryan Feltner",
+      "mlbamid": "663372",
       "team": "Colorado Rockies",
       "opp": "vs New York Yankees",
       "hand": "R",
       "ha": "Away",
       "rec": "OVER",
-      "line": 3.5,
-      "conf": "55.5%",
-      "pred_k": 3.9431457749643024,
-      "avg_ip": 5.23,
-      "k_pct": 0.1481,
+      "line": 4.5,
+      "conf": "54.7%",
+      "pred_k": 4.929472015368394,
+      "avg_ip": 4.77,
+      "k_pct": 0.1834,
       "k_pct_l5": null,
       "barrel_pct": null,
-      "stuff_plus": 81.8,
-      "location_plus": 103.6,
-      "pitching_plus": 88.8,
-      "psi_plus": 88.3,
+      "stuff_plus": 92.0,
+      "location_plus": 96.9,
+      "pitching_plus": 91.6,
+      "psi_plus": 103.9,
       "result": null,
       "actual_k": null,
       "pushers_up": [
         {
           "feat": "ose_k_rate_season_to_date_split",
           "label": "Opponent K rate vs pitcher hand",
-          "pp": 3.9,
-          "val": 0.2485173679751482
+          "pp": 3.7,
+          "val": 0.2478321678321678
         },
         {
-          "feat": "spin_FF",
-          "label": "4-seam fastball spin rate",
-          "pp": 1.8,
-          "val": 2416.5
+          "feat": "PSI_velo_p95",
+          "label": "PSI+ 95th-pct velocity",
+          "pp": 2.5,
+          "val": 96.7
         },
         {
-          "feat": "avg_IP_per_start",
-          "label": "Avg innings per start",
-          "pp": 1.7,
-          "val": 5.2333333333333325
+          "feat": "BF_rolling_avg",
+          "label": "Batters faced (rolling avg)",
+          "pp": 2.1,
+          "val": 24.2
+        },
+        {
+          "feat": "PSI_vaa",
+          "label": "PSI+ vertical approach angle",
+          "pp": 2.1,
+          "val": -5.067
         },
         {
           "feat": "days_since_last_start",
           "label": "Days since last start",
-          "pp": 1.4,
-          "val": 7.0
+          "pp": 1.9,
+          "val": 6.0
         },
         {
-          "feat": "ose_two_strike_reach_rate_season_to_date_split",
-          "label": "Opponent two-strike reach rate",
-          "pp": 1.3,
-          "val": 0.551539113244846
+          "feat": "PSI_CLW",
+          "label": "PSI+ CLW component",
+          "pp": 1.4,
+          "val": 0.12259
         }
       ],
       "pushers_down": [
         {
           "feat": "K_PIT",
           "label": "Pitcher K rate (point-in-time)",
-          "pp": -9.6,
-          "val": 0.1480531689407608
+          "pp": -5.3,
+          "val": 0.1834197723252604
+        },
+        {
+          "feat": "avg_IP_per_start",
+          "label": "Avg innings per start",
+          "pp": -2.6,
+          "val": 4.766666666666667
         },
         {
           "feat": "Stuff+",
           "label": "Stuff+ rating",
-          "pp": -6.7,
-          "val": 81.75344731977822
-        },
-        {
-          "feat": "PSI_vaa",
-          "label": "PSI+ vertical approach angle",
-          "pp": -3.4,
-          "val": -6.092
+          "pp": -2.4,
+          "val": 92.01998836152339
         },
         {
           "feat": "home_away",
           "label": "Home/Away",
-          "pp": -2.4,
+          "pp": -1.6,
           "val": 0.0
-        },
-        {
-          "feat": "Pitching+",
-          "label": "Pitching+ rating",
-          "pp": -2.1,
-          "val": 88.81993530499071
-        },
-        {
-          "feat": "ext_FB",
-          "label": "Fastball extension",
-          "pp": -2.0,
-          "val": 6.249
         }
       ]
     }

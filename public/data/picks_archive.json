@@ -1,5 +1,66 @@
 [
   {
+    "date": "2026-09-09",
+    "picks": [
+      {
+        "name": "Daniel Lynch IV",
+        "mlbamid": "663738",
+        "team": "",
+        "opp": "Arizona Diamondbacks",
+        "hand": "L",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 2.5,
+        "pred_k": 3.66,
+        "edge": 18.4,
+        "actual_k": 3.0,
+        "result": "W"
+      },
+      {
+        "name": "Reynaldo López",
+        "mlbamid": "625643",
+        "team": "",
+        "opp": "Tampa Bay Rays",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "UNDER",
+        "line": 4.0,
+        "pred_k": 3.27,
+        "edge": 24.4,
+        "actual_k": 5.0,
+        "result": "L"
+      },
+      {
+        "name": "Will Warren",
+        "mlbamid": "701542",
+        "team": "",
+        "opp": "Colorado Rockies",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "UNDER",
+        "line": 5.0,
+        "pred_k": 4.93,
+        "edge": 10.4,
+        "actual_k": 8.0,
+        "result": "L"
+      },
+      {
+        "name": "Tomoyuki Sugano",
+        "mlbamid": "608372",
+        "team": "",
+        "opp": "New York Yankees",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 3.5,
+        "pred_k": 3.94,
+        "edge": 3.1,
+        "actual_k": 5.0,
+        "result": "W"
+      }
+    ]
+  },
+  {
     "date": "2026-09-08",
     "picks": [
       {
