@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, type ReactNode } from 'react'
 import Link from 'next/link'
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip,
@@ -12,87 +12,62 @@ interface LBRow {
   k_pct: number; clw: number; velo: number; vaa: number; n: number
   slwr?: number | null
 }
-interface SignalRow { signal: string; yoy_r: number; same_r: number; cat: string }
-interface WeightRow { w_clw: number; w_velo: number; w_vaa: number; hold_starter: number; hold_all: number }
 interface RollingRow { id: string; date: string; psi: number; clw: number; velo: number; vaa: number; n: number }
 
-/* ───── Hardcoded validation data ───── */
+/* ───── Frozen public validation data ───── */
 const STABILITY = [
-  { name: 'PSI+',  r: 0.769, color: '#3ab05a' },
-  { name: 'K%',    r: 0.669, color: '#4EABDE' },
-  { name: 'CSW%',  r: 0.590, color: '#D4AF37' },
+  { name: 'PSI+',   r: 0.8380, color: '#3ab05a' },
+  { name: 'SwStr%', r: 0.7560, color: '#4EABDE' },
+  { name: 'K%',     r: 0.6939, color: '#D4AF37' },
+  { name: 'CSW%',   r: 0.6379, color: '#E07B54' },
 ]
 
-const CORR_TABLE = [
-  { metric: 'PSI+',   all: 0.5815, starters: 0.6799, relievers: 0.5136 },
-  { metric: 'CSW%',   all: 0.5416, starters: 0.5930, relievers: 0.4285 },
-  { metric: 'SwStr%', all: 0.6049, starters: 0.6423, relievers: 0.5227 },
-]
-
-const QUARTILE_S = [
-  { q: 'Q1 (Low)',  k: 18.1 },
-  { q: 'Q2',        k: 19.5 },
-  { q: 'Q3',        k: 22.4 },
-  { q: 'Q4 (High)', k: 26.3 },
-]
-
-const QUARTILE_R = [
-  { q: 'Q1 (Low)',  k: 21.6 },
-  { q: 'Q2',        k: 22.6 },
-  { q: 'Q3',        k: 24.8 },
-  { q: 'Q4 (High)', k: 28.4 },
+const PREDICTION = [
+  { metric: 'Prior K%', r: 0.6924 },
+  { metric: 'PSI+ clean reconstruction', r: 0.6892 },
+  { metric: 'SwStr%', r: 0.6423 },
+  { metric: 'CSW%', r: 0.5930 },
 ]
 
 const CASE_STUDIES = [
   {
-    type: 'UNDERRATED', name: 'Jesús Luzardo', year: 2021,
-    kpct: '22.5%', psi: '114.2', next_kpct: '29.9%', change: '+7.4pp',
-    quote: '"One of the first cases where I went back and double-checked the number. A 22.5% K rate doesn\'t look like a pitcher worth flagging, and 114.2 felt too high. But the two-strike whiff data was clean. It wasn\'t noise."',
+    type: 'PSI+ HIGHER', name: 'Jesús Luzardo', year: 2021,
+    kpct: '22.5%', psi: '114.6', next_kpct: '29.9%', change: '+7.4pp',
+    detail: 'Velo p95: 97.8 mph · CLW: .145',
   },
   {
-    type: 'OVERRATED', name: 'Adam Wainwright', year: 2022,
-    kpct: '17.8%', psi: '80.0', next_kpct: '11.4%', change: '−6.4pp',
-    quote: '"Velocity had dropped. Two-strike whiff rate had weakened for two seasons in a row. The 17.8% K rate in 2022 masked the decline until the numbers aligned in 2023."',
-  },
-  {
-    type: 'UNDERRATED', name: 'Zack Wheeler', year: 2020,
-    kpct: '18.5%', psi: '105.8', next_kpct: '29.1%', change: '+10.6pp',
-    quote: '"A 10.6 point jump the following year is the kind of movement that makes you want to go find the next Wheeler. That\'s the whole point of building this."',
-  },
-]
-
-const FAILED = [
-  {
-    name: 'Geometric Pitch Tunneling (AIS)',
-    desc: 'Measured how similar two pitches look to a hitter before they break in different directions.',
-    result: 'YoY r = 0.15. Too weak.',
-  },
-  {
-    name: 'Outcome-Based Sequencing (OBAI)',
-    desc: 'Whether throwing one type of pitch made the next pitch harder to hit. We analyzed over 2 million consecutive pitch pairs with adjusted baselines.',
-    result: 'YoY r ≈ 0. Essentially zero.',
+    type: 'PSI+ LOWER', name: 'Adam Wainwright', year: 2022,
+    kpct: '17.8%', psi: '78.5', next_kpct: '11.4%', change: '−6.4pp',
+    detail: 'Velo p95: 90.8 to 90.1 mph · CLW: .093 to .073',
   },
 ]
 
 const METHOD_SPECS = [
-  { label: 'Data Source',      val: 'Baseball Savant', sub: '3.6M pitches, 2020–2026' },
-  { label: 'Training Period',  val: '2020–2024',       sub: '2,060 pitcher-seasons' },
-  { label: 'Holdout',          val: '2025 Season',     sub: '473 pitcher-seasons, untouched' },
-  { label: 'Role Detection',   val: '≥ 45 P / app',   sub: 'avg pitches per appearance' },
-  { label: 'Normalization',    val: 'p2 / p98 clip',   sub: 'within role, scaled 0–1' },
-  { label: 'Scaling',          val: '100 = avg',       sub: 'SD = 10 points' },
-  { label: 'Rolling Window',   val: '1,000 pitches',   sub: 'min 200, strictly pre-game' },
-  { label: 'Qualifier',        val: '500 pitches',     sub: 'season min / 200 rolling' },
+  { label: 'Data Source',       val: 'Baseball Savant', sub: 'regular-season pitches' },
+  { label: 'Production',        val: '55 / 35 / 5 / 5', sub: 'CLW · Velo · VAA · SLWR' },
+  { label: 'Score Scale',       val: '100 + 10z',        sub: 'within season and role' },
+  { label: 'Role Handling',     val: 'Separate',         sub: 'starter and reliever baselines' },
+  { label: 'Live Leaderboard',  val: 'Season to date',   sub: 'minimum 200 eligible pitches' },
+  { label: 'Rolling View',      val: 'Prior 1,000',      sub: 'min 200; current appearance excluded' },
+  { label: 'Validation Rules',  val: '2020–2024',        sub: 'clean reconstruction fixed before 2025' },
+  { label: 'Validation Cohorts',val: '167 / 150',        sub: 'prediction / stability' },
 ]
 
 /* ───── Custom Tooltip ───── */
-function ChartTip({ active, payload, label, fmt }: any) {
+interface ChartTipProps {
+  active?: boolean
+  payload?: ReadonlyArray<{ name?: ReactNode; value?: unknown }>
+  label?: ReactNode
+  fmt?: (value: unknown) => ReactNode
+}
+
+function ChartTip({ active, payload, label, fmt }: ChartTipProps) {
   if (!active || !payload?.length) return null
   return (
     <div style={{background:'#0d1e35',border:'1px solid rgba(212,175,55,0.22)',borderRadius:'4px',padding:'8px 12px',fontFamily:'Inter',fontSize:'11px',pointerEvents:'none'}}>
       {label && <div style={{color:'#D4AF37',fontWeight:600,marginBottom:'4px'}}>{label}</div>}
-      {payload.map((p: any, i: number) => (
-        <div key={i} style={{color:'#F5F1E6'}}>{p.name}: {fmt ? fmt(p.value) : p.value}</div>
+      {payload.map((p, i) => (
+        <div key={i} style={{color:'#F5F1E6'}}>{p.name}: {fmt ? fmt(p.value) : String(p.value ?? '')}</div>
       ))}
     </div>
   )
@@ -105,10 +80,6 @@ function psiColor(v: number) {
   if (v >= 90)  return 'var(--cream)'
   if (v >= 80)  return '#e08060'
   return '#C44536'
-}
-
-function fmtSignal(s: string) {
-  return s.replace(/_/g, ' ').replace(/\bpct\b/gi, '%').replace(/\b\w/g, c => c.toUpperCase()).slice(0, 30)
 }
 
 function fmtAsOf(d: string | null) {
@@ -135,8 +106,6 @@ export default function PSIPage() {
   const [menuOpen,      setMenuOpen]      = useState(false)
   const [role,          setRole]          = useState<'starter'|'reliever'>('starter')
   const [lbData,        setLbData]        = useState<LBRow[]|null>(null)
-  const [signals,       setSignals]       = useState<SignalRow[]|null>(null)
-  const [weights,       setWeights]       = useState<WeightRow[]|null>(null)
   const [rolling,       setRolling]       = useState<RollingRow[]|null>(null)
   const [rollingLoad,   setRollingLoad]   = useState(false)
   const [sort,          setSort]          = useState<{col: LBKey; dir: SortDir}>({col:'psi',dir:'desc'})
@@ -145,7 +114,6 @@ export default function PSIPage() {
   const [pitcherQ,      setPitcherQ]      = useState('')
   const [selPitcher,    setSelPitcher]    = useState<LBRow|null>(null)
   const [showDrop,      setShowDrop]      = useState(false)
-  const [qTab,          setQTab]          = useState<'starters'|'relievers'>('starters')
   const [showAll,       setShowAll]       = useState(false)
   const [asOf,          setAsOf]          = useState<string|null>(null)
   const [showWhyName,   setShowWhyName]   = useState(false)
@@ -170,8 +138,6 @@ export default function PSIPage() {
         setPitcherQ(cease.name)
       }
     }).catch(()=>setLbData([]))
-    fetch('/data/psi_signals.json').then(r=>r.json()).then(setSignals).catch(()=>setSignals([]))
-    fetch('/data/psi_weights.json').then(r=>r.json()).then(setWeights).catch(()=>setWeights([]))
     // Pre-load Cease's rolling data for default trajectory display
     fetch('/data/psi_rolling/656302.json').then(r=>r.json()).then(d=>setRolling(d)).catch(()=>{})
   }, [])
@@ -205,6 +171,16 @@ export default function PSIPage() {
   const handleSort = (col: LBKey) =>
     setSort(prev => prev.col === col ? {col, dir: prev.dir==='desc'?'asc':'desc'} : {col, dir:'desc'})
 
+  const toggleCard = (index: number) => {
+    if (!isMobile) return
+    setFlippedCards(prev => {
+      const next = new Set(prev)
+      if (next.has(index)) next.delete(index)
+      else next.add(index)
+      return next
+    })
+  }
+
   /* Trajectory derived */
   const suggestions = pitcherQ.length >= 2
     ? (lbData ?? []).filter(r => r.name.toLowerCase().includes(pitcherQ.toLowerCase())).slice(0, 8)
@@ -213,20 +189,6 @@ export default function PSIPage() {
   const trajectoryData = selPitcher && rolling
     ? rolling.filter(r => r.id === selPitcher.id).sort((a,b) => a.date.localeCompare(b.date))
     : []
-
-  /* Heat map color */
-  const wMin = weights && weights.length ? Math.min(...weights.map(w=>w.hold_starter)) : 0.55
-  const wMax = weights && weights.length ? Math.max(...weights.map(w=>w.hold_starter)) : 0.72
-  const heatColor = (v: number) => {
-    const t = Math.max(0, Math.min(1, (v - wMin) / (wMax - wMin)))
-    const r = Math.round(196 + (58-196)*t), g = Math.round(69+(176-69)*t), b = Math.round(54+(90-54)*t)
-    return `rgb(${r},${g},${b})`
-  }
-
-  /* Signal chart data */
-  const sigChart = (signals && signals.length > 0)
-    ? signals.slice(0,20).map(s => ({ name: fmtSignal(s.signal), r: s.yoy_r, cat: s.cat }))
-    : null
 
   /* ── Shared section wrapper style ── */
   const sec = { padding:'80px 40px', maxWidth:'1200px', margin:'0 auto' } as const
@@ -282,7 +244,7 @@ export default function PSIPage() {
             </p>
             <div style={{display:'flex',justifyContent:'center',marginBottom:'14px'}}>
               <a href="#leaderboard" className="btn btn-primary btn-hero">
-                See Who's Leading PSI+
+                See Who’s Leading PSI+
                 <span aria-hidden="true" style={{marginLeft:'10px'}}>→</span>
               </a>
             </div>
@@ -290,13 +252,13 @@ export default function PSIPage() {
               <a href="#validation" className="link-quiet">Validation Results</a>
             </div>
             <div style={{fontSize:'12.5px',color:'rgba(245,241,230,0.52)',fontFamily:"'Inter',sans-serif",letterSpacing:'0.01em',lineHeight:1.7,maxWidth:'620px',margin:'0 auto',textAlign:'center'}}>
-              Built on 2020–2024 data &nbsp;·&nbsp; Blind-tested on 2025 season
+              Production PSI+ &nbsp;·&nbsp; 2025 validation uses a clean reconstruction fixed from 2020–2024
             </div>
             <div style={{marginTop:'8px',fontSize:'9.5px',letterSpacing:'0.12em',color:'rgba(245,241,230,0.32)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase',textAlign:'center'}}>
               Count Leverage &nbsp;·&nbsp; Velocity &nbsp;·&nbsp; Pitch Angle &nbsp;·&nbsp; SLWR
             </div>
             <div style={{marginTop:'14px',fontSize:'9px',letterSpacing:'0.15em',color:'rgba(245,241,230,0.22)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase'}}>
-              {fmtAsOfFull(asOf) ? `Last updated: ${fmtAsOfFull(asOf)}` : 'Last updated: —'}
+              {fmtAsOfFull(asOf) ? `Last updated: ${fmtAsOfFull(asOf)}` : 'Last updated: pending'}
             </div>
           </div>
         </section>
@@ -311,7 +273,7 @@ export default function PSIPage() {
           <div style={{display:'grid',gridTemplateColumns:isMobile?'1fr':'repeat(2,1fr)',gap:'16px'}}>
 
             {/* 01 — CLW */}
-            <div className={`flip-card${flippedCards.has(0)?' flipped':''}`} style={{height:'340px'}} onClick={()=>isMobile&&setFlippedCards(p=>{const n=new Set(p);n.has(0)?n.delete(0):n.add(0);return n})}>
+            <div className={`flip-card${flippedCards.has(0)?' flipped':''}`} style={{height:'340px'}} onClick={()=>toggleCard(0)}>
               <div className="flip-card-inner">
                 <div className="flip-card-front" style={{background:'var(--surf)',border:'1px solid rgba(58,176,90,0.25)',padding:'26px'}}>
                   <div style={{position:'absolute',top:0,left:0,bottom:0,width:'2px',background:'linear-gradient(180deg,transparent,#3ab05a,transparent)'}}/>
@@ -321,12 +283,12 @@ export default function PSIPage() {
                     <div style={{fontSize:'8px',letterSpacing:'0.1em',color:'rgba(245,241,230,0.3)',fontFamily:"'Inter',sans-serif",background:'rgba(255,255,255,0.04)',border:'1px solid rgba(255,255,255,0.06)',borderRadius:'2px',padding:'3px 7px',textTransform:'uppercase'}}>Weight: 55%</div>
                   </div>
                   <div className="method-title">Count-Leveraged Whiff Rate</div>
-                  <p className="method-desc" style={{color:'rgba(245,241,230,0.72)',lineHeight:1.85}}>Measures how often a pitcher misses bats when it matters most. Two-strike whiffs count double. First-pitch misses count half. The heaviest component in PSI+.</p>
+                  <p className="method-desc" style={{color:'rgba(245,241,230,0.72)',lineHeight:1.85}}>Weighted valid whiffs divided by weighted eligible pitches across the full eligible arsenal. Two-strike pitches count double, first pitches count half, and all other pitches receive neutral weight.</p>
                   <div style={{position:'absolute',bottom:'18px',left:0,right:0,textAlign:'center',fontSize:'9px',letterSpacing:'0.15em',color:'rgba(58,176,90,0.4)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase'}}>{isMobile?'Tap':'Hover'} to see the formula ↺</div>
                 </div>
                 <div className="flip-card-back" style={{background:'#0c1b30',border:'1px solid rgba(58,176,90,0.25)',borderLeft:'3px solid #3ab05a',padding:'26px',display:'flex',flexDirection:'column',gap:'14px'}}>
                   <div style={{fontFamily:"'Playfair Display',serif",fontSize:'16px',fontWeight:700,color:'var(--cream)',lineHeight:1.4}}>Count-Leveraged Whiff Rate (CLW)</div>
-                  <p style={{fontSize:'13px',color:'rgba(245,241,230,0.72)',fontFamily:"'Inter',sans-serif",lineHeight:1.85,margin:0}}>Pitches are weighted by count leverage before calculating whiff rate.</p>
+                  <p style={{fontSize:'13px',color:'rgba(245,241,230,0.72)',fontFamily:"'Inter',sans-serif",lineHeight:1.85,margin:0}}>CLW is not fastball-only. Every eligible pitch contributes to the weighted rate.</p>
                   <div>
                     <div style={{fontSize:'8px',letterSpacing:'0.18em',color:'rgba(212,175,55,0.45)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase',marginBottom:'8px'}}>Count Weights</div>
                     {[['Two-strike','2.0×'],['First-pitch','0.5×'],['All others','1.0×']].map(([lbl,val])=>(
@@ -336,16 +298,13 @@ export default function PSIPage() {
                       </div>
                     ))}
                   </div>
-                  <div style={{background:'rgba(255,255,255,0.03)',border:'1px solid rgba(255,255,255,0.06)',borderRadius:'3px',padding:'10px 14px',display:'flex',justifyContent:'space-between',alignItems:'center',marginTop:'auto'}}>
-                    <span style={{fontSize:'9px',letterSpacing:'0.15em',color:'rgba(245,241,230,0.3)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase'}}>YoY correlation</span>
-                    <span style={{fontFamily:"'Orbitron',sans-serif",fontSize:'16px',fontWeight:700,color:'#3ab05a'}}>r = 0.5818</span>
-                  </div>
+                  <div style={{background:'rgba(255,255,255,0.03)',border:'1px solid rgba(255,255,255,0.06)',borderRadius:'3px',padding:'10px 14px',marginTop:'auto',fontSize:'10px',color:'rgba(245,241,230,0.42)',fontFamily:"'Inter',sans-serif",lineHeight:1.6}}>Formula: weighted valid whiffs ÷ weighted eligible pitches.</div>
                 </div>
               </div>
             </div>
 
             {/* 02 — VELO P95 */}
-            <div className={`flip-card${flippedCards.has(1)?' flipped':''}`} style={{height:'340px'}} onClick={()=>isMobile&&setFlippedCards(p=>{const n=new Set(p);n.has(1)?n.delete(1):n.add(1);return n})}>
+            <div className={`flip-card${flippedCards.has(1)?' flipped':''}`} style={{height:'340px'}} onClick={()=>toggleCard(1)}>
               <div className="flip-card-inner">
                 <div className="flip-card-front" style={{background:'var(--surf)',border:'1px solid rgba(78,171,222,0.25)',padding:'26px'}}>
                   <div style={{position:'absolute',top:0,left:0,bottom:0,width:'2px',background:'linear-gradient(180deg,transparent,#4EABDE,transparent)'}}/>
@@ -355,22 +314,18 @@ export default function PSIPage() {
                     <div style={{fontSize:'8px',letterSpacing:'0.1em',color:'rgba(245,241,230,0.3)',fontFamily:"'Inter',sans-serif",background:'rgba(255,255,255,0.04)',border:'1px solid rgba(255,255,255,0.06)',borderRadius:'2px',padding:'3px 7px',textTransform:'uppercase'}}>Weight: 35%</div>
                   </div>
                   <div className="method-title">Fastball Velocity Ceiling</div>
-                  <p className="method-desc" style={{color:'rgba(245,241,230,0.72)',lineHeight:1.85}}>Captures the top-end speed a pitcher can reach when the moment demands it. Not average velocity — the high gear they can access in big counts.</p>
+                  <p className="method-desc" style={{color:'rgba(245,241,230,0.72)',lineHeight:1.85}}>Captures the upper-end fastball speed a pitcher can reach. It uses the 95th percentile instead of an average or a single maximum.</p>
                   <div style={{position:'absolute',bottom:'18px',left:0,right:0,textAlign:'center',fontSize:'9px',letterSpacing:'0.15em',color:'rgba(78,171,222,0.4)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase'}}>{isMobile?'Tap':'Hover'} to see the formula ↺</div>
                 </div>
                 <div className="flip-card-back" style={{background:'#0c1b30',border:'1px solid rgba(78,171,222,0.25)',borderLeft:'3px solid #4EABDE',padding:'26px',display:'flex',flexDirection:'column',gap:'14px'}}>
                   <div style={{fontFamily:"'Playfair Display',serif",fontSize:'16px',fontWeight:700,color:'var(--cream)',lineHeight:1.4}}>Fastball Velocity Ceiling (Velo P95)</div>
-                  <p style={{fontSize:'13px',color:'rgba(245,241,230,0.72)',fontFamily:"'Inter',sans-serif",lineHeight:1.85,margin:0}}>95th percentile of release speed across four-seam fastballs, sinkers, and cutters — measuring the top-end speed a pitcher can reach, not their average.</p>
-                  <div style={{background:'rgba(255,255,255,0.03)',border:'1px solid rgba(255,255,255,0.06)',borderRadius:'3px',padding:'10px 14px',display:'flex',justifyContent:'space-between',alignItems:'center',marginTop:'auto'}}>
-                    <span style={{fontSize:'9px',letterSpacing:'0.15em',color:'rgba(245,241,230,0.3)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase'}}>YoY correlation</span>
-                    <span style={{fontFamily:"'Orbitron',sans-serif",fontSize:'16px',fontWeight:700,color:'#4EABDE'}}>r = 0.4815</span>
-                  </div>
+                  <p style={{fontSize:'13px',color:'rgba(245,241,230,0.72)',fontFamily:"'Inter',sans-serif",lineHeight:1.85,margin:0}}>95th percentile of release speed across four-seam fastballs, sinkers, and cutters. This measures a pitcher’s top-end gear without letting one isolated reading define the component.</p>
                 </div>
               </div>
             </div>
 
             {/* 03 — VAA */}
-            <div className={`flip-card${flippedCards.has(2)?' flipped':''}`} style={{height:'340px'}} onClick={()=>isMobile&&setFlippedCards(p=>{const n=new Set(p);n.has(2)?n.delete(2):n.add(2);return n})}>
+            <div className={`flip-card${flippedCards.has(2)?' flipped':''}`} style={{height:'340px'}} onClick={()=>toggleCard(2)}>
               <div className="flip-card-inner">
                 <div className="flip-card-front" style={{background:'var(--surf)',border:'1px solid rgba(212,175,55,0.25)',padding:'26px'}}>
                   <div style={{position:'absolute',top:0,left:0,bottom:0,width:'2px',background:'linear-gradient(180deg,transparent,var(--gold),transparent)'}}/>
@@ -380,22 +335,18 @@ export default function PSIPage() {
                     <div style={{fontSize:'8px',letterSpacing:'0.1em',color:'rgba(245,241,230,0.3)',fontFamily:"'Inter',sans-serif",background:'rgba(255,255,255,0.04)',border:'1px solid rgba(255,255,255,0.06)',borderRadius:'2px',padding:'3px 7px',textTransform:'uppercase'}}>Weight: 5%</div>
                   </div>
                   <div className="method-title">Fastball Vertical Approach Angle</div>
-                  <p className="method-desc" style={{color:'rgba(245,241,230,0.72)',lineHeight:1.85}}>Measures how flat or steep a fastball enters the strike zone. Flatter angles are harder for hitters to square up. A smaller component, but stable year over year.</p>
+                  <p className="method-desc" style={{color:'rgba(245,241,230,0.72)',lineHeight:1.85}}>Measures how flat or steep a fastball enters the plate. PSI+ uses the raw average VAA of four-seam fastballs, sinkers, and cutters.</p>
                   <div style={{position:'absolute',bottom:'18px',left:0,right:0,textAlign:'center',fontSize:'9px',letterSpacing:'0.15em',color:'rgba(212,175,55,0.4)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase'}}>{isMobile?'Tap':'Hover'} to see the formula ↺</div>
                 </div>
                 <div className="flip-card-back" style={{background:'#0c1b30',border:'1px solid rgba(212,175,55,0.25)',borderLeft:'3px solid var(--gold)',padding:'26px',display:'flex',flexDirection:'column',gap:'14px'}}>
                   <div style={{fontFamily:"'Playfair Display',serif",fontSize:'16px',fontWeight:700,color:'var(--cream)',lineHeight:1.4}}>Fastball Vertical Approach Angle (VAA)</div>
-                  <p style={{fontSize:'13px',color:'rgba(245,241,230,0.72)',fontFamily:"'Inter',sans-serif",lineHeight:1.85,margin:0}}>Mean vertical approach angle of fastballs at the front of home plate. More negative values indicate a flatter plane into the zone.</p>
-                  <div style={{background:'rgba(255,255,255,0.03)',border:'1px solid rgba(255,255,255,0.06)',borderRadius:'3px',padding:'10px 14px',display:'flex',justifyContent:'space-between',alignItems:'center',marginTop:'auto'}}>
-                    <span style={{fontSize:'9px',letterSpacing:'0.15em',color:'rgba(245,241,230,0.3)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase'}}>YoY correlation</span>
-                    <span style={{fontFamily:"'Orbitron',sans-serif",fontSize:'16px',fontWeight:700,color:'var(--gold)'}}>r = 0.4159</span>
-                  </div>
+                  <p style={{fontSize:'13px',color:'rgba(245,241,230,0.72)',fontFamily:"'Inter',sans-serif",lineHeight:1.85,margin:0}}>Raw average vertical approach angle at the front of home plate for FF, SI, and FC. More negative values indicate a flatter plane. The measure is not adjusted for pitch location.</p>
                 </div>
               </div>
             </div>
 
             {/* 04 — SLWR */}
-            <div className={`flip-card${flippedCards.has(3)?' flipped':''}`} style={{height:'340px'}} onClick={()=>isMobile&&setFlippedCards(p=>{const n=new Set(p);n.has(3)?n.delete(3):n.add(3);return n})}>
+            <div className={`flip-card${flippedCards.has(3)?' flipped':''}`} style={{height:'340px'}} onClick={()=>toggleCard(3)}>
               <div className="flip-card-inner">
                 <div className="flip-card-front" style={{background:'var(--surf)',border:'1px solid rgba(224,123,84,0.25)',padding:'26px'}}>
                   <div style={{position:'absolute',top:0,left:0,bottom:0,width:'2px',background:'linear-gradient(180deg,transparent,#E07B54,transparent)'}}/>
@@ -405,12 +356,12 @@ export default function PSIPage() {
                     <div style={{fontSize:'8px',letterSpacing:'0.1em',color:'rgba(245,241,230,0.3)',fontFamily:"'Inter',sans-serif",background:'rgba(255,255,255,0.04)',border:'1px solid rgba(255,255,255,0.06)',borderRadius:'2px',padding:'3px 7px',textTransform:'uppercase'}}>Weight: 5%</div>
                   </div>
                   <div className="method-title">Secondary Leverage Whiff Rate</div>
-                  <p className="method-desc" style={{color:'rgba(245,241,230,0.72)',lineHeight:1.85}}>The same count-leverage logic as CLW. Applied only to secondary pitches — breaking balls, changeups, and off-speed offerings. Only included when a pitcher has thrown at least 50 secondary pitches.</p>
+                  <p className="method-desc" style={{color:'rgba(245,241,230,0.72)',lineHeight:1.85}}>Applies the same count-weighting logic as CLW to eligible secondary pitches. Those whiffs already appear in CLW, so SLWR gives that subset additional emphasis.</p>
                   <div style={{position:'absolute',bottom:'18px',left:0,right:0,textAlign:'center',fontSize:'9px',letterSpacing:'0.15em',color:'rgba(224,123,84,0.4)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase'}}>{isMobile?'Tap':'Hover'} to see the formula ↺</div>
                 </div>
                 <div className="flip-card-back" style={{background:'#0c1b30',border:'1px solid rgba(224,123,84,0.25)',borderLeft:'3px solid #E07B54',padding:'26px',display:'flex',flexDirection:'column',gap:'14px'}}>
                   <div style={{fontFamily:"'Playfair Display',serif",fontSize:'16px',fontWeight:700,color:'var(--cream)',lineHeight:1.4}}>Secondary Leverage Whiff Rate (SLWR)</div>
-                  <p style={{fontSize:'13px',color:'rgba(245,241,230,0.72)',fontFamily:"'Inter',sans-serif",lineHeight:1.85,margin:0}}>Applies count-leverage multipliers to whiffs on breaking balls, changeups, and off-speed pitches. New in PSI+ v2.</p>
+                  <p style={{fontSize:'13px',color:'rgba(245,241,230,0.72)',fontFamily:"'Inter',sans-serif",lineHeight:1.85,margin:0}}>Applies count-leverage multipliers to breaking balls, changeups, and other eligible off-speed pitches. It is included after a pitcher reaches 50 eligible secondary pitches.</p>
                   <div>
                     <div style={{fontSize:'8px',letterSpacing:'0.18em',color:'rgba(212,175,55,0.45)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase',marginBottom:'8px'}}>Fallback weights · {"<"}50 secondary pitches</div>
                     {[['CLW','57.89%'],['Velo','36.84%'],['VAA','5.26%']].map(([lbl,val])=>(
@@ -429,29 +380,6 @@ export default function PSIPage() {
 
           </div>
 
-          {/* Notable 2026 findings */}
-          <div style={{marginTop:'40px'}}>
-            <div style={{fontSize:'9px',letterSpacing:'0.25em',color:'rgba(212,175,55,0.45)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase',marginBottom:'14px'}}>Notable 2026 Findings</div>
-            <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:'12px'}}>
-              {[
-                {
-                  name:'Cristopher Sánchez', stat:'#2 Starter by PSI+', color:'#3ab05a',
-                  detail:'−6.92° approach angle (98th percentile) · CLW 98th percentile · 96.6 mph velocity. A sinker-ball pitcher outsmarting hitters rather than overpowering them. The clearest example of what PSI+ finds that raw K% misses.',
-                },
-                {
-                  name:'Max Scherzer', stat:'PSI+ 82.6, declining trajectory', color:'#C44536',
-                  detail:'Rolling PSI+ across starts: 97.7 → 97.0 → 95.8 → 93.6 → 92.2. Velocity slipping from 95.2 to 94.8 mph. PSI+ picked up the slide before the K rate did.',
-                },
-              ].map(f=>(
-                <div key={f.name} style={{background:'#0d1e35',border:`1px solid ${f.color}28`,borderLeft:`3px solid ${f.color}`,borderRadius:'4px',padding:'16px 18px'}}>
-                  <div style={{fontFamily:"'Playfair Display',serif",fontSize:'17px',fontWeight:700,color:'var(--cream)',marginBottom:'3px'}}>{f.name}</div>
-                  <div style={{fontFamily:"'Orbitron',sans-serif",fontSize:'10px',color:f.color,letterSpacing:'0.06em',marginBottom:'10px'}}>{f.stat}</div>
-                  <p style={{fontSize:'12px',color:'rgba(245,241,230,0.5)',fontFamily:"'Inter',sans-serif",lineHeight:1.7,margin:0}}>{f.detail}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
           {/* Why the Name? toggle */}
           <div style={{marginTop:'36px',textAlign:'center'}}>
             <button
@@ -466,8 +394,8 @@ export default function PSIPage() {
             </button>
             {showWhyName && (
               <p style={{fontFamily:"'Playfair Display',serif",fontSize:'clamp(13px,1.4vw,15.5px)',color:'rgba(245,241,230,0.55)',lineHeight:2.1,margin:'20px auto 0',maxWidth:'780px',textAlign:'center'}}>
-                PSI+ takes its name from the unit of pressure measurement. Every pitch carries a different level of consequence. It ranges from getting ahead on the first pitch to putting hitters away when they are vulnerable to avoiding the counts where leverage flips back to the hitter.{' '}
-                <span style={{color:'rgba(245,241,230,0.82)',fontWeight:600}}>PSI+ weights every pitch by the pressure of the moment it was thrown in.</span>
+                PSI+ takes its name from the unit of pressure measurement. Every count carries a different level of consequence. It ranges from getting ahead on the first pitch to putting hitters away with two strikes.{' '}
+                <span style={{color:'rgba(245,241,230,0.82)',fontWeight:600}}>The whiff components weight every eligible pitch by the count in which it was thrown.</span>
               </p>
             )}
           </div>
@@ -478,9 +406,9 @@ export default function PSIPage() {
         {/* ══ LEADERBOARD ══ */}
         <section id="leaderboard" style={sec}>
           <div className="sec-header">
-            <div className="sec-eyebrow">2026 Season{fmtAsOf(asOf) ? ` · Through ${fmtAsOf(asOf)}` : ''}</div>
-            <h2 className="sec-title">Leaderboard</h2>
-            <p className="sec-sub">Minimum {minP} pitches. Scored within role. 100 = league average.</p>
+            <div className="sec-eyebrow">Production PSI+{fmtAsOf(asOf) ? ` · Through ${fmtAsOf(asOf)}` : ''}</div>
+            <h2 className="sec-title">2026 Season-to-Date Leaderboard</h2>
+            <p className="sec-sub">Current-season production scores with a minimum of {minP} eligible pitches. Starters and relievers are normalized separately. A 100 is the mean for the relevant season and role, 110 is about one standard deviation above it, and 120 is about two.</p>
           </div>
 
           {/* Role tabs */}
@@ -497,7 +425,6 @@ export default function PSIPage() {
             <input type="text" placeholder="Search pitcher..." value={search} onChange={e=>{setSearch(e.target.value);setShowAll(false)}}
               style={{fontFamily:"'Inter',sans-serif",fontSize:'11px',padding:'8px 14px',background:'#0d1e35',border:'1px solid rgba(212,175,55,0.25)',borderRadius:'4px',color:'var(--cream)',outline:'none',width:'200px'}}/>
             <select className="filter-select" value={minP} onChange={e=>setMinP(Number(e.target.value))}>
-              <option value={100}>Min 100 pitches</option>
               <option value={200}>Min 200 pitches</option>
               <option value={500}>Min 500 pitches</option>
             </select>
@@ -533,7 +460,7 @@ export default function PSIPage() {
                       const clickable = col !== '_rank'
                       return (
                         <th key={col} onClick={clickable ? ()=>handleSort(col as LBKey) : undefined}
-                          style={{textAlign:align as any,padding:'12px 12px',fontSize:'9px',letterSpacing:'0.18em',color:isSort?'var(--gold)':'rgba(212,175,55,0.7)',textTransform:'uppercase',cursor:clickable?'pointer':'default',whiteSpace:'nowrap',fontWeight:700,userSelect:'none'}}>
+                          style={{textAlign:align,padding:'12px 12px',fontSize:'9px',letterSpacing:'0.18em',color:isSort?'var(--gold)':'rgba(212,175,55,0.7)',textTransform:'uppercase',cursor:clickable?'pointer':'default',whiteSpace:'nowrap',fontWeight:700,userSelect:'none'}}>
                           {label}{isSort?(sort.dir==='desc'?' ↓':' ↑'):''}
                         </th>
                       )
@@ -554,7 +481,7 @@ export default function PSIPage() {
                       <td style={{padding:'12px 12px',textAlign:'center',fontFamily:"'Orbitron',sans-serif",fontSize:'12px',color:'rgba(245,241,230,0.9)'}}>{r.clw?.toFixed(3)}</td>
                       <td style={{padding:'12px 12px',textAlign:'center',fontFamily:"'Orbitron',sans-serif",fontSize:'12px',color:'rgba(245,241,230,0.9)'}}>{r.velo}</td>
                       <td style={{padding:'12px 12px',textAlign:'center',fontFamily:"'Orbitron',sans-serif",fontSize:'12px',color:'rgba(245,241,230,0.9)'}}>{r.vaa?.toFixed(2)}°</td>
-                      <td style={{padding:'12px 12px',textAlign:'center',fontFamily:"'Orbitron',sans-serif",fontSize:'12px',color: r.slwr != null ? 'rgba(245,241,230,0.9)' : 'rgba(245,241,230,0.25)'}}>{r.slwr != null ? r.slwr.toFixed(3) : '—'}</td>
+                      <td style={{padding:'12px 12px',textAlign:'center',fontFamily:"'Orbitron',sans-serif",fontSize:'12px',color: r.slwr != null ? 'rgba(245,241,230,0.9)' : 'rgba(245,241,230,0.25)'}}>{r.slwr != null ? r.slwr.toFixed(3) : 'N/A'}</td>
                     </tr>
                   ))}
                   {filtered.length === 0 && (
@@ -598,9 +525,9 @@ export default function PSIPage() {
         {/* ══ PITCHER TRAJECTORY ══ */}
         <section style={sec}>
           <div className="sec-header">
-            <div className="sec-eyebrow">1,000-Pitch Rolling Window · Updated Every Start</div>
+            <div className="sec-eyebrow">Separate Rolling View · Updated Every Appearance</div>
             <h2 className="sec-title">Rolling PSI+ Over Time</h2>
-            <p className="sec-sub">Track how a pitcher's strikeout ability has evolved across starts. Searches 2026 qualifying pitchers.</p>
+            <p className="sec-sub">This is not the season-to-date leaderboard. Each point uses the pitcher’s previous 1,000 eligible pitches, requires at least 200, and excludes the current appearance.</p>
           </div>
 
           <div style={{display:'flex',gap:'12px',alignItems:'center',marginBottom:'24px',flexWrap:'wrap'}}>
@@ -634,11 +561,11 @@ export default function PSIPage() {
               <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:'20px',flexWrap:'wrap',gap:'10px'}}>
                 <div>
                   <div style={{fontFamily:"'Playfair Display',serif",fontSize:'22px',fontWeight:700,color:'var(--cream)'}}>{selPitcher.name}</div>
-                  <div style={{fontSize:'11px',color:'rgba(245,241,230,0.35)',fontFamily:"'Inter',sans-serif",marginTop:'3px'}}>Rolling PSI+ · 1,000-pitch window · 2020–2026</div>
+                  <div style={{fontSize:'11px',color:'rgba(245,241,230,0.35)',fontFamily:"'Inter',sans-serif",marginTop:'3px'}}>Rolling PSI+ · Prior 1,000 eligible pitches · Min 200 · Current appearance excluded</div>
                 </div>
                 <div style={{textAlign:'right'}}>
                   <div style={{fontFamily:"'Orbitron',sans-serif",fontSize:'28px',fontWeight:700,color:psiColor(selPitcher.psi),lineHeight:1}}>{selPitcher.psi}</div>
-                  <div style={{fontSize:'9px',color:'rgba(245,241,230,0.3)',fontFamily:"'Inter',sans-serif",marginTop:'3px',letterSpacing:'0.1em',textTransform:'uppercase'}}>2026 PSI+</div>
+                  <div style={{fontSize:'9px',color:'rgba(245,241,230,0.3)',fontFamily:"'Inter',sans-serif",marginTop:'3px',letterSpacing:'0.1em',textTransform:'uppercase'}}>2026 season-to-date PSI+</div>
                 </div>
               </div>
 
@@ -664,7 +591,7 @@ export default function PSIPage() {
                       axisLine={{stroke:'rgba(245,241,230,0.1)'}} tickLine={false}
                       tickFormatter={(v:number)=>String(v)}
                       width={32}/>
-                    <Tooltip cursor={false} content={(p:any)=><ChartTip {...p} fmt={(v:any)=>Number(v).toFixed(1)} />}/>
+                    <Tooltip cursor={false} content={(p)=><ChartTip {...p} fmt={(v: unknown)=>Number(v).toFixed(1)} />}/>
                     <ReferenceLine y={100} stroke="rgba(245,241,230,0.2)" strokeDasharray="5 4"
                       label={{value:'Avg (100)',fill:'rgba(245,241,230,0.35)',fontSize:10,fontFamily:'Inter',position:'insideTopRight'}}/>
                     <Line type="monotone" dataKey="psi" stroke="#D4AF37" strokeWidth={2.5} dot={false} activeDot={{r:5,fill:'#D4AF37',stroke:'var(--navy)',strokeWidth:2}}/>
@@ -684,14 +611,14 @@ export default function PSIPage() {
         {/* ══ CASE STUDIES ══ */}
         <section style={sec}>
           <div className="sec-header">
-            <div className="sec-eyebrow">Case Studies · 2020–2024</div>
-            <h2 className="sec-title">Where K% Missed, PSI+ Didn't</h2>
-            <p className="sec-sub">Pitchers where PSI+ disagreed with their raw strikeout rate. The following season showed who was right.</p>
+            <div className="sec-eyebrow">Two Earlier Illustrations</div>
+            <h2 className="sec-title">When PSI+ and K% Saw Different Profiles</h2>
+            <p className="sec-sub">These examples illustrate what a disagreement can look like. They are not part of the 2025 validation evidence.</p>
           </div>
 
           <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(300px,1fr))',gap:'16px',marginBottom:'28px'}}>
             {CASE_STUDIES.map(cs=>{
-              const up = cs.type==='UNDERRATED'
+              const up = cs.type==='PSI+ HIGHER'
               const accentColor = up ? '#3ab05a' : '#C44536'
               return (
                 <div key={cs.name} style={{background:'#0d1e35',border:'1px solid rgba(212,175,55,0.12)',borderRadius:'6px',padding:'24px',position:'relative',overflow:'hidden'}}>
@@ -717,7 +644,7 @@ export default function PSIPage() {
                     <span style={{fontSize:'10px',color:'rgba(245,241,230,0.35)',fontFamily:"'Inter',sans-serif"}}>Change:</span>
                     <span style={{fontFamily:"'Orbitron',sans-serif",fontSize:'14px',fontWeight:700,color:accentColor}}>{cs.change}</span>
                   </div>
-                  <p style={{fontSize:'12px',fontStyle:'italic',color:'rgba(245,241,230,0.5)',fontFamily:"'Playfair Display',serif",lineHeight:1.7,margin:0}}>{cs.quote}</p>
+                  <p style={{fontSize:'12px',color:'rgba(245,241,230,0.55)',fontFamily:"'Inter',sans-serif",lineHeight:1.7,margin:0}}>{cs.detail}</p>
                 </div>
               )
             })}
@@ -725,12 +652,9 @@ export default function PSIPage() {
 
           <div style={{background:'rgba(58,176,90,0.07)',border:'1px solid rgba(58,176,90,0.2)',borderRadius:'4px',padding:'18px 22px'}}>
             <p style={{fontSize:'13px',color:'rgba(245,241,230,0.75)',fontFamily:"'Inter',sans-serif",lineHeight:1.7,margin:0}}>
-              PSI+ flagged underrated pitchers correctly <strong style={{color:'#3ab05a'}}>58.8% of the time</strong> when the K% rose the next year.
-              The overrated signal was correct <strong style={{color:'#3ab05a'}}>79.1% of the time</strong>.
-              At larger divergences greater than 1.0 standard deviation, overall accuracy rose to <strong style={{color:'#3ab05a'}}>74.5% across 94 cases</strong>.
+              Luzardo’s current four-component historical score is <strong style={{color:'#3ab05a'}}>114.6</strong>. Wainwright’s is <strong style={{color:'#3ab05a'}}>78.5</strong>. Both use the same four-component identity as current production PSI+.
             </p>
           </div>
-          <div className="updated-tag" style={{marginTop:'12px'}}>Includes partial 2026 season data through June 1</div>
         </section>
 
         <div className="divider"/>
@@ -738,355 +662,105 @@ export default function PSIPage() {
         {/* ══ VALIDATION ══ */}
         <section id="validation" style={sec}>
           <div className="sec-header">
-            <div className="sec-eyebrow">Blind Test · 2025 Season</div>
-            <h2 className="sec-title">Does It Actually Work?</h2>
-            <p className="sec-sub">PSI+ was built entirely on pre-2025 data. Then we tested it on 2025 pitchers the model had never seen. Every result below is from that blind test.</p>
+            <div className="sec-eyebrow">Clean Four-Component Reconstruction · 2025 Evaluation</div>
+            <h2 className="sec-title">What the 2025 Test Showed</h2>
+            <p className="sec-sub">The exact production weights had already been informed by 2025, so they are not presented as a clean 2025 holdout. The public results below come from a four-component reconstruction whose rules and weights were selected using only 2020–2024 information, then evaluated on 2025. It is a validation construction, not a second live PSI+ metric.</p>
           </div>
 
           <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(320px,1fr))',gap:'20px',marginBottom:'24px'}}>
-
-            {/* Stability chart */}
             <div style={card}>
               <div style={cardTop}/>
-              <div style={{fontSize:'9px',letterSpacing:'0.22em',color:'rgba(212,175,55,0.5)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase',marginBottom:'5px'}}>Year-over-Year Consistency</div>
-              <div style={{fontFamily:"'Playfair Display',serif",fontSize:'18px',fontWeight:700,color:'var(--cream)',marginBottom:'4px'}}>Is PSI+ Consistent Year to Year?</div>
-              <div style={{fontSize:'11px',color:'rgba(245,241,230,0.35)',fontFamily:"'Inter',sans-serif",marginBottom:'20px'}}>Starters · Higher = more consistent from year to year</div>
-              <ResponsiveContainer width="100%" height={148}>
-                <BarChart data={STABILITY} layout="vertical" margin={{left:36,right:56,top:4,bottom:4}}>
+              <div style={{fontSize:'9px',letterSpacing:'0.22em',color:'rgba(212,175,55,0.5)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase',marginBottom:'5px'}}>2024 to 2025 Stability · n = 150</div>
+              <div style={{fontFamily:"'Playfair Display',serif",fontSize:'18px',fontWeight:700,color:'var(--cream)',marginBottom:'4px'}}>Year-to-Year Self-Correlation</div>
+              <div style={{fontSize:'11px',color:'rgba(245,241,230,0.4)',fontFamily:"'Inter',sans-serif",marginBottom:'20px'}}>Same both-year starter cohort for every metric. Higher means more stable.</div>
+              <ResponsiveContainer width="100%" height={180}>
+                <BarChart data={STABILITY} layout="vertical" margin={{left:36,right:64,top:4,bottom:4}}>
                   <XAxis type="number" domain={[0,0.9]} hide/>
-                  <YAxis type="category" dataKey="name" tick={{fill:'rgba(245,241,230,0.65)',fontSize:12,fontFamily:'Inter'}} axisLine={false} tickLine={false} width={34}/>
-                  <Tooltip cursor={false} content={(p:any)=><ChartTip {...p} fmt={(v:any)=>Number(v).toFixed(3)} />}/>
-                  <Bar dataKey="r" radius={[0,3,3,0]} label={{position:'right',fill:'rgba(245,241,230,0.55)',fontSize:11,fontFamily:'Orbitron',fontWeight:700,formatter:(v:any)=>Number(v).toFixed(3)}}>
+                  <YAxis type="category" dataKey="name" tick={{fill:'rgba(245,241,230,0.65)',fontSize:11,fontFamily:'Inter'}} axisLine={false} tickLine={false} width={46}/>
+                  <Tooltip cursor={false} content={(p)=><ChartTip {...p} fmt={(v: unknown)=>Number(v).toFixed(4)} />}/>
+                  <Bar dataKey="r" radius={[0,3,3,0]} label={{position:'right',fill:'rgba(245,241,230,0.55)',fontSize:10,fontFamily:'Orbitron',fontWeight:700,formatter:(v: unknown)=>Number(v).toFixed(4)}}>
                     {STABILITY.map((s,i)=><Cell key={i} fill={s.color}/>)}
                   </Bar>
                 </BarChart>
               </ResponsiveContainer>
+              <p style={{fontSize:'11px',color:'rgba(245,241,230,0.45)',fontFamily:"'Inter',sans-serif",lineHeight:1.7,margin:'12px 0 0'}}>The clean reconstruction was substantially more stable than K% in this test.</p>
             </div>
 
-            {/* Correlation table */}
             <div style={card}>
               <div style={cardTop}/>
-              <div style={{fontSize:'9px',letterSpacing:'0.22em',color:'rgba(212,175,55,0.5)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase',marginBottom:'5px'}}>2024 Metric Predicting 2025 K%</div>
-              <div style={{fontFamily:"'Playfair Display',serif",fontSize:'18px',fontWeight:700,color:'var(--cream)',marginBottom:'4px'}}>Predictive Accuracy</div>
-              <div style={{fontSize:'11px',color:'rgba(245,241,230,0.35)',fontFamily:"'Inter',sans-serif",marginBottom:'6px'}}>306 pitchers with back-to-back seasons</div>
-              <div style={{fontSize:'11px',color:'rgba(245,241,230,0.4)',fontFamily:"'Inter',sans-serif",fontStyle:'italic',marginBottom:'16px'}}>r measures predictive accuracy — closer to 1.0 means better.</div>
+              <div style={{fontSize:'9px',letterSpacing:'0.22em',color:'rgba(212,175,55,0.5)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase',marginBottom:'5px'}}>2024 Predictor to 2025 K% · n = 167</div>
+              <div style={{fontFamily:"'Playfair Display',serif",fontSize:'18px',fontWeight:700,color:'var(--cream)',marginBottom:'12px'}}>Predictive Correlation</div>
               <table style={{width:'100%',borderCollapse:'collapse',fontFamily:"'Inter',sans-serif"}}>
                 <thead>
                   <tr style={{borderBottom:'1px solid rgba(212,175,55,0.15)'}}>
-                    {['Metric','All','Starters','Relievers'].map(h=>(
-                      <th key={h} style={{textAlign:h==='Metric'?'left':'center',padding:'6px 8px',fontSize:'8px',letterSpacing:'0.14em',color:'rgba(212,175,55,0.5)',textTransform:'uppercase',fontWeight:700}}>{h}</th>
-                    ))}
+                    <th style={{textAlign:'left',padding:'6px 8px',fontSize:'8px',letterSpacing:'0.14em',color:'rgba(212,175,55,0.5)',textTransform:'uppercase'}}>Metric</th>
+                    <th style={{textAlign:'center',padding:'6px 8px',fontSize:'8px',letterSpacing:'0.14em',color:'rgba(212,175,55,0.5)',textTransform:'uppercase'}}>Pearson r</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {CORR_TABLE.map((row,i)=>(
+                  {PREDICTION.map((row,i)=>(
                     <tr key={row.metric} style={{borderBottom:'1px solid rgba(212,175,55,0.05)',background:i%2?'transparent':'rgba(255,255,255,0.01)'}}>
-                      <td style={{padding:isMobile?'8px 6px':'10px 8px',fontSize:'13px',fontWeight:row.metric==='PSI+'?700:500,color:row.metric==='PSI+'?'var(--gold)':'rgba(245,241,230,0.65)'}}>{row.metric}</td>
-                      <td style={{padding:isMobile?'8px 6px':'10px 8px',textAlign:'center',fontFamily:"'Orbitron',sans-serif",fontSize:'11px',color:'rgba(245,241,230,0.6)',whiteSpace:'nowrap'}}>{row.all}</td>
-                      <td style={{padding:isMobile?'8px 6px':'10px 8px',textAlign:'center',fontFamily:"'Orbitron',sans-serif",fontSize:'12px',fontWeight:row.metric==='PSI+'?700:400,color:row.metric==='PSI+'?'#3ab05a':'rgba(245,241,230,0.6)',whiteSpace:'nowrap'}}>{row.starters}</td>
-                      <td style={{padding:isMobile?'8px 6px':'10px 8px',textAlign:'center',fontFamily:"'Orbitron',sans-serif",fontSize:'11px',color:'rgba(245,241,230,0.6)',whiteSpace:'nowrap'}}>{row.relievers}</td>
+                      <td style={{padding:'10px 8px',fontSize:'12px',fontWeight:row.metric.startsWith('PSI+')?700:500,color:row.metric.startsWith('PSI+')?'var(--gold)':'rgba(245,241,230,0.65)'}}>{row.metric}</td>
+                      <td style={{padding:'10px 8px',textAlign:'center',fontFamily:"'Orbitron',sans-serif",fontSize:'12px',fontWeight:row.metric.startsWith('PSI+')?700:400,color:row.metric.startsWith('PSI+')?'#3ab05a':'rgba(245,241,230,0.6)'}}>{row.r.toFixed(4)}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
-              <p style={{fontSize:'10px',color:'rgba(245,241,230,0.3)',fontFamily:"'Inter',sans-serif",marginTop:'14px',lineHeight:1.6,margin:'14px 0 0'}}>
-                SwStr% edges PSI+ in the overall numbers. PSI+ pulls ahead when you look at starters specifically, and holds up better from year to year.
-              </p>
+              <p style={{fontSize:'11px',color:'rgba(245,241,230,0.45)',fontFamily:"'Inter',sans-serif",lineHeight:1.7,margin:'14px 0 0'}}>Prior K% had the highest point estimate. PSI+ came nearly even and was numerically above SwStr% and CSW%.</p>
             </div>
           </div>
 
-          {/* v2 vs v1 comparison */}
           <div style={{...card,marginBottom:'24px'}}>
             <div style={cardTop}/>
-            <div style={{fontSize:'9px',letterSpacing:'0.22em',color:'rgba(212,175,55,0.5)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase',marginBottom:'5px'}}>PSI+ v2 · Blind Holdout · 2025 Season</div>
-            <div style={{fontFamily:"'Playfair Display',serif",fontSize:'18px',fontWeight:700,color:'var(--cream)',marginBottom:'4px'}}>v2 vs. v1</div>
-            <p style={{fontSize:'12px',color:'rgba(245,241,230,0.45)',fontFamily:"'Inter',sans-serif",lineHeight:1.7,margin:'0 0 16px'}}>All results from the same blind holdout. No 2025 data was used in building either version.</p>
-            <table style={{width:'100%',borderCollapse:'collapse',fontFamily:"'Inter',sans-serif",marginBottom:'16px'}}>
-              <thead>
-                <tr style={{borderBottom:'1px solid rgba(212,175,55,0.15)'}}>
-                  {['','v1','v2'].map(h=>(
-                    <th key={h} style={{textAlign:h===''?'left':'center',padding:'6px 8px',fontSize:'8px',letterSpacing:'0.14em',color:'rgba(212,175,55,0.5)',textTransform:'uppercase',fontWeight:700}}>{h}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {[
-                  {label:'Predictive accuracy · starters', short:'Acc. · starters', v1:'0.6799', v2:'0.6906'},
-                  {label:'Predictive accuracy · overall',  short:'Acc. · overall',  v1:'0.5815', v2:'0.5910'},
-                  {label:'YoY stability · starters',       short:'YoY stability',   v1:'0.6542', v2:'0.6669'},
-                ].map((row,i)=>(
-                  <tr key={i} style={{borderBottom:'1px solid rgba(212,175,55,0.05)',background:i%2?'transparent':'rgba(255,255,255,0.01)'}}>
-                    <td style={{padding:isMobile?'8px 6px':'10px 8px',fontSize:isMobile?'11px':'13px',color:'rgba(245,241,230,0.65)',fontFamily:"'Inter',sans-serif"}}>{isMobile?row.short:row.label}</td>
-                    <td style={{padding:isMobile?'8px 6px':'10px 8px',textAlign:'center',fontFamily:"'Orbitron',sans-serif",fontSize:'11px',color:'rgba(245,241,230,0.4)',whiteSpace:'nowrap'}}>{row.v1}</td>
-                    <td style={{padding:isMobile?'8px 6px':'10px 8px',textAlign:'center',fontFamily:"'Orbitron',sans-serif",fontSize:'12px',fontWeight:700,color:'#3ab05a',whiteSpace:'nowrap'}}>{row.v2} ↑</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            <p style={{fontSize:'12px',color:'rgba(245,241,230,0.4)',fontFamily:"'Inter',sans-serif",lineHeight:1.7,margin:0}}>
-              Low-velocity pitchers show better prediction accuracy in v2.
-            </p>
+            <div style={{fontSize:'9px',letterSpacing:'0.22em',color:'rgba(212,175,55,0.5)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase',marginBottom:'5px'}}>Paired Comparisons</div>
+            <p style={{fontSize:'13px',color:'rgba(245,241,230,0.68)',fontFamily:"'Inter',sans-serif",lineHeight:1.8,margin:0}}>The paired comparison did not establish superiority over SwStr%. The paired advantage over CSW% was narrow. These results support describing PSI+ as nearly even with prior K%, numerically above the two pitch-level benchmarks, and more stable than K% in this cohort.</p>
           </div>
 
-          {/* Quartile K% chart */}
-          <div style={card}>
-            <div style={cardTop}/>
-            <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:'20px',flexWrap:'wrap',gap:'12px'}}>
-              <div>
-                <div style={{fontSize:'9px',letterSpacing:'0.22em',color:'rgba(212,175,55,0.5)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase',marginBottom:'5px'}}>Does a High PSI+ Mean More Strikeouts?</div>
-                <div style={{fontFamily:"'Playfair Display',serif",fontSize:'18px',fontWeight:700,color:'var(--cream)'}}>2025 K% by 2024 PSI+ Quartile</div>
-                <div style={{fontSize:'11px',color:'rgba(245,241,230,0.35)',fontFamily:"'Inter',sans-serif",marginTop:'4px'}}>Bottom 25% vs. top 25% of PSI+ scores, grouped by role.</div>
-              </div>
-              <div style={{display:'flex',border:'1px solid rgba(212,175,55,0.25)',borderRadius:'4px',overflow:'hidden'}}>
-                {(['starters','relievers'] as const).map(t=>(
-                  <button key={t} onClick={()=>setQTab(t)} style={{fontFamily:"'Inter',sans-serif",fontSize:'10px',fontWeight:700,letterSpacing:'0.1em',textTransform:'uppercase',padding:'8px 16px',cursor:'pointer',border:'none',background:qTab===t?'rgba(212,175,55,0.12)':'transparent',color:qTab===t?'var(--gold)':'rgba(245,241,230,0.4)',borderRight:t==='starters'?'1px solid rgba(212,175,55,0.25)':'none'}}>
-                    {t.charAt(0).toUpperCase()+t.slice(1)}
-                  </button>
-                ))}
-              </div>
-            </div>
-            <ResponsiveContainer width="100%" height={220}>
-              <BarChart data={qTab==='starters'?QUARTILE_S:QUARTILE_R} margin={{top:16,right:24,bottom:0,left:0}}>
-                <CartesianGrid strokeDasharray="3 3" stroke="rgba(212,175,55,0.08)" vertical={false}/>
-                <XAxis dataKey="q" tick={{fill:'rgba(245,241,230,0.6)',fontSize:11,fontFamily:'Inter'}} axisLine={{stroke:'rgba(245,241,230,0.1)'}} tickLine={false}/>
-                <YAxis domain={[14,30]} tickFormatter={v=>`${v}%`} tick={{fill:'rgba(245,241,230,0.6)',fontSize:11,fontFamily:'Inter'}} axisLine={{stroke:'rgba(245,241,230,0.1)'}} tickLine={false}/>
-                <Tooltip cursor={false} content={(p:any)=><ChartTip {...p} fmt={(v:any)=>`${v}%`} />}/>
-                <Bar dataKey="k" radius={[3,3,0,0]} activeBar={false} label={{position:'top',fill:'rgba(245,241,230,0.65)',fontSize:11,fontFamily:'Orbitron',fontWeight:700,formatter:(v:any)=>`${v}%`}}>
-                  {(qTab==='starters'?QUARTILE_S:QUARTILE_R).map((_,i)=>(
-                    <Cell key={i} fill={i===3?'#3ab05a':i===2?'rgba(212,175,55,0.65)':i===1?'rgba(212,175,55,0.38)':'rgba(196,69,54,0.55)'}/>
-                  ))}
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-
-          {/* Accuracy tiles */}
-          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(220px,1fr))',gap:'12px',marginTop:'16px'}}>
+          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(240px,1fr))',gap:'12px',marginBottom:'16px'}}>
             {[
-              {label:'Overall accuracy when PSI+ disagreed with K%', val:'69.0%', sub:'236 of 342 cases',                     color:'var(--gold)'},
-              {label:'Accuracy flagging underrated pitchers',         val:'58.8%', sub:'PSI+ high, K% rose the next year',      color:'#4EABDE'},
-              {label:'Accuracy flagging overrated pitchers',          val:'79.1%', sub:'PSI+ low, K% fell the next year',       color:'#3ab05a'},
+              {label:'Disagreement greater than 0.5 SD', val:'66.2%', sub:'47 correct directions in 71 cases', color:'var(--gold)'},
+              {label:'Disagreement greater than 1.0 SD', val:'83.3%', sub:'15 correct directions in 18 cases', color:'#3ab05a'},
             ].map(s=>(
-              <div key={s.label} style={{background:'rgba(13,30,53,0.8)',border:'1px solid rgba(212,175,55,0.1)',borderRadius:'4px',padding:'16px 18px'}}>
+              <div key={s.label} style={{background:'rgba(13,30,53,0.8)',border:'1px solid rgba(212,175,55,0.1)',borderRadius:'4px',padding:'18px 20px'}}>
                 <div style={{fontSize:'9px',letterSpacing:'0.15em',color:'rgba(245,241,230,0.55)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase',marginBottom:'8px',lineHeight:1.5}}>{s.label}</div>
                 <div style={{fontFamily:"'Orbitron',sans-serif",fontSize:'24px',fontWeight:700,color:s.color,lineHeight:1}}>{s.val}</div>
-                <div style={{fontSize:'11px',color:'rgba(245,241,230,0.55)',fontFamily:"'Inter',sans-serif",marginTop:'6px'}}>{s.sub}</div>
+                <div style={{fontSize:'11px',color:'rgba(245,241,230,0.55)',fontFamily:"'Inter',sans-serif",marginTop:'7px'}}>{s.sub}</div>
               </div>
             ))}
+          </div>
+
+          <div style={{background:'rgba(78,171,222,0.06)',border:'1px solid rgba(78,171,222,0.18)',borderRadius:'4px',padding:'18px 22px'}}>
+            <p style={{fontSize:'13px',color:'rgba(245,241,230,0.7)',fontFamily:"'Inter',sans-serif",lineHeight:1.8,margin:0}}>At the 0.5 SD threshold, the direction was above 50% in the 2024 to 2025 held-out test, but incremental lift over ordinary regression remained uncertain. The 1 SD result was stronger, but only 18 cases cleared that bar. This is one held-out outcome-season pair.</p>
           </div>
         </section>
 
         <div className="divider"/>
 
-        {/* ══ SIGNAL DISCOVERY ══ */}
+        {/* ══ FORMULA HISTORY ══ */}
         <section style={sec}>
           <div className="sec-header">
-            <div className="sec-eyebrow">What We Tested · How We Chose the Components</div>
-            <h2 className="sec-title">How We Found the Signal</h2>
-            <p className="sec-sub">We tested 51 different pitcher stats to find which ones best predict future strikeout rate. Most well-known stats fell short. The ones that made it into PSI+ are the ones that actually held up.</p>
+            <div className="sec-eyebrow">Historical Development</div>
+            <h2 className="sec-title">How the Formula Reached Four Components</h2>
+            <p className="sec-sub">PSI+ originally began with CLW, fastball velocity ceiling, and VAA at 60%, 30%, and 10%. That construction leaned too heavily on fastball traits, so SLWR was added to give secondary-pitch swing-and-miss more representation.</p>
           </div>
-
-          {/* Key callout — always visible */}
-          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(220px,1fr))',gap:'12px',marginBottom:'32px'}}>
-            {[
-              {label:'Count-Lev. Whiff (CLW)', r:'0.5818', cat:'Novel: PSI+ Component', color:'#3ab05a'},
-              {label:'CSW%',                   r:'0.4892', cat:'Industry Benchmark',      color:'rgba(212,175,55,0.6)'},
-              {label:'SwStr%',                 r:'0.4900', cat:'Known Public Signal',     color:'rgba(78,171,222,0.6)'},
-            ].map(s=>(
-              <div key={s.label} style={{background:'rgba(13,30,53,0.85)',border:`1px solid ${s.color}44`,borderRadius:'4px',padding:'16px 20px'}}>
-                <div style={{fontSize:'8px',letterSpacing:'0.18em',color:s.color,fontFamily:"'Inter',sans-serif",textTransform:'uppercase',marginBottom:'6px'}}>{s.cat}</div>
-                <div style={{fontSize:'12px',color:'var(--cream)',fontFamily:"'Inter',sans-serif",fontWeight:600,marginBottom:'8px'}}>{s.label}</div>
-                <div style={{fontFamily:"'Orbitron',sans-serif",fontSize:'20px',fontWeight:700,color:s.color}}>r = {s.r}</div>
-              </div>
-            ))}
-          </div>
-
-          {sigChart && sigChart.length > 0 ? (
-            <>
-              <div style={{display:'flex',gap:'20px',flexWrap:'wrap',marginBottom:'16px'}}>
-                {[
-                  {label:'Novel (PSI+ component)', color:'#3ab05a'},
-                  {label:'Benchmark (CSW%, SwStr%)', color:'rgba(212,175,55,0.6)'},
-                  {label:'Known public signal', color:'rgba(78,171,222,0.6)'},
-                ].map(l=>(
-                  <div key={l.label} style={{display:'flex',alignItems:'center',gap:'6px',fontSize:'10px',color:'rgba(245,241,230,0.45)',fontFamily:"'Inter',sans-serif"}}>
-                    <div style={{width:'10px',height:'10px',background:l.color,borderRadius:'2px',flexShrink:0}}/>
-                    {l.label}
-                  </div>
-                ))}
-              </div>
-              <div style={{background:'#0d1e35',border:'1px solid rgba(212,175,55,0.12)',borderRadius:'6px',padding:'20px 20px 20px 0'}}>
-                <ResponsiveContainer width="100%" height={isMobile ? 480 : 520}>
-                  <BarChart
-                    data={sigChart.map(s=>({...s, name: isMobile ? s.name.slice(0,15) : s.name}))}
-                    layout="vertical"
-                    margin={isMobile ? {left:0,right:36,top:4,bottom:4} : {left:172,right:48,top:4,bottom:4}}
-                  >
-                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(212,175,55,0.08)" horizontal={false}/>
-                    <XAxis type="number" domain={[0,0.68]} tickFormatter={v=>v.toFixed(2)} tick={{fill:'rgba(245,241,230,0.6)',fontSize:isMobile?9:11,fontFamily:'Inter'}} axisLine={{stroke:'rgba(245,241,230,0.1)'}} tickLine={false}/>
-                    <YAxis type="category" dataKey="name" tick={{fill:'rgba(245,241,230,0.7)',fontSize:isMobile?9:11,fontFamily:'Inter'}} axisLine={false} tickLine={false} width={isMobile?108:168}/>
-                    <Tooltip cursor={false} content={(p:any)=><ChartTip {...p} fmt={(v:any)=>Number(v).toFixed(4)} />}/>
-                    <Bar dataKey="r" radius={[0,3,3,0]} label={{position:'right',fill:'rgba(245,241,230,0.45)',fontSize:9,fontFamily:'Inter',formatter:(v:any)=>Number(v).toFixed(3)}}>
-                      {sigChart.map((s,i)=>(
-                        <Cell key={i} fill={s.cat==='NOVEL'?'#3ab05a':s.cat==='BENCHMARK'?'rgba(212,175,55,0.55)':'rgba(78,171,222,0.55)'}/>
-                      ))}
-                    </Bar>
-                  </BarChart>
-                </ResponsiveContainer>
-              </div>
-            </>
-          ) : signals !== null && signals.length === 0 ? (
-            <div style={{...card,textAlign:'center',padding:'32px'}}>
-              <div style={{fontSize:'12px',color:'rgba(245,241,230,0.3)',fontFamily:"'Inter',sans-serif"}}>Full signal chart loads from psi_signals.json. Run convert_psi_data.py to generate it.</div>
-            </div>
-          ) : null}
-
-          <div style={{background:'rgba(58,176,90,0.07)',border:'1px solid rgba(58,176,90,0.2)',borderRadius:'4px',padding:'18px 22px',marginTop:'28px'}}>
-            <div style={{fontSize:'9px',letterSpacing:'0.2em',color:'#3ab05a',fontFamily:"'Inter',sans-serif",textTransform:'uppercase',marginBottom:'8px'}}>Key Finding</div>
-            <p style={{fontSize:'14px',color:'rgba(245,241,230,0.8)',fontFamily:"'Inter',sans-serif",lineHeight:1.7,margin:0}}>
-              Count-leveraged whiff rate outperforms every publicly available strikeout predictor we tested.{' '}
-              <strong style={{color:'#3ab05a'}}>r = 0.5818 vs. 0.4892 for CSW%</strong>. Missing bats matters. Missing them in two-strike counts matters more.
-            </p>
-          </div>
-        </section>
-
-        <div className="divider"/>
-
-        {/* ══ WEIGHT OPTIMIZATION ══ */}
-        <section style={sec}>
-          <div className="sec-header">
-            <div className="sec-eyebrow">Weight Testing · 36 Combinations</div>
-            <h2 className="sec-title">How the Weights Were Chosen</h2>
-            <p className="sec-sub">We tested every combination of CLW, velocity, and VAA weights against the 2025 holdout data. That optimization informed v1. PSI+ v2 adds a fourth component and adjusts the weights accordingly.</p>
-          </div>
-
-          {!weights || weights.length === 0 ? (
-            <div style={{...card,textAlign:'center',padding:'40px'}}>
-              <div style={{fontSize:'13px',color:'rgba(245,241,230,0.35)',fontFamily:"'Inter',sans-serif",marginBottom:'8px'}}>Heat map loads from psi_weights.json</div>
-              <div style={{fontSize:'11px',color:'rgba(245,241,230,0.2)',fontFamily:"'Inter',sans-serif"}}>Run convert_psi_data.py after dropping in weight_optimization_results.csv</div>
-            </div>
-          ) : (
-            <div style={{...card,overflowX:'auto'}}>
-              <div style={cardTop}/>
-              <div style={{fontSize:'10px',color:'rgba(245,241,230,0.4)',fontFamily:"'Inter',sans-serif",marginBottom:'20px'}}>
-                Holdout r (starters). Rows = VAA weight, columns = CLW weight, remaining weight = velocity.
-                White border = winning combination.
-              </div>
-              {(() => {
-                const clwVals = [...new Set(weights.map(w=>w.w_clw))].sort((a,b)=>a-b)
-                const vaaVals = [...new Set(weights.map(w=>w.w_vaa))].sort((a,b)=>a-b)
-                return (
-                  <table style={{borderCollapse:'separate',borderSpacing:'3px'}}>
-                    <thead>
-                      <tr>
-                        <th style={{padding:'6px 10px',fontSize:'8px',letterSpacing:'0.15em',color:'rgba(212,175,55,0.45)',fontFamily:"'Inter',sans-serif",textAlign:'right',whiteSpace:'nowrap'}}>CLW→<br/>VAA↓</th>
-                        {clwVals.map(c=>(
-                          <th key={c} style={{padding:'4px 8px',fontSize:'9px',letterSpacing:'0.1em',color:'rgba(212,175,55,0.45)',fontFamily:"'Inter',sans-serif",textAlign:'center',minWidth:'56px'}}>{c}%</th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {vaaVals.map(v=>(
-                        <tr key={v}>
-                          <td style={{padding:'4px 10px',fontSize:'9px',color:'rgba(212,175,55,0.45)',fontFamily:"'Inter',sans-serif",textAlign:'right'}}>{v}%</td>
-                          {clwVals.map(c=>{
-                            const cell = weights.find(w=>w.w_clw===c&&w.w_vaa===v)
-                            const win = c===60&&v===10
-                            return (
-                              <td key={c} style={{padding:'7px 8px',textAlign:'center',borderRadius:'3px',background:cell?heatColor(cell.hold_starter):'rgba(255,255,255,0.02)',border:win?'2.5px solid rgba(255,255,255,0.85)':'2.5px solid transparent',transition:'transform .15s',cursor:'default'}}>
-                                <div style={{fontFamily:"'Orbitron',sans-serif",fontSize:'10px',fontWeight:700,color:'rgba(8,18,32,0.9)'}}>{cell?cell.hold_starter?.toFixed(3):'—'}</div>
-                                {win&&<div style={{fontSize:'6px',color:'rgba(8,18,32,0.8)',fontFamily:"'Inter',sans-serif",marginTop:'1px',fontWeight:800,letterSpacing:'0.1em'}}>BEST</div>}
-                              </td>
-                            )
-                          })}
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                )
-              })()}
-            </div>
-          )}
-
-          <div style={{background:'rgba(78,171,222,0.06)',border:'1px solid rgba(78,171,222,0.18)',borderRadius:'4px',padding:'18px 22px',marginTop:'20px'}}>
-            <p style={{fontSize:'13px',color:'rgba(245,241,230,0.75)',fontFamily:"'Inter',sans-serif",lineHeight:1.7,margin:0}}>
-              <strong style={{color:'#4EABDE'}}>v1 winner: CLW = 60%, Velocity = 30%, VAA = 10%.</strong>{' '}
-              Every combination that gave VAA more than 10% weight underperformed. VAA and velocity are correlated, so over-weighting VAA was essentially counting the velocity signal twice.
-            </p>
-          </div>
-
-          {/* v2 methodology */}
-          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(300px,1fr))',gap:'16px',marginTop:'20px'}}>
-
-            <div style={{background:'rgba(13,30,53,0.8)',border:'1px solid rgba(212,175,55,0.12)',borderRadius:'4px',padding:'22px 24px'}}>
-              <div style={{fontSize:'9px',letterSpacing:'0.2em',color:'rgba(212,175,55,0.5)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase',marginBottom:'10px'}}>PSI+ v2 · Core Weights</div>
-              <div style={{fontFamily:"'Playfair Display',serif",fontSize:'16px',fontWeight:700,color:'var(--cream)',marginBottom:'14px'}}>What Changed</div>
-              <p style={{fontSize:'13px',color:'rgba(245,241,230,0.6)',fontFamily:"'Inter',sans-serif",lineHeight:1.75,margin:'0 0 14px'}}>
-                v2 adds SLWR as a fourth component. Secondary pitch quality was missing from v1. The original three weights were adjusted to make room.
-              </p>
+          <div style={{...card,maxWidth:'760px',margin:'0 auto'}}>
+            <div style={cardTop}/>
+            <div style={{fontSize:'9px',letterSpacing:'0.2em',color:'rgba(212,175,55,0.5)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase',marginBottom:'10px'}}>Current Production PSI+</div>
+            <div style={{display:'grid',gridTemplateColumns:'repeat(2,1fr)',gap:'10px'}}>
               {[
-                {label:'CLW',  val:'55%', note:'down from 60%'},
-                {label:'Velo', val:'35%', note:'up from 30%'},
-                {label:'VAA',  val:'5%',  note:'down from 10%'},
-                {label:'SLWR', val:'5%',  note:'new in v2'},
+                {label:'CLW', val:'55%'},
+                {label:'Fastball Velocity Ceiling', val:'35%'},
+                {label:'VAA', val:'5%'},
+                {label:'SLWR', val:'5%'},
               ].map(row=>(
-                <div key={row.label} style={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'7px 0',borderBottom:'1px solid rgba(212,175,55,0.07)'}}>
-                  <span style={{fontFamily:"'Orbitron',sans-serif",fontSize:'11px',fontWeight:700,color:'rgba(245,241,230,0.8)'}}>{row.label}</span>
-                  <div style={{display:'flex',alignItems:'center',gap:'10px'}}>
-                    <span style={{fontSize:'11px',color:'rgba(245,241,230,0.3)',fontFamily:"'Inter',sans-serif",fontStyle:'italic'}}>{row.note}</span>
-                    <span style={{fontFamily:"'Orbitron',sans-serif",fontSize:'13px',fontWeight:700,color:'var(--gold)'}}>{row.val}</span>
-                  </div>
+                <div key={row.label} style={{display:'flex',justifyContent:'space-between',gap:'12px',padding:'10px 12px',background:'rgba(255,255,255,0.025)',borderRadius:'3px'}}>
+                  <span style={{fontSize:'11px',color:'rgba(245,241,230,0.7)',fontFamily:"'Inter',sans-serif"}}>{row.label}</span>
+                  <span style={{fontFamily:"'Orbitron',sans-serif",fontSize:'12px',fontWeight:700,color:'var(--gold)'}}>{row.val}</span>
                 </div>
               ))}
-              <p style={{fontSize:'11px',color:'rgba(245,241,230,0.3)',fontFamily:"'Inter',sans-serif",lineHeight:1.6,margin:'14px 0 0'}}>
-                When a pitcher has fewer than 50 secondary pitches, SLWR is excluded and the remaining three weights are rescaled proportionally.
-              </p>
             </div>
-
-            <div style={{background:'rgba(13,30,53,0.8)',border:'1px solid rgba(212,175,55,0.12)',borderRadius:'4px',padding:'22px 24px'}}>
-              <div style={{fontSize:'9px',letterSpacing:'0.2em',color:'rgba(212,175,55,0.5)',fontFamily:"'Inter',sans-serif",textTransform:'uppercase',marginBottom:'10px'}}>Dual-Weighting Framework</div>
-              <div style={{fontFamily:"'Playfair Display',serif",fontSize:'16px',fontWeight:700,color:'var(--cream)',marginBottom:'14px'}}>Two Sets of Weights</div>
-              <p style={{fontSize:'13px',color:'rgba(245,241,230,0.6)',fontFamily:"'Inter',sans-serif",lineHeight:1.75,margin:'0 0 14px'}}>
-                PSI+ runs on two separate weighting schemes depending on the use case.
-              </p>
-              <div style={{borderLeft:'2px solid rgba(212,175,55,0.2)',paddingLeft:'14px',marginBottom:'14px'}}>
-                <div style={{fontSize:'11px',fontWeight:700,color:'rgba(245,241,230,0.8)',fontFamily:"'Inter',sans-serif",marginBottom:'4px'}}>Published PSI+</div>
-                <p style={{fontSize:'12px',color:'rgba(245,241,230,0.45)',fontFamily:"'Inter',sans-serif",lineHeight:1.65,margin:0}}>
-                  Uses the core weights above. Optimized for predicting strikeout rate year over year. This is what appears on the leaderboard.
-                </p>
-              </div>
-              <div style={{borderLeft:'2px solid rgba(78,171,222,0.25)',paddingLeft:'14px'}}>
-                <div style={{fontSize:'11px',fontWeight:700,color:'rgba(245,241,230,0.8)',fontFamily:"'Inter',sans-serif",marginBottom:'4px'}}>Betting Model</div>
-                <p style={{fontSize:'12px',color:'rgba(245,241,230,0.45)',fontFamily:"'Inter',sans-serif",lineHeight:1.65,margin:0}}>
-                  Uses a separate set of weights not published here. Optimized for a different objective. The two versions will diverge on some pitchers.
-                </p>
-              </div>
-            </div>
-
+            <p style={{fontSize:'11px',color:'rgba(245,241,230,0.38)',fontFamily:"'Inter',sans-serif",lineHeight:1.7,margin:'14px 0 0'}}>When SLWR is unavailable below 50 eligible secondary pitches, the other three production weights are rescaled proportionally.</p>
           </div>
-        </section>
-
-        <div className="divider"/>
-
-        {/* ══ WHAT DIDN'T WORK ══ */}
-        <section style={{...sec,paddingTop:'60px',paddingBottom:'60px'}}>
-          <div className="sec-header">
-            <div className="sec-eyebrow">What We Tried · What Failed</div>
-            <h2 className="sec-title">What Didn't Work</h2>
-            <p className="sec-sub">Two approaches that looked promising on paper and failed in testing. Showing them here because credibility means showing what didn't work, not just what did.</p>
-          </div>
-          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(300px,1fr))',gap:'14px'}}>
-            {FAILED.map(f=>(
-              <div key={f.name} style={{background:'rgba(13,30,53,0.5)',border:'1px solid rgba(196,69,54,0.12)',borderLeft:'3px solid rgba(196,69,54,0.35)',borderRadius:'4px',padding:'20px 22px'}}>
-                <div style={{fontFamily:"'Playfair Display',serif",fontSize:'16px',fontWeight:700,color:'var(--cream)',marginBottom:'8px'}}>{f.name}</div>
-                <p style={{fontSize:'12px',color:'rgba(245,241,230,0.48)',fontFamily:"'Inter',sans-serif",lineHeight:1.7,marginBottom:'12px'}}>{f.desc}</p>
-                <div style={{fontFamily:"'Orbitron',sans-serif",fontSize:'11px',color:'#C44536',fontWeight:700}}>{f.result}</div>
-              </div>
-            ))}
-          </div>
-          <p style={{marginTop:'18px',fontSize:'12px',color:'rgba(245,241,230,0.35)',fontFamily:"'Inter',sans-serif",lineHeight:1.7}}>
-            Both had intuitive appeal. Both failed validation. What the data consistently rewarded was simpler: count leverage + stuff quality.
-          </p>
         </section>
 
         <div className="divider"/>
@@ -1094,8 +768,9 @@ export default function PSIPage() {
         {/* ══ METHODOLOGY SUMMARY ══ */}
         <section style={{...sec,paddingTop:'60px'}}>
           <div className="sec-header">
-            <div className="sec-eyebrow">Technical Specification</div>
-            <h2 className="sec-title">How It's Built</h2>
+            <div className="sec-eyebrow">Public Methodology</div>
+            <h2 className="sec-title">Production and Validation Boundaries</h2>
+            <p className="sec-sub">Production PSI+ is the season-and-role normalized 55/35/5/5 score used on the live leaderboard. The clean reconstruction exists only to evaluate the four-component idea on 2025.</p>
           </div>
           <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(200px,1fr))',gap:'10px'}}>
             {METHOD_SPECS.map(f=>(
@@ -1106,6 +781,9 @@ export default function PSIPage() {
               </div>
             ))}
           </div>
+          <div style={{background:'rgba(212,175,55,0.05)',border:'1px solid rgba(212,175,55,0.14)',borderRadius:'4px',padding:'16px 20px',marginTop:'16px'}}>
+            <p style={{fontSize:'12px',color:'rgba(245,241,230,0.58)',fontFamily:"'Inter',sans-serif",lineHeight:1.8,margin:0}}>A score of 100 is the mean for the relevant season and role population. A 110 is about one standard deviation above that mean, and a 120 is about two. PSI+ points are standardized distances, not percentages above average.</p>
+          </div>
         </section>
 
       </main>
@@ -1114,7 +792,7 @@ export default function PSIPage() {
       <footer className="footer">
         <div className="footer-brand">Stat<span>Packs</span></div>
         <div className="footer-tagline">Built on Data. Tracked Transparently.</div>
-        <div className="footer-sub">PSI+ is a StatPacks original metric. All validation performed on held-out 2025 season data.</div>
+        <div className="footer-sub">PSI+ is a StatPacks original metric. Public 2025 results use a clean four-component reconstruction fixed from 2020–2024 information.</div>
         <div className="footer-line"/>
         <div className="footer-copy">© 2026 StatPacks · statpacks.app</div>
       </footer>
