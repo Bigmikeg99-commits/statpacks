@@ -1,5 +1,52 @@
 [
   {
+    "date": "2026-09-10",
+    "picks": [
+      {
+        "name": "Cristian Javier",
+        "mlbamid": "664299",
+        "team": "",
+        "opp": "Philadelphia Phillies",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 3.5,
+        "pred_k": 5.18,
+        "edge": 23.5,
+        "actual_k": 5.0,
+        "result": "W"
+      },
+      {
+        "name": "Martín Pérez",
+        "mlbamid": "527048",
+        "team": "",
+        "opp": "Tampa Bay Rays",
+        "hand": "L",
+        "ha": "Home",
+        "rec": "UNDER",
+        "line": 3.0,
+        "pred_k": 2.93,
+        "edge": 13.9,
+        "actual_k": 4.0,
+        "result": "L"
+      },
+      {
+        "name": "Ryan Feltner",
+        "mlbamid": "663372",
+        "team": "",
+        "opp": "New York Yankees",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 4.5,
+        "pred_k": 4.93,
+        "edge": 2.3,
+        "actual_k": 2.0,
+        "result": "L"
+      }
+    ]
+  },
+  {
     "date": "2026-09-09",
     "picks": [
       {
