@@ -1,5 +1,108 @@
 [
   {
+    "date": "2026-09-11",
+    "picks": [
+      {
+        "name": "Ryan Gusto",
+        "mlbamid": "687473",
+        "team": "Miami Marlins",
+        "opp": "Los Angeles Dodgers",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 3.5,
+        "pred_k": 4.79,
+        "edge": 18.0,
+        "actual_k": 3.0,
+        "result": "L"
+      },
+      {
+        "name": "Max Scherzer",
+        "mlbamid": "453286",
+        "team": "Toronto Blue Jays",
+        "opp": "Baltimore Orioles",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "UNDER",
+        "line": 5.5,
+        "pred_k": 4.51,
+        "edge": 17.7,
+        "actual_k": 3.0,
+        "result": "W"
+      },
+      {
+        "name": "Mason Adams",
+        "mlbamid": "690279",
+        "team": "Colorado Rockies",
+        "opp": "Detroit Tigers",
+        "hand": "R",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 3.5,
+        "pred_k": 4.66,
+        "edge": 16.0,
+        "actual_k": 5.0,
+        "result": "W"
+      },
+      {
+        "name": "Yusei Kikuchi",
+        "mlbamid": "579328",
+        "team": "Los Angeles Angels",
+        "opp": "Washington Nationals",
+        "hand": "L",
+        "ha": "Away",
+        "rec": "UNDER",
+        "line": 5.5,
+        "pred_k": 4.62,
+        "edge": 15.8,
+        "actual_k": 5.0,
+        "result": "W"
+      },
+      {
+        "name": "Drew Rasmussen",
+        "mlbamid": "656876",
+        "team": "Tampa Bay Rays",
+        "opp": "Houston Astros",
+        "hand": "R",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 5.5,
+        "pred_k": 6.54,
+        "edge": 11.3,
+        "actual_k": 4.0,
+        "result": "L"
+      },
+      {
+        "name": "Andrew Abbott",
+        "mlbamid": "671096",
+        "team": "Cincinnati Reds",
+        "opp": "Milwaukee Brewers",
+        "hand": "L",
+        "ha": "Away",
+        "rec": "OVER",
+        "line": 3.5,
+        "pred_k": 4.34,
+        "edge": 10.6,
+        "actual_k": 0.0,
+        "result": "L"
+      },
+      {
+        "name": "Framber Valdez",
+        "mlbamid": "664285",
+        "team": "Detroit Tigers",
+        "opp": "Colorado Rockies",
+        "hand": "L",
+        "ha": "Home",
+        "rec": "OVER",
+        "line": 4.5,
+        "pred_k": 5.27,
+        "edge": 8.2,
+        "actual_k": 2.0,
+        "result": "L"
+      }
+    ]
+  },
+  {
     "date": "2026-09-10",
     "picks": [
       {
